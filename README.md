@@ -15,6 +15,14 @@ Then, we need to harvest Greek legal documents for template creation. Some relev
 
 Finally, when the required document archive is built, we will create templates for each one of them.
 
+The document directory will be available for use through a LibreOffice extension. THis extension will be an add-on (in the context of having a GUI built with LibreOffice Basic dialog editor).
+
+The extension code acts as the backend part of our extension implementing functions that ease the access to LibreOffice Java API.
+
+A large number of those functions are implemented (or inspired) by the following sources:
+- Andrew Davison work on documenting Java Libreoffice Programming Concepts on [Java LibreOffice Programming](http://fivedots.coe.psu.ac.th/~ad/jlop/#contents)
+- Samuel Mehrbrodt's repository for a basic Eclipse LibreOffice extension project [libreoffice-starter-extension](https://github.com/smehrbrodt/libreoffice-starter-extension)  
+
 ## Mentors
 Mentors overseeing the development process:
 - Kostas Papadimas
