@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">Sub PageSetup
+	Open_PageSetup_Dialog()
+End Sub
+
+Function Open_PageSetup_Dialog()
+  Dim oFrame   &apos; Frame from the current window.
+  Dim oToolkit &apos; Container window&apos;s com.sun.star.awt.Toolkit
+  Dim oDisp    &apos; Dispatch helper.
+  Dim oList    &apos; XTopWindowListener that handles the interactions.
+  Dim s$
+
+REM Get the com.sun.star.awt.Toolkit
+  oFrame   = ThisComponent.getCurrentController().getFrame()
+  oToolkit = oFrame.getContainerWindow().getToolkit()
+  s$ = &quot;com.sun.star.awt.XTopWindowListener&quot;
+  oList    = createUnoListener(&quot;PageSetupDispatch_&quot;, s$)
+  oDisp    = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
+	
+REM Insert an OLE object!
+  oToolkit.addTopWindowListener(oList)
+  oDisp.executeDispatch(oFrame, &quot;.uno:PageDialog&quot;, &quot;&quot;, 0, Array())
+  oToolkit.removeTopWindowListener(oList)
+
+End function
+
+
+Sub PageSetupDispatch_windowOpened(e As Object)
+  Dim oAC
+  Dim oACChild
+  Dim oACChild2
+
+  REM Get the accessible window, which is the entire dialog.
+  oAC = e.source.AccessibleContext
+	
+  REM Get FILLER
+    oACChild = oAC.getAccessibleChild(0).getAccessibleContext()
+
+  REM Get PAGE_TAB_LIST 
+  for i=0 to oACChild.getAccessibleChildCount()-1
+	if oACChild.getAccessibleChild(i).getAccessibleContext().getAccessibleRole() = 39 then
+
+		 oACChild2 =  oACChild.getAccessibleChild(i).getAccessibleContext()
+		 exit for
+	endif
+	next i
+
+  for i=0 to oACChild2.getAccessibleChildCount()-1
+	if oACChild2.getAccessibleChild(i).getAccessibleName() = &quot;Page&quot; then
+		 oACChild2.selectAccessibleChild(i)
+		 exit for
+	endif
+	next i 	
+End Sub
+
+
+Sub PageSetupDispatch_windowClosing(e As Object)
+End Sub
+
+Sub PageSetupDispatch_windowClosed(e As Object)
+End Sub
+
+Sub PageSetupDispatch_windowMinimized(e As Object)
+End Sub
+
+Sub PageSetupDispatch_windowNormalized(e As Object)
+
+End Sub
+
+Sub PageSetupDispatch_windowActivated(e As Object)
+End Sub
+
+Sub PageSetupDispatch_windowDeactivated(e As Object)
+End Sub
+
+Sub PageSetupDispatch_disposing(e As Object)
+End Sub
+
+Sub InspectOpenWindow
+  Dim oWin
+  Dim oAC
+
+  &apos;This Function identifies the top window, whose title starts with &quot;Page Style&quot;
+  &apos;I used Format | Page... to open the window.
+  oWin = GetWindowOpen(&quot;Page Style&quot;)
+  oAC = oWin.AccessibleContext
+  Xray oAC
+  &apos;This generates a hierarchical list of the accessibility tree
+  &apos;call AnalyzeCreateSxc(oAC)
+End Sub
+
+
+&apos;------------------- GetWindowOpen
+REM Iterate through the open dialogs and find the one that starts with
+REM sTitle.
+Function GetWindowOpen(sTitle as String) As Object
+  Dim oToolkit
+  Dim lCount As Long
+  Dim k As Long
+  Dim oWin
+
+  oToolkit = Stardesktop.ActiveFrame.ContainerWindow.Toolkit
+  lCount = oToolkit.TopWindowCount
+
+  For k=0 To lCount -1
+    oWin = oToolkit.getTopWindow(k)
+    If HasUnoInterfaces(oWin, &quot;com.sun.star.awt.XDialog&quot;) Then
+      If left(oWin.Title, len(sTitle)) = sTitle Then
+        GetWindowOpen = oWin
+        Exit Function
+      EndIf
+    EndIf
+  Next k
+End Function
+</script:module>
