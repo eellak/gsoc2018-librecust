@@ -9,13 +9,17 @@ A set of modules and templates for LibreOffice Suite that ease the transition fr
 This project was suggested by [GFOSS - Open Technologies Alliance](https://gfoss.eu/home-posts/) in the context of [Google Summer of Code 2018](https://www.google.com).
 
 ## Implementation
-Modules and partially of the mockups will be implemented in `.ui` format mainly using [Glade](https://glade.gnome.org/). In the event of a feature that is not already implemented in LibreOffice (`.uno` files), we are going to use  [Libreoffice Software Development Kit 6.0](https://api.libreoffice.org/).
+Modules and partially mockups will be implemented in `.ui` format mainly using [Glade](https://glade.gnome.org/). In the event of a feature that is not already implemented in LibreOffice (`.uno` files), we are going to use  [Libreoffice Software Development Kit 6.0](https://api.libreoffice.org/).
 
-Then, we need to harvest Greek legal documents for template creation. Some relevant sources are websites of associations such as [EANDA](http://www.eanda.gr/) and [DSA](http://www.dsa.gr/).
+Then, we need to harvest Greek legal documents for template creation. Some relevant sources are websites of associations such as [EANDA](http://www.eanda.gr/) and [DSA](http://www.dsa.gr/). THose sources provide templates that do not have any specific format. Most of them are created by employees or lawyers thus their undefined structure.
 
-Finally, when the required document archive is built, we will create templates for each one of them.
+Through this project, we will also create a "proof of concept" archive of templates as well as document the creation procedure and provide a user interface dialog to ease the template creation.
 
-The document directory will be available for use through a LibreOffice extension. THis extension will be an add-on (in the context of having a GUI built with LibreOffice Basic dialog editor).
+Templates will include "User defined fields" for static information (e.g. date and members of court) and "Bookmarks" for case specific info (e.g. description of law case) as well as properties for classification. Those can be tracked and used through the Java API as shown in LibreOffice [examples](https://api.libreoffice.org/examples/DevelopersGuide/Text/).
+
+Finally, when the required "proof of concept" document archive is built, we will create templates for each one of them.
+
+The document directory will be available for use through a LibreOffice extension. This extension will be an add-on (in the context of having a GUI built with LibreOffice Basic dialog editor).
 
 The extension code acts as the backend part of our extension implementing functions that ease the access to LibreOffice Java API.
 
@@ -38,6 +42,7 @@ During the development period of the project the installation procedure will be 
     ```
 6. Copy customized menubar.xml from this [path](https://github.com/eellak/gsoc2018-librecust/blob/master/menu_customization/menubar/menubar.xml) to previous .config path
 7. Open LibreOffice Writer
+
 
 ## Mentors
 Mentors overseeing the development process:
