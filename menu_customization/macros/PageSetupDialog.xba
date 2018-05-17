@@ -17,7 +17,7 @@ REM Get the com.sun.star.awt.Toolkit
   s$ = &quot;com.sun.star.awt.XTopWindowListener&quot;
   oList    = createUnoListener(&quot;PageSetupDispatch_&quot;, s$)
   oDisp    = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
-	
+
 REM Insert an OLE object!
   oToolkit.addTopWindowListener(oList)
   oDisp.executeDispatch(oFrame, &quot;.uno:PageDialog&quot;, &quot;&quot;, 0, Array())
@@ -27,33 +27,32 @@ End function
 
 
 Sub PageSetupDispatch_windowOpened(e As Object)
-  Dim oAC
+	Dim oAC
   Dim oACChild
   Dim oACChild2
 
   REM Get the accessible window, which is the entire dialog.
   oAC = e.source.AccessibleContext
-	
-  REM Get FILLER
-    oACChild = oAC.getAccessibleChild(0).getAccessibleContext()
-
-  REM Get PAGE_TAB_LIST 
-  for i=0 to oACChild.getAccessibleChildCount()-1
-	if oACChild.getAccessibleChild(i).getAccessibleContext().getAccessibleRole() = 39 then
-
-		 oACChild2 =  oACChild.getAccessibleChild(i).getAccessibleContext()
-		 exit for
+	  REM Get FILLER
+   if oAC.getAccessibleChild(0).getAccessibleContext().getAccessibleRole() = 17 then
+    oACChild =  oAC.getAccessibleChild(0).getAccessibleContext()
+    	  REM Get PAGE_TAB_LIST
+    	  for i=0 to oACChild.getAccessibleChildCount()-1
+			if oACChild.getAccessibleChild(i).getAccessibleContext().getAccessibleRole() = 39 then
+				oACChild2 =  oACChild.getAccessibleChild(i).getAccessibleContext()
+					  REM Select page tab
+				for j=0 to oACChild2.getAccessibleChildCount()-1
+					if oACChild2.getAccessibleChild(j).getAccessibleName() = &quot;Σελίδα&quot; then
+		 				oACChild2.selectAccessibleChild(j)
+		 				exit for
+					endif
+				next j
+		        exit for
+			endif
+	      next i
 	endif
-	next i
 
-  for i=0 to oACChild2.getAccessibleChildCount()-1
-	if oACChild2.getAccessibleChild(i).getAccessibleName() = &quot;Page&quot; then
-		 oACChild2.selectAccessibleChild(i)
-		 exit for
-	endif
-	next i 	
 End Sub
-
 
 Sub PageSetupDispatch_windowClosing(e As Object)
 End Sub
@@ -65,7 +64,6 @@ Sub PageSetupDispatch_windowMinimized(e As Object)
 End Sub
 
 Sub PageSetupDispatch_windowNormalized(e As Object)
-
 End Sub
 
 Sub PageSetupDispatch_windowActivated(e As Object)
@@ -83,8 +81,30 @@ Sub InspectOpenWindow
 
   &apos;This Function identifies the top window, whose title starts with &quot;Page Style&quot;
   &apos;I used Format | Page... to open the window.
-  oWin = GetWindowOpen(&quot;Page Style&quot;)
+  oWin = GetWindowOpen(&quot;Τεχνοτροπία σελίδας&quot;)
   oAC = oWin.AccessibleContext
+
+      REM Get FILLER
+   if oAC.getAccessibleChild(0).getAccessibleContext().getAccessibleRole() = 17 then
+	oAC =  oAC.getAccessibleChild(0).getAccessibleContext()
+	endif
+
+	  REM Get PAGE_TAB_LIST
+  for i=0 to oAC.getAccessibleChildCount()-1
+	if oAC.getAccessibleChild(i).getAccessibleContext().getAccessibleRole() = 39 then
+
+		 oAC =  oAC.getAccessibleChild(i).getAccessibleContext()
+		 exit for
+	endif
+	next i
+
+	 for i=0 to oAC.getAccessibleChildCount()-1
+	if oAC.getAccessibleChild(i).getAccessibleName() = &quot;Σελίδα&quot; then
+		 oAC.selectAccessibleChild(i)
+		 exit for
+	endif
+	next i
+
   Xray oAC
   &apos;This generates a hierarchical list of the accessibility tree
   &apos;call AnalyzeCreateSxc(oAC)
@@ -113,4 +133,6 @@ Function GetWindowOpen(sTitle as String) As Object
     EndIf
   Next k
 End Function
+
+
 </script:module>
