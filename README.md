@@ -21,7 +21,23 @@ The extension code acts as the backend part of our extension implementing functi
 
 A large number of those functions are implemented (or inspired) by the following sources:
 - Andrew Davison work on documenting Java Libreoffice Programming Concepts on [Java LibreOffice Programming](http://fivedots.coe.psu.ac.th/~ad/jlop/#contents)
-- Samuel Mehrbrodt's repository for a basic Eclipse LibreOffice extension project [libreoffice-starter-extension](https://github.com/smehrbrodt/libreoffice-starter-extension)  
+- Samuel Mehrbrodt's repository for a basic Eclipse LibreOffice extension project [libreoffice-starter-extension](https://github.com/smehrbrodt/libreoffice-starter-extension)
+
+## Installing
+During the development period of the project the installation procedure will be rather long. When sub-goals are implemented all steps will be included in an .oxt installation.
+
+### Menubar Customization
+1. Install required macro library from this [path](https://github.com/eellak/gsoc2018-librecust/blob/master/menu_customization/macros/LibreCustLib.oxt).
+2. Install Greek language pack for LibreOffice `libreoffice-{fresh|still}-el`
+3. Change Writer UI language to Greek from Tools->Options->Language Settings->Languages.
+4. Close LibreOffice Writer
+5. Backup your current menubar configuration
+    ``` bash
+    cd /home/user/.config/libreoffice/4/user/config/soffice.cfg/modules/swriter/menubar/
+    cp menubar.xml menubar.xml.bak
+    ```
+6. Copy customized menubar.xml from this [path](https://github.com/eellak/gsoc2018-librecust/blob/master/menu_customization/menubar/menubar.xml) to previous .config path
+7. Open LibreOffice Writer
 
 ## Mentors
 Mentors overseeing the development process:
