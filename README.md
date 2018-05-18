@@ -4,14 +4,17 @@ Adding open source software in employee's workflow.
 
 ## Description
 
-A set of modules and templates for LibreOffice Suite that ease the transition from Microsoft Office as well as ready to use templates that automate the creation of Greek Legal Documents. Those templates aim to encounter time consuming tasks by removing the formatting and layout procedures from employee workflow. Furthermore, an interface to access all those templates will be developed. All steps will be documented during the process and afterwards for future reference and development.
+A set of modules, menu and toolbar customizations for LibreOffice Suite that ease the transition from Microsoft Office as well as ready to use templates that automate the creation of Greek Legal Documents. Those templates aim to encounter time consuming tasks by removing the formatting and layout procedures from employee workflow. Furthermore, an interface to access all those templates will be developed. All steps will be documented during the process and afterwards for future reference and development.
 
 This project was suggested by [GFOSS - Open Technologies Alliance](https://gfoss.eu/home-posts/) in the context of [Google Summer of Code 2018](https://www.google.com).
 
 ## Implementation
+Menu customizations are implemented by editing user configuration `.xml` files and adding UI functionality through predefined [dispatch commands](https://wiki.documentfoundation.org/Development/DispatchCommands) and macro scripts.
+The must-see reference for LibreOffice Macro development that is of great use throughout this project is Andrew Pitonyak's [OpenOffice Macro Information](http://www.pitonyak.org/AndrewMacro.odt). 
+
 Modules and partially mockups will be implemented in `.ui` format mainly using [Glade](https://glade.gnome.org/). In the event of a feature that is not already implemented in LibreOffice (`.uno` files), we are going to use  [Libreoffice Software Development Kit 6.0](https://api.libreoffice.org/).
 
-Then, we need to harvest Greek legal documents for template creation. Some relevant sources are websites of associations such as [EANDA](http://www.eanda.gr/) and [DSA](http://www.dsa.gr/). THose sources provide templates that do not have any specific format. Most of them are created by employees or lawyers thus their undefined structure.
+Then, we need to harvest Greek legal documents for template creation. Some relevant sources are websites of associations such as [EANDA](http://www.eanda.gr/) and [DSA](http://www.dsa.gr/). Those sources provide templates that do not have any specific format. Most of them are created by employees or lawyers thus their undefined structure.
 
 Through this project, we will also create a "proof of concept" archive of templates as well as document the creation procedure and provide a user interface dialog to ease the template creation.
 
