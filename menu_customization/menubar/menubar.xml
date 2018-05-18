@@ -79,6 +79,9 @@
    <menu:menuseparator/>
    <menu:menuitem menu:id=".uno:LinkDialog"/>
    <menu:menuitem menu:id=".uno:ObjectMenue"/>
+   <menu:menu menu:id="Περισσότερα" menu:label="Περισσότερα">
+    <menu:menupopup/>
+   </menu:menu>
   </menu:menupopup>
  </menu:menu>
  <menu:menu menu:id=".uno:ViewMenu">
@@ -86,51 +89,40 @@
    <menu:menuitem menu:id=".uno:PrintLayout"/>
    <menu:menuitem menu:id=".uno:BrowseView" menu:label="Διάταξη Web"/>
    <menu:menuseparator/>
-   <menu:menuitem menu:id=".uno:ToolbarMode"/>
-   <menu:menuitem menu:id=".uno:AvailableToolbars"/>
-   <menu:menuitem menu:id=".uno:Notebookbar"/>
-   <menu:menuitem menu:id=".uno:StatusBarVisible"/>
+   <menu:menu menu:id="Γραμμές εργαλείων" menu:label="Γραμμές εργαλείων">
+    <menu:menupopup>
+     <menu:menuitem menu:id=".uno:ToolbarMode"/>
+     <menu:menuitem menu:id=".uno:AvailableToolbars"/>
+     <menu:menuitem menu:id=".uno:Notebookbar"/>
+     <menu:menuitem menu:id=".uno:StatusBarVisible"/>
+     <menu:menu menu:id=".uno:ScrollBarMenu">
+      <menu:menupopup>
+       <menu:menuitem menu:id=".uno:HScroll"/>
+       <menu:menuitem menu:id=".uno:VScroll"/>
+      </menu:menupopup>
+     </menu:menu>
+    </menu:menupopup>
+   </menu:menu>
    <menu:menu menu:id=".uno:RulerMenu">
     <menu:menupopup>
      <menu:menuitem menu:id=".uno:Ruler"/>
      <menu:menuitem menu:id=".uno:VRuler"/>
     </menu:menupopup>
    </menu:menu>
-   <menu:menu menu:id=".uno:ScrollBarMenu">
+   <menu:menuseparator/>
+   <menu:menuitem menu:id=".uno:Navigator" menu:label="Χάρτης εγγράφου"/>
+   <menu:menuseparator/>
+   <menu:menu menu:id=".uno:InsertHeaderFooterMenu" menu:label="Κεφαλίδες και υποσέλιδα">
     <menu:menupopup>
-     <menu:menuitem menu:id=".uno:HScroll"/>
-     <menu:menuitem menu:id=".uno:VScroll"/>
+     <menu:menuitem menu:id=".uno:InsertPageHeader"/>
+     <menu:menuitem menu:id=".uno:InsertPageFooter"/>
     </menu:menupopup>
    </menu:menu>
-   <menu:menuseparator/>
-   <menu:menuitem menu:id=".uno:ViewBounds"/>
-   <menu:menuitem menu:id=".uno:TableBoundaries"/>
-   <menu:menuitem menu:id=".uno:ShowGraphics"/>
-   <menu:menuitem menu:id=".uno:ShowAnnotations"/>
-   <menu:menuitem menu:id=".uno:ControlCodes"/>
-   <menu:menu menu:id=".uno:GridMenu">
-    <menu:menupopup>
-     <menu:menuitem menu:id=".uno:GridVisible"/>
-     <menu:menuitem menu:id=".uno:GridUse"/>
-     <menu:menuitem menu:id=".uno:HelplinesMove"/>
-    </menu:menupopup>
-   </menu:menu>
-   <menu:menuitem menu:id=".uno:HideWhitespace"/>
-   <menu:menuitem menu:id=".uno:ViewTrackChanges"/>
-   <menu:menuseparator/>
-   <menu:menuitem menu:id=".uno:Marks"/>
-   <menu:menuitem menu:id=".uno:Fieldnames"/>
-   <menu:menuitem menu:id=".uno:ShowImeStatusWindow"/>
-   <menu:menuseparator/>
-   <menu:menuitem menu:id=".uno:Sidebar"/>
-   <menu:menuitem menu:id=".uno:DesignerDialog"/>
-   <menu:menuitem menu:id=".uno:Gallery"/>
-   <menu:menuitem menu:id=".uno:Navigator"/>
-   <menu:menuseparator/>
-   <menu:menuitem menu:id=".uno:ViewDataSourceBrowser"/>
+   <menu:menuitem menu:id="vnd.sun.star.script:LibreCustLib.Main.JumpToFootnotes?language=Basic&amp;location=application" menu:label="Υποσημειώσεις"/>
+   <menu:menuitem menu:id=".uno:ShowAnnotations" menu:label="Σημειώσεις"/>
    <menu:menuseparator/>
    <menu:menuitem menu:id=".uno:FullScreen"/>
-   <menu:menu menu:id=".uno:ZoomMenu">
+   <menu:menu menu:id=".uno:ZoomMenu" menu:label="Ζουμ">
     <menu:menupopup>
      <menu:menuitem menu:id=".uno:ZoomPage"/>
      <menu:menuitem menu:id=".uno:ZoomPageWidth"/>
@@ -142,6 +134,35 @@
      <menu:menuitem menu:id=".uno:Zoom200Percent"/>
      <menu:menuseparator/>
      <menu:menuitem menu:id=".uno:Zoom"/>
+    </menu:menupopup>
+   </menu:menu>
+   <menu:menuseparator/>
+   <menu:menu menu:id="Περισσότερα" menu:label="Περισσότερα">
+    <menu:menupopup>
+     <menu:menuitem menu:id=".uno:ViewBounds"/>
+     <menu:menuitem menu:id=".uno:TableBoundaries"/>
+     <menu:menuitem menu:id=".uno:ShowGraphics"/>
+     <menu:menuitem menu:id=".uno:ControlCodes"/>
+     <menu:menu menu:id=".uno:GridMenu">
+      <menu:menupopup>
+       <menu:menuitem menu:id=".uno:GridVisible"/>
+       <menu:menuitem menu:id=".uno:GridUse"/>
+       <menu:menuitem menu:id=".uno:HelplinesMove"/>
+      </menu:menupopup>
+     </menu:menu>
+     <menu:menuseparator/>
+     <menu:menuitem menu:id=".uno:HideWhitespace"/>
+     <menu:menuitem menu:id=".uno:ViewTrackChanges"/>
+     <menu:menuseparator/>
+     <menu:menuitem menu:id=".uno:Marks"/>
+     <menu:menuitem menu:id=".uno:Fieldnames"/>
+     <menu:menuitem menu:id=".uno:ShowImeStatusWindow"/>
+     <menu:menuseparator/>
+     <menu:menuitem menu:id=".uno:Sidebar"/>
+     <menu:menuitem menu:id=".uno:DesignerDialog"/>
+     <menu:menuitem menu:id=".uno:Gallery"/>
+     <menu:menuseparator/>
+     <menu:menuitem menu:id=".uno:ViewDataSourceBrowser"/>
     </menu:menupopup>
    </menu:menu>
   </menu:menupopup>
@@ -241,12 +262,6 @@
    <menu:menuseparator/>
    <menu:menuitem menu:id=".uno:InsertPageNumberField"/>
    <menu:menuitem menu:id=".uno:InsertFieldCtrl"/>
-   <menu:menu menu:id=".uno:InsertHeaderFooterMenu">
-    <menu:menupopup>
-     <menu:menuitem menu:id=".uno:InsertPageHeader"/>
-     <menu:menuitem menu:id=".uno:InsertPageFooter"/>
-    </menu:menupopup>
-   </menu:menu>
    <menu:menuseparator/>
    <menu:menuitem menu:id=".uno:InsertSection"/>
    <menu:menuitem menu:id=".uno:InsertDoc"/>
