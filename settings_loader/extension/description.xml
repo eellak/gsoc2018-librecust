@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description xmlns="http://openoffice.org/extensions/description/2006"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:lo="http://libreoffice.org/extensions/description/2011">
+
+	<version value="0.0.1"/>
+    <identifier value="org.libreoffice.settings_loader"/>
+
+    <publisher>
+        <name xlink:href="" lang="en-US">GFOSS</name>
+    </publisher>
+
+    <display-name>
+        <name lang="en-US">LibreOffice Automatic Configuration Extension</name>
+    </display-name>
+
+	<extension-description>
+		<src xlink:href="description-en-US.txt" lang="en-US"/>
+    <src xlink:href="description-el-GR.txt" lang="el-GR"/>
+	</extension-description>
+</description>
