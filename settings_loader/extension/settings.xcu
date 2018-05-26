@@ -4,5 +4,9 @@
    <prop oor:name="SymbolSet" oor:finalized="true">
       <value>0</value>
    </prop>
+   <prop oor:name="SymbolStyle" oor:finalized="true">
+      <value>office2013</value>
+   </prop>
 </node>
+
 </oor:component-data>
