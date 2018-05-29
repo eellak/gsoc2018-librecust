@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Main" script:language="StarBasic" script:moduleType="normal">Sub PageSetup
+	Open_PageSetup_Dialog(&quot;PageSetupDispatch_&quot;)
+End Sub
+
+Function Open_PageSetup_Dialog(listener_prefix as string)
+  Dim oFrame   &apos; Frame from the current window.
+  Dim oToolkit &apos; Container window&apos;s com.sun.star.awt.Toolkit
+  Dim oDisp    &apos; Dispatch helper.
+  Dim oList    &apos; XTopWindowListener that handles the interactions.
+  Dim s$
+
+REM Get the com.sun.star.awt.Toolkit
+  oFrame   = ThisComponent.getCurrentController().getFrame()
+  oToolkit = oFrame.getContainerWindow().getToolkit()
+  s$ = &quot;com.sun.star.awt.XTopWindowListener&quot;
+  oList    = createUnoListener(listener_prefix, s$)
+  oDisp    = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
+	
+REM Insert an OLE object!
+  oToolkit.addTopWindowListener(oList)
+  oDisp.executeDispatch(oFrame, &quot;.uno:PageDialog&quot;, &quot;&quot;, 0, Array())
+  oToolkit.removeTopWindowListener(oList)
+
+End function
+
+
+Sub PageSetupDispatch_windowOpened(e As Object) 	
+	Dim oAC
+  Dim oACChild
+  Dim oACChild2
+
+  REM Get the accessible window, which is the entire dialog.
+  oAC = e.source.AccessibleContext
+	  REM Get FILLER
+   if oAC.getAccessibleChild(0).getAccessibleContext().getAccessibleRole() = 17 then
+    oACChild =  oAC.getAccessibleChild(0).getAccessibleContext()
+    	  REM Get PAGE_TAB_LIST
+    	  for i=0 to oACChild.getAccessibleChildCount()-1
+			if oACChild.getAccessibleChild(i).getAccessibleContext().getAccessibleRole() = 39 then
+				oACChild2 =  oACChild.getAccessibleChild(i).getAccessibleContext()
+					  REM Select page tab
+				for j=0 to oACChild2.getAccessibleChildCount()-1
+					if oACChild2.getAccessibleChild(j).getAccessibleName() = &quot;Σελίδα&quot; then
+		 				oACChild2.selectAccessibleChild(j)
+		 				exit for
+					endif
+				next j 
+		        exit for
+			endif
+	      next i
+	endif
+
+   
+End Sub
+
+Sub PageSetupDispatch_windowClosing(e As Object)
+End Sub
+
+Sub PageSetupDispatch_windowClosed(e As Object)
+End Sub
+
+Sub PageSetupDispatch_windowMinimized(e As Object)
+End Sub
+
+Sub PageSetupDispatch_windowNormalized(e As Object)
+End Sub
+
+Sub PageSetupDispatch_windowActivated(e As Object)
+End Sub
+
+Sub PageSetupDispatch_windowDeactivated(e As Object)
+End Sub
+
+Sub PageSetupDispatch_disposing(e As Object)
+End Sub
+
+Sub PageBackground
+	Open_PageSetup_Dialog(&quot;PageBackgroundDispatch_&quot;)
+End Sub
+
+Sub PageBackgroundDispatch_windowOpened(e As Object) 	
+	Dim oAC
+  Dim oACChild
+  Dim oACChild2
+
+  REM Get the accessible window, which is the entire dialog.
+  oAC = e.source.AccessibleContext
+	  REM Get FILLER
+   if oAC.getAccessibleChild(0).getAccessibleContext().getAccessibleRole() = 17 then
+    oACChild =  oAC.getAccessibleChild(0).getAccessibleContext()
+    	  REM Get PAGE_TAB_LIST
+    	  for i=0 to oACChild.getAccessibleChildCount()-1
+			if oACChild.getAccessibleChild(i).getAccessibleContext().getAccessibleRole() = 39 then
+				oACChild2 =  oACChild.getAccessibleChild(i).getAccessibleContext()
+					  REM Select page tab
+				for j=0 to oACChild2.getAccessibleChildCount()-1
+					if oACChild2.getAccessibleChild(j).getAccessibleName() = &quot;Περιοχή&quot; then
+		 				oACChild2.selectAccessibleChild(j)
+		 				exit for
+					endif
+				next j 
+		        exit for
+			endif
+	      next i
+	endif
+
+   
+End Sub
+
+Sub PageBackgroundDispatch_windowClosing(e As Object)
+End Sub
+
+Sub PageBackgroundDispatch_windowClosed(e As Object)
+End Sub
+
+Sub PageBackgroundDispatch_windowMinimized(e As Object)
+End Sub
+
+Sub PageBackgroundDispatch_windowNormalized(e As Object)
+End Sub
+
+Sub PageBackgroundDispatch_windowActivated(e As Object)
+End Sub
+
+Sub PageBackgroundDispatch_windowDeactivated(e As Object)
+End Sub
+
+Sub PageBackgroundDispatch_disposing(e As Object)
+End Sub
+
+Sub InspectOpenWindow
+  Dim oWin
+  Dim oAC
+
+  &apos;This Function identifies the top window, whose title starts with &quot;Page Style&quot;
+  &apos;I used Format | Page... to open the window.
+  oWin = GetWindowOpen(&quot;Τεχνοτροπία σελίδας&quot;)
+  oAC = oWin.AccessibleContext
+  
+      REM Get FILLER
+   if oAC.getAccessibleChild(0).getAccessibleContext().getAccessibleRole() = 17 then
+	oAC =  oAC.getAccessibleChild(0).getAccessibleContext()
+	endif
+	
+	  REM Get PAGE_TAB_LIST 
+  for i=0 to oAC.getAccessibleChildCount()-1
+	if oAC.getAccessibleChild(i).getAccessibleContext().getAccessibleRole() = 39 then
+
+		 oAC =  oAC.getAccessibleChild(i).getAccessibleContext()
+		 exit for
+	endif
+	next i
+	
+	 for i=0 to oAC.getAccessibleChildCount()-1
+	if oAC.getAccessibleChild(i).getAccessibleName() = &quot;Σελίδα&quot; then
+		 oAC.selectAccessibleChild(i)
+		 exit for
+	endif
+	next i 	
+  
+  Xray oAC
+  &apos;This generates a hierarchical list of the accessibility tree
+  &apos;call AnalyzeCreateSxc(oAC)
+End Sub
+
+
+&apos;------------------- GetWindowOpen
+REM Iterate through the open dialogs and find the one that starts with
+REM sTitle.
+Function GetWindowOpen(sTitle as String) As Object
+  Dim oToolkit
+  Dim lCount As Long
+  Dim k As Long
+  Dim oWin
+
+  oToolkit = Stardesktop.ActiveFrame.ContainerWindow.Toolkit
+  lCount = oToolkit.TopWindowCount
+
+  For k=0 To lCount -1
+    oWin = oToolkit.getTopWindow(k)
+    If HasUnoInterfaces(oWin, &quot;com.sun.star.awt.XDialog&quot;) Then
+      If left(oWin.Title, len(sTitle)) = sTitle Then
+        GetWindowOpen = oWin
+        Exit Function
+      EndIf
+    EndIf
+  Next k
+End Function
+
+REM https://ask.libreoffice.org/en/question/123664/create-a-macro-that-press-enter-automatic-once/
+Sub simulate_KeyPress_DELETE()
+    Dim oKeyEvent As New com.sun.star.awt.KeyEvent
+    oKeyEvent.Modifiers = 0     REM A combination of com.sun.star.awt.KeyModifier.
+    oKeyEvent.KeyCode   = com.sun.star.awt.Key.DELETE
+    oKeyEvent.KeyChar   = &quot;&quot;
+    simulate_KeyPress( oKeyEvent )
+End Sub
+
+Sub simulate_KeyPress( oKeyEvent As com.sun.star.awt.KeyEvent )
+REM Simulate a Key press ( and -release ) in the current Window.
+REM NB. This can cause the triggering of window elements.
+REM For example if there is a button currently selected in your form, and you call this method
+REM while passing the KeyEvent for RETURN, then that button will be activated.
+    If Not IsNull( oKeyEvent ) Then
+        Dim oWindow As Object, oToolkit As Object
+        oWindow = ThisComponent.CurrentController.Frame.getContainerWindow()
+        oKeyEvent.Source = oWindow      
+        oToolkit = oWindow.getToolkit()         REM com.sun.star.awt.Toolkit
+        oToolkit.keyPress( oKeyEvent )          REM methods of XToolkitRobot.
+        oToolkit.keyRelease( oKeyEvent )
+    End If
+End Sub
+
+Sub JumpToFootnotes
+	Dim document   as object
+	Dim dispatcher as object
+	
+	document   = ThisComponent.CurrentController.Frame
+	dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
+	
+	dispatcher.executeDispatch(document, &quot;.uno:JumpToFootnoteArea&quot;, &quot;&quot;, 0, Array())
+&apos;	dispatcher.executeDispatch(document, &quot;.uno:JumpToFootnoteOrAnchor&quot;, &quot;&quot;, 0, Array())
+&apos;	dispatcher.executeDispatch(document, &quot;.uno:JumpToNextFootnote&quot;, &quot;&quot;, 0, Array())
+&apos;	dispatcher.executeDispatch(document, &quot;.uno:JumpToFootnoteArea&quot;, &quot;&quot;, 0, Array())
+End Sub
+
+REM  *****  BASIC  *****
+
+Sub AddPageNumbering
+Dim PageNumber As Object
+Doc = ThisComponent
+
+DialogLibraries.LoadLibrary( &quot;LibreCustLib&quot; )  &apos;Load the standard Library
+oDialog1 = CreateUnoDialog( DialogLibraries.LibreCustLib.PageNumberingDialog )  &apos;Load the existing Practice Dialog
+oDialog1Model = oDialog1.Model  &apos;Load the Model of the Dialog
+
+
+
+NumberingStyleComboBox = oDialog1Model.getbyname(&quot;NumberingStyle&quot;)
+NumberingStyleComboBox.Text = &quot;1&quot;
+NumberingStyleComboBox.StringItemList = Array(&quot;1&quot;,&quot;-1-&quot;,&quot;[1]&quot;,&quot;(1)&quot;) &apos;styles of numbering
+AlignmentComboBox = oDialog1Model.getbyname(&quot;Alignment&quot;)
+AlignmentComboBox.Text = &quot;Κέντρο&quot;
+AlignmentComboBox.StringItemList = Array(&quot;Αριστερά&quot;,&quot;Δεξιά&quot;,&quot;Κέντρο&quot;) &apos;alignment
+oDialog1.Execute()
+
+AlignmentControl=oDialog1.getControl(&quot;Alignment&quot;)
+
+
+For x = 0 to AlignmentControl.ItemCount - 1
+      If AlignmentControl.Items(x) = AlignmentControl.Text Then
+         AlignmentEnum = x
+      end if
+   next x
+if AlignmentEnum  = 2 then AlignmentEnum  = AlignmentEnum +1 &apos;center align for paradjust to overcome BLOCK option
+
+&apos;Page Number Setup
+PageNumber = Doc.createInstance(&quot;com.sun.star.text.textfield.PageNumber&quot;)
+
+PageNumber.NumberingType = com.sun.star.style.NumberingType.ARABIC
+PageStyles = Doc.StyleFamilies.getByName(&quot;PageStyles&quot;)
+StdPage = PageStyles(&quot;Default&quot;)
+StdPage.FooterIsOn = True
+
+FooterCursor = StdPage.FooterText.Text.createTextCursor()
+
+FooterCursor.ParaAdjust = AlignmentEnum
+
+Select Case NumberingStyleComboBox.Text
+
+Case &quot;1&quot;
+
+StdPage.FooterText.insertTextContent(FooterCursor, PageNumber, False)
+
+Case &quot;-1-&quot;
+StdPage.FooterText.insertString(FooterCursor, &quot;-&quot;, False)
+StdPage.FooterText.insertTextContent(FooterCursor, PageNumber, False)
+StdPage.FooterText.insertString(FooterCursor, &quot;-&quot;, False)
+
+Case &quot;[1]&quot;
+StdPage.FooterText.insertString(FooterCursor, &quot;[&quot;, False)
+StdPage.FooterText.insertTextContent(FooterCursor, PageNumber, False)
+StdPage.FooterText.insertString(FooterCursor, &quot;]&quot;, False)
+
+Case &quot;(1)&quot;
+StdPage.FooterText.insertString(FooterCursor, &quot;(&quot;, False)
+StdPage.FooterText.insertTextContent(FooterCursor, PageNumber, False)
+StdPage.FooterText.insertString(FooterCursor, &quot;)&quot;, False)
+
+Case Else
+
+Print &quot;Something went wrong&quot;
+
+End Select
+
+End Sub
+
+
+</script:module>
