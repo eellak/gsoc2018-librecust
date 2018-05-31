@@ -236,25 +236,26 @@ DialogLibraries.LoadLibrary( &quot;LibreCustLib&quot; )  &apos;Load the standard
 oDialog1 = CreateUnoDialog( DialogLibraries.LibreCustLib.PageNumberingDialog )  &apos;Load the existing Practice Dialog
 oDialog1Model = oDialog1.Model  &apos;Load the Model of the Dialog
 
-
-
 NumberingStyleComboBox = oDialog1Model.getbyname(&quot;NumberingStyle&quot;)
 NumberingStyleComboBox.Text = &quot;1&quot;
 NumberingStyleComboBox.StringItemList = Array(&quot;1&quot;,&quot;-1-&quot;,&quot;[1]&quot;,&quot;(1)&quot;) &apos;styles of numbering
-AlignmentComboBox = oDialog1Model.getbyname(&quot;Alignment&quot;)
-AlignmentComboBox.Text = &quot;Κέντρο&quot;
-AlignmentComboBox.StringItemList = Array(&quot;Αριστερά&quot;,&quot;Δεξιά&quot;,&quot;Κέντρο&quot;) &apos;alignment
-oDialog1.Execute()
 
-AlignmentControl=oDialog1.getControl(&quot;Alignment&quot;)
+PositionListBox = oDialog1Model.getbyname(&quot;Position&quot;)
+PositionListBox.StringItemList= Array(&quot;Επικεφαλίδα&quot;,&quot;Υποσέλιδο&quot;) &apos;alignment
+PositionListBox.SelectedItems = Array(1) &apos;Default selection
 
+AlignmentListBox = oDialog1Model.getbyname(&quot;Alignment&quot;)
+AlignmentListBox.StringItemList= Array(&quot;Αριστερά&quot;,&quot;Δεξιά&quot;,&quot;Κέντρο&quot;) 
+AlignmentListBox.SelectedItems = Array(2) &apos;Default selection
+nReturn = oDialog1.Execute()
 
-For x = 0 to AlignmentControl.ItemCount - 1
-      If AlignmentControl.Items(x) = AlignmentControl.Text Then
-         AlignmentEnum = x
-      end if
-   next x
-if AlignmentEnum  = 2 then AlignmentEnum  = AlignmentEnum +1 &apos;center align for paradjust to overcome BLOCK option
+If nReturn = 1 then
+else
+   Exit Sub
+end if
+
+AlignmentEnum = AlignmentListBox.SelectedItems(0)
+if AlignmentEnum = 2 then AlignmentEnum  = AlignmentEnum +1 &apos;center align for paradjust to overcome BLOCK option
 
 &apos;Page Number Setup
 PageNumber = Doc.createInstance(&quot;com.sun.star.text.textfield.PageNumber&quot;)
@@ -262,37 +263,36 @@ PageNumber = Doc.createInstance(&quot;com.sun.star.text.textfield.PageNumber&quo
 PageNumber.NumberingType = com.sun.star.style.NumberingType.ARABIC
 PageStyles = Doc.StyleFamilies.getByName(&quot;PageStyles&quot;)
 StdPage = PageStyles(&quot;Default&quot;)
-StdPage.FooterIsOn = True
 
-FooterCursor = StdPage.FooterText.Text.createTextCursor()
+&apos;Decide where page numbering should be placed
+if PositionListBox.SelectedItems(0) = 0 then 
+	StdPage.HeaderIsOn = True
+	Num_Position = StdPage.HeaderText
+else
+	StdPage.FooterIsOn = True
+	Num_Position = StdPage.FooterText
+end if
 
-FooterCursor.ParaAdjust = AlignmentEnum
+NumCursor = Num_Position.Text.createTextCursor()
+NumCursor.ParaAdjust = AlignmentEnum
 
 Select Case NumberingStyleComboBox.Text
-
 Case &quot;1&quot;
-
-StdPage.FooterText.insertTextContent(FooterCursor, PageNumber, False)
-
+	Num_Position.insertTextContent(NumCursor, PageNumber, False)
 Case &quot;-1-&quot;
-StdPage.FooterText.insertString(FooterCursor, &quot;-&quot;, False)
-StdPage.FooterText.insertTextContent(FooterCursor, PageNumber, False)
-StdPage.FooterText.insertString(FooterCursor, &quot;-&quot;, False)
-
+	Num_Position.insertString(NumCursor, &quot;-&quot;, False)
+	Num_Position.insertTextContent(NumCursor, PageNumber, False)
+	Num_Position.insertString(NumCursor, &quot;-&quot;, False)
 Case &quot;[1]&quot;
-StdPage.FooterText.insertString(FooterCursor, &quot;[&quot;, False)
-StdPage.FooterText.insertTextContent(FooterCursor, PageNumber, False)
-StdPage.FooterText.insertString(FooterCursor, &quot;]&quot;, False)
-
+	Num_Position.insertString(NumCursor, &quot;[&quot;, False)
+	Num_Position.insertTextContent(NumCursor, PageNumber, False)
+	Num_Position.insertString(NumCursor, &quot;]&quot;, False)
 Case &quot;(1)&quot;
-StdPage.FooterText.insertString(FooterCursor, &quot;(&quot;, False)
-StdPage.FooterText.insertTextContent(FooterCursor, PageNumber, False)
-StdPage.FooterText.insertString(FooterCursor, &quot;)&quot;, False)
-
+	Num_Position.insertString(NumCursor, &quot;(&quot;, False)
+	Num_Position.insertTextContent(NumCursor, PageNumber, False)
+	Num_Position.insertString(NumCursor, &quot;)&quot;, False)
 Case Else
-
-Print &quot;Something went wrong&quot;
-
+Print &quot;Custom decoration unimplemented feature&quot;
 End Select
 
 End Sub
