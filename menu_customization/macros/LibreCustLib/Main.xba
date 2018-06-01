@@ -231,7 +231,7 @@ REM  *****  BASIC  *****
 Sub AddPageNumbering
 Dim PageNumber As Object
 Doc = ThisComponent
-
+&apos;xray Doc.CurrentController.getViewCursor()
 DialogLibraries.LoadLibrary( &quot;LibreCustLib&quot; )  &apos;Load the standard Library
 oDialog1 = CreateUnoDialog( DialogLibraries.LibreCustLib.PageNumberingDialog )  &apos;Load the existing Practice Dialog
 oDialog1Model = oDialog1.Model  &apos;Load the Model of the Dialog
@@ -254,15 +254,31 @@ else
    Exit Sub
 end if
 
+ViewCursor = Doc.CurrentController.getViewCursor()
+&apos;Way to set page style in whole document 
+&apos; From page 1 to next page break (in this example to the end of the document) apply desc Style
+&apos; At first all pages are considered unumbered
+ViewCursor.jumpToPage(1)
+ViewCursor.PageDescName = &quot;no_numbering&quot;
+
+FirstNumberedPage = oDialog1Model.getbyname(&quot;First_Numbered_Page&quot;)
+&apos;Begin numbering after n-th page
+ViewCursor.jumpToPage(FirstNumberedPage.Value)
+ViewCursor.PageDescName = &quot;Standard&quot;
+
+&apos; Set index of first numbered page
+FirstNumberedIndex = oDialog1Model.getbyname(&quot;First_Numbered_Index&quot;)
+ViewCursor.PageNumberOffset = First_Numbered_Index
+
 AlignmentEnum = AlignmentListBox.SelectedItems(0)
 if AlignmentEnum = 2 then AlignmentEnum  = AlignmentEnum +1 &apos;center align for paradjust to overcome BLOCK option
 
 &apos;Page Number Setup
 PageNumber = Doc.createInstance(&quot;com.sun.star.text.textfield.PageNumber&quot;)
-
 PageNumber.NumberingType = com.sun.star.style.NumberingType.ARABIC
 PageStyles = Doc.StyleFamilies.getByName(&quot;PageStyles&quot;)
-StdPage = PageStyles(&quot;Default&quot;)
+&apos;xray PageStyles
+StdPage = PageStyles(&quot;Standard&quot;)
 
 &apos;Decide where page numbering should be placed
 if PositionListBox.SelectedItems(0) = 0 then 
@@ -296,6 +312,4 @@ Print &quot;Custom decoration unimplemented feature&quot;
 End Select
 
 End Sub
-
-
 </script:module>

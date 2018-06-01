@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
-<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="PageNumberingDialog" dlg:left="146" dlg:top="89" dlg:width="197" dlg:height="119" dlg:closeable="true" dlg:moveable="true" dlg:title="Εισαγωγή αρίθμησης σελίδας">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="PageNumberingDialog" dlg:left="148" dlg:top="91" dlg:width="257" dlg:height="91" dlg:closeable="true" dlg:moveable="true" dlg:title="Εισαγωγή αρίθμησης σελίδας">
  <dlg:bulletinboard>
-  <dlg:button dlg:id="CommandButton1" dlg:tab-index="1" dlg:left="135" dlg:top="87" dlg:width="50" dlg:height="12" dlg:value="OK" dlg:button-type="ok"/>
-  <dlg:text dlg:id="Label1" dlg:tab-index="2" dlg:left="6" dlg:top="7" dlg:width="51" dlg:height="11" dlg:value="Στυλ αρίθμησης"/>
-  <dlg:text dlg:id="Label2" dlg:tab-index="3" dlg:left="6" dlg:top="40" dlg:width="48" dlg:height="11" dlg:value="Ευθυγράμμιση"/>
-  <dlg:combobox dlg:id="NumberingStyle" dlg:tab-index="0" dlg:left="6" dlg:top="21" dlg:width="116" dlg:height="12" dlg:tabstop="false" dlg:align="center" dlg:spin="true"/>
-  <dlg:text dlg:id="Label3" dlg:tab-index="4" dlg:left="6" dlg:top="74" dlg:width="19" dlg:height="11" dlg:value="Θέση"/>
-  <dlg:menulist dlg:id="Alignment" dlg:tab-index="5" dlg:left="6" dlg:top="51" dlg:width="63" dlg:height="13" dlg:spin="true"/>
-  <dlg:menulist dlg:id="Position" dlg:tab-index="6" dlg:left="6" dlg:top="85" dlg:width="63" dlg:height="13" dlg:spin="true"/>
+  <dlg:button dlg:id="CommandButton1" dlg:tab-index="1" dlg:left="199" dlg:top="70" dlg:width="50" dlg:height="12" dlg:value="OK" dlg:button-type="ok"/>
+  <dlg:text dlg:id="Label1" dlg:tab-index="2" dlg:left="5" dlg:top="3" dlg:width="51" dlg:height="11" dlg:value="Στυλ αρίθμησης"/>
+  <dlg:text dlg:id="Label2" dlg:tab-index="3" dlg:left="103" dlg:top="3" dlg:width="48" dlg:height="11" dlg:value="Ευθυγράμμιση"/>
+  <dlg:combobox dlg:id="NumberingStyle" dlg:tab-index="0" dlg:left="5" dlg:top="19" dlg:width="82" dlg:height="12" dlg:tabstop="false" dlg:align="center" dlg:spin="true"/>
+  <dlg:text dlg:id="Label3" dlg:tab-index="4" dlg:left="186" dlg:top="3" dlg:width="19" dlg:height="11" dlg:value="Θέση"/>
+  <dlg:menulist dlg:id="Alignment" dlg:tab-index="5" dlg:left="103" dlg:top="19" dlg:width="63" dlg:height="13" dlg:spin="true"/>
+  <dlg:menulist dlg:id="Position" dlg:tab-index="6" dlg:left="186" dlg:top="19" dlg:width="63" dlg:height="13" dlg:spin="true"/>
+  <dlg:text dlg:id="Label4" dlg:tab-index="8" dlg:left="5" dlg:top="40" dlg:width="51" dlg:height="11" dlg:value="Πρώτη σελίδα"/>
+  <dlg:text dlg:id="Label5" dlg:tab-index="10" dlg:left="103" dlg:top="40" dlg:width="51" dlg:height="11" dlg:value="Αρίθμηση από... "/>
+  <dlg:numericfield dlg:id="First_Numbered_Page" dlg:tab-index="7" dlg:left="5" dlg:top="53" dlg:width="63" dlg:height="11" dlg:decimal-accuracy="0" dlg:spin="true"/>
+  <dlg:numericfield dlg:id="First_Numbered_Index" dlg:tab-index="9" dlg:left="103" dlg:top="53" dlg:width="63" dlg:height="11" dlg:decimal-accuracy="0" dlg:spin="true"/>
  </dlg:bulletinboard>
 </dlg:window>
