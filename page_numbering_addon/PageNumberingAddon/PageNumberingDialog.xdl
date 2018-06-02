@@ -11,7 +11,7 @@
   <dlg:menulist dlg:id="Position" dlg:tab-index="6" dlg:left="186" dlg:top="19" dlg:width="63" dlg:height="13" dlg:spin="true"/>
   <dlg:text dlg:id="Label4" dlg:tab-index="8" dlg:left="5" dlg:top="40" dlg:width="51" dlg:height="11" dlg:value="Πρώτη σελίδα"/>
   <dlg:text dlg:id="Label5" dlg:tab-index="10" dlg:left="103" dlg:top="40" dlg:width="51" dlg:height="11" dlg:value="Αρίθμηση από... "/>
-  <dlg:numericfield dlg:id="First_Numbered_Page" dlg:tab-index="7" dlg:left="5" dlg:top="53" dlg:width="63" dlg:height="11" dlg:decimal-accuracy="0" dlg:spin="true"/>
-  <dlg:numericfield dlg:id="First_Numbered_Index" dlg:tab-index="9" dlg:left="103" dlg:top="53" dlg:width="63" dlg:height="11" dlg:decimal-accuracy="0" dlg:spin="true"/>
+  <dlg:numericfield dlg:id="First_Numbered_Page" dlg:tab-index="7" dlg:left="5" dlg:top="53" dlg:width="63" dlg:height="11" dlg:decimal-accuracy="0" dlg:value="1" dlg:spin="true"/>
+  <dlg:numericfield dlg:id="First_Numbered_Index" dlg:tab-index="9" dlg:left="103" dlg:top="53" dlg:width="63" dlg:height="11" dlg:decimal-accuracy="0" dlg:value="1" dlg:spin="true"/>
  </dlg:bulletinboard>
 </dlg:window>
