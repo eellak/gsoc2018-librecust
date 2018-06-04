@@ -167,6 +167,7 @@
  <menu:menu menu:id=".uno:InsertMenu">
   <menu:menupopup>
    <menu:menuitem menu:id=".uno:InsertPagebreak"/>
+   <menu:menuitem menu:id="vnd.sun.star.script:PageNumberingAddon.Module1.Main?language=Basic&amp;location=application" menu:label="Αρίθμηση Σελίδας"/>
    <menu:menuitem menu:id=".uno:InsertBreak"/>
    <menu:menuitem menu:id=".uno:InsertDateField"/>
    <menu:menuitem menu:id=".uno:EditGlossary"/>
@@ -696,23 +697,23 @@
    <menu:menuitem menu:id=".uno:RowSplit"/>
    <menu:menuseparator/>
    <menu:menu menu:id="Περισσότερα" menu:label="Περισσότερα">
-     <menu:menupopup>
-       <menu:menu menu:id=".uno:TableConvertMenu">
-        <menu:menupopup>
-         <menu:menuitem menu:id=".uno:ConvertTextToTable"/>
-         <menu:menuitem menu:id=".uno:ConvertTableToText"/>
-        </menu:menupopup>
-       </menu:menu>
-       <menu:menuseparator/>
-       <menu:menuitem menu:id=".uno:TableSort"/>
-       <menu:menuitem menu:id=".uno:InsertFormula"/>
-       <menu:menuseparator/>
-       <menu:menuitem menu:id=".uno:TableDialog"/>
-       <menu:menuitem menu:id=".uno:TableNumberRecognition"/>
-       <menu:menuseparator/>
-       <menu:menuitem menu:id=".uno:Protect"/>
-       <menu:menuitem menu:id=".uno:UnsetCellsReadOnly"/>
-     </menu:menupopup>
+    <menu:menupopup>
+     <menu:menu menu:id=".uno:TableConvertMenu">
+      <menu:menupopup>
+       <menu:menuitem menu:id=".uno:ConvertTextToTable"/>
+       <menu:menuitem menu:id=".uno:ConvertTableToText"/>
+      </menu:menupopup>
+     </menu:menu>
+     <menu:menuseparator/>
+     <menu:menuitem menu:id=".uno:TableSort"/>
+     <menu:menuitem menu:id=".uno:InsertFormula"/>
+     <menu:menuseparator/>
+     <menu:menuitem menu:id=".uno:TableDialog"/>
+     <menu:menuitem menu:id=".uno:TableNumberRecognition"/>
+     <menu:menuseparator/>
+     <menu:menuitem menu:id=".uno:Protect"/>
+     <menu:menuitem menu:id=".uno:UnsetCellsReadOnly"/>
+    </menu:menupopup>
    </menu:menu>
   </menu:menupopup>
  </menu:menu>
