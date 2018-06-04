@@ -3,97 +3,91 @@
 <script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic" script:moduleType="normal">REM  *****  BASIC  *****
 
 Sub Main
-Dim PageNumber As Object
-Doc = ThisComponent
-&apos;xray Doc.CurrentController.getViewCursor()
-DialogLibraries.LoadLibrary( &quot;LibreCustLib&quot; )  &apos;Load the standard Library
-oDialog1 = CreateUnoDialog( DialogLibraries.LibreCustLib.PageNumberingDialog )  &apos;Load the existing Practice Dialog
-oDialog1Model = oDialog1.Model  &apos;Load the Model of the Dialog
 
-NumberingStyleComboBox = oDialog1Model.getbyname(&quot;NumberingStyle&quot;)
-NumberingStyleComboBox.Text = &quot;1&quot;
-NumberingStyleComboBox.StringItemList = Array(&quot;1&quot;,&quot;-1-&quot;,&quot;[1]&quot;,&quot;(1)&quot;) &apos;styles of numbering
+	Dim PageNumber As Object
+	
+	Doc = ThisComponent
+	
+	DialogLibraries.LoadLibrary( &quot;LibreCustLib&quot; )  &apos;Load the standard Library
+	oDialog1 = CreateUnoDialog( DialogLibraries.LibreCustLib.PageNumberingDialog )  &apos;Load the existing Practice Dialog
+	oDialog1Model = oDialog1.Model  &apos;Load the Model of the Dialog
 
-PositionListBox = oDialog1Model.getbyname(&quot;Position&quot;)
-PositionListBox.StringItemList= Array(&quot;Επικεφαλίδα&quot;,&quot;Υποσέλιδο&quot;) &apos;alignment
-PositionListBox.SelectedItems = Array(1) &apos;Default selection
+	NumberingStyleComboBox = oDialog1Model.getbyname(&quot;NumberingStyle&quot;)
+	NumberingStyleComboBox.Text = &quot;1&quot;
+	NumberingStyleComboBox.StringItemList = Array(&quot;1&quot;,&quot;-1-&quot;,&quot;[1]&quot;,&quot;(1)&quot;) &apos;styles of numbering
 
-AlignmentListBox = oDialog1Model.getbyname(&quot;Alignment&quot;)
-AlignmentListBox.StringItemList= Array(&quot;Αριστερά&quot;,&quot;Δεξιά&quot;,&quot;Κέντρο&quot;) 
-AlignmentListBox.SelectedItems = Array(2) &apos;Default selection
-nReturn = oDialog1.Execute()
+	PositionListBox = oDialog1Model.getbyname(&quot;Position&quot;)
+	PositionListBox.StringItemList= Array(&quot;Επικεφαλίδα&quot;,&quot;Υποσέλιδο&quot;) &apos;alignment
+	PositionListBox.SelectedItems = Array(1) &apos;Default selection
 
-If nReturn = 1 then
-else
-   Exit Sub
-end if
+	AlignmentListBox = oDialog1Model.getbyname(&quot;Alignment&quot;)
+	AlignmentListBox.StringItemList= Array(&quot;Αριστερά&quot;,&quot;Δεξιά&quot;,&quot;Κέντρο&quot;) 
+	AlignmentListBox.SelectedItems = Array(2) &apos;Default selection
+	nReturn = oDialog1.Execute()
 
-ViewCursor = Doc.CurrentController.getViewCursor()
+	If nReturn = 1 then
+	else
+   		Exit Sub
+	end if
+
+	ViewCursor = Doc.CurrentController.getViewCursor()
 
 &apos;Way to set page style in whole document 
 &apos; From page 1 to next page break (in this example to the end of the document) apply desc Style
 &apos; At first all pages are considered unumbered
-ViewCursor.jumpToPage(1)
-&apos;xray ViewCursor
-&apos;exit sub
-ViewCursor.PageDescName = &quot;Index&quot;
+	ViewCursor.jumpToPage(1)
+	ViewCursor.PageDescName = &quot;Index&quot;
 
-
-FirstNumberedPage = oDialog1Model.getbyname(&quot;First_Numbered_Page&quot;)
+	FirstNumberedPage = oDialog1Model.getbyname(&quot;First_Numbered_Page&quot;)
 &apos;Begin numbering after n-th page
-ViewCursor.jumpToPage(FirstNumberedPage.Value)
+	ViewCursor.jumpToPage(FirstNumberedPage.Value)
 
 &apos; Set index of first numbered page
-FirstNumberedIndex = oDialog1Model.getbyname(&quot;First_Numbered_Index&quot;)
-ViewCursor.PageNumberOffset = FirstNumberedIndex.Value
+	FirstNumberedIndex = oDialog1Model.getbyname(&quot;First_Numbered_Index&quot;)
+	ViewCursor.PageNumberOffset = FirstNumberedIndex.Value
 
-ViewCursor.PageDescName = &quot;Standard&quot;
+	ViewCursor.PageDescName = &quot;Standard&quot;
 
 &apos;ViewCursor.NumberingStartValue = First_Numbered_Index
 
-
-
-AlignmentEnum = AlignmentListBox.SelectedItems(0)
-if AlignmentEnum = 2 then AlignmentEnum  = AlignmentEnum +1 &apos;center align for paradjust to overcome BLOCK option
+	AlignmentEnum = AlignmentListBox.SelectedItems(0)
+	if AlignmentEnum = 2 then AlignmentEnum  = AlignmentEnum +1 &apos;center align for paradjust to overcome BLOCK option
 
 &apos;Page Number Setup
-PageNumber = Doc.createInstance(&quot;com.sun.star.text.textfield.PageNumber&quot;)
-PageNumber.NumberingType = com.sun.star.style.NumberingType.ARABIC
-PageStyles = Doc.StyleFamilies.getByName(&quot;PageStyles&quot;)
-
-StdPage = PageStyles(&quot;Standard&quot;)
-
+	PageNumber = Doc.createInstance(&quot;com.sun.star.text.textfield.PageNumber&quot;)
+	PageNumber.NumberingType = com.sun.star.style.NumberingType.ARABIC
+	PageStyles = Doc.StyleFamilies.getByName(&quot;PageStyles&quot;)
+	StdPage = PageStyles(&quot;Standard&quot;)  &apos;Whatever is Standard will get numbering
 
 &apos;Decide where page numbering should be placed
-if PositionListBox.SelectedItems(0) = 0 then 
-	StdPage.HeaderIsOn = True
-	Num_Position = StdPage.HeaderText
-else
-	StdPage.FooterIsOn = True
-	Num_Position = StdPage.FooterText
-end if
+	if PositionListBox.SelectedItems(0) = 0 then 
+		StdPage.HeaderIsOn = True
+		Num_Position = StdPage.HeaderText
+	else
+		StdPage.FooterIsOn = True
+		Num_Position = StdPage.FooterText
+	end if
 
-NumCursor = Num_Position.Text.createTextCursor()
-NumCursor.ParaAdjust = AlignmentEnum
-
-Select Case NumberingStyleComboBox.Text
-Case &quot;1&quot;
-	Num_Position.insertTextContent(NumCursor, PageNumber, False)
-Case &quot;-1-&quot;
-	Num_Position.insertString(NumCursor, &quot;-&quot;, False)
-	Num_Position.insertTextContent(NumCursor, PageNumber, False)
-	Num_Position.insertString(NumCursor, &quot;-&quot;, False)
-Case &quot;[1]&quot;
-	Num_Position.insertString(NumCursor, &quot;[&quot;, False)
-	Num_Position.insertTextContent(NumCursor, PageNumber, False)
-	Num_Position.insertString(NumCursor, &quot;]&quot;, False)
-Case &quot;(1)&quot;
-	Num_Position.insertString(NumCursor, &quot;(&quot;, False)
-	Num_Position.insertTextContent(NumCursor, PageNumber, False)
-	Num_Position.insertString(NumCursor, &quot;)&quot;, False)
-Case Else
-Print &quot;Custom decoration unimplemented feature&quot;
-End Select
-
+	NumCursor = Num_Position.Text.createTextCursor()
+	NumCursor.ParaAdjust = AlignmentEnum
+	
+	Select Case NumberingStyleComboBox.Text
+		Case &quot;1&quot;
+			Num_Position.insertTextContent(NumCursor, PageNumber, False)
+		Case &quot;-1-&quot;
+			Num_Position.insertString(NumCursor, &quot;-&quot;, False)
+			Num_Position.insertTextContent(NumCursor, PageNumber, False)
+			Num_Position.insertString(NumCursor, &quot;-&quot;, False)
+		Case &quot;[1]&quot;
+			Num_Position.insertString(NumCursor, &quot;[&quot;, False)
+			Num_Position.insertTextContent(NumCursor, PageNumber, False)
+			Num_Position.insertString(NumCursor, &quot;]&quot;, False)
+		Case &quot;(1)&quot;
+			Num_Position.insertString(NumCursor, &quot;(&quot;, False)
+			Num_Position.insertTextContent(NumCursor, PageNumber, False)
+			Num_Position.insertString(NumCursor, &quot;)&quot;, False)
+		Case Else
+			Print &quot;Custom decoration unimplemented feature&quot;
+	End Select
 End Sub
 </script:module>
