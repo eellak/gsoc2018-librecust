@@ -9,7 +9,7 @@ Sub Main
 	Doc = ThisComponent
 	
 	DialogLibraries.LoadLibrary( &quot;LibreCustLib&quot; )  &apos;Load the standard Library
-	oDialog1 = CreateUnoDialog( DialogLibraries.LibreCustLib.PageNumberingDialog )  &apos;Load the existing Practice Dialog
+	oDialog1 = CreateUnoDialog( DialogLibraries.PageNumberingAddon.PageNumberingDialog )  &apos;Load the existing Practice Dialog
 	oDialog1Model = oDialog1.Model  &apos;Load the Model of the Dialog
 
 	NumberingStyleComboBox = oDialog1Model.getbyname(&quot;NumberingStyle&quot;)
