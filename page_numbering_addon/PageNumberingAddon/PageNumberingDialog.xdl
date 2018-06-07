@@ -13,12 +13,18 @@
   <dlg:menulist dlg:id="Position" dlg:tab-index="6" dlg:left="186" dlg:top="19" dlg:width="63" dlg:height="13" dlg:spin="true"/>
   <dlg:text dlg:id="Label4" dlg:tab-index="8" dlg:left="8" dlg:top="103" dlg:width="51" dlg:height="11" dlg:value="Πρώτη σελίδα"/>
   <dlg:text dlg:id="Label5" dlg:tab-index="10" dlg:left="103" dlg:top="103" dlg:width="51" dlg:height="11" dlg:value="Αρίθμηση από... "/>
-  <dlg:numericfield dlg:id="First_Numbered_Page" dlg:tab-index="7" dlg:left="8" dlg:top="116" dlg:width="63" dlg:height="11" dlg:decimal-accuracy="0" dlg:value="1" dlg:spin="true"/>
+  <dlg:numericfield dlg:id="First_Numbered_Page" dlg:tab-index="7" dlg:left="8" dlg:top="116" dlg:width="63" dlg:height="11" dlg:decimal-accuracy="0" dlg:value="1" dlg:spin="true">
+   <script:event script:event-name="on-textchange" script:macro-name="vnd.sun.star.script:PageNumberingAddon.Module1.changeTest?language=Basic&amp;location=application" script:language="Script"/>
+  </dlg:numericfield>
   <dlg:numericfield dlg:id="First_Numbered_Index" dlg:tab-index="9" dlg:left="103" dlg:top="116" dlg:width="63" dlg:height="11" dlg:decimal-accuracy="0" dlg:value="1" dlg:spin="true"/>
-  <dlg:textfield dlg:id="TextField1" dlg:tab-index="11" dlg:left="6" dlg:top="51" dlg:width="46" dlg:height="11"/>
-  <dlg:text dlg:id="Label6" dlg:tab-index="12" dlg:left="6" dlg:top="38" dlg:width="51" dlg:height="11" dlg:value="Γραμματοσειρά"/>
-  <dlg:button dlg:id="CommandButton2" dlg:tab-index="13" dlg:left="156" dlg:top="138" dlg:width="50" dlg:height="12" dlg:value="Ακύρωση">
+  <dlg:text dlg:id="Label6" dlg:tab-index="11" dlg:left="6" dlg:top="38" dlg:width="51" dlg:height="11" dlg:value="Γραμματοσειρά"/>
+  <dlg:button dlg:id="CommandButton2" dlg:tab-index="12" dlg:left="156" dlg:top="138" dlg:width="50" dlg:height="12" dlg:value="Ακύρωση">
    <script:event script:event-name="on-performaction" script:macro-name="vnd.sun.star.script:PageNumberingAddon.Module1.TopListen_WindowClosing?language=Basic&amp;location=application" script:language="Script"/>
   </dlg:button>
+  <dlg:text dlg:id="Label7" dlg:tab-index="14" dlg:left="173" dlg:top="38" dlg:width="51" dlg:height="11" dlg:value="Μέγεθος"/>
+  <dlg:numericfield dlg:id="FontSize" dlg:tab-index="13" dlg:left="173" dlg:top="51" dlg:width="63" dlg:height="11" dlg:decimal-accuracy="0" dlg:value="1" dlg:spin="true">
+   <script:event script:event-name="on-textchange" script:macro-name="vnd.sun.star.script:PageNumberingAddon.Module1.changeTest?language=Basic&amp;location=application" script:language="Script"/>
+  </dlg:numericfield>
+  <dlg:menulist dlg:id="FontSelect" dlg:tab-index="15" dlg:left="6" dlg:top="49" dlg:width="104" dlg:height="13" dlg:spin="true"/>
  </dlg:bulletinboard>
 </dlg:window>
