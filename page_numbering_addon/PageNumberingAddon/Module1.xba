@@ -8,7 +8,7 @@ Sub Main
 	
 	Doc = ThisComponent
 	
-	DialogLibraries.LoadLibrary( &quot;LibreCustLib&quot; )  &apos;Load the standard Library
+	DialogLibraries.LoadLibrary( &quot;PageNumberingAddon&quot; )  &apos;Load the standard Library
 	oDialog1 = CreateUnoDialog( DialogLibraries.PageNumberingAddon.PageNumberingDialog )  &apos;Load the existing Practice Dialog
 	oDialog1Model = oDialog1.Model  &apos;Load the Model of the Dialog
 
@@ -29,7 +29,7 @@ Sub Main
 	FirstNumberedPage.Value = 1	&apos;Default first page value is 1
 	FirstNumberedIndex.Value = 1 &apos;Default first page index is 1
 	nReturn = oDialog1.Execute()
-
+	&apos;xray oDialog1
 	If nReturn = 1 then
 	else
    		Exit Sub
@@ -94,4 +94,187 @@ Sub Main
 			Print &quot;Custom decoration unimplemented feature&quot;
 	End Select
 End Sub
+
+&apos;Author:  Paul Sobolik
+&apos;email:  psobolik@lycos.com 
+Sub ListFonts
+  Dim oToolkit as Object
+  oToolkit = CreateUnoService(&quot;com.sun.star.awt.Toolkit&quot;)
+
+  Dim oDevice as Variant
+  oDevice = oToolkit.createScreenCompatibleDevice(0, 0)
+
+  Dim oFontDescriptors As Variant
+  oFontDescriptors = oDevice.FontDescriptors
+
+  Dim oFontDescriptor As Object
+
+  Dim sFontList as String
+  Dim iIndex as Integer, iStart As Integer
+  Dim iTotal As Integer, iAdjust As Integer
+
+  iTotal = UBound(oFontDescriptors) - LBound(oFontDescriptors) + 1
+  iStart = 1
+  iAdjust = iStart - LBound(oFontDescriptors)
+  For iIndex = LBound(oFontDescriptors) To UBound(oFontDescriptors)
+    oFontDescriptor = oFontDescriptors(iIndex)
+    sFontList = sFontList &amp; iIndex + iAdjust &amp; &quot;: &quot; &amp; _
+                oFontDescriptor.Name &amp; &quot; &quot; &amp;_
+                oFontDescriptor.StyleName &amp; Chr(10)
+    If ((iIndex + iAdjust) Mod 20 = 0) Then
+      MsgBox sFontList, 0, &quot;Fonts &quot; &amp; iStart &amp; &quot; to &quot; &amp; _
+             iIndex + iAdjust &amp; &quot; of &quot; &amp; iTotal
+      iStart = iIndex + iAdjust + 1
+      sFontList = &quot;&quot;
+    End If
+  Next iIndex
+  If sFontList &lt;&gt; &quot;&quot; Then
+    Dim s$
+    s = &quot;Fonts &quot; &amp; iStart &amp; &quot; to &quot; &amp; iIndex &amp; &quot; of &quot; &amp; iTotal
+    MsgBox sFontList, 0, s
+  End If
+End Sub
+
+
+global Continue as integer
+global oDlg As Object
+global NumberingStyleComboBox,PositionListBox,AlignmentListBox,FirstNumberedPage,FirstNumberedIndex
+Sub StartDialog()
+
+Dim Doc as Object
+Dim oLib As Object, myDlg As Object
+
+dim oListenerTop as object
+
+Doc = ThisComponent
+DialogLibraries.LoadLibrary(&quot;PageNumberingAddon&quot;)
+oLib = DialogLibraries.GetByName(&quot;PageNumberingAddon&quot;)
+myDlg = oLib.GetByName(&quot;PageNumberingDialog&quot;)
+oDlg = CreateUnoDialog(myDlg)
+
+Continue = 1 &apos; 1 for open window | 0 for cancel | 2 for ok
+
+oListenerTop=createUnoListener(&quot;TopListen_&quot;, &quot;com.sun.star.awt.XTopWindowListener&quot;)
+oDlg.addTopWindowlistener(oListenerTop) 
+
+do while Continue = 1 &apos;if still open 
+	wait 20
+	oDlg.setVisible(true)
+loop
+	If Continue = 2 then 
+	else
+   		Exit Sub
+	end if
+	
+	Dim PageNumber As Object
+	
+	Doc = ThisComponent
+	
+ViewCursor = Doc.CurrentController.getViewCursor()
+
+&apos; Way to set page style in whole document 
+&apos; From page 1 to next page break (in this example to the end of the document) apply desc Style
+&apos; At first all pages are considered unumbered
+	ViewCursor.jumpToPage(1)
+	ViewCursor.PageDescName = &quot;Index&quot;
+	
+&apos; Begin numbering after n-th page
+	ViewCursor.jumpToPage(FirstNumberedPage.Value)
+
+&apos; Set index of first numbered page 
+&apos; We cannot use PageNumber.Offset property because we may need bigger than total page number indexing
+	ViewCursor.PageNumberOffset = FirstNumberedIndex.Value
+
+&apos; Every numbered page will be of Standard Page style for now
+	ViewCursor.PageDescName = &quot;Standard&quot;
+
+	AlignmentEnum = AlignmentListBox.SelectedItems(0)
+	if AlignmentEnum = 2 then AlignmentEnum  = AlignmentEnum +1 &apos;center align for paradjust to overcome BLOCK option
+
+&apos; Page Number Setup
+	PageNumber = Doc.createInstance(&quot;com.sun.star.text.textfield.PageNumber&quot;)
+	PageNumber.NumberingType = com.sun.star.style.NumberingType.ARABIC &apos;Just ARABIC numbering for now till implementation
+	PageStyles = Doc.StyleFamilies.getByName(&quot;PageStyles&quot;)
+	StdPage = PageStyles(&quot;Standard&quot;)  &apos;Whatever is Standard will get numbering
+
+&apos; Decide where page numbering should be placed
+	if PositionListBox.SelectedItems(0) = 0 then 
+		StdPage.HeaderIsOn = True
+		Num_Position = StdPage.HeaderText
+	else
+		StdPage.FooterIsOn = True
+		Num_Position = StdPage.FooterText
+	end if
+
+	NumCursor = Num_Position.Text.createTextCursor()
+	NumCursor.ParaAdjust = AlignmentEnum
+	
+&apos; Could construct the whole object on one call in the future
+	Select Case NumberingStyleComboBox.Text
+		Case &quot;1&quot;
+			Num_Position.insertTextContent(NumCursor, PageNumber, False)
+		Case &quot;-1-&quot;
+			Num_Position.insertString(NumCursor, &quot;-&quot;, False)
+			Num_Position.insertTextContent(NumCursor, &quot;-&quot; &amp; PageNumber, False)
+			Num_Position.insertString(NumCursor, &quot;-&quot;, False)
+		Case &quot;[1]&quot;
+			Num_Position.insertString(NumCursor, &quot;[&quot;, False)
+			Num_Position.insertTextContent(NumCursor, PageNumber, False)
+			Num_Position.insertString(NumCursor, &quot;]&quot;, False)
+		Case &quot;(1)&quot;
+			Num_Position.insertString(NumCursor, &quot;(&quot;, False)
+			Num_Position.insertTextContent(NumCursor, PageNumber, False)
+			Num_Position.insertString(NumCursor, &quot;)&quot;, False)
+		Case Else
+			Print &quot;Custom decoration unimplemented feature&quot;
+	End Select
+
+End Sub 
+
+sub TopListen_WindowClosing
+	Continue=0
+end sub
+sub TopListen_OK
+	Continue=2
+end sub
+sub  TopListen_windowOpened(e As Object)
+	&apos; Initialize all fields with default values
+	Dim oDialog1Model
+	Dim oDialog1
+	
+	
+	oDialog1 = e.Source	
+	oDialog1Model = oDialog1.Model  &apos;Load the Model of the Dialog
+
+	NumberingStyleComboBox = oDialog1Model.getbyname(&quot;NumberingStyle&quot;)
+	NumberingStyleComboBox.Text = &quot;1&quot;
+	NumberingStyleComboBox.StringItemList = Array(&quot;1&quot;,&quot;-1-&quot;,&quot;[1]&quot;,&quot;(1)&quot;) &apos;styles of numbering
+
+	PositionListBox = oDialog1Model.getbyname(&quot;Position&quot;)
+	PositionListBox.StringItemList= Array(&quot;Επικεφαλίδα&quot;,&quot;Υποσέλιδο&quot;) &apos;alignment
+	PositionListBox.SelectedItems = Array(1) &apos;Default selection
+
+	AlignmentListBox = oDialog1Model.getbyname(&quot;Alignment&quot;)
+	AlignmentListBox.StringItemList= Array(&quot;Αριστερά&quot;,&quot;Δεξιά&quot;,&quot;Κέντρο&quot;) 
+	AlignmentListBox.SelectedItems = Array(2) &apos;Default selection
+	
+	FirstNumberedPage = oDialog1Model.getbyname(&quot;First_Numbered_Page&quot;)
+	FirstNumberedIndex = oDialog1Model.getbyname(&quot;First_Numbered_Index&quot;)
+	FirstNumberedPage.Value = 1	&apos;Default first page value is 1
+	FirstNumberedIndex.Value = 1 &apos;Default first page index is 1	
+end sub
+
+sub  TopListen_windowClosed
+end sub
+sub TopListen_windowMinimized
+end sub
+sub  TopListen_windowNormalized
+end sub
+sub  TopListen_windowActivated
+end sub
+sub  TopListen_windowDeactivated
+end sub
+sub  TopListen_disposing
+end sub
+
 </script:module>
