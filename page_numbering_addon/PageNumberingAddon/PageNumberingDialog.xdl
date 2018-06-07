@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
-<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="PageNumberingDialog" dlg:left="148" dlg:top="91" dlg:width="257" dlg:height="91" dlg:closeable="true" dlg:moveable="true" dlg:title="Εισαγωγή αρίθμησης σελίδας">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="PageNumberingDialog" dlg:left="148" dlg:top="91" dlg:width="272" dlg:height="165" dlg:closeable="true" dlg:moveable="true" dlg:title="Εισαγωγή αρίθμησης σελίδας">
  <dlg:bulletinboard>
-  <dlg:button dlg:id="CommandButton1" dlg:tab-index="1" dlg:left="199" dlg:top="70" dlg:width="50" dlg:height="12" dlg:value="OK" dlg:button-type="ok"/>
+  <dlg:button dlg:id="CommandButton1" dlg:tab-index="1" dlg:left="214" dlg:top="138" dlg:width="50" dlg:height="12" dlg:value="OK">
+   <script:event script:event-name="on-performaction" script:macro-name="vnd.sun.star.script:PageNumberingAddon.Module1.TopListen_OK?language=Basic&amp;location=application" script:language="Script"/>
+  </dlg:button>
   <dlg:text dlg:id="Label1" dlg:tab-index="2" dlg:left="5" dlg:top="3" dlg:width="51" dlg:height="11" dlg:value="Στυλ αρίθμησης"/>
   <dlg:text dlg:id="Label2" dlg:tab-index="3" dlg:left="103" dlg:top="3" dlg:width="48" dlg:height="11" dlg:value="Ευθυγράμμιση"/>
   <dlg:combobox dlg:id="NumberingStyle" dlg:tab-index="0" dlg:left="5" dlg:top="19" dlg:width="82" dlg:height="12" dlg:tabstop="false" dlg:align="center" dlg:spin="true"/>
   <dlg:text dlg:id="Label3" dlg:tab-index="4" dlg:left="186" dlg:top="3" dlg:width="19" dlg:height="11" dlg:value="Θέση"/>
   <dlg:menulist dlg:id="Alignment" dlg:tab-index="5" dlg:left="103" dlg:top="19" dlg:width="63" dlg:height="13" dlg:spin="true"/>
   <dlg:menulist dlg:id="Position" dlg:tab-index="6" dlg:left="186" dlg:top="19" dlg:width="63" dlg:height="13" dlg:spin="true"/>
-  <dlg:text dlg:id="Label4" dlg:tab-index="8" dlg:left="5" dlg:top="40" dlg:width="51" dlg:height="11" dlg:value="Πρώτη σελίδα"/>
-  <dlg:text dlg:id="Label5" dlg:tab-index="10" dlg:left="103" dlg:top="40" dlg:width="51" dlg:height="11" dlg:value="Αρίθμηση από... "/>
-  <dlg:numericfield dlg:id="First_Numbered_Page" dlg:tab-index="7" dlg:left="5" dlg:top="53" dlg:width="63" dlg:height="11" dlg:decimal-accuracy="0" dlg:value="1" dlg:spin="true"/>
-  <dlg:numericfield dlg:id="First_Numbered_Index" dlg:tab-index="9" dlg:left="103" dlg:top="53" dlg:width="63" dlg:height="11" dlg:decimal-accuracy="0" dlg:value="1" dlg:spin="true"/>
+  <dlg:text dlg:id="Label4" dlg:tab-index="8" dlg:left="8" dlg:top="103" dlg:width="51" dlg:height="11" dlg:value="Πρώτη σελίδα"/>
+  <dlg:text dlg:id="Label5" dlg:tab-index="10" dlg:left="103" dlg:top="103" dlg:width="51" dlg:height="11" dlg:value="Αρίθμηση από... "/>
+  <dlg:numericfield dlg:id="First_Numbered_Page" dlg:tab-index="7" dlg:left="8" dlg:top="116" dlg:width="63" dlg:height="11" dlg:decimal-accuracy="0" dlg:value="1" dlg:spin="true"/>
+  <dlg:numericfield dlg:id="First_Numbered_Index" dlg:tab-index="9" dlg:left="103" dlg:top="116" dlg:width="63" dlg:height="11" dlg:decimal-accuracy="0" dlg:value="1" dlg:spin="true"/>
+  <dlg:textfield dlg:id="TextField1" dlg:tab-index="11" dlg:left="6" dlg:top="51" dlg:width="46" dlg:height="11"/>
+  <dlg:text dlg:id="Label6" dlg:tab-index="12" dlg:left="6" dlg:top="38" dlg:width="51" dlg:height="11" dlg:value="Γραμματοσειρά"/>
+  <dlg:button dlg:id="CommandButton2" dlg:tab-index="13" dlg:left="156" dlg:top="138" dlg:width="50" dlg:height="12" dlg:value="Ακύρωση">
+   <script:event script:event-name="on-performaction" script:macro-name="vnd.sun.star.script:PageNumberingAddon.Module1.TopListen_WindowClosing?language=Basic&amp;location=application" script:language="Script"/>
+  </dlg:button>
  </dlg:bulletinboard>
 </dlg:window>
