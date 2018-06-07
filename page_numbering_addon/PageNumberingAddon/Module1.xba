@@ -95,53 +95,15 @@ Sub Main
 	End Select
 End Sub
 
-&apos;Author:  Paul Sobolik
-&apos;email:  psobolik@lycos.com 
-Sub ListFonts
-  Dim oToolkit as Object
-  oToolkit = CreateUnoService(&quot;com.sun.star.awt.Toolkit&quot;)
-
-  Dim oDevice as Variant
-  oDevice = oToolkit.createScreenCompatibleDevice(0, 0)
-
-  Dim oFontDescriptors As Variant
-  oFontDescriptors = oDevice.FontDescriptors
-
-  Dim oFontDescriptor As Object
-
-  Dim sFontList as String
-  Dim iIndex as Integer, iStart As Integer
-  Dim iTotal As Integer, iAdjust As Integer
-
-  iTotal = UBound(oFontDescriptors) - LBound(oFontDescriptors) + 1
-  iStart = 1
-  iAdjust = iStart - LBound(oFontDescriptors)
-  For iIndex = LBound(oFontDescriptors) To UBound(oFontDescriptors)
-    oFontDescriptor = oFontDescriptors(iIndex)
-    sFontList = sFontList &amp; iIndex + iAdjust &amp; &quot;: &quot; &amp; _
-                oFontDescriptor.Name &amp; &quot; &quot; &amp;_
-                oFontDescriptor.StyleName &amp; Chr(10)
-    If ((iIndex + iAdjust) Mod 20 = 0) Then
-      MsgBox sFontList, 0, &quot;Fonts &quot; &amp; iStart &amp; &quot; to &quot; &amp; _
-             iIndex + iAdjust &amp; &quot; of &quot; &amp; iTotal
-      iStart = iIndex + iAdjust + 1
-      sFontList = &quot;&quot;
-    End If
-  Next iIndex
-  If sFontList &lt;&gt; &quot;&quot; Then
-    Dim s$
-    s = &quot;Fonts &quot; &amp; iStart &amp; &quot; to &quot; &amp; iIndex &amp; &quot; of &quot; &amp; iTotal
-    MsgBox sFontList, 0, s
-  End If
-End Sub
-
 
 global Continue as integer
 global oDlg As Object
-global NumberingStyleComboBox,PositionListBox,AlignmentListBox,FirstNumberedPage,FirstNumberedIndex
+global NumberingStyleComboBox,PositionListBox,AlignmentListBox,FirstNumberedPage,FirstNumberedIndex,FontUsed,FontSize
+global FontNameList(), FontStyleNameList()
+global Doc as Object
 Sub StartDialog()
 
-Dim Doc as Object
+
 Dim oLib As Object, myDlg As Object
 
 dim oListenerTop as object
@@ -158,9 +120,10 @@ oListenerTop=createUnoListener(&quot;TopListen_&quot;, &quot;com.sun.star.awt.XT
 oDlg.addTopWindowlistener(oListenerTop) 
 
 do while Continue = 1 &apos;if still open 
-	wait 20
 	oDlg.setVisible(true)
-loop
+	wait 20
+	loop
+
 	If Continue = 2 then 
 	else
    		Exit Sub
@@ -170,7 +133,7 @@ loop
 	
 	Doc = ThisComponent
 	
-ViewCursor = Doc.CurrentController.getViewCursor()
+	ViewCursor = Doc.CurrentController.getViewCursor()
 
 &apos; Way to set page style in whole document 
 &apos; From page 1 to next page break (in this example to the end of the document) apply desc Style
@@ -208,6 +171,11 @@ ViewCursor = Doc.CurrentController.getViewCursor()
 
 	NumCursor = Num_Position.Text.createTextCursor()
 	NumCursor.ParaAdjust = AlignmentEnum
+	Dim FontSelected 
+	FontSelected = FontUsed.SelectedItems(0)
+	NumCursor.CharFontName = FontNameList(FontSelected)
+	NumCursor.CharHeight = FontSize.Value
+
 	
 &apos; Could construct the whole object on one call in the future
 	Select Case NumberingStyleComboBox.Text
@@ -215,7 +183,7 @@ ViewCursor = Doc.CurrentController.getViewCursor()
 			Num_Position.insertTextContent(NumCursor, PageNumber, False)
 		Case &quot;-1-&quot;
 			Num_Position.insertString(NumCursor, &quot;-&quot;, False)
-			Num_Position.insertTextContent(NumCursor, &quot;-&quot; &amp; PageNumber, False)
+			Num_Position.insertTextContent(NumCursor, PageNumber, False)
 			Num_Position.insertString(NumCursor, &quot;-&quot;, False)
 		Case &quot;[1]&quot;
 			Num_Position.insertString(NumCursor, &quot;[&quot;, False)
@@ -237,11 +205,14 @@ end sub
 sub TopListen_OK
 	Continue=2
 end sub
+
+sub changeTest
+		FirstNumberedIndex.Value = FirstNumberedPage.Value
+end sub
 sub  TopListen_windowOpened(e As Object)
 	&apos; Initialize all fields with default values
 	Dim oDialog1Model
 	Dim oDialog1
-	
 	
 	oDialog1 = e.Source	
 	oDialog1Model = oDialog1.Model  &apos;Load the Model of the Dialog
@@ -262,6 +233,21 @@ sub  TopListen_windowOpened(e As Object)
 	FirstNumberedIndex = oDialog1Model.getbyname(&quot;First_Numbered_Index&quot;)
 	FirstNumberedPage.Value = 1	&apos;Default first page value is 1
 	FirstNumberedIndex.Value = 1 &apos;Default first page index is 1	
+	
+	FirstNumberedPage = oDialog1Model.getbyname(&quot;First_Numbered_Page&quot;)
+	FirstNumberedIndex = oDialog1Model.getbyname(&quot;First_Numbered_Index&quot;)
+	FirstNumberedPage.Value = 1	&apos;Default first page value is 1
+	FirstNumberedIndex.Value = 1 &apos;Default first page index is 1	
+	
+	FontUsed = oDialog1Model.getbyname(&quot;FontSelect&quot;)
+	Dim FontUtilityList() 
+	FontUtilityList() = ListFonts(Doc, False)
+	
+	FontUsed.StringItemList =  FontUtilityList()
+	FontNameList = FontUtilityList()
+	
+	FontSize = oDialog1Model.getbyname(&quot;FontSize&quot;)
+	FontSize.Value = 12 &apos;Default char size=12
 end sub
 
 sub  TopListen_windowClosed
@@ -276,5 +262,63 @@ sub  TopListen_windowDeactivated
 end sub
 sub  TopListen_disposing
 end sub
+
+&apos;
+Function ListFonts(oDoc)
+  Dim oWindow          &apos;Container window AWT XDevice interface.
+  Dim oFonts()         &apos;Array of awt FontDescriptor structures.
+  Dim oFinalFonts()    &apos;Font descriptors to return.
+  Dim nIndex() As Long &apos;Indirect sorted index into.
+  Dim sName$           &apos;Font name.
+  Dim i&amp;               &apos;General index variable.
+  Dim j&amp;               &apos;General index variable.
+  Dim n&amp;               &apos;General utility variable.
+  Dim k&amp;               &apos;General utility variable.
+  Dim bChanged As Boolean
+
+  oWindow  = oDoc.getCurrentController().getFrame().getContainerWindow()
+  oFonts() = oWindow.getFontDescriptors()
+  ReDim nIndex(UBound(oFonts()))
+  n = UBound(oFonts())
+  Dim oReturner(n)
+  Dim oName(n)
+  Dim oStyle(n)
+  REM First, obtain an index into the unique values.
+  For i = 0 to n
+    nIndex(i) = i
+  Next
+
+  REM Sort the data!
+  For i = 0 To n-1
+    bChanged = False
+    For j = 1 To n-i
+      If oFonts(nIndex(j-1)).Name &gt; oFonts(nIndex(j)).Name Then
+        k = nIndex(j-1)
+        nIndex(j-1) = nIndex(j)
+        nIndex(j) = k
+        bChanged = True
+      End If
+    Next
+    If NOT bChanged Then Exit For
+  Next
+  
+  REM Copy the font descriptor.
+  sName = &quot;&quot;
+  oFinalFonts() = DimArray(n)
+  j = -1
+  For i = 0 To n
+    If bDuplicates OR (sName &lt;&gt; oFonts(nIndex(i)).Name) Then
+      j = j + 1
+      oFinalFonts(j) = oFonts(nIndex(i))
+      sName = oFinalFonts(j).Name
+      oName(j) = oFonts(nIndex(i)).Name
+    End If
+  Next
+	
+	ReDim Preserve oFinalFonts(j)
+	ReDim Preserve oName(j)
+
+  ListFonts =  oName()
+End Function
 
 </script:module>
