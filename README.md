@@ -10,15 +10,15 @@ This project was suggested by [GFOSS - Open Technologies Alliance](https://gfoss
 
 ## Implementation
 Menu customizations are implemented by editing user configuration `.xml` files and adding UI functionality through predefined [dispatch commands](https://wiki.documentfoundation.org/Development/DispatchCommands) and macro scripts.
-The must-see reference for LibreOffice Macro development that is of great use throughout this project is Andrew Pitonyak's [OpenOffice Macro Information](http://www.pitonyak.org/AndrewMacro.odt). 
+The must-see reference for LibreOffice Macro development that is of great use throughout this project is Andrew Pitonyak's [OpenOffice Macro Information](http://www.pitonyak.org/AndrewMacro.odt).
 
 Modules and partially mockups will be implemented in `.ui` format mainly using [Glade](https://glade.gnome.org/). In the event of a feature that is not already implemented in LibreOffice (`.uno` files), we are going to use  [Libreoffice Software Development Kit 6.0](https://api.libreoffice.org/).
 
 Then, we need to harvest Greek legal documents for template creation. Some relevant sources are websites of associations such as [EANDA](http://www.eanda.gr/) and [DSA](http://www.dsa.gr/). Those sources provide templates that do not have any specific format. Most of them are created by employees or lawyers thus their undefined structure.
 
-Through this project, we will also create a "proof of concept" archive of templates as well as document the creation procedure and provide a user interface dialog to ease the template creation.
+Through this project, we will also create a "proof of concept" archive of templates using data and documents from several Greek court divisions as well as document the creation procedure of those templates and developed addons.
 
-Templates will include "User defined fields" for static information (e.g. date and members of court) and "Bookmarks" for case specific info (e.g. description of law case) as well as properties for classification. Those can be tracked and used through the Java API as shown in LibreOffice [examples](https://api.libreoffice.org/examples/DevelopersGuide/Text/).
+Templates will include "User defined fields" for static information (e.g. date and members of court) and "Bookmarks" for case specific info (e.g. description of law case) as well as properties for classification. Those can be tracked and used through the Java or Basic API as shown in LibreOffice [examples](https://api.libreoffice.org/examples/DevelopersGuide/Text/).
 
 Finally, when the required "proof of concept" document archive is built, we will create templates for each one of them.
 
@@ -29,9 +29,18 @@ The extension code acts as the backend part of our extension implementing functi
 A large number of those functions are implemented (or inspired) by the following sources:
 - Andrew Davison work on documenting Java Libreoffice Programming Concepts on [Java LibreOffice Programming](http://fivedots.coe.psu.ac.th/~ad/jlop/#contents)
 - Samuel Mehrbrodt's repository for a basic Eclipse LibreOffice extension project [libreoffice-starter-extension](https://github.com/smehrbrodt/libreoffice-starter-extension)
+-  Andrew D. Pitonyak's OpenOffice.org Macros Explained - [OOME Third Edition](http://www.pitonyak.org/OOME_3_0.pdf)
 
 ## Installing
 During the development period of the project the installation procedure will be rather long. When sub-goals are implemented all steps will be included in an .oxt installation.
+
+Installation requires running the installation bash script located at install_script/installer.sh
+
+```bash
+cd install_script
+bash installer.sh
+```
+An interactive script asks the user for installation of required sub-modules of the project. Superuser permissions are required in some steps.
 
 ### Menubar Customization
 1. Install required macro library from this [path](https://github.com/eellak/gsoc2018-librecust/blob/master/menu_customization/macros/LibreCustLib.oxt).
@@ -53,13 +62,14 @@ Mentors overseeing the development process:
 - Theodoros Karounos
 
 ## Timeline
-- [ ] April 23 – May 14
+- [x] April 23 – May 14
 * Building development environment while updating README and documentation for installation and packaging details.
 * Harvesting of Greek legal documents and design of automation tools for template creation.
-- [ ] May 14 – May 20
+- [x] May 14 – May 20
 * Creation of mockups and prototypes for specific MS Office details that are going to be implemented while getting feedback from users.
-- [ ] May 20 – June 15
+- [x] May 20 – June 15
 * Implementation and testing of UI customizations.
+* Development of Page Numbering extension in the context of easing UI workflow.
 - [ ] June 15 – July 20
 * Template development for a number of the harvested legal documents.
 - [ ] July 20 – August 8
