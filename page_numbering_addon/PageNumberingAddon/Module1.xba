@@ -20,8 +20,11 @@ Sub Main()
 	Dim oListenerTop as Object
 	Dim FontSelected 
 	Dim PageNumber as Object
+	Dim UndoManager1,UndoManager2 as Object 
 	
 	Doc = ThisComponent
+	UndoManager1 = Doc.getUndoManager()
+		UndoManager2 = Doc.getUndoManager()
 	DialogLibraries.LoadLibrary(&quot;PageNumberingAddon&quot;)
 	oLib = DialogLibraries.GetByName(&quot;PageNumberingAddon&quot;)
 	myDlg = oLib.GetByName(&quot;PageNumberingDialog&quot;)
@@ -45,22 +48,6 @@ Sub Main()
 	
 	ViewCursor = Doc.CurrentController.getViewCursor()
 
-&apos; Way to set page style in whole document 
-&apos; From page 1 to next page break (in this example to the end of the document) apply desc Style
-&apos; At first all pages are considered unumbered
-	ViewCursor.jumpToPage(1)
-	ViewCursor.PageDescName = &quot;Index&quot;
-	
-&apos; Begin numbering after n-th page with n given by FirstNumberedPage dialog field
-	ViewCursor.jumpToPage(FirstNumberedPage.Value) 
-
-&apos; Set index of first numbered page 
-&apos; We cannot use PageNumber.Offset property because we may need bigger than total page number indexing
-	ViewCursor.PageNumberOffset = FirstNumberedIndex.Value
-
-&apos; Every numbered page will be of Standard Page style for now
-	ViewCursor.PageDescName = &quot;Standard&quot;
-
 &apos; Set alignment according to AlignmentListBox dialog field
 	AlignmentEnum = AlignmentListBox.SelectedItems(0)	&apos; when having Listbox we get only one selection
 	if AlignmentEnum = 2 then AlignmentEnum  = AlignmentEnum +1 &apos;center align for paradjust to overcome BLOCK option
@@ -71,6 +58,8 @@ Sub Main()
 	PageStyles = Doc.StyleFamilies.getByName(&quot;PageStyles&quot;)
 	StdPage = PageStyles(&quot;Standard&quot;)  &apos;Whatever is Standard will get numbering
 
+	FontSelected = FontUsed.SelectedItems(0)
+	
 &apos; Decide where page numbering should be placed (Header || Footer)
 	if PositionListBox.SelectedItems(0) = 0 then 
 		StdPage.HeaderIsOn = True
@@ -79,14 +68,34 @@ Sub Main()
 		StdPage.FooterIsOn = True
 		Num_Position = StdPage.FooterText
 	end if
-
 	NumCursor = Num_Position.Text.createTextCursor() &apos; For text insertion a Text cursor is needed
+
+&apos; Those complex operations of adding page number and styles are included in one undo stack operation named as following
+	
+	UndoManager1.enterUndoContext(&quot;Page Numbering&quot;)	&apos;There should be included all thos changing operations that should be put in undo stack
+		
+
+&apos; Way to set page style in whole document 
+&apos; From page 1 to next page break (in this example to the end of the document) apply desc Style
+&apos; At first all pages are considered unumbered
+	ViewCursor.jumpToPage(1)
+
+	ViewCursor.PageDescName = &quot;Index&quot;
+
+&apos; Begin numbering after n-th page with n given by FirstNumberedPage dialog field
+	ViewCursor.jumpToPage(FirstNumberedPage.Value) 
+
+&apos; Set index of first numbered page 
+&apos; We cannot use PageNumber.Offset property because we may need bigger than total page number indexing
+	ViewCursor.PageNumberOffset = FirstNumberedIndex.Value
+
+&apos; Every numbered page will be of Standard Page style for now
+	ViewCursor.PageDescName = &quot;Standard&quot;
 	
 	NumCursor.ParaAdjust = AlignmentEnum
-
-	FontSelected = FontUsed.SelectedItems(0)
 	NumCursor.CharFontName = FontNameList(FontSelected)
 	NumCursor.CharHeight = FontSize.Value
+
 
 &apos; Could construct the whole object on one call in the future
 	Select Case NumberingStyleComboBox.Text
@@ -107,6 +116,7 @@ Sub Main()
 		Case Else
 			Print &quot;Custom decoration unimplemented feature&quot;
 	End Select
+		UndoManager1.leaveUndoContext()
 		oDlg.removeTopWindowListener(oListenerTop)	&apos; Remove window listener when we are done
 End Sub 
 
