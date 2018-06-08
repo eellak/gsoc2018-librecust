@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
-<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic" script:moduleType="normal">REM  *****  BASIC  *****
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic" script:moduleType="normal">&apos; 
+&apos; ▛▀▖         ▙ ▌       ▌        ▗       
+&apos; ▙▄▘▝▀▖▞▀▌▞▀▖▌▌▌▌ ▌▛▚▀▖▛▀▖▞▀▖▙▀▖▄ ▛▀▖▞▀▌
+&apos; ▌  ▞▀▌▚▄▌▛▀ ▌▝▌▌ ▌▌▐ ▌▌ ▌▛▀ ▌  ▐ ▌ ▌▚▄▌
+&apos; ▘  ▝▀▘▗▄▘▝▀▘▘ ▘▝▀▘▘▝ ▘▀▀ ▝▀▘▘  ▀▘▘ ▘▗▄▘
+&apos; This is an addon to ease page numbering.
+
+Option Compatible &apos;For multiline comments
 
 global Continue as integer
 global oDlg As Object
@@ -9,34 +16,32 @@ global FontNameList()
 global Doc as Object
 
 Sub Main()
-Dim oLib As Object, myDlg As Object
-
-dim oListenerTop as object
-
-Doc = ThisComponent
-DialogLibraries.LoadLibrary(&quot;PageNumberingAddon&quot;)
-oLib = DialogLibraries.GetByName(&quot;PageNumberingAddon&quot;)
-myDlg = oLib.GetByName(&quot;PageNumberingDialog&quot;)
-oDlg = CreateUnoDialog(myDlg)
-
-Continue = 1 &apos; 1 for open window | 0 for cancel | 2 for ok
-
-oListenerTop=createUnoListener(&quot;TopListen_&quot;, &quot;com.sun.star.awt.XTopWindowListener&quot;)
-oDlg.addTopWindowlistener(oListenerTop) 
-
-do while Continue = 1 &apos;if still open 
-	oDlg.setVisible(true)
-	wait 20
-	loop
-
-	If Continue = 2 then 
-	else
-   		Exit Sub
-	end if
-	
-	Dim PageNumber As Object
+	Dim oLib as Object, myDlg as Object
+	Dim oListenerTop as Object
+	Dim FontSelected 
+	Dim PageNumber as Object
 	
 	Doc = ThisComponent
+	DialogLibraries.LoadLibrary(&quot;PageNumberingAddon&quot;)
+	oLib = DialogLibraries.GetByName(&quot;PageNumberingAddon&quot;)
+	myDlg = oLib.GetByName(&quot;PageNumberingDialog&quot;)
+	oDlg = CreateUnoDialog(myDlg)
+
+	Continue = 1 &apos; 1 for open window | 0 for cancel | 2 for ok
+
+	oListenerTop = createUnoListener(&quot;TopListen_&quot;, &quot;com.sun.star.awt.XTopWindowListener&quot;)
+	oDlg.addTopWindowlistener(oListenerTop) 
+
+	do while Continue = 1 &apos;if still open 
+		oDlg.setVisible(true)
+		wait 20
+	loop
+
+	if Continue = 2 then &apos;Do nothing and proceed to next steps for page numbering
+	else					&apos; Cancel or X was selected abort mission
+		oDlg.removeTopWindowListener(oListenerTop) &apos; Remove window listener when we are done
+   		Exit Sub
+	end if
 	
 	ViewCursor = Doc.CurrentController.getViewCursor()
 
@@ -46,8 +51,8 @@ do while Continue = 1 &apos;if still open
 	ViewCursor.jumpToPage(1)
 	ViewCursor.PageDescName = &quot;Index&quot;
 	
-&apos; Begin numbering after n-th page
-	ViewCursor.jumpToPage(FirstNumberedPage.Value)
+&apos; Begin numbering after n-th page with n given by FirstNumberedPage dialog field
+	ViewCursor.jumpToPage(FirstNumberedPage.Value) 
 
 &apos; Set index of first numbered page 
 &apos; We cannot use PageNumber.Offset property because we may need bigger than total page number indexing
@@ -56,7 +61,8 @@ do while Continue = 1 &apos;if still open
 &apos; Every numbered page will be of Standard Page style for now
 	ViewCursor.PageDescName = &quot;Standard&quot;
 
-	AlignmentEnum = AlignmentListBox.SelectedItems(0)
+&apos; Set alignment according to AlignmentListBox dialog field
+	AlignmentEnum = AlignmentListBox.SelectedItems(0)	&apos; when having Listbox we get only one selection
 	if AlignmentEnum = 2 then AlignmentEnum  = AlignmentEnum +1 &apos;center align for paradjust to overcome BLOCK option
 
 &apos; Page Number Setup
@@ -65,7 +71,7 @@ do while Continue = 1 &apos;if still open
 	PageStyles = Doc.StyleFamilies.getByName(&quot;PageStyles&quot;)
 	StdPage = PageStyles(&quot;Standard&quot;)  &apos;Whatever is Standard will get numbering
 
-&apos; Decide where page numbering should be placed
+&apos; Decide where page numbering should be placed (Header || Footer)
 	if PositionListBox.SelectedItems(0) = 0 then 
 		StdPage.HeaderIsOn = True
 		Num_Position = StdPage.HeaderText
@@ -74,14 +80,14 @@ do while Continue = 1 &apos;if still open
 		Num_Position = StdPage.FooterText
 	end if
 
-	NumCursor = Num_Position.Text.createTextCursor()
+	NumCursor = Num_Position.Text.createTextCursor() &apos; For text insertion a Text cursor is needed
+	
 	NumCursor.ParaAdjust = AlignmentEnum
-	Dim FontSelected 
+
 	FontSelected = FontUsed.SelectedItems(0)
 	NumCursor.CharFontName = FontNameList(FontSelected)
 	NumCursor.CharHeight = FontSize.Value
 
-	
 &apos; Could construct the whole object on one call in the future
 	Select Case NumberingStyleComboBox.Text
 		Case &quot;1&quot;
@@ -101,7 +107,7 @@ do while Continue = 1 &apos;if still open
 		Case Else
 			Print &quot;Custom decoration unimplemented feature&quot;
 	End Select
-
+		oDlg.removeTopWindowListener(oListenerTop)	&apos; Remove window listener when we are done
 End Sub 
 
 sub TopListen_WindowClosing
@@ -154,7 +160,7 @@ sub  TopListen_windowOpened(e As Object)
 	FontSize = oDialog1Model.getbyname(&quot;FontSize&quot;)
 	FontSize.Value = 12 &apos;Default char size=12
 end sub
-
+&apos; Unused window Listeners for now
 sub  TopListen_windowClosed
 end sub
 sub TopListen_windowMinimized
@@ -169,6 +175,12 @@ sub  TopListen_disposing
 end sub
 
 &apos;
+&apos;▌  ▗    ▐  ▛▀▘     ▐     
+&apos;▌  ▄ ▞▀▘▜▀ ▙▄▞▀▖▛▀▖▜▀ ▞▀▘
+&apos;▌  ▐ ▝▀▖▐ ▖▌ ▌ ▌▌ ▌▐ ▖▝▀▖
+&apos;▀▀▘▀▘▀▀  ▀ ▘ ▝▀ ▘ ▘ ▀ ▀▀ 
+&apos; Return installed fonts, without duplicates and sorted by name on a List
+&apos; Core implementation by the incredible Andrew Pitonyak
 Function ListFonts(oDoc)
   Dim oWindow          &apos;Container window AWT XDevice interface.
   Dim oFonts()         &apos;Array of awt FontDescriptor structures.
@@ -188,12 +200,13 @@ Function ListFonts(oDoc)
   Dim oReturner(n)
   Dim oName(n)
   Dim oStyle(n)
-  REM First, obtain an index into the unique values.
+  
+  &apos; First, obtain an index into the unique values.
   For i = 0 to n
     nIndex(i) = i
   Next
 
-  REM Sort the data!
+  &apos; Sort the data!
   For i = 0 To n-1
     bChanged = False
     For j = 1 To n-i
@@ -207,7 +220,7 @@ Function ListFonts(oDoc)
     If NOT bChanged Then Exit For
   Next
   
-  REM Copy the font descriptor.
+  &apos; Copy the font descriptor.
   sName = &quot;&quot;
   oFinalFonts() = DimArray(n)
   j = -1
@@ -223,7 +236,6 @@ Function ListFonts(oDoc)
 	ReDim Preserve oFinalFonts(j)
 	ReDim Preserve oName(j)
 
-  ListFonts =  oName()
+  ListFonts =  oName() &apos; List that keeps only the sorted names
 End Function
-
 </script:module>
