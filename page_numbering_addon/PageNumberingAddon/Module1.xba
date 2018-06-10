@@ -11,16 +11,17 @@ Option Compatible &apos;For multiline comments
 
 global Continue as integer
 global oDlg As Object
-global NumberingStyleComboBox,PositionListBox,AlignmentListBox,FirstNumberedPage,FirstNumberedIndex,FontUsed,FontSize
+global NumberingDecorationComboBox,PositionListBox,AlignmentListBox,FirstNumberedPage,FirstNumberedIndex,FontUsed,FontSize,NumberingTypeComboBox
 global FontNameList()
 global Doc as Object
+global NumTypeCollection As New Collection 
 
 Sub Main()
 	Dim oLib as Object, myDlg as Object
 	Dim oListenerTop as Object
 	Dim FontSelected 
 	Dim PageNumber as Object
-	Dim UndoManager1,UndoManager2 as Object 
+	Dim UndoManager1,UndoManager2 as Object
 	
 	Doc = ThisComponent
 
@@ -55,7 +56,9 @@ Sub Main()
 
 &apos; Page Number Setup
 	PageNumber = Doc.createInstance(&quot;com.sun.star.text.textfield.PageNumber&quot;)
-	PageNumber.NumberingType = com.sun.star.style.NumberingType.ARABIC &apos;Just ARABIC numbering for now till implementation
+	PageNumber.NumberingType = NumTypeCollection(NumberingTypeComboBox.Text) &apos;Just ARABIC numbering for now till implementation
+	PageNumber.SubType = 1 &apos; Which page does the textfield refer to
+	
 	PageStyles = Doc.StyleFamilies.getByName(&quot;PageStyles&quot;)
 	StdPage = PageStyles(&quot;Standard&quot;)  &apos;Whatever is Standard will get numbering
 	
@@ -75,12 +78,10 @@ Sub Main()
 	
 	UndoManager1.enterUndoContext(&quot;Page Numbering&quot;)	&apos;There should be included all thos changing operations that should be put in undo stack
 		
-
 &apos; Way to set page style in whole document 
 &apos; From page 1 to next page break (in this example to the end of the document) apply desc Style
 &apos; At first all pages are considered unumbered
 	ViewCursor.jumpToPage(1)
-
 	ViewCursor.PageDescName = &quot;Index&quot;
 
 &apos; Begin numbering after n-th page with n given by FirstNumberedPage dialog field
@@ -96,21 +97,21 @@ Sub Main()
 	NumCursor.ParaAdjust = AlignmentEnum
 	NumCursor.CharFontName = FontNameList(FontSelected)
 	NumCursor.CharHeight = FontSize.Value
-
+	
 
 &apos; Could construct the whole object on one call in the future
-	Select Case NumberingStyleComboBox.Text
-		Case &quot;1&quot;
+	Select Case NumberingDecorationComboBox.Text
+		Case &quot;#&quot;
 			Num_Position.insertTextContent(NumCursor, PageNumber, False)
-		Case &quot;-1-&quot;
+		Case &quot;-#-&quot;
 			Num_Position.insertString(NumCursor, &quot;-&quot;, False)
 			Num_Position.insertTextContent(NumCursor, PageNumber, False)
 			Num_Position.insertString(NumCursor, &quot;-&quot;, False)
-		Case &quot;[1]&quot;
+		Case &quot;[#]&quot;
 			Num_Position.insertString(NumCursor, &quot;[&quot;, False)
 			Num_Position.insertTextContent(NumCursor, PageNumber, False)
 			Num_Position.insertString(NumCursor, &quot;]&quot;, False)
-		Case &quot;(1)&quot;
+		Case &quot;(#)&quot;
 			Num_Position.insertString(NumCursor, &quot;(&quot;, False)
 			Num_Position.insertTextContent(NumCursor, PageNumber, False)
 			Num_Position.insertString(NumCursor, &quot;)&quot;, False)
@@ -142,9 +143,20 @@ sub  TopListen_windowOpened(e As Object)
 	oDialog1 = e.Source	
 	oDialog1Model = oDialog1.Model  &apos;Load the Model of the Dialog
 
-	NumberingStyleComboBox = oDialog1Model.getbyname(&quot;NumberingStyle&quot;)
-	NumberingStyleComboBox.Text = &quot;1&quot;
-	NumberingStyleComboBox.StringItemList = Array(&quot;1&quot;,&quot;-1-&quot;,&quot;[1]&quot;,&quot;(1)&quot;) &apos;styles of numbering
+	NumberingDecorationComboBox = oDialog1Model.getbyname(&quot;NumberingDecoration&quot;)
+	
+	NumberingTypeComboBox = oDialog1Model.getbyname(&quot;NumberingTypeSelect&quot;)
+
+	&apos; Create collection with preficed numberingstyle values /Maybe macros instead of integers in future/
+	NumTypeCollection.Add(&quot;3&quot; , &quot;i,ii,iii,...&quot;)	
+	NumTypeCollection.Add(&quot;2&quot; , &quot;I,II,III,... &quot;)	
+	NumTypeCollection.Add(&quot;4&quot; , &quot;1,2,3,...&quot;)
+	NumTypeCollection.Add(&quot;52&quot; , &quot;Α,Β,Γ,... &quot;)
+	NumTypeCollection.Add(&quot;53&quot; , &quot;α,β,γ,...&quot;)
+	NumTypeCollection.Add(&quot;10&quot;, &quot;a...aa...aaa&quot;)
+	NumTypeCollection.Add(&quot;9&quot;,&quot;A...AA...AAA &quot;)
+	NumTypeCollection.Add(&quot;1&quot;,&quot;a,b,c,...&quot;)
+	NumTypeCollection.Add(&quot;0&quot;,&quot;A,B,C,... &quot;)
 
 	PositionListBox = oDialog1Model.getbyname(&quot;Position&quot;)
 	PositionListBox.StringItemList= Array(&quot;Επικεφαλίδα&quot;,&quot;Υποσέλιδο&quot;) &apos;alignment
