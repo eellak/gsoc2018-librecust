@@ -23,8 +23,9 @@ Sub Main()
 	Dim UndoManager1,UndoManager2 as Object 
 	
 	Doc = ThisComponent
+
 	UndoManager1 = Doc.getUndoManager()
-		UndoManager2 = Doc.getUndoManager()
+
 	DialogLibraries.LoadLibrary(&quot;PageNumberingAddon&quot;)
 	oLib = DialogLibraries.GetByName(&quot;PageNumberingAddon&quot;)
 	myDlg = oLib.GetByName(&quot;PageNumberingDialog&quot;)
@@ -57,7 +58,7 @@ Sub Main()
 	PageNumber.NumberingType = com.sun.star.style.NumberingType.ARABIC &apos;Just ARABIC numbering for now till implementation
 	PageStyles = Doc.StyleFamilies.getByName(&quot;PageStyles&quot;)
 	StdPage = PageStyles(&quot;Standard&quot;)  &apos;Whatever is Standard will get numbering
-
+	
 	FontSelected = FontUsed.SelectedItems(0)
 	
 &apos; Decide where page numbering should be placed (Header || Footer)
@@ -116,8 +117,8 @@ Sub Main()
 		Case Else
 			Print &quot;Custom decoration unimplemented feature&quot;
 	End Select
-		UndoManager1.leaveUndoContext()
-		oDlg.removeTopWindowListener(oListenerTop)	&apos; Remove window listener when we are done
+	UndoManager1.leaveUndoContext()
+	oDlg.removeTopWindowListener(oListenerTop)	&apos; Remove window listener when we are done
 End Sub 
 
 sub TopListen_WindowClosing
@@ -134,6 +135,9 @@ sub  TopListen_windowOpened(e As Object)
 	&apos; Initialize all fields with default values
 	Dim oDialog1Model
 	Dim oDialog1
+	Dim ListFontsRet() 
+	Dim FontUtilityList() 	
+	Dim DefaultFontIndex
 	
 	oDialog1 = e.Source	
 	oDialog1Model = oDialog1.Model  &apos;Load the Model of the Dialog
@@ -161,14 +165,29 @@ sub  TopListen_windowOpened(e As Object)
 	FirstNumberedIndex.Value = 1 &apos;Default first page index is 1	
 	
 	FontUsed = oDialog1Model.getbyname(&quot;FontSelect&quot;)
-	Dim FontUtilityList() 
-	FontUtilityList() = ListFonts(Doc, False)
+
+&apos; Get the default paragraph font from Standard paragraph style 
+	ParaStyles = Doc.StyleFamilies.getByName(&quot;ParagraphStyles&quot;) 
+	StdPara = ParaStyles(&quot;Standard&quot;)
+	DefaultFontSearch = StdPara.CharFontName
+	
+	
+&apos; Call ListFonts() with the search string to get the required index in FontsUsed string item array
+	ListFontsRet() = ListFonts(Doc,DefaultFontSearch)
+	
+&apos; ListFonts returns a tuple, the first element is the string item array for dropdown list elements (FontUtilityList)
+&apos; the second element is the index of the queried font for dropdown default setting (DefaultFontIndex)
+	FontUtilityList() = ListFontsRet(0)
+	
+	DefaultFontIndex = ListFontsRet(1)
 	
 	FontUsed.StringItemList =  FontUtilityList()
+
+	FontUsed.SelectedItems = Array(DefaultFontIndex)
 	FontNameList = FontUtilityList()
 	
 	FontSize = oDialog1Model.getbyname(&quot;FontSize&quot;)
-	FontSize.Value = 12 &apos;Default char size=12
+	FontSize.Value = StdPara.CharHeight &apos; Get default char size/height from Standard Paragraph style
 end sub
 &apos; Unused window Listeners for now
 sub  TopListen_windowClosed
@@ -191,7 +210,7 @@ end sub
 &apos;▀▀▘▀▘▀▀  ▀ ▘ ▝▀ ▘ ▘ ▀ ▀▀ 
 &apos; Return installed fonts, without duplicates and sorted by name on a List
 &apos; Core implementation by the incredible Andrew Pitonyak
-Function ListFonts(oDoc)
+Function ListFonts(oDoc, SearchString)
   Dim oWindow          &apos;Container window AWT XDevice interface.
   Dim oFonts()         &apos;Array of awt FontDescriptor structures.
   Dim oFinalFonts()    &apos;Font descriptors to return.
@@ -210,6 +229,7 @@ Function ListFonts(oDoc)
   Dim oReturner(n)
   Dim oName(n)
   Dim oStyle(n)
+  Dim SearchIndex
   
   &apos; First, obtain an index into the unique values.
   For i = 0 to n
@@ -240,12 +260,15 @@ Function ListFonts(oDoc)
       oFinalFonts(j) = oFonts(nIndex(i))
       sName = oFinalFonts(j).Name
       oName(j) = oFonts(nIndex(i)).Name
+      if oname(j) = SearchString then 
+      	SearchIndex = j 
+      endif
     End If
   Next
 	
 	ReDim Preserve oFinalFonts(j)
 	ReDim Preserve oName(j)
 
-  ListFonts =  oName() &apos; List that keeps only the sorted names
+  ListFonts =  Array(oName(),SearchIndex) &apos; List that keeps only the sorted names
 End Function
 </script:module>
