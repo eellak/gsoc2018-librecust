@@ -22,6 +22,7 @@ Sub Main()
 	Dim FontSelected 
 	Dim PageNumber as Object
 	Dim UndoManager1,UndoManager2 as Object
+	Dim NewStyle As Object &apos; New page style for each selected page numbering mode
 	
 	Doc = ThisComponent
 
@@ -61,34 +62,29 @@ Sub Main()
 	
 	PageStyles = Doc.StyleFamilies.getByName(&quot;PageStyles&quot;)
 
-Dim Newstyle As Object 
-
-Newstyle = Doc.createInstance(&quot;com.sun.star.style.PageStyle&quot;)
-OldStyle = PageStyles.getByName(&quot;Standard&quot;)
-copyUsingPropertySetInfo(OldStyle, Newstyle)
-&apos;xray Newstyle
-
-&apos;	Newstyle= Doc.createInstance(&quot;com.sun.star.style.PageStyle&quot;)
-&apos;	Newstyle.setParentStyle(PageStyles.getByName(&quot;Standard&quot;).Name)
-if (PageStyles.hasByName(&quot;Newtest&quot;)) then
-else
-	PageStyles.insertByName(&quot;Newtest&quot;,Newstyle)
-endif
-&apos;	xray Newstyle
-
+&apos; The new page style is based in standard. Inheritance is not working for page styles
+&apos; See Bug #41316 
+	NewStyle = Doc.createInstance(&quot;com.sun.star.style.PageStyle&quot;)
+	OldStyle = PageStyles.getByName(&quot;Standard&quot;) 
 	
-	StdPage = PageStyles.getByName(&quot;Newtest&quot;)  &apos;Whatever is Standard will get numbering
+	copyUsingPropertySetInfo(OldStyle, NewStyle)
 
-&apos;		xray StdPage
+	if (PageStyles.hasByName(&quot;Newtest&quot;)) then 
+	else
+		PageStyles.insertByName(&quot;Newtest&quot;,NewStyle)
+	endif
+	
+	NumberedPage = PageStyles.getByName(&quot;Newtest&quot;)  &apos;Whatever is Standard will get numbering
+
 	FontSelected = FontUsed.SelectedItems(0)
 	
 &apos; Decide where page numbering should be placed (Header || Footer)
 	if PositionListBox.SelectedItems(0) = 0 then 
-		StdPage.HeaderIsOn = True
-		Num_Position = StdPage.HeaderText
+		NumberedPage.HeaderIsOn = True
+		Num_Position = NumberedPage.HeaderText
 	else
-		StdPage.FooterIsOn = True
-		Num_Position = StdPage.FooterText
+		NumberedPage.FooterIsOn = True
+		Num_Position = NumberedPage.FooterText
 	end if
 	NumCursor = Num_Position.Text.createTextCursor() &apos; For text insertion a Text cursor is needed
 
@@ -302,7 +298,7 @@ Function ListFonts(oDoc, SearchString)
   ListFonts =  Array(oName(),SearchIndex) &apos; List that keeps only the sorted names
 End Function
 
-
+&apos; Forum post of @pitonyak from https://forum.openoffice.org/en/forum/viewtopic.php?f=20&amp;t=55879
 Sub copyUsingPropertySetInfo(srcObj, dstObj)
   Dim sPInfo, dPInfo  &apos; Property Set Information Objects
   Dim sNames          &apos; Source names
