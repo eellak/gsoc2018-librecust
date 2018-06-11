@@ -60,8 +60,26 @@ Sub Main()
 	PageNumber.SubType = 1 &apos; Which page does the textfield refer to
 	
 	PageStyles = Doc.StyleFamilies.getByName(&quot;PageStyles&quot;)
-	StdPage = PageStyles(&quot;Standard&quot;)  &apos;Whatever is Standard will get numbering
+
+Dim Newstyle As Object 
+
+Newstyle = Doc.createInstance(&quot;com.sun.star.style.PageStyle&quot;)
+OldStyle = PageStyles.getByName(&quot;Standard&quot;)
+copyUsingPropertySetInfo(OldStyle, Newstyle)
+&apos;xray Newstyle
+
+&apos;	Newstyle= Doc.createInstance(&quot;com.sun.star.style.PageStyle&quot;)
+&apos;	Newstyle.setParentStyle(PageStyles.getByName(&quot;Standard&quot;).Name)
+if (PageStyles.hasByName(&quot;Newtest&quot;)) then
+else
+	PageStyles.insertByName(&quot;Newtest&quot;,Newstyle)
+endif
+&apos;	xray Newstyle
+
 	
+	StdPage = PageStyles.getByName(&quot;Newtest&quot;)  &apos;Whatever is Standard will get numbering
+
+&apos;		xray StdPage
 	FontSelected = FontUsed.SelectedItems(0)
 	
 &apos; Decide where page numbering should be placed (Header || Footer)
@@ -81,8 +99,8 @@ Sub Main()
 &apos; Way to set page style in whole document 
 &apos; From page 1 to next page break (in this example to the end of the document) apply desc Style
 &apos; At first all pages are considered unumbered
-	ViewCursor.jumpToPage(1)
-	ViewCursor.PageDescName = &quot;Index&quot;
+&apos;	ViewCursor.jumpToPage(1)
+&apos;	ViewCursor.PageDescName = &quot;Index&quot;
 
 &apos; Begin numbering after n-th page with n given by FirstNumberedPage dialog field
 	ViewCursor.jumpToPage(FirstNumberedPage.Value) 
@@ -92,7 +110,7 @@ Sub Main()
 	ViewCursor.PageNumberOffset = FirstNumberedIndex.Value
 
 &apos; Every numbered page will be of Standard Page style for now
-	ViewCursor.PageDescName = &quot;Standard&quot;
+	ViewCursor.PageDescName = &quot;Newtest&quot;
 	
 	NumCursor.ParaAdjust = AlignmentEnum
 	NumCursor.CharFontName = FontNameList(FontSelected)
@@ -282,5 +300,92 @@ Function ListFonts(oDoc, SearchString)
 	ReDim Preserve oName(j)
 
   ListFonts =  Array(oName(),SearchIndex) &apos; List that keeps only the sorted names
+End Function
+
+
+Sub copyUsingPropertySetInfo(srcObj, dstObj)
+  Dim sPInfo, dPInfo  &apos; Property Set Information Objects
+  Dim sNames          &apos; Source names
+  Dim oProps
+  Dim oProp
+  Dim i As Integer
+  Dim oSValue
+  Dim oDValue
+ 
+  If NOT HasUnoInterfaces(srcObj, &quot;com.sun.star.beans.XPropertySet&quot;) Then
+    &apos; No idea how to  assign contained values.
+    Print &quot;Object does not support the XPropertySet interface.&quot;
+    Exit Sub
+  End If
+ 
+  sPInfo = srcObj.getPropertySetInfo()
+  dPInfo = dstObj.getPropertySetInfo()
+  oProps = sPInfo.getProperties()
+  For i = LBound(oProps) To UBound(oProps)
+    oProp = oProps(i)
+    If dPInfo.hasPropertyByName(oProp.Name) Then
+      &apos; I want short circuit boolean logic
+      If oProp.Type.getName() = dPInfo.getPropertyByName(oProp.Name).Type.getName() Then
+        &apos; The types match...
+        oSValue = srcObj.getPropertyValue(oProp.Name)
+        If canCopyTypeWithAssignment(oSValue) Then
+          If (oProp.Attributes AND com.sun.star.beans.PropertyAttribute.READONLY) = 0 Then
+            If oProp.Name = &quot;GridLines&quot; Then
+              &apos;Print &quot;Ready for GridLines&quot;
+              &apos; Unclear why GridLines failes....
+            Else
+              dstObj.setPropertyValue(oProp.Name, oSValue)
+            End If
+          End If
+        ElseIf IsArray(oSValue) Then
+         &apos; Ignore for now.
+         Print &quot;Ignoring array property &quot; &amp; oProp.Name
+        Else
+          oDValue = dstObj.getPropertyValue(oProp.Name)
+          If IsNull(oDValue) OR IsEmpty(oDValue) Then
+         
+            If (oProp.Attributes AND com.sun.star.beans.PropertyAttribute.READONLY) = 0 Then
+              &apos; TODO: Is this safe?
+              dstObj.setPropertyValue(oProp.Name, oSValue)
+            End If
+             
+          ElseIf HasUnoInterfaces(oSValue, &quot;com.sun.star.beans.XPropertySet&quot;) Then
+           
+            &apos; Not an array and not a struct,
+            &apos; So modifying oDValue should set the internals to the same value.
+            If oSValue.SupportsService(&quot;com.sun.star.text.Text&quot;) Then
+              &apos; TODO: Note that this does NOT properly copy a text object with it&apos;s content.
+              &apos; If the text object supported transferable content, then this would be easy.
+              &apos; It does not, so you must iterate over the content and then handle the items of interest.
+            Else
+              copyUsingPropertySetInfo(oSValue, oDValue)
+            End If
+               
+          Else
+             
+            &apos; Print &quot;ignoring read-only property: &quot; &amp; oProp.Name
+             
+          End If
+        End If
+      End If
+    End If
+  Next
+End Sub
+
+Function canCopyTypeWithAssignment(oObj) As Boolean
+  Select Case VarType(oObj)
+    Case 0 To 8
+      canCopyTypeWithAssignment = True
+    Case 11, 35, 36, 37
+      canCopyTypeWithAssignment = True
+    Case 16 To 23
+      canCopyTypeWithAssignment = True
+    Case Else
+     If IsUnoStruct(oObj) Then
+       canCopyTypeWithAssignment = True
+     Else
+       canCopyTypeWithAssignment = False
+    End If
+  End Select
 End Function
 </script:module>
