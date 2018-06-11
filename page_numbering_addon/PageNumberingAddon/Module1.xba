@@ -68,6 +68,9 @@ Sub Main()
 	OldStyle = PageStyles.getByName(&quot;Standard&quot;) 
 	
 	copyUsingPropertySetInfo(OldStyle, NewStyle)
+	
+	NewStyle.Hidden = True &apos; Do not polute page styles dialog
+	NewStyle.FollowStyle = &quot;Newtest&quot;
 
 	if (PageStyles.hasByName(&quot;Newtest&quot;)) then 
 	else
