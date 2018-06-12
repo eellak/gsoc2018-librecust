@@ -23,9 +23,9 @@ Sub Main()
 	Dim PageNumber as Object
 	Dim UndoManager1,UndoManager2 as Object
 	Dim NewStyle As Object &apos; New page style for each selected page numbering mode
-	
+	Dim DefNumberingStyleNum as integer
+		
 	Doc = ThisComponent
-
 	UndoManager1 = Doc.getUndoManager()
 
 	DialogLibraries.LoadLibrary(&quot;PageNumberingAddon&quot;)
@@ -65,19 +65,47 @@ Sub Main()
 &apos; The new page style is based in standard. Inheritance is not working for page styles
 &apos; See Bug #41316 
 	NewStyle = Doc.createInstance(&quot;com.sun.star.style.PageStyle&quot;)
-	OldStyle = PageStyles.getByName(&quot;Standard&quot;) 
+	
+&apos; Find current page style of starting page and clone it 
+	ViewCursor.jumpToPage(FirstNumberedPage.Value) 
+	Dim CurrentStyleName
+	CurrentStyleName = ViewCursor.PageStyleName
+
+	OldStyle = PageStyles.getByName(CurrentStyleName)  
 	
 	copyUsingPropertySetInfo(OldStyle, NewStyle)
 	
-	NewStyle.Hidden = True &apos; Do not polute page styles dialog
-	NewStyle.FollowStyle = &quot;Newtest&quot;
+&apos; Decide which index Number will be given to the new style
 
-	if (PageStyles.hasByName(&quot;Newtest&quot;)) then 
+	Dim oUDP
+	
+	DefNumberingStyleNum = 200 &apos; trick to overcome the fact that addproperty cannot accept numeric values less than a certain number
+
+	oUDP = ThisComponent.getDocumentProperties().UserDefinedProperties
+
+	if not oUDP.getPropertySetInfo().hasPropertyByName(&quot;NumberingStyleIndex&quot;) then
+		oUDP.addProperty(&quot;NumberingStyleIndex&quot;,_
+			com.sun.star.beans.PropertyAttribute.MAYBEVOID + _
+			com.sun.star.beans.PropertyAttribute.REMOVEABLE + _
+			com.sun.star.beans.PropertyAttribute.MAYBEDEFAULT, _
+			DefNumberingStyleNum )
+			oUDP = ThisComponent.getDocumentProperties().UserDefinedProperties &apos; refresh properties
+			oUdp.NumberingStyleIndex = 0
 	else
-		PageStyles.insertByName(&quot;Newtest&quot;,NewStyle)
+		oUdp.NumberingStyleIndex = oUdp.NumberingStyleIndex + 1 &apos; Increment by one the index number of Numbering styles
+	end If
+
+	oUDP = ThisComponent.getDocumentProperties().UserDefinedProperties &apos; refresh properties
+		
+	NewStyle.Hidden = True &apos; Do not polute page styles dialog
+	NewStyle.FollowStyle = &quot;PageNumbering-Start(&quot;&amp; CStr(FirstNumberedPage.Value) &amp;&quot;)-Index:&quot;&amp; CStr(oUdp.NumberingStyleIndex)
+
+	if (PageStyles.hasByName(NewStyle.FollowStyle)) then 
+	else
+		PageStyles.insertByName(NewStyle.FollowStyle,NewStyle)
 	endif
 	
-	NumberedPage = PageStyles.getByName(&quot;Newtest&quot;)  &apos;Whatever is Standard will get numbering
+	NumberedPage = PageStyles.getByName(NewStyle.FollowStyle)  &apos;Whatever is Standard will get numbering
 
 	FontSelected = FontUsed.SelectedItems(0)
 	
@@ -93,13 +121,7 @@ Sub Main()
 
 &apos; Those complex operations of adding page number and styles are included in one undo stack operation named as following
 	
-	UndoManager1.enterUndoContext(&quot;Page Numbering&quot;)	&apos;There should be included all thos changing operations that should be put in undo stack
-		
-&apos; Way to set page style in whole document 
-&apos; From page 1 to next page break (in this example to the end of the document) apply desc Style
-&apos; At first all pages are considered unumbered
-&apos;	ViewCursor.jumpToPage(1)
-&apos;	ViewCursor.PageDescName = &quot;Index&quot;
+	UndoManager1.enterUndoContext(&quot;Page Numbering&quot;)	&apos;There should be included all those changing operations that should be put in undo stack
 
 &apos; Begin numbering after n-th page with n given by FirstNumberedPage dialog field
 	ViewCursor.jumpToPage(FirstNumberedPage.Value) 
@@ -109,7 +131,7 @@ Sub Main()
 	ViewCursor.PageNumberOffset = FirstNumberedIndex.Value
 
 &apos; Every numbered page will be of Standard Page style for now
-	ViewCursor.PageDescName = &quot;Newtest&quot;
+	ViewCursor.PageDescName = NewStyle.FollowStyle
 	
 	NumCursor.ParaAdjust = AlignmentEnum
 	NumCursor.CharFontName = FontNameList(FontSelected)
