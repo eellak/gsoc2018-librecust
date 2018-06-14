@@ -1,8 +1,10 @@
 import uno
 import unohelper
 import time
-
 from com.sun.star.awt import XTopWindowListener
+
+
+continue_dlg = 1
 
 class oListenerTop_Class(XTopWindowListener,unohelper.Base):
     def __init__(self,):
@@ -15,11 +17,13 @@ class oListenerTop_Class(XTopWindowListener,unohelper.Base):
     def windowOpened(self,oEvent):
         pass
 
+
     def windowClosed(self,oEvent):
         pass
 
     def windowClosing(self,oEvent):
         pass
+
 
     def windowMinimized(self,oEvent):
         pass
@@ -37,12 +41,12 @@ class oListenerTop_Class(XTopWindowListener,unohelper.Base):
     def disposing(self,oEvent):
         pass #normally not needed, but should be callable anyway
 
-continue_dlg = 1
 
-def HelloWorldPythons( ):
+
+def HelloWorldPythons(*args):
     """Prints the string 'Hello World(in Python)' into the current document"""
     #get the doc from the scripting context which is made available to all scripts
-
+    global continue_dlg
     ctx = uno.getComponentContext()
     smgr = ctx.ServiceManager
 
@@ -50,6 +54,14 @@ def HelloWorldPythons( ):
     psm = uno.getComponentContext().ServiceManager
     dp = psm.createInstance("com.sun.star.awt.DialogProvider")
     dlg = dp.createDialog("vnd.sun.star.script:dialogs.PageNumberingDialog?location=application")
+
+    # Initialize the required fields
+    oDialog1Model = dlg.Model
+    PositionListBox = oDialog1Model.getByName("Position")
+    PositionListBox.StringItemList = ["Επικεφαλίδα","Υποσέλιδο"]
+    PositionListBox.SelectedItems = [1]
+
+
     #dlg.execute()
 
     oListenerTop = oListenerTop_Class()
@@ -57,15 +69,8 @@ def HelloWorldPythons( ):
 
     dlg.addTopWindowListener(oListenerTop)
 
-    dlg.setVisible(1)
 
-    #while continue_dlg=1:
-    #    dlg.setVisible(true)
-    #    time.sleep(0.02)
-    #    pass
-
-    #xray(smgr,ctx, oListenerTop)
-
+    dlg.execute()
 
 
 def xray(smgr, ctx, target):
@@ -79,3 +84,4 @@ g_ImplementationHelper.addImplementation(
     oListenerTop_Class,
     'com.sun.star.awt.XTopWindowListener',()
 )
+g_exportedScripts = HelloWorldPythons,
