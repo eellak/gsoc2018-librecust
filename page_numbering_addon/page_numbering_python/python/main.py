@@ -82,13 +82,11 @@ def main(*args):
     StdPara = ParaStyles["Standard"]
     DefaultFontSearch = StdPara.CharFontName
 
-
     oListenerTop = oListenerTop_Class()
     oListenerTop.setDocument(Doc)
 
     dlg.addTopWindowListener(oListenerTop)
-
-
+    ListFonts(Doc,"search")
     dlg.execute()
 
 # inspection tool xRay
@@ -97,6 +95,16 @@ def xray(smgr, ctx, target):
     script_provider = mspf.createScriptProvider("")
     script = script_provider.getScript("vnd.sun.star.script:XrayTool._Main.Xray?language=Basic&location=application")
     script.invoke((target,), (), ())
+
+def ListFonts(oDoc, SearchString):
+    oWindow  = oDoc.getCurrentController().getFrame().getContainerWindow()
+    oFonts = oWindow.getFontDescriptors()
+
+    uniquefonts = sorted(set(oFonts))
+
+    ctx = uno.getComponentContext()
+    smgr = ctx.ServiceManager
+    xray(smgr,ctx,oFonts)
 
 g_ImplementationHelper = unohelper.ImplementationHelper()
 g_ImplementationHelper.addImplementation(
