@@ -6,11 +6,13 @@ import itertools
 import operator
 import sys
 from com.sun.star.beans.PropertyAttribute import READONLY
+from com.sun.star.beans.PropertyAttribute import MAYBEVOID
+from com.sun.star.beans.PropertyAttribute import REMOVEABLE
+from com.sun.star.beans.PropertyAttribute import MAYBEDEFAULT
 
 # Dictionary for possible numbering type options
 NumTypeCollection = {'i,ii,iii,...': 3, 'I,II,III,...': 2, '1,2,3,...': 4, 'Α,Β,Γ,...': 52,
                      'α,β,γ,...': 53, 'a...aa...aaa': 10, 'A...AA...AAA': 9, 'a,b,c,...': 1, 'A,B,C,...': 0}
-
 
 class oListenerTop_Class(XTopWindowListener, unohelper.Base):
     def __init__(self,):
@@ -100,19 +102,23 @@ def main(*args):
     # end initialization of fields
 
     if dlg.execute() == 0:
+        dlg.removeTopWindowListener(oListenerTop)
         return
 
     ViewCursor = Doc.CurrentController.getViewCursor()
 
-    AlignmentEnum = AlignmentListBox.SelectedItems[0] #when having Listbox we get only one selection
+    # when having Listbox we get only one selection
+    AlignmentEnum = AlignmentListBox.SelectedItems[0]
     if AlignmentEnum == 2:
-        AlignmentEnum = AlignmentEnum + 1  # center align for paradjust to overcome BLOCK option
+        # center align for paradjust to overcome BLOCK option
+        AlignmentEnum = AlignmentEnum + 1
 
     PageNumber = Doc.createInstance("com.sun.star.text.textfield.PageNumber")
-    #xray(smgr,ctx,PageNumber)
+    # xray(smgr,ctx,PageNumber)
 
-    PageNumber.NumberingType = NumTypeCollection[oDialog1Model.getByName("NumberingTypeSelect").Text] #Just ARABIC numbering for now till implementation
-    PageNumber.SubType = 1 # Which page does the textfield refer to
+    PageNumber.NumberingType = NumTypeCollection[oDialog1Model.getByName(
+        "NumberingTypeSelect").Text]  # Just ARABIC numbering for now till implementation
+    PageNumber.SubType = 1  # Which page does the textfield refer to
 
     PageStyles = Doc.StyleFamilies.getByName("PageStyles")
 
@@ -123,12 +129,85 @@ def main(*args):
     CurrentStyleName = ViewCursor.PageStyleName
     OldStyle = PageStyles.getByName(CurrentStyleName)
 
-    copyUsingPropertySetInfo(OldStyle,NewStyle)
+    copyUsingPropertySetInfo(OldStyle, NewStyle)
 
+    DefNumberingStyleNum = 200
 
-    xray(smgr, ctx, NewStyle)
+    oUDP = Doc.getDocumentProperties().UserDefinedProperties
 
-# inspection tool xRay
+    if oUDP.getPropertySetInfo().hasPropertyByName("NumberingStyleIndex") == False:
+        maybevoid = uno.getConstantByName(
+            "com.sun.star.beans.PropertyAttribute.MAYBEVOID")
+        removeable = uno.getConstantByName(
+            "com.sun.star.beans.PropertyAttribute.REMOVEABLE")
+        maybedefault = uno.getConstantByName(
+            "com.sun.star.beans.PropertyAttribute.MAYBEDEFAULT")
+        oUDP.addProperty("NumberingStyleIndex", maybevoid +
+                         removeable + maybedefault, DefNumberingStyleNum)
+        oUDP = Doc.getDocumentProperties().UserDefinedProperties
+        oUDP.NumberingStyleIndex = 0
+    else:
+        oUDP.NumberingStyleIndex = oUDP.NumberingStyleIndex + 1
+
+    NewStyle.Hidden = True  # Do not polute page styles dialog
+    NewStyle.FollowStyle = "PageNumbering-Start(" + str(
+        FirstNumberedPage.Value) + ")-Index:" + str(oUDP.NumberingStyleIndex)
+
+    if PageStyles.hasByName(NewStyle.FollowStyle) == False:
+        PageStyles.insertByName(NewStyle.FollowStyle, NewStyle)
+
+    # Whatever is Standard will get numbering
+    NumberedPage = PageStyles.getByName(NewStyle.FollowStyle)
+
+    FontSelected = FontUsed.SelectedItems[0]
+
+    Num_Position = None
+    if PositionListBox.SelectedItems[0] == 0:
+        NumberedPage.HeaderIsOn = True
+        Num_Position = NumberedPage.HeaderText
+    else:
+        NumberedPage.FooterIsOn = True
+        Num_Position = NumberedPage.FooterText
+
+    # For text insertion a Text cursor is needed
+    NumCursor = Num_Position.Text.createTextCursor()
+
+    # there should be the initialization of UndoManager
+
+    ViewCursor.jumpToPage(FirstNumberedPage.Value)
+
+# Set index of first numbered page
+# We cannot use PageNumber.Offset property because we may need bigger than total page number indexing
+    ViewCursor.PageNumberOffset = FirstNumberedIndex.Value
+
+# Every numbered page will be of Standard Page style for now
+    ViewCursor.PageDescName = NewStyle.FollowStyle
+
+    NumCursor.ParaAdjust = AlignmentEnum
+    NumCursor.CharFontName = FontUsed.SelectedItems[0]
+    NumCursor.CharHeight = FontSize.Value
+
+    AlignmentListBox = oDialog1Model.getByName("Alignment")
+    NumberingDecorationComboBoxText = oDialog1Model.getByName(
+        "NumberingDecoration").Text
+    if NumberingDecorationComboBoxText == "#":
+        Num_Position.insertTextContent(NumCursor, PageNumber, False)
+    elif NumberingDecorationComboBoxText == "-#-":
+        Num_Position.insertString(NumCursor, "-", False)
+        Num_Position.insertTextContent(NumCursor, PageNumber, False)
+        Num_Position.insertString(NumCursor, "-", False)
+    elif NumberingDecorationComboBoxText == "[#]":
+        Num_Position.insertString(NumCursor, "[", False)
+        Num_Position.insertTextContent(NumCursor, PageNumber, False)
+        Num_Position.insertString(NumCursor, "]", False)
+    elif NumberingDecorationComboBoxText == "(#)":
+        Num_Position.insertString(NumCursor, "(", False)
+        Num_Position.insertTextContent(NumCursor, PageNumber, False)
+        Num_Position.insertString(NumCursor, ")", False)
+    else:
+        raise Exception('Custom decoration unimplemented feature')
+    dlg.removeTopWindowListener(oListenerTop)
+
 
 
 def xray(smgr, ctx, target):
@@ -183,21 +262,22 @@ def copyUsingPropertySetInfo(srcObj, dstObj):
                         pass
                     else:
                         oDValue = dstObj.getPropertyValue(oProp.Name)
-                        if oDValue== None or uno.IsEmpty(oDValue):
+                        if oDValue == None or uno.IsEmpty(oDValue):
                             if (uno.getConstantByName("com.sun.star.beans.PropertyAttribute.READONLY") and oProp.Attributes) == False:
                                 dstObj.setPropertyValue(oProp.Name, oSValue)
-                            elif uno.HasUnoInterfaces(oSValue,"com.sun.star.beans.XPropertySet"):
+                            elif uno.HasUnoInterfaces(oSValue, "com.sun.star.beans.XPropertySet"):
                                 if oSValue.SupportsService("com.sun.star.text.Text"):
                                     pass
                                 else:
-                                    copyUsingPropertySetInfo(oSValue,oDValue)
+                                    copyUsingPropertySetInfo(oSValue, oDValue)
         except Exception as e:
             continue
     return
 
+
 def canCopyTypeWithAssignment(oObj):
     case_check = uno.VarType(oObj)
-    if case_check<=8:
+    if case_check <= 8:
         return True
     elif case_check == 11 or case_check == 35 or case_check == 36 or case_check == 37:
         return True
@@ -208,6 +288,7 @@ def canCopyTypeWithAssignment(oObj):
             return True
         else:
             return False
+
 
 g_ImplementationHelper = unohelper.ImplementationHelper()
 g_ImplementationHelper.addImplementation(
