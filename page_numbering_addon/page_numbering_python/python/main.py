@@ -2,15 +2,17 @@ import uno
 import unohelper
 import time
 from com.sun.star.awt import XTopWindowListener
+import itertools
+import operator
+import sys
+
 
 # Dictionary for possible numbering type options
-NumTypeCollection = {'i,ii,iii,...': 3, 'I,II,III,...': 2, '1,2,3,...': 4, 'Α,Β,Γ,...':52, 'α,β,γ,...':53, 'a...aa...aaa':10, 'A...AA...AAA':9, 'a,b,c,...':1, 'A,B,C,...':0}
+NumTypeCollection = {'i,ii,iii,...': 3, 'I,II,III,...': 2, '1,2,3,...': 4, 'Α,Β,Γ,...': 52,
+                     'α,β,γ,...': 53, 'a...aa...aaa': 10, 'A...AA...AAA': 9, 'a,b,c,...': 1, 'A,B,C,...': 0}
 
 
-
-
-
-class oListenerTop_Class(XTopWindowListener,unohelper.Base):
+class oListenerTop_Class(XTopWindowListener, unohelper.Base):
     def __init__(self,):
         self.doc = None
 
@@ -18,38 +20,35 @@ class oListenerTop_Class(XTopWindowListener,unohelper.Base):
         self.doc = doc
 
 # XModifyListener
-    def windowOpened(self,oEvent):
+    def windowOpened(self, oEvent):
         pass
 
-
-    def windowClosed(self,oEvent):
+    def windowClosed(self, oEvent):
         pass
 
-    def windowClosing(self,oEvent):
+    def windowClosing(self, oEvent):
         pass
 
-
-    def windowMinimized(self,oEvent):
+    def windowMinimized(self, oEvent):
         pass
 
-    def windowNormalized(self,oEvent):
+    def windowNormalized(self, oEvent):
         pass
 
-    def windowActivated(self,oEvent):
+    def windowActivated(self, oEvent):
         pass
 
-    def windowDeactivated(self,oEvent):
+    def windowDeactivated(self, oEvent):
         pass
 
 # parent-interface XEventListener
-    def disposing(self,oEvent):
-        pass #normally not needed, but should be callable anyway
-
+    def disposing(self, oEvent):
+        pass  # normally not needed, but should be callable anyway
 
 
 def main(*args):
     """Prints the string 'Hello World(in Python)' into the current document"""
-    #get the doc from the scripting context which is made available to all scripts
+    # get the doc from the scripting context which is made available to all scripts
     global continue_dlg
     ctx = uno.getComponentContext()
     smgr = ctx.ServiceManager
@@ -57,18 +56,18 @@ def main(*args):
     Doc = XSCRIPTCONTEXT.getDocument()
     psm = uno.getComponentContext().ServiceManager
     dp = psm.createInstance("com.sun.star.awt.DialogProvider")
-    dlg = dp.createDialog("vnd.sun.star.script:dialogs.PageNumberingDialog?location=application")
+    dlg = dp.createDialog(
+        "vnd.sun.star.script:dialogs.PageNumberingDialog?location=application")
 
     # Initialize the required fields
     oDialog1Model = dlg.Model
     PositionListBox = oDialog1Model.getByName("Position")
-    PositionListBox.StringItemList = ["Επικεφαλίδα","Υποσέλιδο"]
+    PositionListBox.StringItemList = ["Επικεφαλίδα", "Υποσέλιδο"]
     PositionListBox.SelectedItems = [1]
 
     AlignmentListBox = oDialog1Model.getByName("Alignment")
-    AlignmentListBox.StringItemList= ["Αριστερά","Δεξιά","Κέντρο"]
+    AlignmentListBox.StringItemList = ["Αριστερά", "Δεξιά", "Κέντρο"]
     AlignmentListBox.SelectedItems = [2]
-
 
     FirstNumberedPage = oDialog1Model.getByName("First_Numbered_Page")
     FirstNumberedIndex = oDialog1Model.getByName("First_Numbered_Index")
@@ -86,29 +85,56 @@ def main(*args):
     oListenerTop.setDocument(Doc)
 
     dlg.addTopWindowListener(oListenerTop)
-    ListFonts(Doc,"search")
+
+    ListFontsRet = ListFonts(Doc, DefaultFontSearch)
+
+    FontUsed = oDialog1Model.getByName("FontSelect")
+    FontUsed.StringItemList = ListFontsRet[0]
+    FontUsed.SelectedItems = [ListFontsRet[1]]
+
     dlg.execute()
 
 # inspection tool xRay
+
+
 def xray(smgr, ctx, target):
-    mspf = smgr.createInstanceWithContext("com.sun.star.script.provider.MasterScriptProviderFactory", ctx)
+    mspf = smgr.createInstanceWithContext(
+        "com.sun.star.script.provider.MasterScriptProviderFactory", ctx)
     script_provider = mspf.createScriptProvider("")
-    script = script_provider.getScript("vnd.sun.star.script:XrayTool._Main.Xray?language=Basic&location=application")
+    script = script_provider.getScript(
+        "vnd.sun.star.script:XrayTool._Main.Xray?language=Basic&location=application")
     script.invoke((target,), (), ())
 
+
 def ListFonts(oDoc, SearchString):
-    oWindow  = oDoc.getCurrentController().getFrame().getContainerWindow()
+    SearchIndex = -1
+    uniqueFontNames = []
+    oWindow = oDoc.getCurrentController().getFrame().getContainerWindow()
     oFonts = oWindow.getFontDescriptors()
-
-    uniquefonts = sorted(set(oFonts))
-
     ctx = uno.getComponentContext()
     smgr = ctx.ServiceManager
-    xray(smgr,ctx,oFonts)
+
+    seen = set()
+    uniqueFontDescriptors = [
+        seen.add(obj.Name) or obj for obj in oFonts if obj.Name not in seen]
+    uniqueFontDescriptors = sorted(
+        uniqueFontDescriptors, key=lambda x: x.Name, reverse=False)
+
+    for i in range(len(uniqueFontDescriptors)):
+        uniqueFontNames.append(uniqueFontDescriptors[i].Name)
+        if uniqueFontDescriptors[i].Name == SearchString:
+            SearchIndex = i
+
+    return (uniqueFontNames, SearchIndex)
+
+
+def sort_uniq(sequence):
+    return map(operator.itemgetter(0), itertools.groupby(sorted(sequence)))
+
 
 g_ImplementationHelper = unohelper.ImplementationHelper()
 g_ImplementationHelper.addImplementation(
     oListenerTop_Class,
-    'com.sun.star.awt.XTopWindowListener',()
+    'com.sun.star.awt.XTopWindowListener', ()
 )
 g_exportedScripts = main,
