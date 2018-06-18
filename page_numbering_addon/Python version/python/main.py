@@ -9,6 +9,7 @@ from com.sun.star.beans.PropertyAttribute import READONLY
 from com.sun.star.beans.PropertyAttribute import MAYBEVOID
 from com.sun.star.beans.PropertyAttribute import REMOVEABLE
 from com.sun.star.beans.PropertyAttribute import MAYBEDEFAULT
+from com.sun.star.beans import PropertyValue
 
 # Dictionary for possible numbering type options
 NumTypeCollection = {'i,ii,iii,...': 3, 'I,II,III,...': 2, '1,2,3,...': 4, 'Α,Β,Γ,...': 52,
@@ -291,6 +292,39 @@ def canCopyTypeWithAssignment(oObj):
         else:
             return False
 
+# Inspired by @sng at https://forum.openoffice.org/en/forum/viewtopic.php?f=45&t=81457
+# and Andrew Pitonyak pdf "Useful Useful Macro Information For OpenOffice.org"
+def getLanguage():
+    oProvider = 'com.sun.star.configuration.ConfigurationProvider'
+    oAccess   = 'com.sun.star.configuration.ConfigurationAccess'
+    oConfigProvider = get_instance(oProvider)
+    oProp = PropertyValue()
+    oProp.Name = 'nodepath'
+    oProp.Value = 'org.openoffice.Office.Linguistic/General'
+    properties = (oProp,)
+    key = 'UILocale'
+    oSet = oConfigProvider.createInstanceWithArguments(oAccess, properties)
+    if oSet and (oSet.hasByName(key)):
+        ooLang = oSet.getPropertyValue(key)
+
+    if not (ooLang and not ooLang.isspace()):
+        oProp.Value = '/org.openoffice.Setup/L10N'
+        properties = (oProp,)
+        key = 'ooLocale'
+        oSet = oConfigProvider.createInstanceWithArguments(oAccess, properties)
+        if oSet and (oSet.hasByName(key)):
+            ooLang = oSet.getPropertyValue(key)
+    return ooLang
+
+def get_instance(service_name):
+        """ gets a service from Uno """
+        sm = uno.getComponentContext()
+        ctx = sm.getServiceManager()
+        try:
+            service = ctx.createInstance(service_name)
+        except:
+            service = NONE
+        return service
 
 g_ImplementationHelper = unohelper.ImplementationHelper()
 g_ImplementationHelper.addImplementation(
