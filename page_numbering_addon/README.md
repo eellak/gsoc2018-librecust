@@ -1,4 +1,4 @@
-# Page Numbering Addon implementations
+# Page Numbering Addon
 
 During this project, we decided, after getting feedback from common users (law department employees), to implement a plugin that eases the process of adding page numbering to a document.
 
@@ -18,4 +18,6 @@ This plugin, or by LO/OO terminology add-on(an extension that includes any kind 
 ## Implementation
 In order to get familiar with LO API we first implemented a version of the plugin in LO Basic language. Although this is the most documented among LO/OO compatible languages, it follows an archaic programming principle with little to none moder features. That is the reason that led us to port the official version in Python, using [UNO:API](https://api.libreoffice.org/) as the connection with LibreOffice.
 
-During the porting process, we still tested all of our next steps in the Basic module for faster communication with LO exploiting the abstraction of Basic over Python. 
+During the porting process, we still tested all of our next steps in the Basic module for faster communication with LO, exploiting the abstraction of Basic over Python.
+
+All facts and drawbacks that we came through during this implementation are documented in the Wiki, as well as the whole process of building the workflow used for a common Python add-on implementation.
