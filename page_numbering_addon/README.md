@@ -32,3 +32,6 @@ Each implementation (Python/LO Basic) is packaged as en extension in `.oxt` form
 * uno-tools required dependencies
   - OpenOffice.org/LibreOffice 3.4 or later
   - Python 3.3 or later
+
+### Warning
+In order to avoid unexpected results you are suggested to avoid installing together the two versions of this add-on.
