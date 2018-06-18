@@ -29,3 +29,6 @@ Each implementation (Python/LO Basic) is packaged as en extension in `.oxt` form
 
 ### Python Dependencies
 * libreoffice-script-provider-python package or even better [uno-tools](https://pypi.org/project/unotools/)
+* uno-tools required dependencies
+  - OpenOffice.org/LibreOffice 3.4 or later
+  - Python 3.3 or later
