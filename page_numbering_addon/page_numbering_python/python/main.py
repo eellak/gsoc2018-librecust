@@ -56,6 +56,7 @@ def main(*args):
     smgr = ctx.ServiceManager
 
     Doc = XSCRIPTCONTEXT.getDocument()
+    UndoManager = Doc.getUndoManager()
     psm = uno.getComponentContext().ServiceManager
     dp = psm.createInstance("com.sun.star.awt.DialogProvider")
     dlg = dp.createDialog(
@@ -172,7 +173,7 @@ def main(*args):
     # For text insertion a Text cursor is needed
     NumCursor = Num_Position.Text.createTextCursor()
 
-    # there should be the initialization of UndoManager
+    UndoManager.enterUndoContext("Page Numbering")	#There should be included all those changing operations that should be put in undo stack
 
     ViewCursor.jumpToPage(FirstNumberedPage.Value)
 
@@ -206,6 +207,7 @@ def main(*args):
         Num_Position.insertString(NumCursor, ")", False)
     else:
         raise Exception('Custom decoration unimplemented feature')
+    UndoManager.leaveUndoContext()
     dlg.removeTopWindowListener(oListenerTop)
 
 
