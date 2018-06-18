@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
-<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="PageNumberingDialog" dlg:left="148" dlg:top="91" dlg:width="272" dlg:height="119" dlg:closeable="true" dlg:moveable="true" dlg:title="Εισαγωγή αρίθμησης σελίδας">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="PageNumberingDialog" dlg:left="148" dlg:top="91" dlg:width="272" dlg:height="119" dlg:help-text="&amp;2.PageNumberingDialog.HelpText" dlg:closeable="true" dlg:moveable="true" dlg:title="&amp;3.PageNumberingDialog.Title">
  <dlg:bulletinboard>
-  <dlg:button dlg:id="CommandButton1" dlg:tab-index="1" dlg:left="214" dlg:top="101" dlg:width="50" dlg:height="12" dlg:default="true" dlg:value="OK" dlg:button-type="ok"/>
-  <dlg:text dlg:id="Label1" dlg:tab-index="2" dlg:left="5" dlg:top="3" dlg:width="39" dlg:height="11" dlg:value="Διακόσμηση"/>
-  <dlg:text dlg:id="Label2" dlg:tab-index="3" dlg:left="126" dlg:top="3" dlg:width="48" dlg:height="11" dlg:value="Ευθυγράμμιση"/>
-  <dlg:text dlg:id="Label3" dlg:tab-index="4" dlg:left="201" dlg:top="3" dlg:width="19" dlg:height="11" dlg:value="Θέση"/>
-  <dlg:menulist dlg:id="Alignment" dlg:tab-index="5" dlg:left="126" dlg:top="19" dlg:width="63" dlg:height="13" dlg:spin="true"/>
-  <dlg:menulist dlg:id="Position" dlg:tab-index="6" dlg:left="201" dlg:top="19" dlg:width="63" dlg:height="13" dlg:spin="true"/>
-  <dlg:text dlg:id="Label4" dlg:tab-index="8" dlg:left="8" dlg:top="69" dlg:width="51" dlg:height="9" dlg:value="Πρώτη σελίδα"/>
-  <dlg:text dlg:id="Label5" dlg:tab-index="10" dlg:left="103" dlg:top="69" dlg:width="51" dlg:height="9" dlg:value="Αρίθμηση από... "/>
-  <dlg:numericfield dlg:id="First_Numbered_Page" dlg:tab-index="7" dlg:left="8" dlg:top="81" dlg:width="63" dlg:height="11" dlg:decimal-accuracy="0" dlg:value="1" dlg:spin="true"/>
-  <dlg:numericfield dlg:id="First_Numbered_Index" dlg:tab-index="9" dlg:left="103" dlg:top="81" dlg:width="63" dlg:height="11" dlg:decimal-accuracy="0" dlg:value="1" dlg:spin="true"/>
-  <dlg:text dlg:id="Label6" dlg:tab-index="11" dlg:left="6" dlg:top="38" dlg:width="51" dlg:height="11" dlg:value="Γραμματοσειρά"/>
-  <dlg:button dlg:id="CommandButton2" dlg:tab-index="12" dlg:left="152" dlg:top="101" dlg:width="50" dlg:height="12" dlg:value="Ακύρωση" dlg:button-type="cancel"/>
-  <dlg:text dlg:id="Label7" dlg:tab-index="14" dlg:left="173" dlg:top="38" dlg:width="51" dlg:height="11" dlg:value="Μέγεθος"/>
-  <dlg:numericfield dlg:id="FontSize" dlg:tab-index="13" dlg:left="173" dlg:top="51" dlg:width="63" dlg:height="11" dlg:decimal-accuracy="0" dlg:value="1" dlg:spin="true"/>
-  <dlg:menulist dlg:id="FontSelect" dlg:tab-index="15" dlg:left="6" dlg:top="49" dlg:width="104" dlg:height="13" dlg:spin="true"/>
-  <dlg:combobox dlg:id="NumberingDecoration" dlg:tab-index="0" dlg:left="5" dlg:top="19" dlg:width="41" dlg:height="12" dlg:tabstop="false" dlg:value="#" dlg:align="center" dlg:spin="true">
+  <dlg:button dlg:id="CommandButton1" dlg:tab-index="1" dlg:left="214" dlg:top="101" dlg:width="50" dlg:height="12" dlg:help-text="&amp;4.PageNumberingDialog.CommandButton1.HelpText" dlg:default="true" dlg:value="&amp;5.PageNumberingDialog.CommandButton1.Label" dlg:button-type="ok"/>
+  <dlg:text dlg:id="Label1" dlg:tab-index="2" dlg:left="5" dlg:top="3" dlg:width="39" dlg:height="11" dlg:help-text="&amp;6.PageNumberingDialog.Label1.HelpText" dlg:value="&amp;7.PageNumberingDialog.Label1.Label"/>
+  <dlg:text dlg:id="Label2" dlg:tab-index="3" dlg:left="126" dlg:top="3" dlg:width="48" dlg:height="11" dlg:help-text="&amp;8.PageNumberingDialog.Label2.HelpText" dlg:value="&amp;9.PageNumberingDialog.Label2.Label"/>
+  <dlg:text dlg:id="Label3" dlg:tab-index="4" dlg:left="201" dlg:top="3" dlg:width="28" dlg:height="11" dlg:help-text="&amp;10.PageNumberingDialog.Label3.HelpText" dlg:value="&amp;11.PageNumberingDialog.Label3.Label"/>
+  <dlg:menulist dlg:id="Alignment" dlg:tab-index="5" dlg:left="126" dlg:top="19" dlg:width="63" dlg:height="13" dlg:help-text="&amp;12.PageNumberingDialog.Alignment.HelpText" dlg:spin="true"/>
+  <dlg:menulist dlg:id="Position" dlg:tab-index="6" dlg:left="201" dlg:top="19" dlg:width="63" dlg:height="13" dlg:help-text="&amp;13.PageNumberingDialog.Position.HelpText" dlg:spin="true"/>
+  <dlg:text dlg:id="Label4" dlg:tab-index="8" dlg:left="8" dlg:top="69" dlg:width="51" dlg:height="9" dlg:help-text="&amp;14.PageNumberingDialog.Label4.HelpText" dlg:value="&amp;15.PageNumberingDialog.Label4.Label"/>
+  <dlg:text dlg:id="Label5" dlg:tab-index="10" dlg:left="103" dlg:top="69" dlg:width="51" dlg:height="9" dlg:help-text="&amp;16.PageNumberingDialog.Label5.HelpText" dlg:value="&amp;17.PageNumberingDialog.Label5.Label"/>
+  <dlg:numericfield dlg:id="First_Numbered_Page" dlg:tab-index="7" dlg:left="8" dlg:top="81" dlg:width="63" dlg:height="11" dlg:help-text="&amp;18.PageNumberingDialog.First_Numbered_Page.HelpText" dlg:decimal-accuracy="0" dlg:value="1" dlg:spin="true"/>
+  <dlg:numericfield dlg:id="First_Numbered_Index" dlg:tab-index="9" dlg:left="103" dlg:top="81" dlg:width="63" dlg:height="11" dlg:help-text="&amp;19.PageNumberingDialog.First_Numbered_Index.HelpText" dlg:decimal-accuracy="0" dlg:value="1" dlg:spin="true"/>
+  <dlg:text dlg:id="Label6" dlg:tab-index="11" dlg:left="6" dlg:top="38" dlg:width="51" dlg:height="11" dlg:help-text="&amp;20.PageNumberingDialog.Label6.HelpText" dlg:value="&amp;21.PageNumberingDialog.Label6.Label"/>
+  <dlg:button dlg:id="CommandButton2" dlg:tab-index="12" dlg:left="152" dlg:top="101" dlg:width="50" dlg:height="12" dlg:help-text="&amp;22.PageNumberingDialog.CommandButton2.HelpText" dlg:value="&amp;23.PageNumberingDialog.CommandButton2.Label" dlg:button-type="cancel"/>
+  <dlg:text dlg:id="Label7" dlg:tab-index="14" dlg:left="173" dlg:top="38" dlg:width="51" dlg:height="11" dlg:help-text="&amp;24.PageNumberingDialog.Label7.HelpText" dlg:value="&amp;25.PageNumberingDialog.Label7.Label"/>
+  <dlg:numericfield dlg:id="FontSize" dlg:tab-index="13" dlg:left="173" dlg:top="51" dlg:width="63" dlg:height="11" dlg:help-text="&amp;26.PageNumberingDialog.FontSize.HelpText" dlg:decimal-accuracy="0" dlg:value="1" dlg:spin="true"/>
+  <dlg:menulist dlg:id="FontSelect" dlg:tab-index="15" dlg:left="6" dlg:top="49" dlg:width="104" dlg:height="13" dlg:help-text="&amp;27.PageNumberingDialog.FontSelect.HelpText" dlg:spin="true"/>
+  <dlg:combobox dlg:id="NumberingDecoration" dlg:tab-index="0" dlg:left="5" dlg:top="19" dlg:width="41" dlg:height="12" dlg:help-text="&amp;28.PageNumberingDialog.NumberingDecoration.HelpText" dlg:tabstop="false" dlg:value="&amp;33.PageNumberingDialog.NumberingDecoration.Text" dlg:align="center" dlg:spin="true">
    <dlg:menupopup>
-    <dlg:menuitem dlg:value="#"/>
-    <dlg:menuitem dlg:value="-#-"/>
-    <dlg:menuitem dlg:value="[#]"/>
-    <dlg:menuitem dlg:value="(#)"/>
+    <dlg:menuitem dlg:value="&amp;29.NumberingDecoration.StringItemList"/>
+    <dlg:menuitem dlg:value="&amp;30.NumberingDecoration.StringItemList"/>
+    <dlg:menuitem dlg:value="&amp;31.NumberingDecoration.StringItemList"/>
+    <dlg:menuitem dlg:value="&amp;32.NumberingDecoration.StringItemList"/>
    </dlg:menupopup>
   </dlg:combobox>
-  <dlg:text dlg:id="Label8" dlg:tab-index="16" dlg:left="59" dlg:top="3" dlg:width="36" dlg:height="11" dlg:value="Τύπος"/>
-  <dlg:combobox dlg:id="NumberingTypeSelect" dlg:tab-index="17" dlg:left="59" dlg:top="19" dlg:width="55" dlg:height="12" dlg:tabstop="false" dlg:value="1,2,3,..." dlg:align="center" dlg:spin="true">
+  <dlg:text dlg:id="Label8" dlg:tab-index="16" dlg:left="59" dlg:top="3" dlg:width="51" dlg:height="11" dlg:help-text="&amp;34.PageNumberingDialog.Label8.HelpText" dlg:value="&amp;35.PageNumberingDialog.Label8.Label"/>
+  <dlg:combobox dlg:id="NumberingTypeSelect" dlg:tab-index="17" dlg:left="59" dlg:top="19" dlg:width="55" dlg:height="12" dlg:help-text="&amp;36.PageNumberingDialog.NumberingTypeSelect.HelpText" dlg:tabstop="false" dlg:value="&amp;46.PageNumberingDialog.NumberingTypeSelect.Text" dlg:align="center" dlg:spin="true">
    <dlg:menupopup>
-    <dlg:menuitem dlg:value="Α,Β,Γ,..."/>
-    <dlg:menuitem dlg:value="α,β,γ,..."/>
-    <dlg:menuitem dlg:value="1,2,3,..."/>
-    <dlg:menuitem dlg:value="i,ii,iii,..."/>
-    <dlg:menuitem dlg:value="I,II,III,..."/>
-    <dlg:menuitem dlg:value="a...aa...aaa"/>
-    <dlg:menuitem dlg:value="A...AA...AAA"/>
-    <dlg:menuitem dlg:value="a,b,c,..."/>
-    <dlg:menuitem dlg:value="A,B,C,..."/>
+    <dlg:menuitem dlg:value="&amp;37.NumberingTypeSelect.StringItemList"/>
+    <dlg:menuitem dlg:value="&amp;38.NumberingTypeSelect.StringItemList"/>
+    <dlg:menuitem dlg:value="&amp;39.NumberingTypeSelect.StringItemList"/>
+    <dlg:menuitem dlg:value="&amp;40.NumberingTypeSelect.StringItemList"/>
+    <dlg:menuitem dlg:value="&amp;41.NumberingTypeSelect.StringItemList"/>
+    <dlg:menuitem dlg:value="&amp;42.NumberingTypeSelect.StringItemList"/>
+    <dlg:menuitem dlg:value="&amp;43.NumberingTypeSelect.StringItemList"/>
+    <dlg:menuitem dlg:value="&amp;44.NumberingTypeSelect.StringItemList"/>
+    <dlg:menuitem dlg:value="&amp;45.NumberingTypeSelect.StringItemList"/>
    </dlg:menupopup>
   </dlg:combobox>
  </dlg:bulletinboard>
