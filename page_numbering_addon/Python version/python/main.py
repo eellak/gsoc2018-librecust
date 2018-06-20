@@ -12,8 +12,8 @@ from com.sun.star.beans.PropertyAttribute import MAYBEDEFAULT
 from com.sun.star.beans import PropertyValue
 
 # Dictionary for possible numbering type options
-NumTypeCollection = {'i,ii,iii,...': 3, 'I,II,III,...': 2, '1,2,3,...': 4, 'Α,Β,Γ,...': 52,
-                     'α,β,γ,...': 53, 'a...aa...aaa': 10, 'A...AA...AAA': 9, 'a,b,c,...': 1, 'A,B,C,...': 0}
+NumTypeCollection = {"i,ii,iii,...": 3, "I,II,III,...": 2, "1,2,3,...": 4, "Α,Β,Γ,...": 52,
+                     "α,β,γ,...": 53, "a...aa...aaa": 10, "A...AA...AAA": 9, "a,b,c,...": 1, "A,B,C,...": 0}
 
 class oListenerTop_Class(XTopWindowListener, unohelper.Base):
     def __init__(self,):
@@ -50,7 +50,7 @@ class oListenerTop_Class(XTopWindowListener, unohelper.Base):
 
 
 def main(*args):
-    """Prints the string 'Hello World(in Python)' into the current document"""
+    """Prints the string "Hello World(in Python)" into the current document"""
     # get the doc from the scripting context which is made available to all scripts
     global continue_dlg
     ctx = uno.getComponentContext()
@@ -77,6 +77,14 @@ def main(*args):
     FirstNumberedIndex = oDialog1Model.getByName("First_Numbered_Index")
     FirstNumberedPage.Value = 1
     FirstNumberedIndex.Value = 1
+
+    NumberingTypeSelectListBox = oDialog1Model.getByName("NumberingTypeSelect")
+    NumberingTypeSelectListBox.StringItemList = ["i,ii,iii,...", "I,II,III,...", "1,2,3,...", "Α,Β,Γ,...","α,β,γ,...", "a...aa...aaa", "A...AA...AAA", "a,b,c,...", "A,B,C,..."]
+    NumberingTypeSelectListBox.Text = "1,2,3,..."
+
+    NumberingDecorationListBox = oDialog1Model.getByName("NumberingDecoration")
+    NumberingDecorationListBox.StringItemList = ["#","-#-","[#]","(#)"]
+    NumberingDecorationListBox.Text = "#"
 
     FontUsed = oDialog1Model.getByName("FontSelect")
 
@@ -207,7 +215,7 @@ def main(*args):
         Num_Position.insertTextContent(NumCursor, PageNumber, False)
         Num_Position.insertString(NumCursor, ")", False)
     else:
-        raise Exception('Custom decoration unimplemented feature')
+        raise Exception("Custom decoration unimplemented feature")
     UndoManager.leaveUndoContext()
     dlg.removeTopWindowListener(oListenerTop)
 
@@ -295,22 +303,22 @@ def canCopyTypeWithAssignment(oObj):
 # Inspired by @sng at https://forum.openoffice.org/en/forum/viewtopic.php?f=45&t=81457
 # and Andrew Pitonyak pdf "Useful Useful Macro Information For OpenOffice.org"
 def getLanguage():
-    oProvider = 'com.sun.star.configuration.ConfigurationProvider'
-    oAccess   = 'com.sun.star.configuration.ConfigurationAccess'
+    oProvider = "com.sun.star.configuration.ConfigurationProvider"
+    oAccess   = "com.sun.star.configuration.ConfigurationAccess"
     oConfigProvider = get_instance(oProvider)
     oProp = PropertyValue()
-    oProp.Name = 'nodepath'
-    oProp.Value = 'org.openoffice.Office.Linguistic/General'
+    oProp.Name = "nodepath"
+    oProp.Value = "org.openoffice.Office.Linguistic/General"
     properties = (oProp,)
-    key = 'UILocale'
+    key = "UILocale"
     oSet = oConfigProvider.createInstanceWithArguments(oAccess, properties)
     if oSet and (oSet.hasByName(key)):
         ooLang = oSet.getPropertyValue(key)
 
     if not (ooLang and not ooLang.isspace()):
-        oProp.Value = '/org.openoffice.Setup/L10N'
+        oProp.Value = "/org.openoffice.Setup/L10N"
         properties = (oProp,)
-        key = 'ooLocale'
+        key = "ooLocale"
         oSet = oConfigProvider.createInstanceWithArguments(oAccess, properties)
         if oSet and (oSet.hasByName(key)):
             ooLang = oSet.getPropertyValue(key)
@@ -329,6 +337,6 @@ def get_instance(service_name):
 g_ImplementationHelper = unohelper.ImplementationHelper()
 g_ImplementationHelper.addImplementation(
     oListenerTop_Class,
-    'com.sun.star.awt.XTopWindowListener', ()
+    "com.sun.star.awt.XTopWindowListener", ()
 )
 g_exportedScripts = main,
