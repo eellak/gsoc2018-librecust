@@ -10,6 +10,8 @@ from com.sun.star.beans.PropertyAttribute import MAYBEVOID
 from com.sun.star.beans.PropertyAttribute import REMOVEABLE
 from com.sun.star.beans.PropertyAttribute import MAYBEDEFAULT
 from com.sun.star.beans import PropertyValue
+import gettext
+_ = gettext.gettext
 
 # Dictionary for possible numbering type options
 NumTypeCollection = {"i,ii,iii,...": 3, "I,II,III,...": 2, "1,2,3,...": 4, "Α,Β,Γ,...": 52,
@@ -65,28 +67,51 @@ def main(*args):
 
     # Initialize the required fields
     oDialog1Model = dlg.Model
+
+    #Cancel and OK button Labels
+    CancelButton = oDialog1Model.getByName("CancelButton")
+    CancelButton.Label = _("Cancel")
+
+    OKButton = oDialog1Model.getByName("OKButton")
+    OKButton.Label = _("OK")
+
+    PositionLabel = oDialog1Model.getByName("PositionLabel")
+    PositionLabel.Label = _("Position")
     PositionListBox = oDialog1Model.getByName("Position")
-    PositionListBox.StringItemList = ["Επικεφαλίδα", "Υποσέλιδο"]
+    PositionListBox.StringItemList = [_("Επικεφαλίδα"), _("Υποσέλιδο")]
     PositionListBox.SelectedItems = [1]
 
+
+    AlignmentLabel = oDialog1Model.getByName("AlignmentLabel")
+    AlignmentLabel.Label = _("Alignment")
     AlignmentListBox = oDialog1Model.getByName("Alignment")
-    AlignmentListBox.StringItemList = ["Αριστερά", "Δεξιά", "Κέντρο"]
+    AlignmentListBox.StringItemList = [_("Αριστερά"), _("Δεξιά"), _("Κέντρο")]
     AlignmentListBox.SelectedItems = [2]
 
+    FirstPageLabel = oDialog1Model.getByName("FirstPageLabel")
+    FirstPageLabel.Label = _("First Page")
     FirstNumberedPage = oDialog1Model.getByName("First_Numbered_Page")
+
+    FirstPageLabel = oDialog1Model.getByName("PageOffsetLabel")
+    FirstPageLabel.Label = _("PageOffsetLabel")
     FirstNumberedIndex = oDialog1Model.getByName("First_Numbered_Index")
     FirstNumberedPage.Value = 1
     FirstNumberedIndex.Value = 1
 
+    TypeLabel = oDialog1Model.getByName("TypeLabel")
+    TypeLabel.Label = _("Numbering Type")
     NumberingTypeSelectListBox = oDialog1Model.getByName("NumberingTypeSelect")
     NumberingTypeSelectListBox.StringItemList = ["i,ii,iii,...", "I,II,III,...", "1,2,3,...", "Α,Β,Γ,...","α,β,γ,...", "a...aa...aaa", "A...AA...AAA", "a,b,c,...", "A,B,C,..."]
     NumberingTypeSelectListBox.Text = "1,2,3,..."
 
+    DecorLabel = oDialog1Model.getByName("DecorLabel")
+    DecorLabel.Label = _("Decor")
     NumberingDecorationListBox = oDialog1Model.getByName("NumberingDecoration")
     NumberingDecorationListBox.StringItemList = ["#","-#-","[#]","(#)"]
     NumberingDecorationListBox.Text = "#"
 
-    FontUsed = oDialog1Model.getByName("FontSelect")
+
+    # FontUsed = oDialog1Model.getByName("FontSelect")
 
 # Get the default paragraph font from Standard paragraph style
     ParaStyles = Doc.StyleFamilies.getByName("ParagraphStyles")
@@ -100,10 +125,14 @@ def main(*args):
 
     ListFontsRet = ListFonts(Doc, DefaultFontSearch)
 
+    FontLabel = oDialog1Model.getByName("FontLabel")
+    FontLabel.Label = _("Font")
     FontUsed = oDialog1Model.getByName("FontSelect")
     FontUsed.StringItemList = ListFontsRet[0]
     FontUsed.SelectedItems = [ListFontsRet[1]]
 
+    SizeLabel = oDialog1Model.getByName("SizeLabel")
+    SizeLabel.Label = _("Size")
     FontSize = oDialog1Model.getByName("FontSize")
     # Get default char size/height from Standard Paragraph style
 
@@ -182,7 +211,7 @@ def main(*args):
     # For text insertion a Text cursor is needed
     NumCursor = Num_Position.Text.createTextCursor()
 
-    UndoManager.enterUndoContext("Page Numbering")	#There should be included all those changing operations that should be put in undo stack
+    UndoManager.enterUndoContext(_("Page Numbering"))	#There should be included all those changing operations that should be put in undo stack
 
     ViewCursor.jumpToPage(FirstNumberedPage.Value)
 
