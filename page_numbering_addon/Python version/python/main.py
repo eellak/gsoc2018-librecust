@@ -78,14 +78,14 @@ def main(*args):
     PositionLabel = oDialog1Model.getByName("PositionLabel")
     PositionLabel.Label = _("Position")
     PositionListBox = oDialog1Model.getByName("Position")
-    PositionListBox.StringItemList = [_("Επικεφαλίδα"), _("Υποσέλιδο")]
+    PositionListBox.StringItemList = [_("Header"), _("Footer")]
     PositionListBox.SelectedItems = [1]
 
 
     AlignmentLabel = oDialog1Model.getByName("AlignmentLabel")
     AlignmentLabel.Label = _("Alignment")
     AlignmentListBox = oDialog1Model.getByName("Alignment")
-    AlignmentListBox.StringItemList = [_("Αριστερά"), _("Δεξιά"), _("Κέντρο")]
+    AlignmentListBox.StringItemList = [_("Left"), _("Right"), _("Centered")]
     AlignmentListBox.SelectedItems = [2]
 
     FirstPageLabel = oDialog1Model.getByName("FirstPageLabel")
