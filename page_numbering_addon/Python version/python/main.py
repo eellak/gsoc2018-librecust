@@ -93,7 +93,7 @@ def main(*args):
     FirstNumberedPage = oDialog1Model.getByName("First_Numbered_Page")
 
     FirstPageLabel = oDialog1Model.getByName("PageOffsetLabel")
-    FirstPageLabel.Label = _("PageOffsetLabel")
+    FirstPageLabel.Label = _("Page Offset")
     FirstNumberedIndex = oDialog1Model.getByName("First_Numbered_Index")
     FirstNumberedPage.Value = 1
     FirstNumberedIndex.Value = 1
