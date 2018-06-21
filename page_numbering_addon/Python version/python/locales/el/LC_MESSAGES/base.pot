@@ -1,0 +1,81 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2018-06-22 00:34+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: main.py:73
+msgid "Cancel"
+msgstr ""
+
+#: main.py:76
+msgid "OK"
+msgstr ""
+
+#: main.py:79
+msgid "Position"
+msgstr ""
+
+#: main.py:81
+msgid "Footer"
+msgstr ""
+
+#: main.py:81
+msgid "Header"
+msgstr ""
+
+#: main.py:86
+msgid "Alignment"
+msgstr ""
+
+#: main.py:88
+msgid "Centered"
+msgstr ""
+
+#: main.py:88
+msgid "Left"
+msgstr ""
+
+#: main.py:88
+msgid "Right"
+msgstr ""
+
+#: main.py:92
+msgid "First Page"
+msgstr ""
+
+#: main.py:96
+msgid "PageOffsetLabel"
+msgstr ""
+
+#: main.py:102
+msgid "Numbering Type"
+msgstr ""
+
+#: main.py:108
+msgid "Decor"
+msgstr ""
+
+#: main.py:129
+msgid "Font"
+msgstr ""
+
+#: main.py:135
+msgid "Size"
+msgstr ""
+
+#: main.py:214
+msgid "Page Numbering"
+msgstr ""
+
