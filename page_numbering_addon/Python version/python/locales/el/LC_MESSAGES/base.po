@@ -4,78 +4,80 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-06-22 00:34+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Project-Id-Version: 1.0\n"
+"POT-Creation-Date: 2018-01-28 16:47+0000\n"
+"PO-Revision-Date: 2018-01-28 16:48+0000\n"
+"Last-Translator: me <johndoe@example.com>\n"
+"Language-Team: Greek <yourteam@example.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
+#: main.py:85
+msgid "Page Numbering Title"
+msgstr "Εισαγωγή αρίθμησης σελίδας"
 
 #: main.py:73
 msgid "Cancel"
-msgstr ""
+msgstr "Ακύρωση"
 
 #: main.py:76
 msgid "OK"
-msgstr ""
+msgstr "Εντάξει"
 
 #: main.py:79
 msgid "Position"
-msgstr ""
+msgstr "Θέση"
 
 #: main.py:81
 msgid "Footer"
-msgstr ""
+msgstr "Υποσέλιδο"
 
 #: main.py:81
 msgid "Header"
-msgstr ""
+msgstr "Επικεφαλίδα"
 
 #: main.py:86
 msgid "Alignment"
-msgstr ""
+msgstr "Στοίχιση"
 
 #: main.py:88
 msgid "Centered"
-msgstr ""
+msgstr "Κέντρο"
 
 #: main.py:88
 msgid "Left"
-msgstr ""
+msgstr "Αριστερά"
 
 #: main.py:88
 msgid "Right"
-msgstr ""
+msgstr "Δεξιά"
 
 #: main.py:92
 msgid "First Page"
-msgstr ""
+msgstr "Πρώτη σελίδα"
 
 #: main.py:96
 msgid "PageOffsetLabel"
-msgstr ""
+msgstr "Αρίθμηση από..."
 
 #: main.py:102
 msgid "Numbering Type"
-msgstr ""
+msgstr "Τύπος"
 
 #: main.py:108
 msgid "Decor"
-msgstr ""
+msgstr "Διακόσμηση"
 
 #: main.py:129
 msgid "Font"
-msgstr ""
+msgstr "Γραμματοσειρά"
 
 #: main.py:135
 msgid "Size"
-msgstr ""
+msgstr "Μέγεθος"
 
 #: main.py:214
 msgid "Page Numbering"
-msgstr ""
-
+msgstr "Αρίθμηση σελίδας"

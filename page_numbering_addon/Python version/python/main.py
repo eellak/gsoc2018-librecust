@@ -11,6 +11,8 @@ from com.sun.star.beans.PropertyAttribute import REMOVEABLE
 from com.sun.star.beans.PropertyAttribute import MAYBEDEFAULT
 from com.sun.star.beans import PropertyValue
 import gettext
+import os
+from urllib.parse import urlparse
 _ = gettext.gettext
 
 # Dictionary for possible numbering type options
@@ -50,13 +52,25 @@ class oListenerTop_Class(XTopWindowListener, unohelper.Base):
     def disposing(self, oEvent):
         pass  # normally not needed, but should be callable anyway
 
+def get_main_directory(module_name): #com.addon.pagenumbering
+    ctx = uno.getComponentContext()
+    srv = ctx.getByName("/singletons/com.sun.star.deployment.PackageInformationProvider")
+    return urlparse(srv.getPackageLocation(module_name)).path + "/"
 
 def main(*args):
-    """Prints the string "Hello World(in Python)" into the current document"""
-    # get the doc from the scripting context which is made available to all scripts
-    global continue_dlg
     ctx = uno.getComponentContext()
     smgr = ctx.ServiceManager
+
+    try:
+        ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.pagenumbering")+'python/locales', languages=[getLanguage()])
+    except Exception as e:
+        ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.pagenumbering")+'python/locales', languages=["en"])
+
+    ui_locale.install()
+    _ = ui_locale.gettext
+
+    # get the doc from the scripting context which is made available to all scripts
+    #global continue_dlg
 
     Doc = XSCRIPTCONTEXT.getDocument()
     UndoManager = Doc.getUndoManager()
@@ -67,6 +81,8 @@ def main(*args):
 
     # Initialize the required fields
     oDialog1Model = dlg.Model
+
+    oDialog1Model.Title = _("Page Numbering Title")
 
     #Cancel and OK button Labels
     CancelButton = oDialog1Model.getByName("CancelButton")
@@ -81,11 +97,10 @@ def main(*args):
     PositionListBox.StringItemList = [_("Header"), _("Footer")]
     PositionListBox.SelectedItems = [1]
 
-
     AlignmentLabel = oDialog1Model.getByName("AlignmentLabel")
     AlignmentLabel.Label = _("Alignment")
     AlignmentListBox = oDialog1Model.getByName("Alignment")
-    AlignmentListBox.StringItemList = [_("Left"), _("Right"), _("Centered")]
+    AlignmentListBox.StringItemList = [_("Left"), _("RightS"), _("Centered")]
     AlignmentListBox.SelectedItems = [2]
 
     FirstPageLabel = oDialog1Model.getByName("FirstPageLabel")

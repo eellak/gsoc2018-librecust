@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-06-22 00:42+0300\n"
+"POT-Creation-Date: 2018-06-22 19:53+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,67 +15,71 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: main.py:73
+#: main.py:85
+msgid "Page Numbering Title"
+msgstr ""
+
+#: main.py:89
 msgid "Cancel"
 msgstr ""
 
-#: main.py:76
+#: main.py:92
 msgid "OK"
 msgstr ""
 
-#: main.py:79
+#: main.py:95
 msgid "Position"
 msgstr ""
 
-#: main.py:81
+#: main.py:97
 msgid "Footer"
 msgstr ""
 
-#: main.py:81
+#: main.py:97
 msgid "Header"
 msgstr ""
 
-#: main.py:86
+#: main.py:101
 msgid "Alignment"
 msgstr ""
 
-#: main.py:88
+#: main.py:103
 msgid "Centered"
 msgstr ""
 
-#: main.py:88
+#: main.py:103
 msgid "Left"
 msgstr ""
 
-#: main.py:88
-msgid "Right"
+#: main.py:103
+msgid "RightS"
 msgstr ""
 
-#: main.py:92
+#: main.py:107
 msgid "First Page"
 msgstr ""
 
-#: main.py:96
+#: main.py:111
 msgid "Page Offset"
 msgstr ""
 
-#: main.py:102
+#: main.py:117
 msgid "Numbering Type"
 msgstr ""
 
-#: main.py:108
+#: main.py:123
 msgid "Decor"
 msgstr ""
 
-#: main.py:129
+#: main.py:144
 msgid "Font"
 msgstr ""
 
-#: main.py:135
+#: main.py:150
 msgid "Size"
 msgstr ""
 
-#: main.py:214
+#: main.py:229
 msgid "Page Numbering"
 msgstr ""
 

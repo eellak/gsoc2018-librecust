@@ -14,68 +14,70 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 
+#: main.py:85
+msgid "Page Numbering Title"
+msgstr "Insert Page Numbering"
 
 #: main.py:73
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel"
 
 #: main.py:76
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: main.py:79
 msgid "Position"
-msgstr ""
+msgstr "Position"
 
 #: main.py:81
 msgid "Footer"
-msgstr ""
+msgstr "Footer"
 
 #: main.py:81
 msgid "Header"
-msgstr ""
+msgstr "Header"
 
 #: main.py:86
 msgid "Alignment"
-msgstr ""
+msgstr "Alignment"
 
 #: main.py:88
 msgid "Centered"
-msgstr ""
+msgstr "Centered"
 
 #: main.py:88
 msgid "Left"
-msgstr ""
+msgstr "Left"
 
 #: main.py:88
 msgid "Right"
-msgstr ""
+msgstr "Right"
 
 #: main.py:92
 msgid "First Page"
-msgstr ""
+msgstr "First Page"
 
 #: main.py:96
 msgid "PageOffsetLabel"
-msgstr ""
+msgstr "Start from..."
 
 #: main.py:102
 msgid "Numbering Type"
-msgstr ""
+msgstr "Numbering Type"
 
 #: main.py:108
 msgid "Decor"
-msgstr ""
+msgstr "Decor"
 
 #: main.py:129
 msgid "Font"
-msgstr ""
+msgstr "Font"
 
 #: main.py:135
 msgid "Size"
-msgstr ""
+msgstr "Size"
 
 #: main.py:214
 msgid "Page Numbering"
-msgstr ""
-
+msgstr "Page Numbering"
