@@ -10,10 +10,14 @@ from com.sun.star.beans.PropertyAttribute import MAYBEVOID
 from com.sun.star.beans.PropertyAttribute import REMOVEABLE
 from com.sun.star.beans.PropertyAttribute import MAYBEDEFAULT
 from com.sun.star.beans import PropertyValue
+import gettext
+import os
+from urllib.parse import urlparse
+_ = gettext.gettext
 
 # Dictionary for possible numbering type options
-NumTypeCollection = {'i,ii,iii,...': 3, 'I,II,III,...': 2, '1,2,3,...': 4, 'Α,Β,Γ,...': 52,
-                     'α,β,γ,...': 53, 'a...aa...aaa': 10, 'A...AA...AAA': 9, 'a,b,c,...': 1, 'A,B,C,...': 0}
+NumTypeCollection = {"i,ii,iii,...": 3, "I,II,III,...": 2, "1,2,3,...": 4, "Α,Β,Γ,...": 52,
+                     "α,β,γ,...": 53, "a...aa...aaa": 10, "A...AA...AAA": 9, "a,b,c,...": 1, "A,B,C,...": 0}
 
 class oListenerTop_Class(XTopWindowListener, unohelper.Base):
     def __init__(self,):
@@ -48,13 +52,25 @@ class oListenerTop_Class(XTopWindowListener, unohelper.Base):
     def disposing(self, oEvent):
         pass  # normally not needed, but should be callable anyway
 
+def get_main_directory(module_name): #com.addon.pagenumbering
+    ctx = uno.getComponentContext()
+    srv = ctx.getByName("/singletons/com.sun.star.deployment.PackageInformationProvider")
+    return urlparse(srv.getPackageLocation(module_name)).path + "/"
 
 def main(*args):
-    """Prints the string 'Hello World(in Python)' into the current document"""
-    # get the doc from the scripting context which is made available to all scripts
-    global continue_dlg
     ctx = uno.getComponentContext()
     smgr = ctx.ServiceManager
+
+    try:
+        ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.pagenumbering")+'python/locales', languages=[getLanguage()])
+    except Exception as e:
+        ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.pagenumbering")+'python/locales', languages=["en"])
+
+    ui_locale.install()
+    _ = ui_locale.gettext
+
+    # get the doc from the scripting context which is made available to all scripts
+    #global continue_dlg
 
     Doc = XSCRIPTCONTEXT.getDocument()
     UndoManager = Doc.getUndoManager()
@@ -65,20 +81,52 @@ def main(*args):
 
     # Initialize the required fields
     oDialog1Model = dlg.Model
+
+    oDialog1Model.Title = _("Page Numbering Title")
+
+    #Cancel and OK button Labels
+    CancelButton = oDialog1Model.getByName("CancelButton")
+    CancelButton.Label = _("Cancel")
+
+    OKButton = oDialog1Model.getByName("OKButton")
+    OKButton.Label = _("OK")
+
+    PositionLabel = oDialog1Model.getByName("PositionLabel")
+    PositionLabel.Label = _("Position")
     PositionListBox = oDialog1Model.getByName("Position")
-    PositionListBox.StringItemList = ["Επικεφαλίδα", "Υποσέλιδο"]
+    PositionListBox.StringItemList = [_("Header"), _("Footer")]
     PositionListBox.SelectedItems = [1]
 
+    AlignmentLabel = oDialog1Model.getByName("AlignmentLabel")
+    AlignmentLabel.Label = _("Alignment")
     AlignmentListBox = oDialog1Model.getByName("Alignment")
-    AlignmentListBox.StringItemList = ["Αριστερά", "Δεξιά", "Κέντρο"]
+    AlignmentListBox.StringItemList = [_("Left"), _("RightS"), _("Centered")]
     AlignmentListBox.SelectedItems = [2]
 
+    FirstPageLabel = oDialog1Model.getByName("FirstPageLabel")
+    FirstPageLabel.Label = _("First Page")
     FirstNumberedPage = oDialog1Model.getByName("First_Numbered_Page")
+
+    FirstPageLabel = oDialog1Model.getByName("PageOffsetLabel")
+    FirstPageLabel.Label = _("Page Offset")
     FirstNumberedIndex = oDialog1Model.getByName("First_Numbered_Index")
     FirstNumberedPage.Value = 1
     FirstNumberedIndex.Value = 1
 
-    FontUsed = oDialog1Model.getByName("FontSelect")
+    TypeLabel = oDialog1Model.getByName("TypeLabel")
+    TypeLabel.Label = _("Numbering Type")
+    NumberingTypeSelectListBox = oDialog1Model.getByName("NumberingTypeSelect")
+    NumberingTypeSelectListBox.StringItemList = ["i,ii,iii,...", "I,II,III,...", "1,2,3,...", "Α,Β,Γ,...","α,β,γ,...", "a...aa...aaa", "A...AA...AAA", "a,b,c,...", "A,B,C,..."]
+    NumberingTypeSelectListBox.Text = "1,2,3,..."
+
+    DecorLabel = oDialog1Model.getByName("DecorLabel")
+    DecorLabel.Label = _("Decor")
+    NumberingDecorationListBox = oDialog1Model.getByName("NumberingDecoration")
+    NumberingDecorationListBox.StringItemList = ["#","-#-","[#]","(#)"]
+    NumberingDecorationListBox.Text = "#"
+
+
+    # FontUsed = oDialog1Model.getByName("FontSelect")
 
 # Get the default paragraph font from Standard paragraph style
     ParaStyles = Doc.StyleFamilies.getByName("ParagraphStyles")
@@ -92,10 +140,14 @@ def main(*args):
 
     ListFontsRet = ListFonts(Doc, DefaultFontSearch)
 
+    FontLabel = oDialog1Model.getByName("FontLabel")
+    FontLabel.Label = _("Font")
     FontUsed = oDialog1Model.getByName("FontSelect")
     FontUsed.StringItemList = ListFontsRet[0]
     FontUsed.SelectedItems = [ListFontsRet[1]]
 
+    SizeLabel = oDialog1Model.getByName("SizeLabel")
+    SizeLabel.Label = _("Size")
     FontSize = oDialog1Model.getByName("FontSize")
     # Get default char size/height from Standard Paragraph style
 
@@ -174,7 +226,7 @@ def main(*args):
     # For text insertion a Text cursor is needed
     NumCursor = Num_Position.Text.createTextCursor()
 
-    UndoManager.enterUndoContext("Page Numbering")	#There should be included all those changing operations that should be put in undo stack
+    UndoManager.enterUndoContext(_("Page Numbering"))	#There should be included all those changing operations that should be put in undo stack
 
     ViewCursor.jumpToPage(FirstNumberedPage.Value)
 
@@ -207,7 +259,7 @@ def main(*args):
         Num_Position.insertTextContent(NumCursor, PageNumber, False)
         Num_Position.insertString(NumCursor, ")", False)
     else:
-        raise Exception('Custom decoration unimplemented feature')
+        raise Exception("Custom decoration unimplemented feature")
     UndoManager.leaveUndoContext()
     dlg.removeTopWindowListener(oListenerTop)
 
@@ -295,22 +347,22 @@ def canCopyTypeWithAssignment(oObj):
 # Inspired by @sng at https://forum.openoffice.org/en/forum/viewtopic.php?f=45&t=81457
 # and Andrew Pitonyak pdf "Useful Useful Macro Information For OpenOffice.org"
 def getLanguage():
-    oProvider = 'com.sun.star.configuration.ConfigurationProvider'
-    oAccess   = 'com.sun.star.configuration.ConfigurationAccess'
+    oProvider = "com.sun.star.configuration.ConfigurationProvider"
+    oAccess   = "com.sun.star.configuration.ConfigurationAccess"
     oConfigProvider = get_instance(oProvider)
     oProp = PropertyValue()
-    oProp.Name = 'nodepath'
-    oProp.Value = 'org.openoffice.Office.Linguistic/General'
+    oProp.Name = "nodepath"
+    oProp.Value = "org.openoffice.Office.Linguistic/General"
     properties = (oProp,)
-    key = 'UILocale'
+    key = "UILocale"
     oSet = oConfigProvider.createInstanceWithArguments(oAccess, properties)
     if oSet and (oSet.hasByName(key)):
         ooLang = oSet.getPropertyValue(key)
 
     if not (ooLang and not ooLang.isspace()):
-        oProp.Value = '/org.openoffice.Setup/L10N'
+        oProp.Value = "/org.openoffice.Setup/L10N"
         properties = (oProp,)
-        key = 'ooLocale'
+        key = "ooLocale"
         oSet = oConfigProvider.createInstanceWithArguments(oAccess, properties)
         if oSet and (oSet.hasByName(key)):
             ooLang = oSet.getPropertyValue(key)
@@ -329,6 +381,6 @@ def get_instance(service_name):
 g_ImplementationHelper = unohelper.ImplementationHelper()
 g_ImplementationHelper.addImplementation(
     oListenerTop_Class,
-    'com.sun.star.awt.XTopWindowListener', ()
+    "com.sun.star.awt.XTopWindowListener", ()
 )
 g_exportedScripts = main,
