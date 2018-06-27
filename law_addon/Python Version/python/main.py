@@ -131,4 +131,4 @@ g_ImplementationHelper.addImplementation(
     oListenerTop_Class,
     "com.sun.star.awt.XTopWindowListener", ()
 )
-g_exportedScripts = main,
+g_exportedScripts = main,insert_hd1,
