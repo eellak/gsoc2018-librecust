@@ -24,6 +24,17 @@ def main(*args):
 
     UndoManager.leaveUndoContext()
 
+def insert_hd1():
+    ctx = uno.getComponentContext()
+    smgr = ctx.ServiceManager
+
+    # get the doc from the scripting context which is made available to all scripts
+
+    Doc = XSCRIPTCONTEXT.getDocument()
+    UndoManager = Doc.getUndoManager()
+    ParaStyles = Doc.StyleFamilies.getByName("ParagraphStyles")
+    xray(smgr, ctx, ParaStyles)        
+
 def xray(smgr, ctx, target):
     mspf = smgr.createInstanceWithContext(
         "com.sun.star.script.provider.MasterScriptProviderFactory", ctx)
