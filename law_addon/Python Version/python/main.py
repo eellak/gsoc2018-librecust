@@ -3,6 +3,11 @@ import unohelper
 import itertools
 import operator
 import sys
+from com.sun.star.beans.PropertyAttribute import READONLY
+from com.sun.star.beans.PropertyAttribute import MAYBEVOID
+from com.sun.star.beans.PropertyAttribute import REMOVEABLE
+from com.sun.star.beans.PropertyAttribute import MAYBEDEFAULT
+from com.sun.star.beans import PropertyValue
 
 def main(*args):
     ctx = uno.getComponentContext()
@@ -12,7 +17,7 @@ def main(*args):
 
     Doc = XSCRIPTCONTEXT.getDocument()
     UndoManager = Doc.getUndoManager()
-    
+
     # FontUsed = oDialog1Model.getByName("FontSelect")
 
 # Get the default paragraph font from Standard paragraph style
@@ -20,8 +25,26 @@ def main(*args):
     StdPara = ParaStyles["Heading 1"]
 
 #atomic operations combined in one undo stack item
-    UndoManager.enterUndoContext("Change Paragraph style")	#There should be included all those changing operations that should be put in undo stack
+    UndoManager.enterUndoContext("Change Paragraph style")  #There should be included all those changing operations that should be put in undo stack
 
+    UndoManager.leaveUndoContext()
+
+def insert_hd1():
+    ctx = uno.getComponentContext()
+    smgr = ctx.ServiceManager
+
+    # get the doc from the scripting context which is made available to all scripts
+
+    Doc = XSCRIPTCONTEXT.getDocument()
+    UndoManager = Doc.getUndoManager()
+    ParaStyles = Doc.StyleFamilies.getByName("ParagraphStyles")
+    #xray(smgr, ctx, ParaStyles)
+
+    #Create view cursor to take current cursor position
+    ViewCursor = Doc.CurrentController.getViewCursor()
+    #xray(smgr, ctx, ViewCursor)
+    UndoManager.enterUndoContext("Style to Heading 1")
+    ViewCursor.ParaStyleName = "Heading 1"
     UndoManager.leaveUndoContext()
 
 def xray(smgr, ctx, target):
@@ -116,8 +139,5 @@ def get_instance(service_name):
         return service
 
 g_ImplementationHelper = unohelper.ImplementationHelper()
-g_ImplementationHelper.addImplementation(
-    oListenerTop_Class,
-    "com.sun.star.awt.XTopWindowListener", ()
-)
-g_exportedScripts = main,
+
+g_exportedScripts = main,insert_hd1,
