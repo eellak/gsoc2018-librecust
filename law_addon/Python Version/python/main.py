@@ -3,6 +3,11 @@ import unohelper
 import itertools
 import operator
 import sys
+from com.sun.star.beans.PropertyAttribute import READONLY
+from com.sun.star.beans.PropertyAttribute import MAYBEVOID
+from com.sun.star.beans.PropertyAttribute import REMOVEABLE
+from com.sun.star.beans.PropertyAttribute import MAYBEDEFAULT
+from com.sun.star.beans import PropertyValue
 
 def main(*args):
     ctx = uno.getComponentContext()
@@ -12,7 +17,7 @@ def main(*args):
 
     Doc = XSCRIPTCONTEXT.getDocument()
     UndoManager = Doc.getUndoManager()
-    
+
     # FontUsed = oDialog1Model.getByName("FontSelect")
 
 # Get the default paragraph font from Standard paragraph style
@@ -20,7 +25,7 @@ def main(*args):
     StdPara = ParaStyles["Heading 1"]
 
 #atomic operations combined in one undo stack item
-    UndoManager.enterUndoContext("Change Paragraph style")	#There should be included all those changing operations that should be put in undo stack
+    UndoManager.enterUndoContext("Change Paragraph style")  #There should be included all those changing operations that should be put in undo stack
 
     UndoManager.leaveUndoContext()
 
@@ -33,7 +38,14 @@ def insert_hd1():
     Doc = XSCRIPTCONTEXT.getDocument()
     UndoManager = Doc.getUndoManager()
     ParaStyles = Doc.StyleFamilies.getByName("ParagraphStyles")
-    xray(smgr, ctx, ParaStyles)        
+    #xray(smgr, ctx, ParaStyles)
+
+    #Create view cursor to take current cursor position
+    ViewCursor = Doc.CurrentController.getViewCursor()
+    #xray(smgr, ctx, ViewCursor)
+    UndoManager.enterUndoContext("Style to Heading 1")
+    ViewCursor.ParaStyleName = "Heading 1"
+    UndoManager.leaveUndoContext()
 
 def xray(smgr, ctx, target):
     mspf = smgr.createInstanceWithContext(
