@@ -3,7 +3,7 @@
 Adding open source software in employee's workflow.
 
 ## Project outline
-This GSOC project, Librecust[1], includes the following substeps:
+This GSOC project, **Librecust**, includes the following substeps:
 - Development of specific menu, UI customizations and extensions(add-ons) to achieve MS Office familiar interface without undermining LO functionality.
 - Creation of Greek legal system templates to introduce LO mechanisms as a tool for Greek Public Services
 - Documentation of LO customization and extension development as well as deployment approaches for real case scenarios (testing on Specific Court Department with multiple workstations)
