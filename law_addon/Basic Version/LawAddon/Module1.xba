@@ -22,7 +22,7 @@ REM get current cursor position
 	ViewCursor = Doc.CurrentController.getViewCursor()
 	
 
-	UndoManager.enterUndoContext(&quot;Page Numbering&quot;)
+	UndoManager.enterUndoContext(&quot;Change Paragraph style&quot;)
 	
 	ViewCursor.ParaStyleName = &quot;Heading 1&quot;
 
