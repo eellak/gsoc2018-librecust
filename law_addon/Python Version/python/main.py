@@ -29,7 +29,7 @@ def main(*args):
 
     UndoManager.leaveUndoContext()
 
-def insert_hd1():
+def insert_hd1(*args):
     ctx = uno.getComponentContext()
     smgr = ctx.ServiceManager
 
