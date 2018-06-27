@@ -11,4 +11,23 @@ OldStyle = ParagraphStyles.getByName(&quot;Heading 1&quot;)
 ThisComponent.CurrentController.ViewCursor.ParaStyleName = &quot;Heading 1&quot;
 xray ThisComponent.CurrentController.ViewCursor.ParaStyleName
 End Sub
+
+sub insert_hd1()
+	Doc = ThisComponent
+	UndoManager = Doc.getUndoManager()
+	
+	ParagraphStyles = Doc.StyleFamilies.getByName(&quot;ParagraphStyles&quot;)
+	
+REM get current cursor position
+	ViewCursor = Doc.CurrentController.getViewCursor()
+	
+
+	UndoManager.enterUndoContext(&quot;Page Numbering&quot;)
+	
+	ViewCursor.ParaStyleName = &quot;Heading 1&quot;
+
+	UndoManager.leaveUndoContext()
+
+end sub
+
 </script:module>
