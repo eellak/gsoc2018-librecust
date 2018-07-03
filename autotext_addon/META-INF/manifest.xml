@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest:manifest>
+ <manifest:file-entry manifest:full-path="registration.components" 
+  manifest:media-type="application/vnd.sun.star.uno-components"/>
+ <manifest:file-entry manifest:full-path="WindowContentFactories.xcu" 
+  manifest:media-type="application/vnd.sun.star.configuration-data"/>
+ <manifest:file-entry manifest:full-path="WriterWindowState.xcu" 
+  manifest:media-type="application/vnd.sun.star.configuration-data"/>
+ <manifest:file-entry manifest:full-path="View.xcu" 
+  manifest:media-type="application/vnd.sun.star.configuration-data"/>
+</manifest:manifest>
