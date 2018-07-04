@@ -5,6 +5,16 @@ import unohelper
 from com.sun.star.lang import (XSingleComponentFactory, 
     XServiceInfo)
 
+def toogle_autotext_sidebar():
+    RESOURCE_URL = "private:resource/dockingwindow/9809"
+    oDoc = XSCRIPTCONTEXT.getDocument()
+    layoutmgr = oDoc.getCurrentController().getFrame().LayoutManager
+    if layoutmgr.isElementVisible(RESOURCE_URL):
+        layoutmgr.hideElement(RESOURCE_URL)
+    else:
+        layoutmgr.requestElement(RESOURCE_URL)
+    
+
 class Factory(unohelper.Base, XSingleComponentFactory, XServiceInfo):
     """ This factory instantiate new window content. 
     Registration of this class have to be there under 
@@ -300,6 +310,7 @@ class Switcher(unohelper.Base, XJobExecutor, XServiceInfo):
     def getImplementationName(self):
         return self.IMPLE_NAME
 
+g_exportedScripts = toogle_autotext_sidebar,
 
 #g_ImplementationHelper.addImplementation(*Switcher.get_imple())
 
