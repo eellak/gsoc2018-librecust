@@ -6,6 +6,6 @@
   <dlg:textfield dlg:id="ShortcutField" dlg:tab-index="1" dlg:left="6" dlg:top="54" dlg:width="118" dlg:height="21"/>
   <dlg:text dlg:id="NameLabel" dlg:tab-index="2" dlg:left="7" dlg:top="3" dlg:width="59" dlg:height="13" dlg:value="Name"/>
   <dlg:text dlg:id="Label1" dlg:tab-index="3" dlg:left="7" dlg:top="41" dlg:width="59" dlg:height="13" dlg:value="Shortcut"/>
-  <dlg:button dlg:id="AddButton" dlg:tab-index="4" dlg:left="141" dlg:top="75" dlg:width="46" dlg:height="17" dlg:value="Add" dlg:button-type="ok"/>
+  <dlg:button dlg:id="AddButton" dlg:tab-index="4" dlg:left="141" dlg:top="75" dlg:width="46" dlg:height="17" dlg:default="true" dlg:value="Add" dlg:button-type="ok"/>
  </dlg:bulletinboard>
 </dlg:window>
