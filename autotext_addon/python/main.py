@@ -35,7 +35,7 @@ def xray(smgr, ctx, target):
     script.invoke((target,), (), ())
 
 
-def toogle_autotext_sidebar():
+def toogle_autotext_sidebar(*args):
     RESOURCE_URL = "private:resource/dockingwindow/9809"
     oDoc = XSCRIPTCONTEXT.getDocument()
     layoutmgr = oDoc.getCurrentController().getFrame().LayoutManager
@@ -158,7 +158,7 @@ def create_window(ctx, args):
 
         child.getControl("SavedAutotext").addItems(oRange.Titles,0)
 
-        action_listener = ActionListener(ctx)
+        action_listener = ActionListener(ctx,child)
         child.getControl("OKButton").addActionListener(action_listener)
         child.getControl("OKButton").setActionCommand('InsertAutoText')
 
@@ -168,6 +168,8 @@ def create_window(ctx, args):
         child.getControl("SavedAutotext").addMouseListener(MouseListener(ctx))
         #xray(smgr,ctx,child.getControl("SavedAutotext"))
         child.setVisible(True)
+        xray(smgr,ctx,child.getControl("SavedAutotext"))
+
 
         window.addWindowListener(WindowResizeListener(child))
 
@@ -219,8 +221,9 @@ class MouseListener(unohelper.Base, XMouseListener):
 
 class ActionListener(unohelper.Base, XActionListener):
 
-    def __init__(self, ctx):
+    def __init__(self, ctx, child):
         self.ctx = ctx
+        self.child = child # Pass child to get access to sub-window elements
 
     def disposing(self, ev):
         pass
@@ -257,7 +260,13 @@ class ActionListener(unohelper.Base, XActionListener):
             oRange = dps.getByName("mytexts")            
             
             oRange.insertNewByName("testing","testing",oCurs.getByIndex(0))
-            child.getControl("SavedAutotext").addItems(oRange.Titles,0)
+            oRange = dps.getByName("mytexts")
+            autotext_listbox = self.child.getControl("SavedAutotext")
+            current_autotexts = autotext_listbox.getItemCount()
+            autotext_listbox.removeItems(0,current_autotexts) 
+            autotext_listbox.addItems(oRange.Titles,0)
+
+
 
 class WindowResizeListener(unohelper.Base, XWindowListener):
 
