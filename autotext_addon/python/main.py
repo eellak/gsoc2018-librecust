@@ -158,8 +158,12 @@ def create_window(ctx, args):
 
         child.getControl("SavedAutotext").addItems(oRange.Titles,0)
 
-        child.getControl("OKButton").addActionListener(ActionListener(ctx))
+        action_listener = ActionListener(ctx)
+        child.getControl("OKButton").addActionListener(action_listener)
         child.getControl("OKButton").setActionCommand('InsertAutoText')
+
+        child.getControl("AddSelectionButton").addActionListener(action_listener)
+        child.getControl("AddSelectionButton").setActionCommand('AddSelectedAutoText')        
         
         child.getControl("SavedAutotext").addMouseListener(MouseListener(ctx))
         #xray(smgr,ctx,child.getControl("SavedAutotext"))
@@ -244,6 +248,16 @@ class ActionListener(unohelper.Base, XActionListener):
             #get_parent_document().getText().getEnd().setString(selected_autotext.String)
             selected_autotext.applyTo(ViewCursor)
             #doc.getText().getEnd().setString("Hello!")
+
+        if action_command == "AddSelectedAutoText":
+            oCurs = get_parent_document().getCurrentSelection()
+            psm = uno.getComponentContext().ServiceManager
+            dps = psm.createInstance("com.sun.star.text.AutoTextContainer")
+            ViewCursor = get_parent_document().getCurrentController().getViewCursor()
+            oRange = dps.getByName("mytexts")            
+            
+            oRange.insertNewByName("testing","testing",oCurs.getByIndex(0))
+            child.getControl("SavedAutotext").addItems(oRange.Titles,0)
 
 class WindowResizeListener(unohelper.Base, XWindowListener):
 
