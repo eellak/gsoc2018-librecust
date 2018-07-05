@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="Dialog2" dlg:left="0" dlg:top="11" dlg:width="197" dlg:height="95" dlg:closeable="true" dlg:moveable="true">
+ <dlg:bulletinboard>
+  <dlg:textfield dlg:id="NameField" dlg:tab-index="0" dlg:left="6" dlg:top="17" dlg:width="118" dlg:height="19"/>
+  <dlg:textfield dlg:id="ShortcutField" dlg:tab-index="1" dlg:left="6" dlg:top="54" dlg:width="118" dlg:height="21"/>
+  <dlg:text dlg:id="NameLabel" dlg:tab-index="2" dlg:left="7" dlg:top="3" dlg:width="59" dlg:height="13" dlg:value="Name"/>
+  <dlg:text dlg:id="Label1" dlg:tab-index="3" dlg:left="7" dlg:top="41" dlg:width="59" dlg:height="13" dlg:value="Shortcut"/>
+  <dlg:button dlg:id="AddButton" dlg:tab-index="4" dlg:left="141" dlg:top="75" dlg:width="46" dlg:height="17" dlg:value="Add" dlg:button-type="ok"/>
+ </dlg:bulletinboard>
+</dlg:window>

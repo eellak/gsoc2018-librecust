@@ -168,8 +168,6 @@ def create_window(ctx, args):
         child.getControl("SavedAutotext").addMouseListener(MouseListener(ctx))
         #xray(smgr,ctx,child.getControl("SavedAutotext"))
         child.setVisible(True)
-        xray(smgr,ctx,child.getControl("SavedAutotext"))
-
 
         window.addWindowListener(WindowResizeListener(child))
 
@@ -246,11 +244,8 @@ class ActionListener(unohelper.Base, XActionListener):
             oRange = dps.getByName("mytexts")
 
             selected_autotext = oRange.getByIndex(selected_pos)
-            #xray(smgr, ctx, oRange)
             ViewCursor = get_parent_document().getCurrentController().getViewCursor()
-            #get_parent_document().getText().getEnd().setString(selected_autotext.String)
             selected_autotext.applyTo(ViewCursor)
-            #doc.getText().getEnd().setString("Hello!")
 
         if action_command == "AddSelectedAutoText":
             oCurs = get_parent_document().getCurrentSelection()
@@ -259,7 +254,20 @@ class ActionListener(unohelper.Base, XActionListener):
             ViewCursor = get_parent_document().getCurrentController().getViewCursor()
             oRange = dps.getByName("mytexts")            
             
-            oRange.insertNewByName("testing","testing",oCurs.getByIndex(0))
+            dp = psm.createInstance("com.sun.star.awt.DialogProvider")
+            dlg = dp.createDialog("vnd.sun.star.extension://com.addon.autotextaddon/dialogs_autotext/Dialog2.xdl")
+
+
+            if dlg.execute() == 0:
+                return
+            
+
+            new_autotext_name = dlg.getControl("NameField").Text
+            new_autotext_shortcut = dlg.getControl("ShortcutField").Text
+
+            oRange.insertNewByName(new_autotext_shortcut,new_autotext_name,oCurs.getByIndex(0))
+
+            #refresh entries of main listbox
             oRange = dps.getByName("mytexts")
             autotext_listbox = self.child.getControl("SavedAutotext")
             current_autotexts = autotext_listbox.getItemCount()
