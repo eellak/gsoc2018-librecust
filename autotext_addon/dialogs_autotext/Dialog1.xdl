@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
-<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="Dialog1" dlg:left="0" dlg:top="0" dlg:width="110" dlg:height="183" dlg:closeable="true" dlg:moveable="true">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="Dialog1" dlg:left="0" dlg:top="0" dlg:width="110" dlg:height="183" dlg:closeable="true" dlg:moveable="true" dlg:withtitlebar="false">
  <dlg:bulletinboard>
   <dlg:menulist dlg:id="SavedAutotext" dlg:tab-index="1" dlg:left="6" dlg:top="5" dlg:width="95" dlg:height="136"/>
   <dlg:button dlg:id="OKButton" dlg:tab-index="0" dlg:left="60" dlg:top="151" dlg:width="39" dlg:height="17" dlg:value="OK"/>
