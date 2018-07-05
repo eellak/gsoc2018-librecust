@@ -160,6 +160,9 @@ def create_window(ctx, args):
 
         child.getControl("OKButton").addActionListener(ActionListener(ctx))
         child.getControl("OKButton").setActionCommand('InsertAutoText')
+        
+        child.getControl("SavedAutotext").addMouseListener(MouseListener(ctx))
+        #xray(smgr,ctx,child.getControl("SavedAutotext"))
         child.setVisible(True)
 
         window.addWindowListener(WindowResizeListener(child))
@@ -170,9 +173,45 @@ def create_window(ctx, args):
 
     return window
 
-# for normal window based dockingwindow
+from com.sun.star.awt import XWindowListener, XActionListener, XMouseListener
 
-from com.sun.star.awt import XWindowListener, XActionListener
+class MouseListener(unohelper.Base, XMouseListener):
+
+    def __init__(self, ctx):
+        self.ctx = ctx
+
+    def disposing(self, ev):
+        pass
+
+    # XActionListener
+    def mousePressed(self, ev):
+        dialog = ev.Source.getContext()
+        action_command = ev
+        smgr = self.ctx.ServiceManager
+
+        auto_list = dialog.getControl("SavedAutotext")
+        selected_pos= auto_list.getSelectedItemPos()
+        psm = uno.getComponentContext().ServiceManager
+        dps = psm.createInstance("com.sun.star.text.AutoTextContainer")
+
+        oRange = dps.getByName("mytexts")
+
+        selected_autotext = oRange.getByIndex(selected_pos)
+        #getString
+
+        preview_label = dialog.getControl("PreviewLabel")
+
+        preview_label.setText(selected_autotext.getString())
+        #xray(smgr, self.ctx, preview_label)
+
+    def mouseReleased():
+        pass
+
+    def mouseEntered():
+        pass
+
+    def mouseExited():
+        pass
 
 class ActionListener(unohelper.Base, XActionListener):
 
@@ -188,6 +227,7 @@ class ActionListener(unohelper.Base, XActionListener):
         ctx = uno.getComponentContext()
         action_command = ev.ActionCommand
         smgr = ctx.ServiceManager
+        #xray(smgr, ctx, action_command)
 
         if action_command == "InsertAutoText":
             auto_list = dialog.getControl("SavedAutotext")
@@ -199,7 +239,7 @@ class ActionListener(unohelper.Base, XActionListener):
             oRange = dps.getByName("mytexts")
 
             selected_autotext = oRange.getByIndex(selected_pos)
-            xray(smgr, ctx, oRange)
+            #xray(smgr, ctx, oRange)
             ViewCursor = get_parent_document().getCurrentController().getViewCursor()
             #get_parent_document().getText().getEnd().setString(selected_autotext.String)
             selected_autotext.applyTo(ViewCursor)
