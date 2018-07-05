@@ -180,7 +180,6 @@ def create_window(ctx, args):
 
         window.addWindowListener(WindowResizeListener(child))
 
-
         #child.setPosSize(0, 0, 0, 0, POS)  # if the dialog is not placed at
                                             # top left corner
 
@@ -215,7 +214,6 @@ class MouseListener(unohelper.Base, XMouseListener):
         preview_label = dialog.getControl("PreviewLabel")
 
         preview_label.setText(selected_autotext.getString())
-        #xray(smgr, self.ctx, preview_label)
 
     def mouseReleased():
         pass
@@ -241,7 +239,6 @@ class ActionListener(unohelper.Base, XActionListener):
         ctx = uno.getComponentContext()
         action_command = ev.ActionCommand
         smgr = ctx.ServiceManager
-        #xray(smgr, ctx, action_command)
 
         if action_command == "InsertAutoText":
             auto_list = dialog.getControl("SavedAutotext")
@@ -270,11 +267,9 @@ class ActionListener(unohelper.Base, XActionListener):
             dp = psm.createInstance("com.sun.star.awt.DialogProvider")
             dlg = dp.createDialog("vnd.sun.star.extension://com.addon.autotextaddon/dialogs_autotext/Dialog2.xdl")
 
-
             if dlg.execute() == 0:
                 return
             
-
             new_autotext_name = dlg.getControl("NameField").Text
             new_autotext_shortcut = dlg.getControl("ShortcutField").Text
 
@@ -286,8 +281,6 @@ class ActionListener(unohelper.Base, XActionListener):
             current_autotexts = autotext_listbox.getItemCount()
             autotext_listbox.removeItems(0,current_autotexts) 
             autotext_listbox.addItems(oRange.Titles,0)
-
-
 
 class WindowResizeListener(unohelper.Base, XWindowListener):
 
@@ -309,8 +302,6 @@ class WindowResizeListener(unohelper.Base, XWindowListener):
         # extends inner window to match with the outer window
         if self.dialog:
             self.dialog.setPosSize(0, 0, ev.Width, ev.Height, SIZE)
-            # ToDo: resize dialog elements
-
 
 # for com.sun.star.comp.framework.TabWindowService based dockingwindow
 
@@ -337,9 +328,6 @@ class ContainerWindowHandler(unohelper.Base, XContainerWindowEventHandler, XActi
         return "external_event",
 
     def _initialize(self, window):
-#        btn = window.getControl("CommandButton1")
-#        btn.setActionCommand("btn1")
-#        btn.addActionListener(self)
         pass
 
     def disposing(self, ev):
@@ -348,17 +336,6 @@ class ContainerWindowHandler(unohelper.Base, XContainerWindowEventHandler, XActi
     # XActionListener
     def actionPerformed(self, ev):
         pass
-# Tool functions
-
-def create_service(ctx, name, args=None):
-    """ Create service with args if required. """
-    smgr = ctx.getServiceManager()
-    if args:
-        return smgr.createInstanceWithArgumentsAndContext(name, args, ctx)
-    else:
-        return smgr.createInstanceWithContext(name, ctx)
-
-
 
 from com.sun.star.task import XJobExecutor
 
