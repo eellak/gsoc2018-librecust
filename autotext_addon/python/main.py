@@ -279,35 +279,3 @@ def create_service(ctx, name, args=None):
 from com.sun.star.task import XJobExecutor
 
 g_exportedScripts = toogle_autotext_sidebar,
-
-#g_ImplementationHelper.addImplementation(*Switcher.get_imple())
-
-"""
-' Switch through layout manager.
-const RESOURCE_URL = "private:resource/dockingwindow/9809"
-
-Sub SwitchDockingWindow
-  layoutmgr = ThisComponent.getCurrentController().getFrame().LayoutManager
-  if layoutmgr.isElementVisible(RESOURCE_URL) then
-    layoutmgr.hideElement(RESOURCE_URL)
-  else
-    layoutmgr.requestElement(RESOURCE_URL)
-  end if
-End Sub
-"""
-
-"""
-' Way to show/hide docking window through dispatch framework.
-Sub ShowDockingWindow()
-  id = 9809
-  a = "DockingWindow" & CStr(id - 9800)
-  p = CreateUnoStruct("com.sun.star.beans.PropertyValue")
-  p.Name = a
-  p.Value = True ' show or hide(False)
-
-  dp = CreateUnoService("com.sun.star.frame.DispatchHelper")
-  dp.executeDispatch(ThisComponent.getCurrentController().getFrame(), _
-      ".uno:" & a, "_self", 0, Array(p))
-
-End Sub
-"""
