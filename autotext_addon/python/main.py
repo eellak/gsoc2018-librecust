@@ -1,6 +1,15 @@
 import uno
 import unohelper
 
+from com.sun.star.awt.MessageBoxType import MESSAGEBOX, INFOBOX, WARNINGBOX, ERRORBOX, QUERYBOX
+from com.sun.star.awt.MessageBoxButtons import BUTTONS_OK, BUTTONS_OK_CANCEL, BUTTONS_ABORT_IGNORE_RETRY, BUTTONS_YES_NO_CANCEL, BUTTONS_YES_NO, BUTTONS_RETRY_CANCEL, DEFAULT_BUTTON_OK, DEFAULT_BUTTON_CANCEL, DEFAULT_BUTTON_RETRY, DEFAULT_BUTTON_YES, DEFAULT_BUTTON_NO, DEFAULT_BUTTON_IGNORE
+
+def MessageBox(ParentWin, MsgText, MsgTitle, MsgType=MESSAGEBOX, MsgButtons=BUTTONS_OK):
+  ctx = uno.getComponentContext()
+  sm = ctx.ServiceManager
+  sv = sm.createInstanceWithContext("com.sun.star.awt.Toolkit", ctx) 
+  myBox = sv.createMessageBox(ParentWin, MsgType, MsgButtons, MsgTitle, MsgText)
+  return myBox.execute()
 
 from com.sun.star.lang import (XSingleComponentFactory,
     XServiceInfo)
@@ -252,6 +261,10 @@ class ActionListener(unohelper.Base, XActionListener):
             psm = uno.getComponentContext().ServiceManager
             dps = psm.createInstance("com.sun.star.text.AutoTextContainer")
             ViewCursor = get_parent_document().getCurrentController().getViewCursor()
+            if ViewCursor.getString() == "":
+                parentwin = get_parent_document().getCurrentController().Frame.ContainerWindow
+                MessageBox(parentwin, "No content is selected. Please select content and then add to autotext list", 'Error',ERRORBOX)
+                return
             oRange = dps.getByName("mytexts")            
             
             dp = psm.createInstance("com.sun.star.awt.DialogProvider")
