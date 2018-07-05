@@ -152,7 +152,7 @@ def create_window(ctx, args):
 
         psm = uno.getComponentContext().ServiceManager
         dps = psm.createInstance("com.sun.star.text.AutoTextContainer")
-        oRange = dps.getByName("standard")
+        oRange = dps.getByName("mytexts")
     #    ctx = uno.getComponentContext()
         smgr = ctx.ServiceManager
 
@@ -195,10 +195,11 @@ class ActionListener(unohelper.Base, XActionListener):
 
             psm = uno.getComponentContext().ServiceManager
             dps = psm.createInstance("com.sun.star.text.AutoTextContainer")
-            oRange = dps.getByName("standard")
+
+            oRange = dps.getByName("mytexts")
 
             selected_autotext = oRange.getByIndex(selected_pos)
-            xray(smgr, ctx, selected_autotext)
+            xray(smgr, ctx, oRange)
             ViewCursor = get_parent_document().getCurrentController().getViewCursor()
             #get_parent_document().getText().getEnd().setString(selected_autotext.String)
             selected_autotext.applyTo(ViewCursor)
