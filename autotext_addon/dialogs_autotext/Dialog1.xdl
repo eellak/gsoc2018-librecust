@@ -5,13 +5,12 @@
   <dlg:style dlg:style-id="0" dlg:border="3d"/>
  </dlg:styles>
  <dlg:bulletinboard>
-  <dlg:menulist dlg:id="SavedAutotext" dlg:tab-index="1" dlg:left="6" dlg:top="17" dlg:width="95" dlg:height="136"/>
+  <dlg:menulist dlg:id="SavedAutotext" dlg:tab-index="1" dlg:left="6" dlg:top="13" dlg:width="95" dlg:height="136"/>
   <dlg:button dlg:id="OKButton" dlg:tab-index="0" dlg:left="123" dlg:top="15" dlg:width="39" dlg:height="17" dlg:value="Insert"/>
-  <dlg:text dlg:style-id="0" dlg:id="PreviewLabel" dlg:tab-index="2" dlg:left="6" dlg:top="179" dlg:width="153" dlg:height="93" dlg:multiline="true"/>
-  <dlg:text dlg:style-id="0" dlg:id="LabelPreview" dlg:tab-index="3" dlg:left="6" dlg:top="162" dlg:width="66" dlg:height="14" dlg:value="Preview" dlg:multiline="true"/>
-  <dlg:text dlg:style-id="0" dlg:id="LabelListbox" dlg:tab-index="4" dlg:left="6" dlg:top="2" dlg:width="66" dlg:height="14" dlg:value="Auto texts" dlg:multiline="true"/>
-  <dlg:button dlg:id="AddNewButton" dlg:tab-index="5" dlg:left="123" dlg:top="37" dlg:width="39" dlg:height="17" dlg:value="Add New"/>
-  <dlg:button dlg:id="AddSelectionButton" dlg:tab-index="6" dlg:left="123" dlg:top="58" dlg:width="48" dlg:height="17" dlg:value="Add Selection"/>
-  <dlg:fixedline dlg:id="FixedLine1" dlg:tab-index="7" dlg:left="0" dlg:top="155" dlg:width="185" dlg:height="2"/>
+  <dlg:text dlg:style-id="0" dlg:id="PreviewLabel" dlg:tab-index="2" dlg:left="6" dlg:top="173" dlg:width="153" dlg:height="93" dlg:multiline="true"/>
+  <dlg:text dlg:id="LabelPreview" dlg:tab-index="3" dlg:left="6" dlg:top="162" dlg:width="66" dlg:height="14" dlg:value="Preview" dlg:multiline="true"/>
+  <dlg:text dlg:id="LabelListbox" dlg:tab-index="4" dlg:left="6" dlg:top="2" dlg:width="66" dlg:height="14" dlg:value="Auto texts" dlg:multiline="true"/>
+  <dlg:button dlg:id="AddSelectionButton" dlg:tab-index="5" dlg:left="123" dlg:top="37" dlg:width="48" dlg:height="17" dlg:value="Add Selection"/>
+  <dlg:fixedline dlg:id="FixedLine1" dlg:tab-index="6" dlg:left="0" dlg:top="155" dlg:width="185" dlg:height="2"/>
  </dlg:bulletinboard>
 </dlg:window>

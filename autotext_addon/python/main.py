@@ -1,6 +1,15 @@
 import uno
 import unohelper
 
+from com.sun.star.awt.MessageBoxType import MESSAGEBOX, INFOBOX, WARNINGBOX, ERRORBOX, QUERYBOX
+from com.sun.star.awt.MessageBoxButtons import BUTTONS_OK, BUTTONS_OK_CANCEL, BUTTONS_ABORT_IGNORE_RETRY, BUTTONS_YES_NO_CANCEL, BUTTONS_YES_NO, BUTTONS_RETRY_CANCEL, DEFAULT_BUTTON_OK, DEFAULT_BUTTON_CANCEL, DEFAULT_BUTTON_RETRY, DEFAULT_BUTTON_YES, DEFAULT_BUTTON_NO, DEFAULT_BUTTON_IGNORE
+
+def MessageBox(ParentWin, MsgText, MsgTitle, MsgType=MESSAGEBOX, MsgButtons=BUTTONS_OK):
+  ctx = uno.getComponentContext()
+  sm = ctx.ServiceManager
+  sv = sm.createInstanceWithContext("com.sun.star.awt.Toolkit", ctx) 
+  myBox = sv.createMessageBox(ParentWin, MsgType, MsgButtons, MsgTitle, MsgText)
+  return myBox.execute()
 
 from com.sun.star.lang import (XSingleComponentFactory,
     XServiceInfo)
@@ -35,7 +44,7 @@ def xray(smgr, ctx, target):
     script.invoke((target,), (), ())
 
 
-def toogle_autotext_sidebar():
+def toogle_autotext_sidebar(*args):
     RESOURCE_URL = "private:resource/dockingwindow/9809"
     oDoc = XSCRIPTCONTEXT.getDocument()
     layoutmgr = oDoc.getCurrentController().getFrame().LayoutManager
@@ -158,7 +167,7 @@ def create_window(ctx, args):
 
         child.getControl("SavedAutotext").addItems(oRange.Titles,0)
 
-        action_listener = ActionListener(ctx)
+        action_listener = ActionListener(ctx,child)
         child.getControl("OKButton").addActionListener(action_listener)
         child.getControl("OKButton").setActionCommand('InsertAutoText')
 
@@ -219,8 +228,9 @@ class MouseListener(unohelper.Base, XMouseListener):
 
 class ActionListener(unohelper.Base, XActionListener):
 
-    def __init__(self, ctx):
+    def __init__(self, ctx, child):
         self.ctx = ctx
+        self.child = child # Pass child to get access to sub-window elements
 
     def disposing(self, ev):
         pass
@@ -243,21 +253,41 @@ class ActionListener(unohelper.Base, XActionListener):
             oRange = dps.getByName("mytexts")
 
             selected_autotext = oRange.getByIndex(selected_pos)
-            #xray(smgr, ctx, oRange)
             ViewCursor = get_parent_document().getCurrentController().getViewCursor()
-            #get_parent_document().getText().getEnd().setString(selected_autotext.String)
             selected_autotext.applyTo(ViewCursor)
-            #doc.getText().getEnd().setString("Hello!")
 
         if action_command == "AddSelectedAutoText":
             oCurs = get_parent_document().getCurrentSelection()
             psm = uno.getComponentContext().ServiceManager
             dps = psm.createInstance("com.sun.star.text.AutoTextContainer")
             ViewCursor = get_parent_document().getCurrentController().getViewCursor()
+            if ViewCursor.getString() == "":
+                parentwin = get_parent_document().getCurrentController().Frame.ContainerWindow
+                MessageBox(parentwin, "No content is selected. Please select content and then add to autotext list", 'Error',ERRORBOX)
+                return
             oRange = dps.getByName("mytexts")            
             
-            oRange.insertNewByName("testing","testing",oCurs.getByIndex(0))
-            child.getControl("SavedAutotext").addItems(oRange.Titles,0)
+            dp = psm.createInstance("com.sun.star.awt.DialogProvider")
+            dlg = dp.createDialog("vnd.sun.star.extension://com.addon.autotextaddon/dialogs_autotext/Dialog2.xdl")
+
+
+            if dlg.execute() == 0:
+                return
+            
+
+            new_autotext_name = dlg.getControl("NameField").Text
+            new_autotext_shortcut = dlg.getControl("ShortcutField").Text
+
+            oRange.insertNewByName(new_autotext_shortcut,new_autotext_name,oCurs.getByIndex(0))
+
+            #refresh entries of main listbox
+            oRange = dps.getByName("mytexts")
+            autotext_listbox = self.child.getControl("SavedAutotext")
+            current_autotexts = autotext_listbox.getItemCount()
+            autotext_listbox.removeItems(0,current_autotexts) 
+            autotext_listbox.addItems(oRange.Titles,0)
+
+
 
 class WindowResizeListener(unohelper.Base, XWindowListener):
 
