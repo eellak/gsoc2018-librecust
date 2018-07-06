@@ -174,6 +174,9 @@ def create_window(ctx, args):
         child.getControl("AddSelectionButton").addActionListener(action_listener)
         child.getControl("AddSelectionButton").setActionCommand('AddSelectedAutoText')        
         
+        child.getControl("MoreButton").addActionListener(action_listener)
+        child.getControl("MoreButton").setActionCommand('MoreDispatch')
+
         child.getControl("SavedAutotext").addMouseListener(MouseListener(ctx))
         #xray(smgr,ctx,child.getControl("SavedAutotext"))
         child.setVisible(True)
@@ -286,6 +289,12 @@ class ActionListener(unohelper.Base, XActionListener):
             current_autotexts = autotext_listbox.getItemCount()
             autotext_listbox.removeItems(0,current_autotexts) 
             autotext_listbox.addItems(oRange.Titles,0)
+
+        if action_command == "MoreDispatch":
+            # access the dispatcher
+            dispatcher = smgr.createInstanceWithContext( "com.sun.star.frame.DispatchHelper", ctx)
+            doc = get_parent_document().getCurrentController()
+            dispatcher.executeDispatch(doc, ".uno:EditGlossary", "", 0, tuple())
 
 class WindowResizeListener(unohelper.Base, XWindowListener):
 
