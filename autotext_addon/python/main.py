@@ -174,6 +174,9 @@ def create_window(ctx, args):
         child.getControl("AddSelectionButton").addActionListener(action_listener)
         child.getControl("AddSelectionButton").setActionCommand('AddSelectedAutoText')        
         
+        child.getControl("MoreButton").addActionListener(action_listener)
+        child.getControl("MoreButton").setActionCommand('MoreDispatch')
+
         child.getControl("SavedAutotext").addMouseListener(MouseListener(ctx))
         #xray(smgr,ctx,child.getControl("SavedAutotext"))
         child.setVisible(True)
@@ -244,6 +247,11 @@ class ActionListener(unohelper.Base, XActionListener):
             auto_list = dialog.getControl("SavedAutotext")
             selected_pos= auto_list.getSelectedItemPos()
 
+            if selected_pos == -1:
+                parentwin = get_parent_document().getCurrentController().Frame.ContainerWindow
+                MessageBox(parentwin, "No autotext is selected. Please select auotext and then press Insert", 'Error',ERRORBOX)
+                return
+
             psm = uno.getComponentContext().ServiceManager
             dps = psm.createInstance("com.sun.star.text.AutoTextContainer")
 
@@ -281,6 +289,12 @@ class ActionListener(unohelper.Base, XActionListener):
             current_autotexts = autotext_listbox.getItemCount()
             autotext_listbox.removeItems(0,current_autotexts) 
             autotext_listbox.addItems(oRange.Titles,0)
+
+        if action_command == "MoreDispatch":
+            # access the dispatcher
+            dispatcher = smgr.createInstanceWithContext( "com.sun.star.frame.DispatchHelper", ctx)
+            doc = get_parent_document().getCurrentController()
+            dispatcher.executeDispatch(doc, ".uno:EditGlossary", "", 0, tuple())
 
 class WindowResizeListener(unohelper.Base, XWindowListener):
 
