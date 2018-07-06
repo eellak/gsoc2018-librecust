@@ -6,11 +6,12 @@
  </dlg:styles>
  <dlg:bulletinboard>
   <dlg:menulist dlg:id="SavedAutotext" dlg:tab-index="1" dlg:left="6" dlg:top="19" dlg:width="95" dlg:height="136"/>
-  <dlg:button dlg:id="OKButton" dlg:tab-index="0" dlg:left="6" dlg:top="287" dlg:width="39" dlg:height="17" dlg:default="true" dlg:value="Insert"/>
+  <dlg:button dlg:id="OKButton" dlg:tab-index="0" dlg:left="108" dlg:top="287" dlg:width="39" dlg:height="17" dlg:default="true" dlg:value="Insert"/>
   <dlg:text dlg:style-id="0" dlg:id="PreviewLabel" dlg:tab-index="2" dlg:left="6" dlg:top="182" dlg:width="138" dlg:height="93" dlg:multiline="true"/>
   <dlg:text dlg:id="LabelPreview" dlg:tab-index="3" dlg:left="6" dlg:top="169" dlg:width="66" dlg:height="14" dlg:value="Preview" dlg:multiline="true"/>
   <dlg:text dlg:id="LabelListbox" dlg:tab-index="4" dlg:left="6" dlg:top="5" dlg:width="66" dlg:height="14" dlg:value="Auto texts" dlg:multiline="true"/>
-  <dlg:button dlg:id="AddSelectionButton" dlg:tab-index="5" dlg:left="51" dlg:top="287" dlg:width="48" dlg:height="17" dlg:value="Add Selection"/>
+  <dlg:button dlg:id="AddSelectionButton" dlg:tab-index="5" dlg:left="53" dlg:top="287" dlg:width="48" dlg:height="17" dlg:value="Add Selection"/>
   <dlg:fixedline dlg:id="FixedLine1" dlg:tab-index="6" dlg:left="0" dlg:top="163" dlg:width="151" dlg:height="0"/>
+  <dlg:button dlg:id="MoreButton" dlg:tab-index="7" dlg:left="4" dlg:top="287" dlg:width="44" dlg:height="17" dlg:value="More..."/>
  </dlg:bulletinboard>
 </dlg:window>

@@ -244,6 +244,11 @@ class ActionListener(unohelper.Base, XActionListener):
             auto_list = dialog.getControl("SavedAutotext")
             selected_pos= auto_list.getSelectedItemPos()
 
+            if selected_pos == -1:
+                parentwin = get_parent_document().getCurrentController().Frame.ContainerWindow
+                MessageBox(parentwin, "No autotext is selected. Please select auotext and then press Insert", 'Error',ERRORBOX)
+                return
+
             psm = uno.getComponentContext().ServiceManager
             dps = psm.createInstance("com.sun.star.text.AutoTextContainer")
 
