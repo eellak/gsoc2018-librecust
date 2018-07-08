@@ -47,6 +47,22 @@ def insert_hd1(*args):
     ViewCursor.ParaStyleName = "Heading 1"
     UndoManager.leaveUndoContext()
 
+def insert_law(*args):
+    #Inspect services for debugging purposes
+    ctx = uno.getComponentContext()
+    smgr = ctx.ServiceManager
+
+    Doc = XSCRIPTCONTEXT.getDocument()
+    UndoManager = Doc.getUndoManager()
+
+    #Create view cursor to take current cursor position
+    ViewCursor = Doc.CurrentController.getViewCursor()
+    xray(smgr, ctx, ViewCursor)
+    
+    #There should be used the law API to get the law string
+    #dialog to get the law
+    ViewCursor.setString("HALLO")    
+
 def xray(smgr, ctx, target):
     mspf = smgr.createInstanceWithContext(
         "com.sun.star.script.provider.MasterScriptProviderFactory", ctx)
@@ -140,4 +156,4 @@ def get_instance(service_name):
 
 g_ImplementationHelper = unohelper.ImplementationHelper()
 
-g_exportedScripts = main,insert_hd1,
+g_exportedScripts = main,insert_hd1,insert_law,
