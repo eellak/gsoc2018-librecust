@@ -151,7 +151,7 @@ def create_window(ctx, args):
 
         # Creates outer window
         # title name of this window is defined in WindowState configuration.
-        desc = WindowDescriptor(SIMPLE, "window", parent, 0, Rectangle(0, 0, 100, 100),
+        desc = WindowDescriptor(SIMPLE, "window", parent, 0, Rectangle(0, 0, 200, 300),
                 SHOW | SIZEABLE | MOVEABLE | CLOSEABLE | CLIPCHILDREN)
         window = toolkit.createWindow(desc)
 
@@ -165,20 +165,35 @@ def create_window(ctx, args):
     #    ctx = uno.getComponentContext()
         smgr = ctx.ServiceManager
 
-        child.getControl("SavedAutotext").addItems(oRange.Titles,0)
+        # Initialize Dialog items
 
+        #Initialize listeners
         action_listener = ActionListener(ctx,child)
-        child.getControl("OKButton").addActionListener(action_listener)
-        child.getControl("OKButton").setActionCommand('InsertAutoText')
+        mouse_listener = MouseListener(ctx)
 
-        child.getControl("AddSelectionButton").addActionListener(action_listener)
-        child.getControl("AddSelectionButton").setActionCommand('AddSelectedAutoText')        
+        # Autotext Listbox
+        Autotext_Label = child.getControl("LabelListbox")
+        Autotext_Label.Text = "Auto Texts"
+
+        Autotext_ListBox = child.getControl("SavedAutotext") 
+        Autotext_ListBox.addItems(oRange.Titles,0)
+        Autotext_ListBox.addMouseListener(mouse_listener)
         
-        child.getControl("MoreButton").addActionListener(action_listener)
-        child.getControl("MoreButton").setActionCommand('MoreDispatch')
+        OK_Button = child.getControl("OKButton")
+        OK_Button.addActionListener(action_listener)
+        OK_Button.setActionCommand('InsertAutoText')
+        OK_Button.Label = "Insert"
 
-        child.getControl("SavedAutotext").addMouseListener(MouseListener(ctx))
-        #xray(smgr,ctx,child.getControl("SavedAutotext"))
+        AddSelection_Button = child.getControl("AddSelectionButton")
+        AddSelection_Button.addActionListener(action_listener)
+        AddSelection_Button.setActionCommand('AddSelectedAutoText')
+        AddSelection_Button.Label = "Add Selection"        
+        
+        More_Button = child.getControl("MoreButton")
+        More_Button.addActionListener(action_listener)
+        More_Button.setActionCommand('MoreDispatch')
+        More_Button.Label = "More..."
+
         child.setVisible(True)
 
         window.addWindowListener(WindowResizeListener(child))
