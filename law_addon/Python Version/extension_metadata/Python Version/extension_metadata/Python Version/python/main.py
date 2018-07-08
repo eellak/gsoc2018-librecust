@@ -29,7 +29,7 @@ def main(*args):
 
     UndoManager.leaveUndoContext()
 
-def insert_hd1(*args):
+def insert_hd1():
     ctx = uno.getComponentContext()
     smgr = ctx.ServiceManager
 
@@ -46,22 +46,6 @@ def insert_hd1(*args):
     UndoManager.enterUndoContext("Style to Heading 1")
     ViewCursor.ParaStyleName = "Heading 1"
     UndoManager.leaveUndoContext()
-
-def insert_law(*args):
-    #Inspect services for debugging purposes
-    ctx = uno.getComponentContext()
-    smgr = ctx.ServiceManager
-
-    Doc = XSCRIPTCONTEXT.getDocument()
-    UndoManager = Doc.getUndoManager()
-
-    #Create view cursor to take current cursor position
-    ViewCursor = Doc.CurrentController.getViewCursor()
-    xray(smgr, ctx, ViewCursor)
-    
-    #There should be used the law API to get the law string
-    #dialog to get the law
-    ViewCursor.setString("HALLO")    
 
 def xray(smgr, ctx, target):
     mspf = smgr.createInstanceWithContext(
@@ -156,4 +140,4 @@ def get_instance(service_name):
 
 g_ImplementationHelper = unohelper.ImplementationHelper()
 
-g_exportedScripts = main,insert_hd1,insert_law,
+g_exportedScripts = main,insert_hd1,

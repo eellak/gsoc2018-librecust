@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Extension files were created by Extension Compiler - version 2.1.2 -->
+<description xmlns="http://openoffice.org/extensions/description/2006"
+ xmlns:dep="http://openoffice.org/extensions/description/2006"
+ xmlns:xlink="http://www.w3.org/1999/xlink" >
+   <identifier value="com.addon.lawaddon" />
+   <version value="0.0.1" />
+   <dependencies>
+      <OpenOffice.org-minimal-version value="2.4" dep:name="OpenOffice.org 2.4 minimum, or more recent" />
+   </dependencies>
+</description>

@@ -12,25 +12,9 @@
                </prop>
                <prop oor:name="Title" oor:type="xs:string">
                   <value xml:lang="en">Header 1</value>
-                  <value xml:lang="el">Κεφαλίδα 1</value>
                </prop>
                <prop oor:name="URL" oor:type="xs:string">
                   <value>vnd.sun.star.script:LawAddon-0.0.1.oxt|python|main.py$insert_hd1?language=Python&amp;location=user:uno_packages</value>
-               </prop>
-               <prop oor:name="Target" oor:type="xs:string">
-                  <value>_self</value>
-               </prop>
-            </node>
-            <node oor:name="N002" oor:op="replace">
-               <prop oor:name="Context" oor:type="xs:string">
-                  <value>com.sun.star.text.TextDocument</value>
-               </prop>
-               <prop oor:name="Title" oor:type="xs:string">
-                  <value xml:lang="en">Insert Law</value>
-                  <value xml:lang="el">Εισαγωγή νόμου</value>
-               </prop>
-               <prop oor:name="URL" oor:type="xs:string">
-                  <value>vnd.sun.star.script:LawAddon-0.0.1.oxt|python|main.py$insert_law?language=Python&amp;location=user:uno_packages</value>
                </prop>
                <prop oor:name="Target" oor:type="xs:string">
                   <value>_self</value>
