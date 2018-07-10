@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="InsertLaw" dlg:left="257" dlg:top="142" dlg:width="172" dlg:height="87" dlg:closeable="true" dlg:moveable="true">
+ <dlg:bulletinboard>
+  <dlg:text dlg:id="InsertFieldLabel" dlg:tab-index="0" dlg:left="3" dlg:top="6" dlg:width="72" dlg:height="11" dlg:value="Insert Law Number:"/>
+  <dlg:textfield dlg:id="TextField1" dlg:tab-index="1" dlg:left="3" dlg:top="23" dlg:width="125" dlg:height="19"/>
+  <dlg:text dlg:id="HelpLabel" dlg:tab-index="2" dlg:left="5" dlg:top="51" dlg:width="159" dlg:height="26" dlg:value="Use format ν. [number]/[year] for searching in law database" dlg:multiline="true"/>
+ </dlg:bulletinboard>
+</dlg:window>

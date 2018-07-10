@@ -57,10 +57,19 @@ def insert_law(*args):
 
     #Create view cursor to take current cursor position
     ViewCursor = Doc.CurrentController.getViewCursor()
-    xray(smgr, ctx, ViewCursor)
     
     #There should be used the law API to get the law string
     #dialog to get the law
+
+    psm = uno.getComponentContext().ServiceManager
+    
+    dp = psm.createInstance("com.sun.star.awt.DialogProvider")
+    dlg = dp.createDialog("vnd.sun.star.extension://com.addon.lawaddon/dialogs/InsertLaw.xdl")
+
+    if dlg.execute() == 0:
+    	return
+
+    
     ViewCursor.setString("HALLO")    
 
 def xray(smgr, ctx, target):
