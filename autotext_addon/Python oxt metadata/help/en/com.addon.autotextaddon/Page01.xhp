@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+   <meta>
+      <topic id="com.addon.autotextaddon.Page01">
+         <title id="tit" xml-lang="en">Autotext Addon : Introduction</title>
+         <filename>/com.addon.autotextaddon/Page01.xhp</filename>
+      </topic>
+   </meta>
+   <body>
+      <bookmark branch="hid/vnd.sun.star.script:AutotextAddon-0.0.1.oxt|python|main.py$toogle_autotext_sidebar?language=Python&amp;location=user:uno_packages" xml-lang="en" id="N0001"/>
+      <paragraph role="paragraph" xml-lang="en" id="N0002">
+         <ahelp hid="vnd.sun.star.script:AutotextAddon-0.0.1.oxt|python|main.py$toogle_autotext_sidebar?language=Python&amp;location=user:uno_packages" visibility="hidden">This is toogling toolbar GSOC</ahelp>
+      </paragraph>
+      <bookmark branch="index" xml-lang="en" id="N0003">
+         <bookmark_value>autotext;starter</bookmark_value>
+      </bookmark>
+      <paragraph role="paragraph" xml-lang="en" id="N0004">
+         
+      </paragraph>
+      <paragraph role="heading" level="1" xml-lang="en" id="N0005">
+         Write your own help pages from here
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0006">
+         Language en is the default value, you should have an english version of your help if your extension is internationally available.
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0007">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0008">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0009">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0010">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0011">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0012">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0013">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0014">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0015">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0016">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0017">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0018">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0019">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0020">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0021">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0022">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0023">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0024">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0025">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0026">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0027">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0028">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0029">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0030">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0031">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0032">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0033">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0034">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0035">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0036">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0037">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0038">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0039">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0040">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0041">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0042">
+         
+      </paragraph>
+   </body>
+</helpdocument>
