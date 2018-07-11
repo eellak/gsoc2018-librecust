@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+   <meta>
+      <topic id="com.addon.lawaddon.Page01">
+         <title id="tit" xml-lang="el">LawAddon-0.0.1.oxt : Εισαγωγή</title>
+         <filename>/com.addon.lawaddon/Page01.xhp</filename>
+      </topic>
+   </meta>
+   <body>
+      <paragraph role="heading" level="1" xml-lang="el" id="N0001">
+         Εισαγωγή
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0002">
+         Η συγκεκριμένη επέκταση-πρόσθετο σκοπεύει στην αυτοματοποίηση διαδικασιών και στη διευκόλυνση των συχνότερα χρησιμοποιούμενων μηχανισμών κατά την επεξεργασία νομικών εγγράφων. Είναι συμβατό με τις ακόλουθες σουίτες γραφείου:
+      </paragraph>
+      <list type="unordered">
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0003">
+               LibreOffice
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0004">
+               OpenOffice
+            </paragraph>
+         </listitem>
+      </list>
+      <paragraph role="paragraph" xml-lang="el" id="N0005">
+         Οι δυνατότητες της συγκεκριμένης επέκτασης είναι προσβάσιμες στον χρήστη μέσω μίας μπάρας εργαλείων η οποία μπορεί να βρίσκεται είτε αιωρούμενη (floating) είτε προσκολλημένη στη γραμμή εργαλείων του LibreOffice (docked)
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0006">
+         
+      </paragraph>
+   </body>
+</helpdocument>
