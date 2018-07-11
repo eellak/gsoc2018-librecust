@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE manifest:manifest PUBLIC "-//OpenOffice.org//DTD Manifest 1.0//EN" "Manifest.dtd">
+<manifest:manifest xmlns:manifest="http://openoffice.org/2001/manifest">
+   <manifest:file-entry manifest:media-type="application/vnd.sun.star.help" 
+      manifest:full-path="help" />
+   <manifest:file-entry manifest:media-type="application/vnd.sun.star.framework-script" 
+      manifest:full-path="python/" />
+   <manifest:file-entry manifest:media-type="application/vnd.sun.star.uno-components" 
+      manifest:full-path="registration.components" />
+   <manifest:file-entry manifest:media-type="application/vnd.sun.star.configuration-data" 
+      manifest:full-path="WriterWindowState.xcu" />
+   <manifest:file-entry manifest:media-type="application/vnd.sun.star.configuration-data" 
+      manifest:full-path="WindowContentFactories.xcu" />
+   <manifest:file-entry manifest:media-type="application/vnd.sun.star.configuration-data" 
+      manifest:full-path="Views.xcu" />
+   <manifest:file-entry manifest:media-type="application/vnd.sun.star.configuration-data" 
+      manifest:full-path="AddonUI.xcu" />
+   <manifest:file-entry manifest:media-type="application/vnd.sun.star.configuration-data" 
+      manifest:full-path="WindowState/tbWriter.xcu" />
+</manifest:manifest>
