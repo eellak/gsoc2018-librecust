@@ -26,9 +26,22 @@
          </listitem>
       </list>
       <paragraph role="paragraph" xml-lang="el" id="N0005">
-         Οι δυνατότητες της συγκεκριμένης επέκτασης είναι προσβάσιμες στον χρήστη μέσω μίας μπάρας εργαλείων η οποία μπορεί να βρίσκεται είτε αιωρούμενη (floating) είτε προσκολλημένη στη γραμμή εργαλείων του LibreOffice (docked)
+         Οι δυνατότητες της συγκεκριμένης επέκτασης είναι προσβάσιμες στον χρήστη μέσω μίας μπάρας εργαλείων η οποία μπορεί να βρίσκεται είτε αιωρούμενη (floating) είτε προσκολλημένη στη γραμμή εργαλείων του LibreOffice (docked). 
       </paragraph>
       <paragraph role="paragraph" xml-lang="el" id="N0006">
+         Μέσω της επέκτασης, παρέχονται οι εξής λειτουργικότητες:
+      </paragraph>
+      <list type="unordered">
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0007">
+               <link href="com.addon.lawaddon/Page02.xhp" name ="Page02">Αυτόματη εισαγωγή κειμένου νόμου</link>
+            </paragraph>
+         </listitem>
+      </list>
+      <paragraph role="paragraph" xml-lang="el" id="N0008">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0009">
          
       </paragraph>
    </body>

@@ -2,5 +2,6 @@
 <tree_view version="24-Aug-2004">
    <help_section application="comaddonlawaddon" id="01" title="Πρόσθετο νομικών εγγράφων">
       <topic id="comaddonlawaddon/com.addon.lawaddon/Page01.xhp">Εισαγωγή</topic>
+      <topic id="comaddonlawaddon/com.addon.lawaddon/Page02.xhp">Αυτόματη εισαγωγή κειμένου νόμου</topic>
    </help_section>
 </tree_view>
