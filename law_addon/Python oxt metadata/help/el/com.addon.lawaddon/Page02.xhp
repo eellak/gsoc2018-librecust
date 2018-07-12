@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+   <meta>
+      <topic id="com.addon.lawaddon.Page02">
+         <title id="tit" xml-lang="el">LawAddon-0.0.1.oxt : Αυτόματη εισαγωγή κειμένου νόμου</title>
+         <filename>/com.addon.lawaddon/Page02.xhp</filename>
+      </topic>
+   </meta>
+   <body>
+      <paragraph role="heading" level="1" xml-lang="el" id="N0010">
+         Αυτόματη εισαγωγή κειμένου νόμου
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0011">
+         Κατά τη συγκεκριμένη λειτουργία, και με την βοήθεια διαλόγου, προσφέρεται η δυνατότητα αυτόματης εισαγωγής του ενημερωμένου κειμένου το οποίο αντιστοιχεί στον νόμο που εισάγει ο χρήστης.
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0012">
+         Προκειμένου να εισαχθεί το ενημερωμένο κείμενο ο χρήστης οφείλει να ακολουθήσει τα εξής βήματα:
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0013">
+         
+      </paragraph>
+      <list type="ordered">
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0014">
+               Επιλογή εργαλείου &quot;Εισαγωγή νόμου&quot; από τη γραμμή εργαλείων &quot;Νομικά έγγραφα&quot;
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0015">
+               Συμπλήρωση πεδίου κειμένου με τον κατάλληλο αριθμό νόμου (μορφή εισόδου: αριθμός_νόμου/χρονολογία)
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0016">
+               Επιλογή άρθρου-άρθρων απο λίστα
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0017">
+               Εισαγωγή με χρήση του πλήκτρου &quot;Εισαγωγή&quot;
+            </paragraph>
+         </listitem>
+      </list>
+      <paragraph role="paragraph" xml-lang="el" id="N0018">
+         
+      </paragraph>
+   </body>
+</helpdocument>
