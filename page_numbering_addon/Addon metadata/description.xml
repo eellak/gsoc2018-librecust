@@ -10,7 +10,7 @@
       <src xlink:href="Descriptions/descr-el.txt" lang="el"/>
    </extension-description>
    <update-information>
-      <src xlink:href="https://github.com/eellak/gsoc2018-librecust/tree/master/page_numbering_addon/Python%20version/PageNumberingAddonPython.update.xml" />
+      <src xlink:href="https://github.com/eellak/gsoc2018-librecust/raw/master/page_numbering_addon/Python%20version/PageNumberingAddonPython.update.xml" />
    </update-information>
    <dependencies>
       <OpenOffice.org-minimal-version value="3.1" dep:name="OpenOffice.org 2.4 mnameinimum, or more recent" />
@@ -23,8 +23,4 @@
       <name lang="en" xlink:href="https://github.com/arvchristos">Arvanitis Christos</name>
       <name lang="el" xlink:href="https://github.com/arvchristos">Αρβανίτης Χρήστος</name>
    </publisher>
-   <release-notes>
-      <src lang="en" xlink:href="https://github.com/eellak/gsoc2018-librecust/tree/master/page_numbering_addon"/>
-      <src lang="el" xlink:href="https://github.com/eellak/gsoc2018-librecust/tree/master/page_numbering_addon"/>
-   </release-notes>
 </description>
