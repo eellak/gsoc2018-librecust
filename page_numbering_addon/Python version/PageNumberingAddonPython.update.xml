@@ -15,8 +15,4 @@
       <name lang="en" xlink:href="https://github.com/arvchristos">Arvanitis Christos</name>
       <name lang="el" xlink:href="https://github.com/arvchristos">Αρβανίτης Χρήστος</name>
    </publisher>
-   <release-notes>
-      <src lang="en" xlink:href="https://github.com/eellak/gsoc2018-librecust/tree/master/page_numbering_addon"/>
-      <src lang="el" xlink:href="https://github.com/eellak/gsoc2018-librecust/tree/master/page_numbering_addon"/>
-   </release-notes>
 </description>
