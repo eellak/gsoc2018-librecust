@@ -4,12 +4,12 @@
  xmlns:dep="http://openoffice.org/extensions/description/2006"
  xmlns:xlink="http://www.w3.org/1999/xlink" >
    <identifier value="com.addon.pagenumbering" />
-   <version value="0.0.2" />
+   <version value="0.0.1" />
    <dependencies>
       <OpenOffice.org-minimal-version value="3.1" dep:name="OpenOffice.org 2.4 mnameinimum, or more recent" />
    </dependencies>
    <update-download>
-      <src xlink:href="https://github.com/eellak/gsoc2018-librecust/tree/master/page_numbering_addon/Python%20version/PageNumberingAddonPython-0.0.2.oxt" />
+      <src xlink:href="https://github.com/eellak/gsoc2018-librecust/raw/master/page_numbering_addon/Python%20version/PageNumberingAddonPython-0.0.1.oxt" />
    </update-download>
    <publisher>
       <name lang="en" xlink:href="https://github.com/arvchristos">Arvanitis Christos</name>
