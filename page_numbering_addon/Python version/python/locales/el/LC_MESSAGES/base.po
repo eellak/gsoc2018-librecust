@@ -59,7 +59,7 @@ msgid "First Page"
 msgstr "Πρώτη σελίδα"
 
 #: main.py:96
-msgid "PageOffsetLabel"
+msgid "Page Offset"
 msgstr "Αρίθμηση από..."
 
 #: main.py:102
