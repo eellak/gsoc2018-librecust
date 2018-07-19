@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+   <meta>
+      <topic id="com.addon.pagenumbering.Page01">
+         <title id="tit" xml-lang="en">Page Numbering Add-on : Introduction</title>
+         <filename>/com.addon.pagenumbering/Page01.xhp</filename>
+      </topic>
+   </meta>
+   <body>
+      <paragraph role="heading" level="1" xml-lang="en" id="N0001">
+         Page Numbering Add-on
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0002">
+         Page numbering in LibreOffice/OpenOffice is an unreasonably complicated procedure, especially for a new user. One has to fully understand where the page numbering info is stored for each document, how to use manual page breaks and in what way do page styles extend and work. Considering the fact that other office suites do follow a far more simple approach we decided to create <emph>Page Numbering Addon</emph>. Throughout this help section, we are going to explain how this addon adds an abstraction layer to the whole page numbering process.
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0003">
+         
+      </paragraph>
+      <paragraph role="heading" level="2" xml-lang="en" id="N0004">
+         Introduction
+      </paragraph>
+      <section id="Menu item" >
+         <paragraph role="paragraph" xml-lang="en" id="N0005">
+            The addon is accessible though <emph>Insert-&gt;Page Numbering</emph> 
+         </paragraph>
+      </section>
+      <paragraph role="paragraph" xml-lang="en" id="N0006">
+         After accessing the menu item, the user is presented with the following interface dialog:<br/><image src="com.addon.pagenumbering/../../../images/help/main_page_numbering.png" id="N0007"><alt xml-lang="en" id="N0008">Main dialog</alt></image>
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0009">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0010">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0011">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0012">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0013">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0014">
+         
+      </paragraph>
+   </body>
+</helpdocument>
