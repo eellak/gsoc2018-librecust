@@ -30,19 +30,65 @@
       <paragraph role="paragraph" xml-lang="en" id="N0009">
          
       </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0010">
+      <list type="unordered">
+         <listitem>
+            <paragraph role="listitem" xml-lang="en" id="N0010">
+               <emph>Decor</emph>: Choose to either have simple numbering or surrounding text (e.g. -1-, [1]).
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="en" id="N0011">
+               <emph>Numbering Type</emph>: Choose from a number of different types such as Roman uppercase/lowercase numbering (i,ii... , I,II...), Arabic (1,2...) or Greek (α,β... , Α,Β...).
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="en" id="N0012">
+               <emph>Alignment</emph>: Define the alignment of numbering.
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="en" id="N0013">
+               <emph>Position</emph>: Choose the position or numbering (currently available options are Header and Footer)
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="en" id="N0014">
+               <emph>Font</emph>: Choose from the list of available system fonts
+            </paragraph>
+         </listitem>
+      </list>
+      <paragraph role="warning" xml-lang="en" id="N0015">
+         Some of the system fonts were not made to be compatible with certain characters so you may face compatibility issues and empty page numbers (e.g. a font may not support Greek characters)
+      </paragraph>
+      <list type="unordered">
+         <listitem>
+            <paragraph role="listitem" xml-lang="en" id="N0016">
+               <emph>Size</emph>: Define the font size
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="en" id="N0017">
+               <emph>First Page</emph>: The page where the numbering will begin from. 
+            </paragraph>
+         </listitem>
+      </list>
+      <paragraph role="tip" xml-lang="en" id="N0018">
+         Choosing a page different that the first of the document (1) will create two ranges, the first that will remain unnumbered and the second that will include numbers. This is the result of creating clone page styles in order to preserve previously created page styling customization. 
+      </paragraph>
+      <list type="unordered">
+         <listitem>
+            <paragraph role="listitem" xml-lang="en" id="N0019">
+               <emph>Page Offset</emph>: Define the offset(page number) of the first numbered page.
+            </paragraph>
+         </listitem>
+      </list>
+      <paragraph role="tip" xml-lang="en" id="N0020">
+         Defining page offset simulates the alteration of the according paragraph property, letting a user choosing different page numbering schemes across the document (e.g. The first n pages are numbered using Roman uppercase while the rest use simple Arabic numbers).
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0021">
          
       </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0011">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0012">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0013">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0014">
+      <paragraph role="paragraph" xml-lang="en" id="N0022">
          
       </paragraph>
    </body>
