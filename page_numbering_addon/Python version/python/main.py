@@ -70,7 +70,6 @@ def main(*args):
     _ = ui_locale.gettext
 
     # get the doc from the scripting context which is made available to all scripts
-    #global continue_dlg
 
     Doc = XSCRIPTCONTEXT.getDocument()
     UndoManager = Doc.getUndoManager()
@@ -100,7 +99,7 @@ def main(*args):
     AlignmentLabel = oDialog1Model.getByName("AlignmentLabel")
     AlignmentLabel.Label = _("Alignment")
     AlignmentListBox = oDialog1Model.getByName("Alignment")
-    AlignmentListBox.StringItemList = [_("Left"), _("RightS"), _("Centered")]
+    AlignmentListBox.StringItemList = [_("Left"), _("Right"), _("Centered")]
     AlignmentListBox.SelectedItems = [2]
 
     FirstPageLabel = oDialog1Model.getByName("FirstPageLabel")
