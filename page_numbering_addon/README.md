@@ -5,7 +5,6 @@ During this project, we decided, after getting feedback from common users (law d
 This plugin, or by LO/OO terminology add-on(an extension that includes any kind of UI implementation/customization), includes the following features:
 
 ## Features
-
 * Add page numbering without taking page-break system into account
 
   Although Page Breaks are an intuitive and effective approach for document layout and styling, users migrating from Microsoft Office suites find it more than difficult to understand)
@@ -35,3 +34,17 @@ Each implementation (Python/LO Basic) is packaged as en extension in `.oxt` form
 
 ### Warning
 In order to avoid unexpected results you are suggested to avoid installing together the two versions of this add-on.
+
+## Contribute 
+Extensive info about the development of this extension is provided in the repository [wiki](https://github.com/eellak/gsoc2018-librecust/wiki). 
+
+### Suggestions 
+Suggestions and ideas are more than welcome. We suggest including them in issues, however personal emails are not discouraged.
+
+### Localization 
+Localization guidelines are described in the according [wiki page](https://github.com/eellak/gsoc2018-librecust/wiki/Localization) and especially at the [Guide paragraph](https://github.com/eellak/gsoc2018-librecust/wiki/Localization#how-to-localize-librecust-extensions)
+
+## Team 
+* Developer: Arvanitis Christos ([arvchristos](https://github.com/arvchrihttps://github.com/eellak/gsoc2018-librecust/wiki/Localization#how-to-localize-librecust-extensionsstos))
+* Mentors: Kostas Papadimas, Theodoros Karounos
+* Organization: GFOSS 
