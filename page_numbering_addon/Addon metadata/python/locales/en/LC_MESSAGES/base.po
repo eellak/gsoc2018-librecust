@@ -59,7 +59,7 @@ msgid "First Page"
 msgstr "First Page"
 
 #: main.py:96
-msgid "PageOffsetLabel"
+msgid "Page Offset"
 msgstr "Start from..."
 
 #: main.py:102

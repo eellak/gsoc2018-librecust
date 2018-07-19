@@ -25,7 +25,7 @@
          </paragraph>
       </section>
       <paragraph role="paragraph" xml-lang="en" id="N0006">
-         After accessing the menu item, the user is presented with the following interface dialog:<br/><image src="com.addon.pagenumbering/../../../images/help/main_page_numbering.png" id="N0007"><alt xml-lang="en" id="N0008">Main dialog</alt></image>
+         After accessing the menu item, the user is presented with the following interface dialog:<br/><image src="com.addon.pagenumbering/../../../images/help/en/main_page_numbering.png" id="N0007"><alt xml-lang="en" id="N0008">Main dialog</alt></image>
       </paragraph>
       <paragraph role="paragraph" xml-lang="en" id="N0009">
          
@@ -78,7 +78,7 @@
       <list type="unordered">
          <listitem>
             <paragraph role="listitem" xml-lang="en" id="N0019">
-               <emph>Page Offset</emph>: Define the offset(page number) of the first numbered page.
+               <emph>Start from...</emph>: Define the offset(page number) of the first numbered page.
             </paragraph>
          </listitem>
       </list>
