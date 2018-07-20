@@ -5,12 +5,11 @@ During this project, we decided, after getting feedback from common users (law d
 This plugin, or by LO/OO terminology add-on(an extension that includes any kind of UI implementation/customization), includes the following features:
 
 ## Features
-
 * Add page numbering without taking page-break system into account
 
   Although Page Breaks are an intuitive and effective approach for document layout and styling, users migrating from Microsoft Office suites find it more than difficult to understand)
 
-* Configure styling options such as Font, Character height, Αlignment and page position (Header/Footer)
+* Configure styling options such as Font, Character height, Alignment and page position (Header/Footer)
 * Page offset and First page options
 * Numbering type selection such as Roman, Arabic or Greek
 * Multiple Page numbering setups per document
@@ -25,7 +24,7 @@ All facts and drawbacks that we came through during this implementation are docu
 Page Numbering Addon will be released in version 0.0.1 during/after GSOC period. Source code will, surely, be available and suggestions, improvements or bug reports will be more than welcome. Any updates will be distributed through the official extension manager.
 
 ## Installation
-Each implementation (Python/LO Basic) is packaged as en extension in `.oxt` format. The LO Basic version has no dependencies. For the suggested Python version the following are applied:
+Each implementation (Python/LO Basic) is packaged as an extension in `.oxt` format. The LO Basic version has no dependencies. For the suggested Python version the following are applied:
 
 ### Python Dependencies
 * libreoffice-script-provider-python package or even better [uno-tools](https://pypi.org/project/unotools/)
@@ -35,3 +34,17 @@ Each implementation (Python/LO Basic) is packaged as en extension in `.oxt` form
 
 ### Warning
 In order to avoid unexpected results you are suggested to avoid installing together the two versions of this add-on.
+
+## Contribute 
+Extensive info about the development of this extension is provided in the repository [wiki](https://github.com/eellak/gsoc2018-librecust/wiki). 
+
+### Suggestions 
+Suggestions and ideas are more than welcome. We suggest including them in issues, however personal emails are not discouraged.
+
+### Localization 
+Localization guidelines are described in the according [wiki page](https://github.com/eellak/gsoc2018-librecust/wiki/Localization) and especially at the [Guide paragraph](https://github.com/eellak/gsoc2018-librecust/wiki/Localization#how-to-localize-librecust-extensions)
+
+## Team 
+* Developer: Arvanitis Christos ([arvchristos](https://github.com/arvchrihttps://github.com/eellak/gsoc2018-librecust/wiki/Localization#how-to-localize-librecust-extensionsstos))
+* Mentors: Kostas Papadimas, Theodoros Karounos
+* Organization: GFOSS 
