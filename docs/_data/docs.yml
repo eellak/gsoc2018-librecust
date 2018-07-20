@@ -9,3 +9,17 @@
   - cheatsheet
   - font-awesome
   - bootstrap
+
+- title: Wiki
+  docs:
+  - Coding-workflow
+  - Configuration-extension
+  - Debugging
+  - Event-listeners
+  - Icon-set-configuration
+  - Localization
+  - Managing-text-data
+  - Menubar-customization
+  - Page-Numbering-Addon
+  - Toolbar-customization
+
