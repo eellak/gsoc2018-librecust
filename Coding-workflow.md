@@ -15,16 +15,16 @@ This is the main reason why, communicating with LO, is done using a multi langua
 The interface elements used, such as dialogs containing buttons and dropdown lists, are implemented in specific XML files of `.xdl` extension. Those can be manually written following the required LO XML schemas or compiled using the LO Dialog editor. This editor can be found at `Tools->Macros->Organize dialogs->Edit`
 
 ## Python
-In order to execute python macros there are some dependencies and extensions that must be installed. The following is mandatory while the next extension is not, however we suggest using it for easing the whole testing process: 
+In order to execute Python macros there are some dependencies and extensions that must be installed. The following is mandatory while the next extension is not, however we suggest using it for easing the whole testing process: 
 Packages
-* libreoffice-script-provider-python
+* libreoffice-script-provider-Python
 Extensions
-* [APSO - Alternative Script organizer for Python](https://extensions.libreoffice.org/extensions/apso-alternative-script-organizer-for-python): This extension fills the gap between Basic and Python development, emulating a script organizer for Python that offers similar functionality to the one of Basic IDE.
+* [APSO - Alternative Script organizer for Python](https://extensions.libreoffice.org/extensions/apso-alternative-script-organizer-for-Python): This extension fills the gap between Basic and Python development, emulating a script organizer for Python that offers similar functionality to the one of Basic IDE.
 
-APSO can be accessed through `Tools->Macros->Organize python scripts`:
+APSO can be accessed through `Tools->Macros->Organize Python scripts`:
 ![APSO Start screen](https://i.imgur.com/hlC7HNP.png)
 
-Using its menu a user can directly edit extension's python scripts. 
+Using its menu a user can directly edit extension's Python scripts. 
 
 **Important:** Every change done through `Menu->Edit` of APSO is written directly to extension's files, so it will be overwritten with a new install of the same extension `.oxt`.
 

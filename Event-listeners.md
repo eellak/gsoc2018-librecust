@@ -92,7 +92,7 @@ class oListenerTop_Class(XTopWindowListener, unohelper.Base):
         pass  # normally not needed, but should be callable anyway
 
 ```       
-The listener constructor is where, exploiting python function polymorphism, different arguments, after `self` can be passed. For defined by the interface functions the required arguments are included in the official interface documentation pages. As we can see in the Basic implementation, access to the window/dialog that the event took place is given through the `e` argument that is of type [EventObject](https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1lang_1_1EventObject.html).
+The listener constructor is where, exploiting Python function polymorphism, different arguments, after `self` can be passed. For defined by the interface functions the required arguments are included in the official interface documentation pages. As we can see in the Basic implementation, access to the window/dialog that the event took place is given through the `e` argument that is of type [EventObject](https://api.libreoffice.org/docs/idl/ref/structcom_1_1sun_1_1star_1_1lang_1_1EventObject.html).
 
 Every LibreOffice listener is implemented using the aforementioned procedure. Next, some examples of different event listeners used in the `AutoText addon` and implemented in Python are shown:
 
