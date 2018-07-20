@@ -1,3 +1,8 @@
+---
+title: Coding Workflow
+permalink: /docs/Coding-workflow/
+---
+
 # Coding workflow
 In this page, the setup of the environment used to develop a LibreOffice extension is outlined 
 
