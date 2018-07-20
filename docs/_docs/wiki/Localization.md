@@ -13,7 +13,7 @@ An important aspect, and the welcoming part of almost every extension (that shou
 
 During this project, we first followed the former approach. However, as the extensions started to scale, an approach with greater scalability and maintainability was essential so the latter was chosen. 
 
-The project extensions are developed in Python so the well known localization and iternationalization library called [gettext](https://www.gnu.org/software/gettext/) is used. This module is bundled with Python and consists of an API and a toolset to help extract strings and create l10n catalogs. A brief introduction as well as a descriptive tutorial can be found at the PhraseApp [blog](https://phraseapp.com/blog/posts/translate-python-gnu-gettext/).
+The project extensions are developed in Python so the well known localization and iternationalization library called [gettext](https://www.gnu.org/software/gettext/) is used. This module is bundled with Python and consists of an API and a toolset to help extract strings and create l10n catalogs. A brief introduction as well as a descriptive tutorial can be found at the PhraseApp [blog](https://phraseapp.com/blog/posts/translate-Python-gnu-gettext/).
 
 Outlining the l10n process using gettext:
 1. Mark all those strings to be translated.
@@ -24,15 +24,15 @@ Outlining the l10n process using gettext:
 
 ### Marking translatable strings
 
-Initially, the gettext module for the python script is included, and the marking function is defined:
-```python
+Initially, the gettext module for the Python script is included, and the marking function is defined:
+```Python
 import gettext
 _ = gettext.gettext 
 ```
 
 Next, all translatable strings are marked using this marking function:
 
-```python
+```Python
 	Doc = XSCRIPTCONTEXT.getDocument()
     psm = uno.getComponentContext().ServiceManager
     dp = psm.createInstance("com.sun.star.awt.DialogProvider")
@@ -47,7 +47,7 @@ Next, all translatable strings are marked using this marking function:
 
 Previously, we mentioned that most of dialog control elements will be dynamically set during extension execution. The previous code segment represents that choice, by setting the dialog title during execution. More dialog control properties that are of `string` type are defined in such way:
 
-```python
+```Python
 	#Cancel and OK button Labels
     CancelButton = oDialog1Model.getByName("CancelButton")
     CancelButton.Label = _("Cancel")
@@ -92,9 +92,9 @@ Previously, we mentioned that most of dialog control elements will be dynamicall
 In order to create template l10n files for the previous marked strings, the `pygettext` tool is used:
 
 ```bash
-pygettext.py -d base -o locales/base.pot python/main_python_script.py
+pygettext.py -d base -o locales/base.pot Python/main_Python_script.py
 ```
-This will create one template in the base domain for the main python script. Strings inside `_()` functions are used as id's for replaceable text. More info about domains can be found in GNU gawk [manual](https://www.gnu.org/software/gawk/manual/html_node/Explaining-gettext.html). 
+This will create one template in the base domain for the main Python script. Strings inside `_()` functions are used as id's for replaceable text. More info about domains can be found in GNU gawk [manual](https://www.gnu.org/software/gawk/manual/html_node/Explaining-gettext.html). 
 
 The result template has the following format:
 
@@ -184,9 +184,9 @@ After executing the previous commands for each locale the catalogs are created:
 ```
 
 ### Choosing the right locale catalog during execution
-Although we have created the required catalogs, we still have to select the right one depending on the running locale. Generally, selecting a locale in python requires the following:
+Although we have created the required catalogs, we still have to select the right one depending on the running locale. Generally, selecting a locale in Python requires the following:
 
-```python
+```Python
 import gettext
  
 locale = gettext.translation('base', localedir='locales', languages=['locale_string']) #locale_string = en, el, ...
@@ -196,7 +196,7 @@ _ = locale.gettext # Greek
 
 To implement full l10n features, we have to decide which is the right locale to use. This is done by getting the right property info from the LO PropertySet:
 
-```python
+```Python
 def getLanguage():
     oProvider = "com.sun.star.configuration.ConfigurationProvider"
     oAccess   = "com.sun.star.configuration.ConfigurationAccess"
@@ -232,7 +232,7 @@ def get_instance(service_name):
 
 `getLanguage()` returns the string value of the currently used locale in LibreOffice. Then, setting the correct locale and catalog is based on this string value:
 
-```python
+```Python
 from urllib.parse import urlparse
 
 def get_main_directory(module_name): #com.addon.pagenumbering
@@ -242,9 +242,9 @@ def get_main_directory(module_name): #com.addon.pagenumbering
 
 def main(*args):
 	try:
-        ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.pagenumbering")+'python/locales', languages=[getLanguage()])
+        ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.pagenumbering")+'Python/locales', languages=[getLanguage()])
     except Exception as e:
-        ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.pagenumbering")+'python/locales', languages=["en"])
+        ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.pagenumbering")+'Python/locales', languages=["en"])
 
     ui_locale.install()
     _ = ui_locale.gettext
@@ -252,13 +252,13 @@ def main(*args):
 
 Although dialog controls include the majority of translatable strings, the previous methodology applies to other elements:
 
-```python
+```Python
 def main(*args):
 
     try:
-        ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.pagenumbering")+'python/locales', languages=[getLanguage()])
+        ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.pagenumbering")+'Python/locales', languages=[getLanguage()])
     except Exception as e:
-        ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.pagenumbering")+'python/locales', languages=["en"])
+        ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.pagenumbering")+'Python/locales', languages=["en"])
 
     ui_locale.install()
     _ = ui_locale.gettext
@@ -284,7 +284,7 @@ The steps required to create a new localization catalog for librecust extensions
 1. Choose extension to l10n.
 2. Generate most recent `.pot` template:
     ```bash
-    pygettext.py -d base -o locales/base.pot python/main_python_script.py
+    pygettext.py -d base -o locales/base.pot Python/main_Python_script.py
     ```
 3. Create new folder for the locale in the directory tree:
 	

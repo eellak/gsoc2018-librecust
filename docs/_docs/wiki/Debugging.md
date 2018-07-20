@@ -56,7 +56,7 @@ In the previous example, we inspect the current cursor paragraph style for metho
 
 ## Xray on Python
 On Python, the steps required to inspect an element with Xray are more or less the same with the Basic implementation. However, there are some differences that we should point out. 
-```python
+```Python
 import uno
 import unohelper
 

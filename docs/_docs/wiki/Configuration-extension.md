@@ -74,7 +74,7 @@ This file refers to the toolbar icon size setting, changing its value to 0 and f
 We choose, until figuring out a better way, to set the desired toolbar settings not using embedded `.xcu` files but by writing directly to the `registrymodifications.xcu` which is by default located to specific [paths](https://wiki.documentfoundation.org/UserProfile). This is a fairly large XML document depending on saved settings that holds each and every user profile detail. Specific `<item>` entries have to be added for a number toolbar settings, arising the need for XML editing. However, there is a noticeable overhead in using DOM parsing software for this big files, mainly because the whole XML document has to be loaded in memory before constructing the parsing struct. 
 LibreOfice developers surely faced this problem that led them to use SAX parsing for their operations. We can take advantage of this and add desired entries at the start of the document, avoiding loading it to memory. An example script in this contect is the following:
 
-```python
+```Python
 import os
 import sys
 import argparse
