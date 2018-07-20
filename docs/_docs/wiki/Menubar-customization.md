@@ -1,3 +1,8 @@
+---
+title: Menubar customization
+permalink: /docs/Menubar-customization/
+---
+
 # Menubar customization
 
 ### What is a menubar

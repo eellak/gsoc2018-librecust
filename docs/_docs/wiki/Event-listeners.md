@@ -1,3 +1,8 @@
+---
+title: Event listeners
+permalink: /docs/Event-listeners/
+---
+
 # Event listeners
 In this page, the main methodology concerning LibreOffice event listeners is outlined. 
 

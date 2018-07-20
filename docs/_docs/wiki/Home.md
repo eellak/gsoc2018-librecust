@@ -1,3 +1,8 @@
+---
+title: Home
+permalink: /docs/Home/
+---
+
 Welcome to the gsoc2018-librecust wiki!
 
 This wiki is dedicated to info related to development and LibreOffice/OpenOffice API usage. Wherever possible, a straight comparison between LO Basic macro and Python implementation is included, while describing the main elements used in the various addons created during Google Summer of Code 2018.

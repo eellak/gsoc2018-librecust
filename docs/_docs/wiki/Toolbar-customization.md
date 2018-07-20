@@ -1,3 +1,8 @@
+---
+title: Toolbar customization
+permalink: /docs/Toolbar-customization/
+---
+
 # Toolbar customization
 ## What is a toolbar
 ![toolbar_libre](https://i.imgur.com/5r5MZEE.png)

@@ -1,3 +1,8 @@
+---
+title: Icon set configuration
+permalink: /docs/Icon-set-configuration/
+---
+
 #Icon set configuration
 
 Icon sets/themes come in specific `.zip` format, with certain naming. An icon theme named **Foo** will be archived in a `.zip` file named `images_Foo.zip`. The reader is referred to the included [images_office2013.zip](https://github.com/eellak/gsoc2018-librecust/blob/master/menu_customization/toolbar/icon_theme/images_office2013.zip) example icon theme for a starting template. THis is the suggested way to create an icon theme at this point mainly because there is not any interface or tool to ease this procedure.  
