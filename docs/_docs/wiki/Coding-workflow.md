@@ -1,6 +1,6 @@
 ---
 title: Coding Workflow
-permalink: /docs//Coding-workflow/
+permalink: /docs/Coding-workflow/
 ---
 
 # Coding workflow
