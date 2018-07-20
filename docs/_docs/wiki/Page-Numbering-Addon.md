@@ -1,3 +1,8 @@
+---
+title: Page Numbering Addon
+permalink: /docs/Page-Numbering-Addon/
+---
+
 During this project, among other extensions, we created an addon to simplify the process of page numbering in LIbreOffice and OpenOffice. With the term addon, we refer to an extension that includes a Graphic User Interface end. 
 
 ## Motivation
