@@ -1,3 +1,8 @@
+---
+title: Localization
+permalink: /docs/Localization/
+---
+
 # Localization - l10n
 Extensions should be available to as much users as possible, without assuming that a user can use English to navigate through an extension or access documentation. This is the reason why localization(l10n) is considered an essential in extension development. Along this section, we are going to document the l10n relevant to several extension elements process.
 

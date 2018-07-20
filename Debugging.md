@@ -1,3 +1,8 @@
+---
+title: Debugging
+permalink: /docs/Debugging/
+---
+
 # Debugging during development
 In this page, the steps relevant to debugging that where followed during the project are included. 
 
