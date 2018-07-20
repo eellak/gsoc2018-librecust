@@ -1,0 +1,6 @@
+Template: librecust/question1
+Type: multiselect
+Choices: Page Numbering, Settings loader, AutoText Wizard, LibreCust lib, Law toolbar, UI customizations
+Default: Page Numbering, Settings loader, AutoText Wizard, LibreCust lib, UI customizations
+Description: Please select librecust packages to install:
+

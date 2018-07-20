@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+# Run template
+db_input high librecust/question1 || true
+db_go
+
+#DEBHELPER#
+
+exit 0

@@ -1,0 +1,76 @@
+#!/bin/bash
+
+set -e
+
+# Define a timestamp function
+timestamp() {
+  date +"%d%m%y_%H%M" #FORMAT DayMonthYear_HoursMinutes
+}
+
+UNOPKG_PATH="$(which unopkg)"
+LIBRECUST_MACRO_PATH="/tmp/librecust/LibreCustLib*"
+SETTINGS_LOADER_PATH="/tmp/librecust/settings_*"
+AUTOTEXT_WIZARD_PATH="/tmp/librecust/Autotext*"
+LAW_TOOLBAR_PATH="/tmp/librecust/LawAddon*"
+MENUBAR_PATH="/tmp/librecust/menubar.xml"
+TOOLBAR_SINGLE_PATH="/tmp/librecust/singlemode.xml"
+TOOLBAR_TEXTOBJ_PATH="/tmp/librecust/textobjectbar.xml"
+PAGE_NUMBERING_PATH="/tmp/librecust/PageNumbering*"
+USER_HOME_PATH="$(eval echo "~$different_user")"
+
+
+USER_NAME="$(eval echo $(basename $USER_HOME_PATH))"
+USER_PROFILE_PATH="$USER_HOME_PATH/.config/libreoffice/4/user/config"
+MENUBAR_DIR="$USER_PROFILE_PATH/soffice.cfg/modules/swriter/menubar" #INSTALLED MENUBAR
+TOOLBAR_DIR="$USER_PROFILE_PATH/soffice.cfg/modules/swriter/toolbar"
+INSTALLATION_TIMESTAMP="$(timestamp)"
+
+declare -A SELECT_DICT
+SELECT_DICT=( ['Page Numbering']=1 ['Settings loader']=2 ['AutoText Wizard']=3 ['LibreCust lib']=4 ['Law toolbar']=5 ['UI customizations']=6)
+IFS=","
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+db_get librecust/question1
+
+prompt_result=${RET//", "/,}
+prompt_result=($prompt_result);
+
+for i in "${!prompt_result[@]}"; do
+	#echo "${prompt_result[$i]}";
+	#echo ${SELECT_DICT["${prompt_result[$i]}"]}
+	case ${SELECT_DICT["${prompt_result[$i]}"]} in
+		1) echo "Installing Page Numbering addon"
+			eval sudo -u $USER_NAME $UNOPKG_PATH add -f $PAGE_NUMBERING_PATH
+			;;
+		2) echo "Installing Settings loader"
+			eval sudo -u $USER_NAME $UNOPKG_PATH add -f $SETTINGS_LOADER_PATH
+			;;
+		3) echo "Installing AutoText Wizard"
+			eval sudo -u $USER_NAME $UNOPKG_PATH add -f $AUTOTEXT_WIZARD_PATH
+			;;
+		4) echo "Installing LibreCust Lib"
+			eval sudo -u $USER_NAME $UNOPKG_PATH add -f $LIBRECUST_MACRO_PATH
+			;;
+		5) echo "Installing Law Toolbar"
+			eval sudo -u $USER_NAME $UNOPKG_PATH add -f $LAW_TOOLBAR_PATH
+			;;
+		6) echo "Installing UI customizations"
+			echo "Menubar:"
+			cp "$MENUBAR_DIR/menubar.xml" "$MENUBAR_DIR/menubar.xml.bak_$INSTALLATION_TIMESTAMP" || true
+			cp $MENUBAR_PATH "$MENUBAR_DIR/menubar.xml"
+			echo "[DONE]"
+			echo "Toolbar:"
+			mkdir "$TOOLBAR_DIR/toolbar_bak_$INSTALLATION_TIMESTAMP"
+			cp "$TOOLBAR_SINGLE_PATH" "$TOOLBAR_DIR/" || true
+			cp "$TOOLBAR_TEXTOBJ_PATH" "$TOOLBAR_DIR/" || true
+			echo "[DONE]"
+			;;
+	esac
+done
+
+unset IFS
+
+#DEBHELPER#
+
+exit 0

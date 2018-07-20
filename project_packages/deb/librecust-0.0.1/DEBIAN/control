@@ -1,0 +1,8 @@
+Package: librecust
+Version: 0.0.1
+Section: base
+Priority: optional
+Architecture: all
+Depends:  libreoffice (>= 5.0.0.0), debconf (>= 0.2.26), libreoffice-script-provider-python
+Maintainer: Arvanitis Christos <arvchristos@gmail.com>
+Description: GSOC 2018 LibreOffice customization and creation of legal templates
