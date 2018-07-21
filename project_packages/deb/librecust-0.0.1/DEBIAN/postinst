@@ -32,6 +32,16 @@ IFS=","
 # Source debconf library.
 . /usr/share/debconf/confmodule
 db_get librecust/question1
+KILL_SOFFICE=$RET
+
+db_get librecust/question2
+
+if [[ $KILL_SOFFICE = "No" ]]; then
+	echo "LibreOffice instances should be terminated for stable Librecust installation"
+	exit 0
+fi
+
+killall soffice.bin #kill those LO instances
 
 prompt_result=${RET//", "/,}
 prompt_result=($prompt_result);
