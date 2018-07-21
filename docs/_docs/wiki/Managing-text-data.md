@@ -3,7 +3,6 @@ title: Managing text data
 permalink: /docs/Managing-text-data/
 ---
 
-# Managing and traversing text data
 In order to apply text changes and traverse text data, the main iterators used by LibreOffice/OpenOffice are named cursors, in correspondence to the UI cursors in text editing.
 
 For this addon, two kinds of cursors are used:

@@ -3,7 +3,6 @@ title: Configuration Extension
 permalink: /docs/Configuration-extension/
 ---
 
-# Configuration extension
 Multiple LibreOffice properties have to be edited for the project to succeed. An important aspect of the project is the deployment of configuration, so as to avoid editing settings manually for each installation. We deploy almost all needed settings (enable toolbars and document styling properties are excluded) using an `.oxt` extension package, namely a renamed `.zip` archive of the following structure:
 
 ```bash

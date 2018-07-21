@@ -3,8 +3,6 @@ title: Menubar customization
 permalink: /docs/Menubar-customization/
 ---
 
-# Menubar customization
-
 ### What is a menubar
 ![menubar](https://i.imgur.com/GGMgWPA.png)
 

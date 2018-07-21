@@ -3,7 +3,6 @@ title: Toolbar customization
 permalink: /docs/Toolbar-customization/
 ---
 
-# Toolbar customization
 ## What is a toolbar
 ![toolbar_libre](https://i.imgur.com/5r5MZEE.png)
 With the term toolbar we refer to the menu located on top of the main editor view, right under the [menubar](https://github.com/eellak/gsoc2018-librecust/wiki/Menubar-customization). Toolbars consist of specific menu elements including buttons and dropdown menus as shown above.
