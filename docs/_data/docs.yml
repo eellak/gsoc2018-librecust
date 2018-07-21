@@ -1,3 +1,7 @@
+- title: Getting started
+  docs:
+  - Installation
+
 - title: UI customization
   docs:
   - Configuration-extension
