@@ -25,14 +25,14 @@ Outlining the l10n process using gettext:
 ### Marking translatable strings
 
 Initially, the gettext module for the Python script is included, and the marking function is defined:
-```Python
+```python
 import gettext
 _ = gettext.gettext 
 ```
 
 Next, all translatable strings are marked using this marking function:
 
-```Python
+```python
 	Doc = XSCRIPTCONTEXT.getDocument()
     psm = uno.getComponentContext().ServiceManager
     dp = psm.createInstance("com.sun.star.awt.DialogProvider")
@@ -47,7 +47,7 @@ Next, all translatable strings are marked using this marking function:
 
 Previously, we mentioned that most of dialog control elements will be dynamically set during extension execution. The previous code segment represents that choice, by setting the dialog title during execution. More dialog control properties that are of `string` type are defined in such way:
 
-```Python
+```python
 	#Cancel and OK button Labels
     CancelButton = oDialog1Model.getByName("CancelButton")
     CancelButton.Label = _("Cancel")
@@ -186,7 +186,7 @@ After executing the previous commands for each locale the catalogs are created:
 ### Choosing the right locale catalog during execution
 Although we have created the required catalogs, we still have to select the right one depending on the running locale. Generally, selecting a locale in Python requires the following:
 
-```Python
+```python
 import gettext
  
 locale = gettext.translation('base', localedir='locales', languages=['locale_string']) #locale_string = en, el, ...
@@ -196,7 +196,7 @@ _ = locale.gettext # Greek
 
 To implement full l10n features, we have to decide which is the right locale to use. This is done by getting the right property info from the LO PropertySet:
 
-```Python
+```python
 def getLanguage():
     oProvider = "com.sun.star.configuration.ConfigurationProvider"
     oAccess   = "com.sun.star.configuration.ConfigurationAccess"
@@ -232,7 +232,7 @@ def get_instance(service_name):
 
 `getLanguage()` returns the string value of the currently used locale in LibreOffice. Then, setting the correct locale and catalog is based on this string value:
 
-```Python
+```python
 from urllib.parse import urlparse
 
 def get_main_directory(module_name): #com.addon.pagenumbering
@@ -252,7 +252,7 @@ def main(*args):
 
 Although dialog controls include the majority of translatable strings, the previous methodology applies to other elements:
 
-```Python
+```python
 def main(*args):
 
     try:

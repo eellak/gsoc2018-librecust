@@ -26,7 +26,7 @@ However, the main advantage of Basic macros that leads to their popularity over 
 ### Python and others
 While Basic macros are easier to construct, this level of abstraction comes with some disadvantages a programmer has to take into account while deciding the final implementation language. Basic is by no means a full featured language. Scaling a Basic macro can be difficult and debugging is not as simple as in other modern languages.
  
-Basic was firstly introduced to support inter-compatibility across OpenOffice and Microsoft Office macro scripts attached to documents. This means that VBA coding principles characterize Basic macros. 
+Basic was firstly introduced to support inter-compatibility across OpenOffice and Microsoft Office macro scripts attached to documents. This means that vb coding principles characterize Basic macros. 
 
 Using Basic leads to many "reinventing-the-wheel" situations. Sorting algorithms, optimized dictionaries and other structs have to be written from scratch, sacrificing performance and stability of large scale LibreOffice extensions. 
 In addition to these, Basic coding standards do not appeal to new programmers. This means that documentation is fairly old and supported only by those people that managed to get familiar with Basic's standards. Trying to get help for a Basic implementation clearly reveals the aforementioned drawback. At this point we should mention that there is a great amount of people willing to help with macro coding mainly at the following forums:
@@ -54,21 +54,24 @@ As we can see, inserting page numbering in LibreOffice Writer is not as simple a
 This addon adds page numbering on the current document. In order to access the current document, we use the following code:
 
 **Basic**
-```vba
+
+```vb
 Doc = ThisComponent
 ```
 **Python**
-```Python
+
+```python
 Doc = XSCRIPTCONTEXT.getDocument()
 ```
 Then we get access to the Undo Manager interface. This struct allows multiple edit actions to be included in one undo step in the undo stack giving the illusion that the whole page numbering process is just one step.
 
 **Basic**
-```vba
+```vb
 UndoManager = Doc.getUndoManager()
 ```
 **Python**
-```Python
+
+```python
 UndoManager = Doc.getUndoManager()
 ```
 ### Creating dialogs
@@ -85,14 +88,15 @@ The dialog is saved and/or exported in `.xdl` format. This file will be included
 In order to fill components with data, one should first access the dialog. This is done using the following code:
 
 **Basic**
-```vba
+```vb
 	DialogLibraries.LoadLibrary("PageNumberingAddon")
 	oLib = DialogLibraries.GetByName("PageNumberingAddon")
 	myDlg = oLib.GetByName("PageNumberingDialog")
 	oDlg = CreateUnoDialog(myDlg)
 ```
 **Python**
-```Python
+
+```python
     psm = uno.getComponentContext().ServiceManager
     dp = psm.createInstance("com.sun.star.awt.DialogProvider")
     dlg = dp.createDialog("vnd.sun.star.script:dialogs.PageNumberingDialog?location=application")
@@ -100,11 +104,11 @@ In order to fill components with data, one should first access the dialog. This 
 Notice that in Basic code, we include the dialog in the PageNumberingAddon library while in Python we use the dialogs, library. This is just a choice of ours, the user can choose to save dialogs in the desired library. In any case, accessing and editing components requires the use of dialog model.
 
 **Basic**
-```vba
+```vb
 oDialog1Model = oDlg.Model
 ```
 **Python**
-```Python
+```python
 oDialog1Model = dlg.Model
 ```
 During prototyping of the addon (Basic implementation), we initiated the dialog fields using a [top window listener](https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XTopWindowListener.html). This fires the execution of certain methods when an event such as "window minimized" is traced. A flag is used to check whether the dialog was closed, canceled or the data is valid and further execution is mandatory. However, during Python porting, we choose to initialize all fields and respective data before executing the dialog.    

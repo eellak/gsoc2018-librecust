@@ -1,25 +1,22 @@
-- title: Getting Started
+- title: Getting started
   docs:
-  - home
-  - themes
-  - customization
+  - Installation
 
-- title: Examples
+- title: UI customization
   docs:
-  - cheatsheet
-  - font-awesome
-  - bootstrap
-
-- title: Wiki
-  docs:
-  - Coding-workflow
   - Configuration-extension
-  - Debugging
-  - Event-listeners
   - Icon-set-configuration
-  - Localization
-  - Managing-text-data
   - Menubar-customization
-  - Page-Numbering-Addon
   - Toolbar-customization
 
+- title: Extension development
+  docs:
+  - Coding-workflow
+  - Page-Numbering-Addon
+  - Debugging
+  - Localization
+
+- title: LibreOffice API
+  docs:
+  - Managing-text-data
+  - Event-listeners
