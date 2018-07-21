@@ -7,7 +7,7 @@ permalink: /docs/Coding-workflow/
 In this page, the setup of the environment used to develop a LibreOffice extension is outlined 
 
 ## Choosing a language
-This is the most important part of th development process. LibreOffice, as well as other suites of the same parent branch such as OpenOffice, provide an integrated environment to build and debug macros and/or extensions. However, in order to use this environment, one has to follow the path of macro development using a language called LO Basic. This language has its syntax roots to VBA so high-level compatibility between Microsoft and Apache suites is achieved.
+This is the most important part of th development process. LibreOffice, as well as other suites of the same parent branch such as OpenOffice, provide an integrated environment to build and debug macros and/or extensions. However, in order to use this environment, one has to follow the path of macro development using a language called LO Basic. This language has its syntax roots to vb so high-level compatibility between Microsoft and Apache suites is achieved.
 It's archaic syntax as well as the absence of modern programming goodies such as list containers or object oriented principles turn developers in the quest of finding a different language to use.
 
 This is the main reason why, communicating with LO, is done using a multi language [API](https://api.libreoffice.org/). Well known languages can be used for LibreOffice programming with some among them to be Java, C++ or Python. In this GSOC project, Python is used as the language for the final extension implementations. However, some prototyping steps such as inspecting a Page style property set are executed using Basic macro commands.

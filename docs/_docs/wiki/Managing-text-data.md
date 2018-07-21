@@ -16,11 +16,11 @@ A view cursor, in terms of LO/OO API, is used to move across the page layout. Th
 
 View cursor reference in Basic and Python:
 ### Basic
-```Basic
+```vb
     ViewCursor = Doc.CurrentController.getViewCursor()
 ```
 ### Python
-```Python
+```python
     Doc = XSCRIPTCONTEXT.getDocument()
     ViewCursor = Doc.CurrentController.getViewCursor()
 ```
@@ -38,12 +38,12 @@ There is a variety of View cursors in LO API, which, mainly because of the abstr
 In order to add manual page breaks, we need to move across pages using XPageCursor methods:
 
 ### Basic
-```Basic
+```vb
     ViewCursor.jumpToPage(int Arg1) 
 ```
 
 ### Python
-```Python
+```python
      ViewCursor.jumpToPage(int Arg1)
 ```
 
@@ -58,7 +58,7 @@ Accessing the current page style requires getting the [style](https://api.libreo
 In order to create a manual page break, one has to change the PageDescName property of the first page following the break. Additionally, as shown in the dialog generated when inserting a manual break, one can define a new page number for the following page range.
 A page range is defined as the number of pages between two page breaks or a page break and start/end of document. A page style is a property of a range. 
 Adding a manual page break at the n-th page:
-```Python
+```python
 # Set index of first numbered page
 # We cannot use PageNumber.Offset property because we may need bigger than total page number indexing
 ViewCursor.jumpToPage(n)
@@ -97,7 +97,7 @@ Getting a text cursor requires the acquisition of ViewCursor
 
 However, page styles provide specific text ranges for Header and Footer locations, a feature used in Page Numbering Addon:
 
-```Python
+```python
 #Header text
  Num_Position = NumberedPage.HeaderText
 
@@ -111,7 +111,7 @@ After getting the required text range, a text cursor for data interaction is acq
 Num_Position object implements the [XText](https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1text_1_1XText.html)  interface, allowing for text content insertion/deletion using specific methods. As far as Page Numbering Addon is concerned, these methods are used as following:
 
 ### Basic
-```Basic
+```vb
 ‘ NumberingDecorationComboBox is a dialog element that provides a decoration string value.
 ‘ PageNumber is a specific field that represents page numbering LO struct. 
 
@@ -135,7 +135,7 @@ Num_Position object implements the [XText](https://api.libreoffice.org/docs/idl/
     End Select
 ```
 ### Python
-```Python
+```python
 # NumberingDecorationComboBoxText object is a dialog control that provides decoration option
 NumberingDecorationComboBoxText = oDialog1Model.getByName(
         "NumberingDecoration").Text

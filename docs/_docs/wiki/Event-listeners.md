@@ -15,7 +15,7 @@ In LibreOffice terms, every listener interface is a subclass of [XEventListener]
 Listening to window events is mandatory for the creation of dialogs and wizards that offer a level of user interaction. The [XTopWindowListener](https://api.libreoffice.org/docs/idl/ref/interfacecom_1_1sun_1_1star_1_1awt_1_1XTopWindowListener.html) interface polls for window events such as when a window is opened, closed or minimized. The following code, part of Page Numbering Addon, illustrate a simple usage and implementation of window listeners:
 
 ### Basic
-```Basic
+```vb
 sub Main
         DialogLibraries.LoadLibrary("PageNumberingAddon")
 	oLib = DialogLibraries.GetByName("PageNumberingAddon")
@@ -55,7 +55,7 @@ end sub
 In basic, there are no classes and objects so a prefix for the listener's methods is required. As seen in the first argument of `createUnoListener()` we use the prefix `TopListen_*`. This is not the case with Python implementation that offers object oriented principles.
 
 ### Python
-```Python
+```python
 from com.sun.star.awt import XTopWindowListener
 
 class oListenerTop_Class(XTopWindowListener, unohelper.Base):
@@ -97,7 +97,7 @@ The listener constructor is where, exploiting Python function polymorphism, diff
 Every LibreOffice listener is implemented using the aforementioned procedure. Next, some examples of different event listeners used in the `AutoText addon` and implemented in Python are shown:
 
 ## Mouse listeners
-```Python
+```python
 from com.sun.star.awt import XMouseListener
 
 class MouseListener(unohelper.Base, XMouseListener):
@@ -139,7 +139,7 @@ pass
 ```
 
 ## Action listeners
-```Python
+```python
 from com.sun.star.awt import XActionListener
 
 class ActionListener(unohelper.Base, XActionListener):
@@ -166,7 +166,7 @@ class ActionListener(unohelper.Base, XActionListener):
 ```
 
 ## Window resize listeners
-```Python
+```python
 from com.sun.star.awt import XWindowListener
 
 class WindowResizeListener(unohelper.Base, XWindowListener):

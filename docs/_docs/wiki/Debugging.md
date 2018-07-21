@@ -21,7 +21,7 @@ In order to use Xray for either implementation (Basic, Python), installing the X
 
 ## Xray on Basic
 While developing a macro, in order to inspect an object, a call to xray with this object as argument is required:
-```Basic
+```vb
 Sub Main
 
 Doc = ThisComponent
@@ -56,7 +56,7 @@ In the previous example, we inspect the current cursor paragraph style for metho
 
 ## Xray on Python
 On Python, the steps required to inspect an element with Xray are more or less the same with the Basic implementation. However, there are some differences that we should point out. 
-```Python
+```python
 import uno
 import unohelper
 
