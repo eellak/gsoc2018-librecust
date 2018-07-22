@@ -5,6 +5,9 @@
  xmlns:xlink="http://www.w3.org/1999/xlink" >
    <identifier value="com.addon.pagenumbering" />
    <version value="0.0.1" />
+   <icon>
+      <default xlink:href="images/icon.png" />
+   </icon>
    <extension-description>
       <src xlink:href="Descriptions/descr-en.txt" lang="en"/>
       <src xlink:href="Descriptions/descr-el.txt" lang="el"/>
@@ -20,7 +23,7 @@
       <name lang="el">Page Numbering Addon</name>
    </display-name>
    <publisher>
-      <name lang="en" xlink:href="https://github.com/arvchristos">Arvanitis Christos</name>
-      <name lang="el" xlink:href="https://github.com/arvchristos">Αρβανίτης Χρήστος</name>
+      <name lang="en" xlink:href="https://eellak.github.io/gsoc2018-librecust/">Arvanitis Christos</name>
+      <name lang="el" xlink:href="https://eellak.github.io/gsoc2018-librecust/">Αρβανίτης Χρήστος</name>
    </publisher>
 </description>
