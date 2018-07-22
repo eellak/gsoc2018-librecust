@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
-<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="Dialog1" dlg:left="0" dlg:top="0" dlg:width="151" dlg:height="319" dlg:closeable="true" dlg:moveable="true" dlg:withtitlebar="false">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="Dialog1" dlg:left="0" dlg:top="0" dlg:width="151" dlg:height="330" dlg:closeable="true" dlg:moveable="true" dlg:withtitlebar="false">
  <dlg:styles>
   <dlg:style dlg:style-id="0" dlg:border="3d"/>
  </dlg:styles>
  <dlg:bulletinboard>
-  <dlg:menulist dlg:id="SavedAutotext" dlg:tab-index="1" dlg:left="6" dlg:top="19" dlg:width="95" dlg:height="136"/>
-  <dlg:button dlg:id="OKButton" dlg:tab-index="0" dlg:left="108" dlg:top="287" dlg:width="39" dlg:height="17" dlg:default="true" dlg:value="Insert"/>
-  <dlg:text dlg:style-id="0" dlg:id="PreviewLabel" dlg:tab-index="2" dlg:left="6" dlg:top="182" dlg:width="138" dlg:height="93" dlg:multiline="true"/>
-  <dlg:text dlg:id="LabelPreview" dlg:tab-index="3" dlg:left="6" dlg:top="169" dlg:width="66" dlg:height="14" dlg:value="Preview" dlg:multiline="true"/>
-  <dlg:text dlg:id="LabelListbox" dlg:tab-index="4" dlg:left="6" dlg:top="5" dlg:width="66" dlg:height="14" dlg:value="Auto texts" dlg:multiline="true"/>
-  <dlg:button dlg:id="AddSelectionButton" dlg:tab-index="5" dlg:left="53" dlg:top="287" dlg:width="48" dlg:height="17" dlg:value="Add Selection"/>
-  <dlg:fixedline dlg:id="FixedLine1" dlg:tab-index="6" dlg:left="0" dlg:top="163" dlg:width="151" dlg:height="0"/>
-  <dlg:button dlg:id="MoreButton" dlg:tab-index="7" dlg:left="4" dlg:top="287" dlg:width="44" dlg:height="17" dlg:value="More..."/>
+  <dlg:menulist dlg:id="SavedAutotext" dlg:tab-index="1" dlg:left="6" dlg:top="39" dlg:width="123" dlg:height="136"/>
+  <dlg:button dlg:id="OKButton" dlg:tab-index="0" dlg:left="108" dlg:top="291" dlg:width="39" dlg:height="17" dlg:default="true" dlg:value="Insert"/>
+  <dlg:text dlg:style-id="0" dlg:id="PreviewLabel" dlg:tab-index="2" dlg:left="4" dlg:top="190" dlg:width="138" dlg:height="93" dlg:multiline="true"/>
+  <dlg:text dlg:id="LabelPreview" dlg:tab-index="3" dlg:left="6" dlg:top="179" dlg:width="66" dlg:height="11" dlg:value="Preview" dlg:multiline="true"/>
+  <dlg:text dlg:id="LabelListbox" dlg:tab-index="4" dlg:left="6" dlg:top="28" dlg:width="72" dlg:height="10" dlg:value="Auto texts" dlg:multiline="true"/>
+  <dlg:button dlg:id="AddSelectionButton" dlg:tab-index="5" dlg:left="53" dlg:top="291" dlg:width="48" dlg:height="17" dlg:value="Add Selection"/>
+  <dlg:fixedline dlg:id="FixedLine1" dlg:tab-index="6" dlg:left="15" dlg:top="171" dlg:width="151" dlg:height="0"/>
+  <dlg:button dlg:id="MoreButton" dlg:tab-index="7" dlg:left="4" dlg:top="291" dlg:width="44" dlg:height="17" dlg:value="More..."/>
+  <dlg:text dlg:id="GroupLabel" dlg:tab-index="9" dlg:left="0" dlg:top="11" dlg:width="51" dlg:height="10" dlg:value="Group:" dlg:align="center" dlg:multiline="true"/>
+  <dlg:menulist dlg:id="GroupListBox" dlg:tab-index="8" dlg:left="51" dlg:top="6" dlg:width="87" dlg:height="17" dlg:spin="true"/>
  </dlg:bulletinboard>
 </dlg:window>
