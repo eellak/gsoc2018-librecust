@@ -4,80 +4,100 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-06-22 00:34+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2018-07-22 14:47+EEST\n"
+"PO-Revision-Date: 2018-07-22 15:04+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 2.0.9\n"
 
-#: main.py:85
+#: main.py:84
 msgid "Page Numbering Title"
 msgstr "Insert Page Numbering"
 
-#: main.py:73
+#: main.py:88
 msgid "Cancel"
 msgstr "Cancel"
 
-#: main.py:76
+#: main.py:91
 msgid "OK"
 msgstr "OK"
 
-#: main.py:79
+#: main.py:94
+msgid "Help"
+msgstr "Help..."
+
+#: main.py:101
 msgid "Position"
 msgstr "Position"
 
-#: main.py:81
+#: main.py:103
 msgid "Footer"
 msgstr "Footer"
 
-#: main.py:81
+#: main.py:103
 msgid "Header"
 msgstr "Header"
 
-#: main.py:86
+#: main.py:107
 msgid "Alignment"
 msgstr "Alignment"
 
-#: main.py:88
+#: main.py:109
 msgid "Centered"
 msgstr "Centered"
 
-#: main.py:88
+#: main.py:109
 msgid "Left"
 msgstr "Left"
 
-#: main.py:88
+#: main.py:109
 msgid "Right"
 msgstr "Right"
 
-#: main.py:92
+#: main.py:113
 msgid "First Page"
 msgstr "First Page"
 
-#: main.py:96
+#: main.py:117
 msgid "Page Offset"
 msgstr "Start from..."
 
-#: main.py:102
+#: main.py:123
 msgid "Numbering Type"
 msgstr "Numbering Type"
 
-#: main.py:108
+#: main.py:129
 msgid "Decor"
 msgstr "Decor"
 
-#: main.py:129
+#: main.py:150
 msgid "Font"
 msgstr "Font"
 
-#: main.py:135
+#: main.py:156
 msgid "Size"
 msgstr "Size"
 
-#: main.py:214
+#: main.py:235
 msgid "Page Numbering"
 msgstr "Page Numbering"
+
+#: main.py:295
+msgid "For help menu"
+msgstr ""
+"For help using this addon:\n"
+"Help->LibreOffice Help->Page Numbering Addon"
+
+#: main.py:298
+msgid "OKHelp"
+msgstr "OK"
+
+#: main.py:302
+msgid "Help..."
+msgstr "Help..."

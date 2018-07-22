@@ -57,10 +57,10 @@ def get_main_directory(module_name): #com.addon.pagenumbering
     srv = ctx.getByName("/singletons/com.sun.star.deployment.PackageInformationProvider")
     return urlparse(srv.getPackageLocation(module_name)).path + "/"
 
+
 def main(*args):
     ctx = uno.getComponentContext()
     smgr = ctx.ServiceManager
-
     try:
         ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.pagenumbering")+'python/locales', languages=[getLanguage()])
     except Exception as e:
@@ -89,6 +89,13 @@ def main(*args):
 
     OKButton = oDialog1Model.getByName("OKButton")
     OKButton.Label = _("OK")
+
+    HelpButton = dlg.getControl("HelpButton")
+    HelpButton.Label = _("Help")
+
+    action_listener = ActionListener(ctx)
+    HelpButton.addActionListener(action_listener)
+    HelpButton.setActionCommand('PageNumberingHelp')
 
     PositionLabel = oDialog1Model.getByName("PositionLabel")
     PositionLabel.Label = _("Position")
@@ -225,7 +232,7 @@ def main(*args):
     # For text insertion a Text cursor is needed
     NumCursor = Num_Position.Text.createTextCursor()
 
-    UndoManager.enterUndoContext(_("Page Numbering"))	#There should be included all those changing operations that should be put in undo stack
+    UndoManager.enterUndoContext(_("Page Numbering"))   #There should be included all those changing operations that should be put in undo stack
 
     ViewCursor.jumpToPage(FirstNumberedPage.Value)
 
@@ -261,6 +268,46 @@ def main(*args):
         raise Exception("Custom decoration unimplemented feature")
     UndoManager.leaveUndoContext()
     dlg.removeTopWindowListener(oListenerTop)
+
+from com.sun.star.awt import  XActionListener
+
+class ActionListener(unohelper.Base, XActionListener):
+
+    def __init__(self, ctx):
+        self.ctx = ctx
+
+    def disposing(self, ev):
+        pass
+
+    # XActionListener
+    def actionPerformed(self, ev):
+        dialog = ev.Source.getContext()
+        ctx = uno.getComponentContext()
+        action_command = ev.ActionCommand
+        smgr = ctx.ServiceManager
+        try:
+            ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.pagenumbering")+'python/locales', languages=[getLanguage()])
+        except Exception as e:
+            ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.pagenumbering")+'python/locales', languages=["en"])
+        ui_locale.install()
+        _ = ui_locale.gettext
+
+        if action_command == "PageNumberingHelp":
+            psm = uno.getComponentContext().ServiceManager
+            dp = psm.createInstance("com.sun.star.awt.DialogProvider")
+            dlg = dp.createDialog("vnd.sun.star.script:dialogs.PageNumberingHelpDialog?location=application")
+
+            HelpLabel = dlg.getControl("HelpLabel")
+            HelpLabel.Text = _("For help menu")
+
+            OKButton = dlg.getControl("OKButton")
+            OKButton.Label = _("OKHelp")
+
+            oDialogHelpModel = dlg.Model
+
+            oDialogHelpModel.Title = _("Help...")
+
+            dlg.execute()
 
 
 
