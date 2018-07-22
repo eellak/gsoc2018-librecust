@@ -53,6 +53,17 @@ def toogle_autotext_sidebar(*args):
     else:
         layoutmgr.requestElement(RESOURCE_URL)
 
+sorted_by_title = []
+
+def update_auto_list(oRange):
+    global sorted_by_title
+    indexes = range(oRange.getCount())
+    combined_col = list(zip(oRange.Titles,indexes))
+    combined_col.sort(key=lambda tup: tup[0])  # sorts in place
+    sorted_by_title = combined_col
+    sorted_to_listbox = [i[0] for i in sorted_by_title]
+    return sorted_to_listbox
+
 
 class Factory(unohelper.Base, XSingleComponentFactory, XServiceInfo):
     """ This factory instantiate new window content.
@@ -151,7 +162,7 @@ def create_window(ctx, args):
 
         # Creates outer window
         # title name of this window is defined in WindowState configuration.
-        desc = WindowDescriptor(SIMPLE, "window", parent, 0, Rectangle(0, 0, 200, 300),
+        desc = WindowDescriptor(SIMPLE, "window", parent, 0, Rectangle(0, 0, 400, 400),
                 SHOW | SIZEABLE | MOVEABLE | CLOSEABLE | CLIPCHILDREN)
         window = toolkit.createWindow(desc)
 
@@ -176,7 +187,11 @@ def create_window(ctx, args):
         Autotext_Label.Text = "Auto Texts"
 
         Autotext_ListBox = child.getControl("SavedAutotext") 
-        Autotext_ListBox.addItems(oRange.Titles,0)
+
+        # there should be sorted entries by title and not name!
+
+        Autotext_ListBox.addItems(update_auto_list(oRange),0)
+        
         Autotext_ListBox.addMouseListener(mouse_listener)
         
         OK_Button = child.getControl("OKButton")
@@ -215,6 +230,7 @@ class MouseListener(unohelper.Base, XMouseListener):
 
     # XActionListener
     def mousePressed(self, ev):
+        global sorted_by_title
         dialog = ev.Source.getContext()
         action_command = ev
         smgr = self.ctx.ServiceManager
@@ -226,7 +242,7 @@ class MouseListener(unohelper.Base, XMouseListener):
 
         oRange = dps.getByName("mytexts")
 
-        selected_autotext = oRange.getByIndex(selected_pos)
+        selected_autotext = oRange.getByIndex(sorted_by_title[selected_pos][1])
         #getString
 
         preview_label = dialog.getControl("PreviewLabel")
@@ -247,7 +263,6 @@ class ActionListener(unohelper.Base, XActionListener):
     def __init__(self, ctx, child):
         self.ctx = ctx
         self.child = child # Pass child to get access to sub-window elements
-
     def disposing(self, ev):
         pass
 
@@ -257,7 +272,7 @@ class ActionListener(unohelper.Base, XActionListener):
         ctx = uno.getComponentContext()
         action_command = ev.ActionCommand
         smgr = ctx.ServiceManager
-
+        global sorted_by_title 
         if action_command == "InsertAutoText":
             auto_list = dialog.getControl("SavedAutotext")
             selected_pos= auto_list.getSelectedItemPos()
@@ -272,7 +287,7 @@ class ActionListener(unohelper.Base, XActionListener):
 
             oRange = dps.getByName("mytexts")
 
-            selected_autotext = oRange.getByIndex(selected_pos)
+            selected_autotext = oRange.getByIndex(sorted_by_title[selected_pos][1])
             ViewCursor = get_parent_document().getCurrentController().getViewCursor()
             selected_autotext.applyTo(ViewCursor)
 
@@ -300,10 +315,11 @@ class ActionListener(unohelper.Base, XActionListener):
 
             #refresh entries of main listbox
             oRange = dps.getByName("mytexts")
+            #xray(smgr, ctx, oRange)
             autotext_listbox = self.child.getControl("SavedAutotext")
             current_autotexts = autotext_listbox.getItemCount()
             autotext_listbox.removeItems(0,current_autotexts) 
-            autotext_listbox.addItems(oRange.Titles,0)
+            autotext_listbox.addItems(update_auto_list(oRange),0)
 
         if action_command == "MoreDispatch":
             # access the dispatcher

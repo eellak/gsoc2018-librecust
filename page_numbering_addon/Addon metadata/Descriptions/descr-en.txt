@@ -1,2 +1,1 @@
-A fantastic extension that does everything.
-Copyright (c) 2009 yourself
+An extension that simplifies the process of page numbering in LibreOffice/OpenOffice. 

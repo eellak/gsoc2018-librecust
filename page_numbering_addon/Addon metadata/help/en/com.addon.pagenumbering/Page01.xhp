@@ -73,22 +73,25 @@
          </listitem>
       </list>
       <paragraph role="tip" xml-lang="en" id="N0018">
+         A usage example of First Page option is the implementation of a document that includes a cover page and contents that do not include page numbering.
+      </paragraph>
+      <paragraph role="tip" xml-lang="en" id="N0019">
          Choosing a page different that the first of the document (1) will create two ranges, the first that will remain unnumbered and the second that will include numbers. This is the result of creating clone page styles in order to preserve previously created page styling customization. 
       </paragraph>
       <list type="unordered">
          <listitem>
-            <paragraph role="listitem" xml-lang="en" id="N0019">
+            <paragraph role="listitem" xml-lang="en" id="N0020">
                <emph>Start from...</emph>: Define the offset(page number) of the first numbered page.
             </paragraph>
          </listitem>
       </list>
-      <paragraph role="tip" xml-lang="en" id="N0020">
+      <paragraph role="tip" xml-lang="en" id="N0021">
          Defining page offset simulates the alteration of the according paragraph property, letting a user choosing different page numbering schemes across the document (e.g. The first n pages are numbered using Roman uppercase while the rest use simple Arabic numbers).
       </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0021">
+      <paragraph role="paragraph" xml-lang="en" id="N0022">
          
       </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0022">
+      <paragraph role="paragraph" xml-lang="en" id="N0023">
          
       </paragraph>
    </body>

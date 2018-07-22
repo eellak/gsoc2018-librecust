@@ -67,10 +67,16 @@ def insert_law(*args):
     dlg = dp.createDialog("vnd.sun.star.extension://com.addon.lawaddon/dialogs/InsertLaw.xdl")
 
     if dlg.execute() == 0:
-    	return
+        return
 
-    
     ViewCursor.setString("HALLO")    
+
+def insert_contents(*args):
+    ctx = uno.getComponentContext()
+    smgr = ctx.ServiceManager
+    dispatcher = smgr.createInstanceWithContext( "com.sun.star.frame.DispatchHelper", ctx)
+    doc = XSCRIPTCONTEXT.getDocument().getCurrentController()
+    dispatcher.executeDispatch(doc,  ".uno:InsertMultiIndex", "", 0, tuple())
 
 def xray(smgr, ctx, target):
     mspf = smgr.createInstanceWithContext(
@@ -165,4 +171,4 @@ def get_instance(service_name):
 
 g_ImplementationHelper = unohelper.ImplementationHelper()
 
-g_exportedScripts = main,insert_hd1,insert_law,
+g_exportedScripts = main,insert_hd1,insert_law,insert_contents,
