@@ -151,7 +151,7 @@ def create_window(ctx, args):
 
         # Creates outer window
         # title name of this window is defined in WindowState configuration.
-        desc = WindowDescriptor(SIMPLE, "window", parent, 0, Rectangle(0, 0, 200, 300),
+        desc = WindowDescriptor(SIMPLE, "window", parent, 0, Rectangle(0, 0, 400, 400),
                 SHOW | SIZEABLE | MOVEABLE | CLOSEABLE | CLIPCHILDREN)
         window = toolkit.createWindow(desc)
 

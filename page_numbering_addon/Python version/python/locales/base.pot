@@ -52,7 +52,7 @@ msgid "Left"
 msgstr ""
 
 #: main.py:103
-msgid "RightS"
+msgid "Right"
 msgstr ""
 
 #: main.py:107
@@ -82,4 +82,3 @@ msgstr ""
 #: main.py:229
 msgid "Page Numbering"
 msgstr ""
-
