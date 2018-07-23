@@ -176,6 +176,8 @@ RESOURCE_URL = "private:resource/dockingwindow/9809"
 EXT_ID = "com.addon.autotextaddon"
 
 current_group = "mytexts"
+group_ids = []
+groups_to_insert = []
 
 def create_window(ctx, args):
     """ Creates docking window.
@@ -274,9 +276,16 @@ def create_window(ctx, args):
         TeamList = child.getControl("GroupListBox")
         TeamList.addActionListener(ListBoxActionListener(ctx,child))
 
-        groups_to_insert = dps.getElementNames() 
+        global groups_to_insert
+        global group_ids 
+        group_ids = dps.getElementNames()
+
+
+        for x in group_ids:
+            groups_to_insert[len(groups_to_insert):] = [dps.getByName(x).Title]
+        
         TeamList.addItems(groups_to_insert,0)
-        TeamList.getModel().SelectedItems = [groups_to_insert.index(current_group)]
+        TeamList.getModel().SelectedItems = [group_ids.index(current_group)]
         
         child.setVisible(True)
 
@@ -393,7 +402,9 @@ class ActionListener(unohelper.Base, XActionListener):
             dp = psm.createInstance("com.sun.star.awt.DialogProvider")
             dlg = dp.createDialog("vnd.sun.star.extension://com.addon.autotextaddon/dialogs_autotext/Dialog2.xdl")
 
-            dlg.Title = _("Add to category") +" "+current_group
+            global groups_to_insert
+            global group_ids
+            dlg.Title = _("Add to category") +" "+ groups_to_insert[group_ids.index(current_group)]
 
             NameLabel = dlg.getControl("NameLabel")
             ShortcutLabel = dlg.getControl("ShortcutLabel")
@@ -451,7 +462,9 @@ class ListBoxActionListener(unohelper.Base, XActionListener):
 
         global sorted_by_title 
         global current_group
-        current_group = action_command
+        global groups_to_insert
+        global group_ids
+        current_group = group_ids[groups_to_insert.index(action_command)]
 
         autotext_listbox = dialog.getControl("SavedAutotext")
 
