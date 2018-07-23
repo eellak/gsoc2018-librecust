@@ -336,7 +336,12 @@ class ActionListener(unohelper.Base, XActionListener):
             new_autotext_name = dlg.getControl("NameField").Text
             new_autotext_shortcut = dlg.getControl("ShortcutField").Text
 
-            oRange.insertNewByName(new_autotext_shortcut,new_autotext_name,oCurs.getByIndex(0))
+            try:
+                oRange.insertNewByName(new_autotext_shortcut,new_autotext_name,oCurs.getByIndex(0))
+            except Exception as e:
+                parentwin = get_parent_document().getCurrentController().Frame.ContainerWindow
+                MessageBox(parentwin, _("Cannot add selection to category") +" "+ current_group, _('Error'),ERRORBOX)
+            
 
             #refresh entries of main listbox
             oRange = dps.getByName(current_group)
