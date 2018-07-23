@@ -1,6 +1,9 @@
 import uno
 import unohelper
 
+import gettext
+_ = gettext.gettext 
+
 from com.sun.star.awt.MessageBoxType import MESSAGEBOX, INFOBOX, WARNINGBOX, ERRORBOX, QUERYBOX
 from com.sun.star.awt.MessageBoxButtons import BUTTONS_OK, BUTTONS_OK_CANCEL, BUTTONS_ABORT_IGNORE_RETRY, BUTTONS_YES_NO_CANCEL, BUTTONS_YES_NO, BUTTONS_RETRY_CANCEL, DEFAULT_BUTTON_OK, DEFAULT_BUTTON_CANCEL, DEFAULT_BUTTON_RETRY, DEFAULT_BUTTON_YES, DEFAULT_BUTTON_NO, DEFAULT_BUTTON_IGNORE
 
@@ -131,6 +134,8 @@ RESOURCE_URL = "private:resource/dockingwindow/9809"
 
 EXT_ID = "com.addon.autotextaddon"
 
+current_group = "mytexts"
+
 def create_window(ctx, args):
     """ Creates docking window.
         @param ctx component context
@@ -172,8 +177,9 @@ def create_window(ctx, args):
 
         psm = uno.getComponentContext().ServiceManager
         dps = psm.createInstance("com.sun.star.text.AutoTextContainer")
-        oRange = dps.getByName("mytexts")
-    #    ctx = uno.getComponentContext()
+
+        oRange = dps.getByName(current_group)
+        ctx = uno.getComponentContext()
         smgr = ctx.ServiceManager
 
         # Initialize Dialog items
@@ -184,7 +190,7 @@ def create_window(ctx, args):
 
         # Autotext Listbox
         Autotext_Label = child.getControl("LabelListbox")
-        Autotext_Label.Text = "Auto Texts"
+        Autotext_Label.Text = _("Auto Texts")
 
         Autotext_ListBox = child.getControl("SavedAutotext") 
 
@@ -193,22 +199,29 @@ def create_window(ctx, args):
         Autotext_ListBox.addItems(update_auto_list(oRange),0)
         
         Autotext_ListBox.addMouseListener(mouse_listener)
-        
+        #xray(smgr,ctx,Autotext_ListBox)
         OK_Button = child.getControl("OKButton")
         OK_Button.addActionListener(action_listener)
         OK_Button.setActionCommand('InsertAutoText')
-        OK_Button.Label = "Insert"
+        OK_Button.Label = _("Insert")
 
         AddSelection_Button = child.getControl("AddSelectionButton")
         AddSelection_Button.addActionListener(action_listener)
         AddSelection_Button.setActionCommand('AddSelectedAutoText')
-        AddSelection_Button.Label = "Add Selection"        
+        AddSelection_Button.Label = _("Add Selection")        
         
         More_Button = child.getControl("MoreButton")
         More_Button.addActionListener(action_listener)
         More_Button.setActionCommand('MoreDispatch')
-        More_Button.Label = "More..."
+        More_Button.Label = _("More...")
 
+        TeamList = child.getControl("GroupListBox")
+        TeamList.addActionListener(ListBoxActionListener(ctx,child))
+
+        groups_to_insert = dps.getElementNames() 
+        TeamList.addItems(groups_to_insert,0)
+        TeamList.getModel().SelectedItems = [groups_to_insert.index(current_group)]
+        
         child.setVisible(True)
 
         window.addWindowListener(WindowResizeListener(child))
@@ -218,7 +231,8 @@ def create_window(ctx, args):
 
     return window
 
-from com.sun.star.awt import XWindowListener, XActionListener, XMouseListener
+
+from com.sun.star.awt import XWindowListener, XActionListener, XMouseListener, XItemListener
 
 class MouseListener(unohelper.Base, XMouseListener):
 
@@ -240,7 +254,7 @@ class MouseListener(unohelper.Base, XMouseListener):
         psm = uno.getComponentContext().ServiceManager
         dps = psm.createInstance("com.sun.star.text.AutoTextContainer")
 
-        oRange = dps.getByName("mytexts")
+        oRange = dps.getByName(current_group)
 
         selected_autotext = oRange.getByIndex(sorted_by_title[selected_pos][1])
         #getString
@@ -253,10 +267,21 @@ class MouseListener(unohelper.Base, XMouseListener):
         pass
 
     def mouseEntered():
+        dialog = ev.Source.getContext()
+        global sorted_by_title 
+        autotext_listbox = dialog.getControl("SavedAutotext")
+        current_autotexts = autotext_listbox.getItemCount()
+        autotext_listbox.removeItems(0,current_autotexts) 
+        autotext_listbox.addItems(update_auto_list(oRange),0)
+        psm = uno.getComponentContext().ServiceManager
+        dps = psm.createInstance("com.sun.star.text.AutoTextContainer")
+        oRange = dps.getByName(current_group)
+
         pass
 
     def mouseExited():
         pass
+
 
 class ActionListener(unohelper.Base, XActionListener):
 
@@ -279,13 +304,13 @@ class ActionListener(unohelper.Base, XActionListener):
 
             if selected_pos == -1:
                 parentwin = get_parent_document().getCurrentController().Frame.ContainerWindow
-                MessageBox(parentwin, "No autotext is selected. Please select auotext and then press Insert", 'Error',ERRORBOX)
+                MessageBox(parentwin, _("No autotext is selected. Please select auotext and then press Insert"), _('Error'),ERRORBOX)
                 return
 
             psm = uno.getComponentContext().ServiceManager
             dps = psm.createInstance("com.sun.star.text.AutoTextContainer")
 
-            oRange = dps.getByName("mytexts")
+            oRange = dps.getByName(current_group)
 
             selected_autotext = oRange.getByIndex(sorted_by_title[selected_pos][1])
             ViewCursor = get_parent_document().getCurrentController().getViewCursor()
@@ -298,9 +323,9 @@ class ActionListener(unohelper.Base, XActionListener):
             ViewCursor = get_parent_document().getCurrentController().getViewCursor()
             if ViewCursor.getString() == "":
                 parentwin = get_parent_document().getCurrentController().Frame.ContainerWindow
-                MessageBox(parentwin, "No content is selected. Please select content and then add to autotext list", 'Error',ERRORBOX)
+                MessageBox(parentwin, _("No content is selected. Please select content and then add to autotext list"), _('Error'),ERRORBOX)
                 return
-            oRange = dps.getByName("mytexts")            
+            oRange = dps.getByName(current_group)            
             
             dp = psm.createInstance("com.sun.star.awt.DialogProvider")
             dlg = dp.createDialog("vnd.sun.star.extension://com.addon.autotextaddon/dialogs_autotext/Dialog2.xdl")
@@ -314,7 +339,7 @@ class ActionListener(unohelper.Base, XActionListener):
             oRange.insertNewByName(new_autotext_shortcut,new_autotext_name,oCurs.getByIndex(0))
 
             #refresh entries of main listbox
-            oRange = dps.getByName("mytexts")
+            oRange = dps.getByName(current_group)
             #xray(smgr, ctx, oRange)
             autotext_listbox = self.child.getControl("SavedAutotext")
             current_autotexts = autotext_listbox.getItemCount()
@@ -327,11 +352,44 @@ class ActionListener(unohelper.Base, XActionListener):
             doc = get_parent_document().getCurrentController()
             dispatcher.executeDispatch(doc, ".uno:EditGlossary", "", 0, tuple())
 
+
+class ListBoxActionListener(unohelper.Base, XActionListener):
+
+    def __init__(self, ctx, child):
+        self.ctx = ctx
+        self.child = child # Pass child to get access to sub-window elements
+    def disposing(self, ev):
+        pass
+
+    # XActionListener
+    def actionPerformed(self, ev):
+        dialog = ev.Source.getContext()
+        ctx = uno.getComponentContext()
+        action_command = ev.ActionCommand
+        smgr = ctx.ServiceManager
+
+        psm = uno.getComponentContext().ServiceManager
+        dps = psm.createInstance("com.sun.star.text.AutoTextContainer")
+
+        global sorted_by_title 
+        global current_group
+        current_group = action_command
+
+        autotext_listbox = dialog.getControl("SavedAutotext")
+
+        oRange = dps.getByName(current_group)
+        #xray(smgr, ctx, oRange)
+        autotext_listbox = dialog.getControl("SavedAutotext")
+        current_autotexts = autotext_listbox.getItemCount()
+        autotext_listbox.removeItems(0,current_autotexts) 
+        autotext_listbox.addItems(update_auto_list(oRange),0)
+        
+
+
 class WindowResizeListener(unohelper.Base, XWindowListener):
 
     def __init__(self, dialog):
         self.dialog = dialog
-
     def disposing(self, ev):
         pass
 
@@ -339,8 +397,25 @@ class WindowResizeListener(unohelper.Base, XWindowListener):
     def windowMoved(self, ev):
         pass
     def windowShown(self, ev):
+        global sorted_by_title 
+        autotext_listbox = dialog.getControl("SavedAutotext")
+        current_autotexts = autotext_listbox.getItemCount()
+        autotext_listbox.removeItems(0,current_autotexts) 
+        autotext_listbox.addItems(update_auto_list(oRange),0)
+        psm = uno.getComponentContext().ServiceManager
+        dps = psm.createInstance("com.sun.star.text.AutoTextContainer")
+        oRange = dps.getByName(current_group)
+
         pass
     def windowHidden(self, ev):
+        global sorted_by_title 
+        autotext_listbox = dialog.getControl("SavedAutotext")
+        current_autotexts = autotext_listbox.getItemCount()
+        autotext_listbox.removeItems(0,current_autotexts) 
+        autotext_listbox.addItems(update_auto_list(oRange),0)
+        psm = uno.getComponentContext().ServiceManager
+        dps = psm.createInstance("com.sun.star.text.AutoTextContainer")
+        oRange = dps.getByName(current_group)
         pass
 
     def windowResized(self, ev):

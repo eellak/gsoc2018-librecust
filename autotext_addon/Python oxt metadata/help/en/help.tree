@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tree_view version="24-Aug-2004">
+   <help_section application="comaddonautotextaddon" id="01" title="AutoText addon">
+      <topic id="comaddonautotextaddon/com.addon.autotextaddon/Page01.xhp">Introduction</topic>
+      <topic id="comaddonautotextaddon/com.addon.autotextaddon/Page02.xhp">Brief autotext description</topic>
+      <topic id="comaddonautotextaddon/com.addon.autotextaddon/Page03.xhp">AutoText addon usage</topic>
+   </help_section>
+</tree_view>

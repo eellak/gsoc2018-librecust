@@ -9,7 +9,7 @@
    <body>
       <bookmark branch="hid/vnd.sun.star.script:AutotextAddon-0.0.1.oxt|python|main.py$toogle_autotext_sidebar?language=Python&amp;location=user:uno_packages" xml-lang="en" id="N0001"/>
       <paragraph role="paragraph" xml-lang="en" id="N0002">
-         <ahelp hid="vnd.sun.star.script:AutotextAddon-0.0.1.oxt|python|main.py$toogle_autotext_sidebar?language=Python&amp;location=user:uno_packages" visibility="hidden">This is toogling toolbar GSOC</ahelp>
+         <ahelp hid="vnd.sun.star.script:AutotextAddon-0.0.1.oxt|python|main.py$toogle_autotext_sidebar?language=Python&amp;location=user:uno_packages" visibility="hidden">Toogle AutoText</ahelp>
       </paragraph>
       <bookmark branch="index" xml-lang="en" id="N0003">
          <bookmark_value>autotext;starter</bookmark_value>
@@ -18,118 +18,22 @@
          
       </paragraph>
       <paragraph role="heading" level="1" xml-lang="en" id="N0005">
-         Write your own help pages from here
+         Introduction
       </paragraph>
       <paragraph role="paragraph" xml-lang="en" id="N0006">
-         Language en is the default value, you should have an english version of your help if your extension is internationally available.
+         AutoText Addon is an extension that simplifies autotext usage for beginers in LibreOffice. Autotexts are, by default, available through the following menu:<br/><br/>Tools -&gt; AutoText... (F3)
       </paragraph>
       <paragraph role="paragraph" xml-lang="en" id="N0007">
          
       </paragraph>
       <paragraph role="paragraph" xml-lang="en" id="N0008">
-         
+         The dialog that opens using this menu includes each and every functionality relevant to autotexts. However, this dialog cannot be used along editing a document. Users are required to use this dialog, interrupting the writing process. In addition to this, in order to add new autotexts, one has to select the required content and afterwards open the dialog.
       </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0009">
-         
+      <paragraph role="heading" level="2" xml-lang="en" id="N0009">
+         Goal
       </paragraph>
       <paragraph role="paragraph" xml-lang="en" id="N0010">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0011">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0012">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0013">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0014">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0015">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0016">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0017">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0018">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0019">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0020">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0021">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0022">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0023">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0024">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0025">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0026">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0027">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0028">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0029">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0030">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0031">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0032">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0033">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0034">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0035">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0036">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0037">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0038">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0039">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0040">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0041">
-         
-      </paragraph>
-      <paragraph role="paragraph" xml-lang="en" id="N0042">
-         
+         This extension overcomes the aforementioned problems offering the ability to interact with autotexts without leaving the editing window. More complex functionality is still provided through the default autotext dialog.
       </paragraph>
    </body>
 </helpdocument>
