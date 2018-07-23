@@ -20,6 +20,6 @@
   <dlg:text dlg:id="TypeLabel" dlg:tab-index="16" dlg:left="59" dlg:top="3" dlg:width="51" dlg:height="11" dlg:value="Type"/>
   <dlg:button dlg:id="CancelButton" dlg:tab-index="12" dlg:left="163" dlg:top="101" dlg:width="50" dlg:height="12" dlg:value="Cancel" dlg:button-type="cancel"/>
   <dlg:button dlg:id="OKButton" dlg:tab-index="1" dlg:left="218" dlg:top="101" dlg:width="50" dlg:height="12" dlg:default="true" dlg:value="OK" dlg:button-type="ok"/>
-  <dlg:button dlg:id="HelpButton" dlg:tab-index="18" dlg:left="106" dlg:top="101" dlg:width="50" dlg:height="12" dlg:value="Help"/>
+  <dlg:button dlg:id="HelpButton" dlg:tab-index="18" dlg:left="106" dlg:top="101" dlg:width="50" dlg:height="12" dlg:help-text="Page01" dlg:help-url="com.addon.pagenumbering/Page01.xhp" dlg:value="Help" dlg:button-type="help"/>
  </dlg:bulletinboard>
 </dlg:window>
