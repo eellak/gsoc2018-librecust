@@ -330,6 +330,16 @@ class ActionListener(unohelper.Base, XActionListener):
             dp = psm.createInstance("com.sun.star.awt.DialogProvider")
             dlg = dp.createDialog("vnd.sun.star.extension://com.addon.autotextaddon/dialogs_autotext/Dialog2.xdl")
 
+            dlg.Title = _("Add to category") +" "+current_group
+
+            NameLabel = dlg.getControl("NameLabel")
+            ShortcutLabel = dlg.getControl("ShortcutLabel")
+            AddButton = dlg.getControl("AddButton")
+
+            NameLabel.Text = _("Name")
+            ShortcutLabel.Text = _("Shortcut")
+            AddButton.Label = _("Add")
+
             if dlg.execute() == 0:
                 return
             

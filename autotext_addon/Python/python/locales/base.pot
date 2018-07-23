@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2018-07-23 14:37+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: main.py:193
+msgid "Auto Texts"
+msgstr ""
+
+#: main.py:206
+msgid "Insert"
+msgstr ""
+
+#: main.py:211
+msgid "Add Selection"
+msgstr ""
+
+#: main.py:216
+msgid "More..."
+msgstr ""
+
+#: main.py:307
+msgid "No autotext is selected. Please select auotext and then press Insert"
+msgstr ""
+
+#: main.py:307 main.py:326 main.py:353
+msgid "Error"
+msgstr ""
+
+#: main.py:326
+msgid "No content is selected. Please select content and then add to autotext list"
+msgstr ""
+
+#: main.py:333
+msgid "Add to category"
+msgstr ""
+
+#: main.py:339
+msgid "Name"
+msgstr ""
+
+#: main.py:340
+msgid "Shortcut"
+msgstr ""
+
+#: main.py:341
+msgid "Add"
+msgstr ""
+
+#: main.py:353
+msgid "Cannot add selection to category"
+msgstr ""
+
