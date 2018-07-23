@@ -1,8 +1,9 @@
 import uno
 import unohelper
-
+from urllib.parse import urlparse
 import gettext
 _ = gettext.gettext 
+from com.sun.star.beans import PropertyValue
 
 from com.sun.star.awt.MessageBoxType import MESSAGEBOX, INFOBOX, WARNINGBOX, ERRORBOX, QUERYBOX
 from com.sun.star.awt.MessageBoxButtons import BUTTONS_OK, BUTTONS_OK_CANCEL, BUTTONS_ABORT_IGNORE_RETRY, BUTTONS_YES_NO_CANCEL, BUTTONS_YES_NO, BUTTONS_RETRY_CANCEL, DEFAULT_BUTTON_OK, DEFAULT_BUTTON_CANCEL, DEFAULT_BUTTON_RETRY, DEFAULT_BUTTON_YES, DEFAULT_BUTTON_NO, DEFAULT_BUTTON_IGNORE
@@ -36,6 +37,46 @@ def get_parent_document():
         parent = doc.CurrentController.Frame.ContainerWindow
 
     return desktop.CurrentComponent
+
+def get_main_directory(module_name): #com.addon.pagenumbering
+    ctx = uno.getComponentContext()
+    srv = ctx.getByName("/singletons/com.sun.star.deployment.PackageInformationProvider")
+    return urlparse(srv.getPackageLocation(module_name)).path + "/"
+
+
+# Inspired by @sng at https://forum.openoffice.org/en/forum/viewtopic.php?f=45&t=81457
+# and Andrew Pitonyak pdf "Useful Useful Macro Information For OpenOffice.org"
+def getLanguage():
+    oProvider = "com.sun.star.configuration.ConfigurationProvider"
+    oAccess   = "com.sun.star.configuration.ConfigurationAccess"
+    oConfigProvider = get_instance(oProvider)
+    oProp = PropertyValue()
+    oProp.Name = "nodepath"
+    oProp.Value = "org.openoffice.Office.Linguistic/General"
+    properties = (oProp,)
+    key = "UILocale"
+    oSet = oConfigProvider.createInstanceWithArguments(oAccess, properties)
+    if oSet and (oSet.hasByName(key)):
+        ooLang = oSet.getPropertyValue(key)
+
+    if not (ooLang and not ooLang.isspace()):
+        oProp.Value = "/org.openoffice.Setup/L10N"
+        properties = (oProp,)
+        key = "ooLocale"
+        oSet = oConfigProvider.createInstanceWithArguments(oAccess, properties)
+        if oSet and (oSet.hasByName(key)):
+            ooLang = oSet.getPropertyValue(key)
+    return ooLang
+
+def get_instance(service_name):
+        """ gets a service from Uno """
+        sm = uno.getComponentContext()
+        ctx = sm.getServiceManager()
+        try:
+            service = ctx.createInstance(service_name)
+        except:
+            service = NONE
+        return service
 
 
 def xray(smgr, ctx, target):
@@ -158,10 +199,22 @@ def create_window(ctx, args):
 
     if frame is None: return None # ToDo: raise exception
 
+    global current_locale
+
     # this dialog has no title and placed at the top left corner.
     dialog1 = "vnd.sun.star.extension://com.addon.autotextaddon/dialogs_autotext/Dialog1.xdl"
     window = None
     if True:
+        ctx = uno.getComponentContext()
+        smgr = ctx.ServiceManager
+        
+        try:
+            ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.autotextaddon")+'python/locales', languages=[getLanguage()])
+        except Exception as e:
+            ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.autotextaddon")+'python/locales', languages=["en"])
+        
+        ui_locale.install()
+        _ = ui_locale.gettext
         toolkit = create("com.sun.star.awt.Toolkit")
         parent = frame.getContainerWindow()
 
@@ -191,6 +244,9 @@ def create_window(ctx, args):
         # Autotext Listbox
         Autotext_Label = child.getControl("LabelListbox")
         Autotext_Label.Text = _("Auto Texts")
+
+        Preview_Label = child.getControl("LabelPreview")
+        Preview_Label.Text = _("Preview")
 
         Autotext_ListBox = child.getControl("SavedAutotext") 
 
@@ -304,7 +360,7 @@ class ActionListener(unohelper.Base, XActionListener):
 
             if selected_pos == -1:
                 parentwin = get_parent_document().getCurrentController().Frame.ContainerWindow
-                MessageBox(parentwin, _("No autotext is selected. Please select auotext and then press Insert"), _('Error'),ERRORBOX)
+                MessageBox(parentwin, _("No autotext is selected. Please select autotext and then press Insert"), _('Error'),ERRORBOX)
                 return
 
             psm = uno.getComponentContext().ServiceManager
@@ -317,6 +373,13 @@ class ActionListener(unohelper.Base, XActionListener):
             selected_autotext.applyTo(ViewCursor)
 
         if action_command == "AddSelectedAutoText":
+            try:
+                ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.autotextaddon")+'python/locales', languages=[getLanguage()])
+            except Exception as e:
+                ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.autotextaddon")+'python/locales', languages=["en"])
+        
+            ui_locale.install()
+            _ = ui_locale.gettext
             oCurs = get_parent_document().getCurrentSelection()
             psm = uno.getComponentContext().ServiceManager
             dps = psm.createInstance("com.sun.star.text.AutoTextContainer")
