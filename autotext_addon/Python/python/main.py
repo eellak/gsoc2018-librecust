@@ -1,6 +1,9 @@
 import uno
 import unohelper
 
+import gettext
+_ = gettext.gettext 
+
 from com.sun.star.awt.MessageBoxType import MESSAGEBOX, INFOBOX, WARNINGBOX, ERRORBOX, QUERYBOX
 from com.sun.star.awt.MessageBoxButtons import BUTTONS_OK, BUTTONS_OK_CANCEL, BUTTONS_ABORT_IGNORE_RETRY, BUTTONS_YES_NO_CANCEL, BUTTONS_YES_NO, BUTTONS_RETRY_CANCEL, DEFAULT_BUTTON_OK, DEFAULT_BUTTON_CANCEL, DEFAULT_BUTTON_RETRY, DEFAULT_BUTTON_YES, DEFAULT_BUTTON_NO, DEFAULT_BUTTON_IGNORE
 
@@ -187,7 +190,7 @@ def create_window(ctx, args):
 
         # Autotext Listbox
         Autotext_Label = child.getControl("LabelListbox")
-        Autotext_Label.Text = "Auto Texts"
+        Autotext_Label.Text = _("Auto Texts")
 
         Autotext_ListBox = child.getControl("SavedAutotext") 
 
@@ -200,17 +203,17 @@ def create_window(ctx, args):
         OK_Button = child.getControl("OKButton")
         OK_Button.addActionListener(action_listener)
         OK_Button.setActionCommand('InsertAutoText')
-        OK_Button.Label = "Insert"
+        OK_Button.Label = _("Insert")
 
         AddSelection_Button = child.getControl("AddSelectionButton")
         AddSelection_Button.addActionListener(action_listener)
         AddSelection_Button.setActionCommand('AddSelectedAutoText')
-        AddSelection_Button.Label = "Add Selection"        
+        AddSelection_Button.Label = _("Add Selection")        
         
         More_Button = child.getControl("MoreButton")
         More_Button.addActionListener(action_listener)
         More_Button.setActionCommand('MoreDispatch')
-        More_Button.Label = "More..."
+        More_Button.Label = _("More...")
 
         TeamList = child.getControl("GroupListBox")
         TeamList.addActionListener(ListBoxActionListener(ctx,child))
@@ -301,7 +304,7 @@ class ActionListener(unohelper.Base, XActionListener):
 
             if selected_pos == -1:
                 parentwin = get_parent_document().getCurrentController().Frame.ContainerWindow
-                MessageBox(parentwin, "No autotext is selected. Please select auotext and then press Insert", 'Error',ERRORBOX)
+                MessageBox(parentwin, _("No autotext is selected. Please select auotext and then press Insert"), _('Error'),ERRORBOX)
                 return
 
             psm = uno.getComponentContext().ServiceManager
@@ -320,7 +323,7 @@ class ActionListener(unohelper.Base, XActionListener):
             ViewCursor = get_parent_document().getCurrentController().getViewCursor()
             if ViewCursor.getString() == "":
                 parentwin = get_parent_document().getCurrentController().Frame.ContainerWindow
-                MessageBox(parentwin, "No content is selected. Please select content and then add to autotext list", 'Error',ERRORBOX)
+                MessageBox(parentwin, _("No content is selected. Please select content and then add to autotext list"), _('Error'),ERRORBOX)
                 return
             oRange = dps.getByName(current_group)            
             

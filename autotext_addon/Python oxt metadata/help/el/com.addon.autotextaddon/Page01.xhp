@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+   <meta>
+      <topic id="com.addon.autotextaddon.Page01">
+         <title id="tit" xml-lang="el">Autotext Addon : Εισαγωγή</title>
+         <filename>/com.addon.autotextaddon/Page01.xhp</filename>
+      </topic>
+   </meta>
+   <body>
+      <bookmark branch="hid/vnd.sun.star.script:AutotextAddon-0.0.1.oxt|python|main.py$toogle_autotext_sidebar?language=Python&amp;location=user:uno_packages" xml-lang="el" id="N0001"/>
+      <paragraph role="paragraph" xml-lang="el" id="N0002">
+         <ahelp hid="vnd.sun.star.script:AutotextAddon-0.0.1.oxt|python|main.py$toogle_autotext_sidebar?language=Python&amp;location=user:uno_packages" visibility="hidden">Ανάπτυξη AutoText</ahelp>
+      </paragraph>
+      <bookmark branch="index" xml-lang="el" id="N0003">
+         <bookmark_value>autotext;starter</bookmark_value>
+      </bookmark>
+      <paragraph role="paragraph" xml-lang="el" id="N0004">
+         
+      </paragraph>
+      <paragraph role="heading" level="1" xml-lang="el" id="N0005">
+         Εισαγωγή
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0006">
+         Το AutoText Addon αποτελεί ένα πρόσθετο διευκόλυνσης της χρήσης των αυτόματων κειμένων (autotexts) από τον μέσο χρήστη. Το LibreOffice προσφέρει τη δυνατότητα χρήσης αυτόματων κειμένων μέσω του μενού:<br/><br/>Εργαλεία -&gt; Αυτόματο Κείμενο... (F3)<br/><br/>Όλες οι λειτουργίες σχετικά με τα αυτόματα κείμενα περιέχονται σε αυτόν τον διάλογο. Όμως, ο σύνθετος διάλογος αυτός, δεν μπορεί να χρησιμοποιηθεί παράλληλα με την επεξεργασία κειμένου. Πρέπει σε κάθε στάδιο της συγγραφής ο χρήστης να κατευθύνεται σε αυτό το μενού και να επιλέγει από εκεί το κείμενο που θέλει να προσθέσει. <br/>Επιπλέον, προκειμένου να προστεθεί αυτόματο κείμενο, είναι απαραίτητο να επιλεχθεί αυτό, ο χρήστης να κατευθυνθεί στο κατάλληλο μενού και στη συνέχεια να το προσθέσει στη σωστή κατηγορία από τον σύνθετο διάλογο. 
+      </paragraph>
+      <paragraph role="heading" level="2" xml-lang="el" id="N0007">
+         Στόχος
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0008">
+         Η επέκταση αυτή διευκολύνει όλα τα παραπάνω προσφέροντας τη δυνατότητα προσθήκης και χρήσης των αυτόματων κειμένων κατά τη σύνθεση οποιουδήποτε εγγράφου. Επιπλέον δυνατότητες, εξακολουθούν να δρομολογούνται στον προεπιλεγμένο διάλογο, απλοποιώντας τη διαδικασία χρήσης των αυτόματων κειμένων.
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0009">
+         
+      </paragraph>
+   </body>
+</helpdocument>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+   <meta>
+      <topic id="com.addon.autotextaddon.Page03">
+         <title id="tit" xml-lang="el">Autotext Addon : Χρήση_επέκτασης</title>
+         <filename>/com.addon.autotextaddon/Page03.xhp</filename>
+      </topic>
+   </meta>
+   <body>
+      <paragraph role="heading" level="1" xml-lang="el" id="N0022">
+         Χρήση επέκτασης Autotext
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0023">
+         Το συγκεκριμένο πρόσθετο εισάγει μία απλούστερη διεπαφή χρήσης των αυτόματων κειμένων μέσω του ακόλουθου διαλόγου:
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0024">
+         ΕΙΚΟΝΑ ΔΙΑΛΟΓΟΥ
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0025">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0026">
+         Στη συνέχεια θα περιγράψουμε αναλυτικά τις δυνατότητες της επέκτασης:
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0027">
+         
+      </paragraph>
+      <paragraph role="heading" level="2" xml-lang="el" id="N0028">
+         Περιγραφή επέκτασης
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0029">
+         Η συγκεκριμένη διεπαφή χρήσης των αυτόματων κειμένων υποστηρίζει είτε την λειτουργία ως ανεξάρτητο παράθυρο που μπορέι να ελαχιστοποιηθεί, είτε την προσάρτηση στο κύριο παράθυρο του LibreOffice με τη μορφή πλευρικής μπάρας εργαλείων.
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0030">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0031">
+         Προκείμενου να εναλλάσσονται οι δύο λειτουργίες ο χρήστης κρατώντας πατημένο το πλήκτρο Ctrl πιέζει διπλό κλικ σε οποιοδήποτε σημείο του διαλόγου εκτός των στοιχείων (πλήκτρα, λίστες...)
+      </paragraph>
+      <paragraph role="tip" xml-lang="el" id="N0032">
+         Ctrl + Διπλό κλικ για εναλλαγή από αιωρούμενο παράθυρο σε προσαρτημένη πλευρική γραμμή εργαλείων.
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0033">
+         
+      </paragraph>
+      <paragraph role="heading" level="3" xml-lang="el" id="N0034">
+         Ενεργοποίηση / απενεργοποίηση προσθέτου
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0035">
+         Χρησιμοποιώντας το πλήκτρο (ICON) της γραμμής εργαλείων, ενεργοποιείται / απενεργοποιείται το παράθυρο της επέκτασης Autotext
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0036">
+         
+      </paragraph>
+      <paragraph role="heading" level="3" xml-lang="el" id="N0037">
+         Στοιχεία διαλόγου
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0038">
+         Τα επιμέρους στοιχεία του διαλόγου είναι τα εξής:
+      </paragraph>
+      <list type="unordered">
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0039">
+               <emph>Κατηγορία</emph>: Η κατηγορία των αυτόματων κειμένων που προβάλλονται στον διάλογο. 
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0040">
+               <emph>Αυτόματα Κείμενα</emph>: Τα αυτόματα κείμενα που περιέχονται σε αυτή τη κατηγορία. Τα κείμενα είναι ταξινομημένα ως προς το όνομά τους ενώ δίνεται η δυνατότητα στον χρήστη να αναζητήσει κάποιο απλά πληκτρολογώντας το όνομά που τον ενδιαφέρει πάνω στη λίστα.
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0041">
+               <emph>Προεπισκόπηση</emph>: Εμφάνιση προεπισκόπησης του αυτόματου κειμένου που είναι επιλεγμένο από τη λίστα. 
+            </paragraph>
+         </listitem>
+      </list>
+      <paragraph role="warning" xml-lang="el" id="N0042">
+         Στη προεπισκόπηση εμφανίζεται μόνο το περιεχόμενο του αυτόματου κειμένου χωρίς ιδιότητες μορφοποίησης.
+      </paragraph>
+      <list type="unordered">
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0043">
+               <emph>Περισσότερα...</emph>: Άνοιγμα του σύνθετου διαλόγου για επιπλέον διαχείριση των Autotexts
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0044">
+               <emph>Προσθήκη επιλογής</emph>: Προσθήκη του επιλεγμένου κειμένου σε νέα καταχώρηση αυτόματων κειμένων.
+            </paragraph>
+         </listitem>
+      </list>
+      <paragraph role="warning" xml-lang="el" id="N0045">
+         Κατά τη Προσθήκη επιλογής το αυτόματο κείμενο προστίθεται στη κατηγορία εκείνη που προβάλλεται τη τρέχουσα στιγμή από το πεδίο <emph>Κατηγορία</emph>.
+      </paragraph>
+      <list type="unordered">
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0046">
+               <emph>Εισαγωγή</emph>: Εισαγωγή του επιλεγμένου αυτόματου κειμένου στη τρέχουσα θέση του κέρσορα στο έγγραφο.
+            </paragraph>
+         </listitem>
+      </list>
+      <paragraph role="paragraph" xml-lang="el" id="N0047">
+         
+      </paragraph>
+   </body>
+</helpdocument>
