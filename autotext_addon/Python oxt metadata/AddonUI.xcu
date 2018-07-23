@@ -23,5 +23,18 @@
          </node>
       </node>
 
+      <node oor:name="Images">
+         <node oor:name="com.addon.autotextaddon.N001" oor:op="replace">
+            <prop oor:name="URL" oor:type="xs:string">
+               <value>vnd.sun.star.script:AutotextAddon-0.0.1.oxt|python|main.py$toogle_autotext_sidebar?language=Python&amp;location=user:uno_packages</value>
+            </prop>
+            <node oor:name="UserDefinedImages">
+               <prop oor:name="ImageSmallURL" oor:type="xs:string">
+                  <value>%origin%/images/icon_16.png</value>
+               </prop>
+            </node>
+         </node>
+      </node>
+
    </node>
 </oor:component-data>

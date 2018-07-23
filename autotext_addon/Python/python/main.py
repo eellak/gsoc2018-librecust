@@ -247,6 +247,9 @@ def create_window(ctx, args):
         Autotext_Label = child.getControl("LabelListbox")
         Autotext_Label.Text = _("Auto Texts")
 
+        GroupLabel = child.getControl("GroupLabel")
+        GroupLabel.Text = _("Group")        
+
         Preview_Label = child.getControl("LabelPreview")
         Preview_Label.Text = _("Preview")
 
@@ -280,7 +283,8 @@ def create_window(ctx, args):
         global group_ids 
         group_ids = dps.getElementNames()
 
-
+        groups_to_insert = []
+        
         for x in group_ids:
             groups_to_insert[len(groups_to_insert):] = [dps.getByName(x).Title]
         

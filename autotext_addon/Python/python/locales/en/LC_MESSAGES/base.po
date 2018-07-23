@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2018-07-23 15:49+0300\n"
-"PO-Revision-Date: 2018-07-23 17:05+0300\n"
+"POT-Creation-Date: 2018-07-23 17:49+0300\n"
+"PO-Revision-Date: 2018-07-23 17:50+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -17,54 +17,58 @@ msgstr ""
 "X-Generator: Poedit 2.0.9\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: main.py:246
+#: main.py:248
 msgid "Auto Texts"
 msgstr "Auto Texts"
 
-#: main.py:249
+#: main.py:251
+msgid "Group"
+msgstr "Category"
+
+#: main.py:254
 msgid "Preview"
 msgstr "Preview"
 
-#: main.py:262
+#: main.py:267
 msgid "Insert"
 msgstr "Insert"
 
-#: main.py:267
+#: main.py:272
 msgid "Add Selection"
 msgstr "Add Selection"
 
-#: main.py:272
+#: main.py:277
 msgid "More..."
 msgstr "More..."
 
-#: main.py:363
+#: main.py:375
 msgid "No autotext is selected. Please select autotext and then press Insert"
 msgstr "No autotext is selected. Please select autotext and then press Insert"
 
-#: main.py:363 main.py:389 main.py:416
+#: main.py:375 main.py:401 main.py:430
 msgid "Error"
 msgstr "Error"
 
-#: main.py:389
+#: main.py:401
 msgid "No content is selected. Please select content and then add to autotext list"
 msgstr "No content is selected. Please select content and then add to autotext list"
 
-#: main.py:396
+#: main.py:410
 msgid "Add to category"
 msgstr "Add to category"
 
-#: main.py:402
+#: main.py:416
 msgid "Name"
 msgstr "Name"
 
-#: main.py:403
+#: main.py:417
 msgid "Shortcut"
 msgstr "Shortcut"
 
-#: main.py:404
+#: main.py:418
 msgid "Add"
 msgstr "Add"
 
-#: main.py:416
+#: main.py:430
 msgid "Cannot add selection to category"
 msgstr "Cannot add selection to category"

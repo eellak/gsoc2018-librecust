@@ -4,80 +4,76 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.0\n"
-"POT-Creation-Date: 2018-01-28 16:47+0000\n"
-"PO-Revision-Date: 2018-01-28 16:48+0000\n"
-"Last-Translator: me <johndoe@example.com>\n"
-"Language-Team: Greek <yourteam@example.com>\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2018-07-23 17:49+0300\n"
+"PO-Revision-Date: 2018-07-23 17:50+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 2.0.9\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: main.py:85
-msgid "Page Numbering Title"
-msgstr "Εισαγωγή αρίθμησης σελίδας"
+#: main.py:248
+msgid "Auto Texts"
+msgstr "Αυτόματα Κείμενα"
 
-#: main.py:73
-msgid "Cancel"
-msgstr "Ακύρωση"
+#: main.py:251
+msgid "Group"
+msgstr "Κατηγορία"
 
-#: main.py:76
-msgid "OK"
-msgstr "Εντάξει"
+#: main.py:254
+msgid "Preview"
+msgstr "Προεπισκόπηση"
 
-#: main.py:79
-msgid "Position"
-msgstr "Θέση"
+#: main.py:267
+msgid "Insert"
+msgstr "Εισαγωγή"
 
-#: main.py:81
-msgid "Footer"
-msgstr "Υποσέλιδο"
+#: main.py:272
+msgid "Add Selection"
+msgstr "Προσθήκη επιλογής"
 
-#: main.py:81
-msgid "Header"
-msgstr "Επικεφαλίδα"
+#: main.py:277
+msgid "More..."
+msgstr "Περισσότερα..."
 
-#: main.py:86
-msgid "Alignment"
-msgstr "Στοίχιση"
+#: main.py:375
+msgid "No autotext is selected. Please select autotext and then press Insert"
+msgstr ""
+"Δεν επιλέχθηκε αυτόματο κείμενο από τη λίστα. Επιλέξτε και μετά πατήστε "
+"Εισαγωγή"
 
-#: main.py:88
-msgid "Centered"
-msgstr "Κέντρο"
+#: main.py:375 main.py:401 main.py:430
+msgid "Error"
+msgstr "Σφάλμα"
 
-#: main.py:88
-msgid "Left"
-msgstr "Αριστερά"
+#: main.py:401
+msgid ""
+"No content is selected. Please select content and then add to autotext list"
+msgstr ""
+"Δεν επιλέχθηκε περιεχόμενο. Επιλέξτε και στη συνέχεια προσθέστε στη λίστα "
+"αυτόματων κειμένων"
 
-#: main.py:88
-msgid "Right"
-msgstr "Δεξιά"
+#: main.py:410
+msgid "Add to category"
+msgstr "Προσθήκη στη κατηγορία"
 
-#: main.py:92
-msgid "First Page"
-msgstr "Πρώτη σελίδα"
+#: main.py:416
+msgid "Name"
+msgstr "Όνομα"
 
-#: main.py:96
-msgid "PageOffsetLabel"
-msgstr "Αρίθμηση από..."
+#: main.py:417
+msgid "Shortcut"
+msgstr "Συντόμευση"
 
-#: main.py:102
-msgid "Numbering Type"
-msgstr "Τύπος"
+#: main.py:418
+msgid "Add"
+msgstr "Προσθήκη"
 
-#: main.py:108
-msgid "Decor"
-msgstr "Διακόσμηση"
-
-#: main.py:129
-msgid "Font"
-msgstr "Γραμματοσειρά"
-
-#: main.py:135
-msgid "Size"
-msgstr "Μέγεθος"
-
-#: main.py:214
-msgid "Page Numbering"
-msgstr "Αρίθμηση σελίδας"
+#: main.py:430
+msgid "Cannot add selection to category"
+msgstr "Αδύνατη εισαγωγή στη κατηγορία"

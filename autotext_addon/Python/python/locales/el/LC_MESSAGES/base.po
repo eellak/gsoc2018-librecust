@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2018-07-23 15:49+0300\n"
-"PO-Revision-Date: 2018-07-23 15:50+0300\n"
+"POT-Creation-Date: 2018-07-23 17:49+0300\n"
+"PO-Revision-Date: 2018-07-23 17:50+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: el\n"
@@ -17,59 +17,63 @@ msgstr ""
 "X-Generator: Poedit 2.0.9\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: main.py:246
+#: main.py:248
 msgid "Auto Texts"
 msgstr "Αυτόματα Κείμενα"
 
-#: main.py:249
+#: main.py:251
+msgid "Group"
+msgstr "Κατηγορία"
+
+#: main.py:254
 msgid "Preview"
 msgstr "Προεπισκόπηση"
 
-#: main.py:262
+#: main.py:267
 msgid "Insert"
 msgstr "Εισαγωγή"
 
-#: main.py:267
+#: main.py:272
 msgid "Add Selection"
 msgstr "Προσθήκη επιλογής"
 
-#: main.py:272
+#: main.py:277
 msgid "More..."
 msgstr "Περισσότερα..."
 
-#: main.py:363
+#: main.py:375
 msgid "No autotext is selected. Please select autotext and then press Insert"
 msgstr ""
 "Δεν επιλέχθηκε αυτόματο κείμενο από τη λίστα. Επιλέξτε και μετά πατήστε "
 "Εισαγωγή"
 
-#: main.py:363 main.py:389 main.py:416
+#: main.py:375 main.py:401 main.py:430
 msgid "Error"
 msgstr "Σφάλμα"
 
-#: main.py:389
+#: main.py:401
 msgid ""
 "No content is selected. Please select content and then add to autotext list"
 msgstr ""
 "Δεν επιλέχθηκε περιεχόμενο. Επιλέξτε και στη συνέχεια προσθέστε στη λίστα "
 "αυτόματων κειμένων"
 
-#: main.py:396
+#: main.py:410
 msgid "Add to category"
 msgstr "Προσθήκη στη κατηγορία"
 
-#: main.py:402
+#: main.py:416
 msgid "Name"
 msgstr "Όνομα"
 
-#: main.py:403
+#: main.py:417
 msgid "Shortcut"
 msgstr "Συντόμευση"
 
-#: main.py:404
+#: main.py:418
 msgid "Add"
 msgstr "Προσθήκη"
 
-#: main.py:416
+#: main.py:430
 msgid "Cannot add selection to category"
 msgstr "Αδύνατη εισαγωγή στη κατηγορία"
