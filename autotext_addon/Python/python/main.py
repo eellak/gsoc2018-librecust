@@ -1,8 +1,9 @@
 import uno
 import unohelper
-
+from urllib.parse import urlparse
 import gettext
 _ = gettext.gettext 
+from com.sun.star.beans import PropertyValue
 
 from com.sun.star.awt.MessageBoxType import MESSAGEBOX, INFOBOX, WARNINGBOX, ERRORBOX, QUERYBOX
 from com.sun.star.awt.MessageBoxButtons import BUTTONS_OK, BUTTONS_OK_CANCEL, BUTTONS_ABORT_IGNORE_RETRY, BUTTONS_YES_NO_CANCEL, BUTTONS_YES_NO, BUTTONS_RETRY_CANCEL, DEFAULT_BUTTON_OK, DEFAULT_BUTTON_CANCEL, DEFAULT_BUTTON_RETRY, DEFAULT_BUTTON_YES, DEFAULT_BUTTON_NO, DEFAULT_BUTTON_IGNORE
@@ -36,6 +37,46 @@ def get_parent_document():
         parent = doc.CurrentController.Frame.ContainerWindow
 
     return desktop.CurrentComponent
+
+def get_main_directory(module_name): #com.addon.pagenumbering
+    ctx = uno.getComponentContext()
+    srv = ctx.getByName("/singletons/com.sun.star.deployment.PackageInformationProvider")
+    return urlparse(srv.getPackageLocation(module_name)).path + "/"
+
+
+# Inspired by @sng at https://forum.openoffice.org/en/forum/viewtopic.php?f=45&t=81457
+# and Andrew Pitonyak pdf "Useful Useful Macro Information For OpenOffice.org"
+def getLanguage():
+    oProvider = "com.sun.star.configuration.ConfigurationProvider"
+    oAccess   = "com.sun.star.configuration.ConfigurationAccess"
+    oConfigProvider = get_instance(oProvider)
+    oProp = PropertyValue()
+    oProp.Name = "nodepath"
+    oProp.Value = "org.openoffice.Office.Linguistic/General"
+    properties = (oProp,)
+    key = "UILocale"
+    oSet = oConfigProvider.createInstanceWithArguments(oAccess, properties)
+    if oSet and (oSet.hasByName(key)):
+        ooLang = oSet.getPropertyValue(key)
+
+    if not (ooLang and not ooLang.isspace()):
+        oProp.Value = "/org.openoffice.Setup/L10N"
+        properties = (oProp,)
+        key = "ooLocale"
+        oSet = oConfigProvider.createInstanceWithArguments(oAccess, properties)
+        if oSet and (oSet.hasByName(key)):
+            ooLang = oSet.getPropertyValue(key)
+    return ooLang
+
+def get_instance(service_name):
+        """ gets a service from Uno """
+        sm = uno.getComponentContext()
+        ctx = sm.getServiceManager()
+        try:
+            service = ctx.createInstance(service_name)
+        except:
+            service = NONE
+        return service
 
 
 def xray(smgr, ctx, target):
@@ -135,6 +176,8 @@ RESOURCE_URL = "private:resource/dockingwindow/9809"
 EXT_ID = "com.addon.autotextaddon"
 
 current_group = "mytexts"
+group_ids = []
+groups_to_insert = []
 
 def create_window(ctx, args):
     """ Creates docking window.
@@ -158,10 +201,22 @@ def create_window(ctx, args):
 
     if frame is None: return None # ToDo: raise exception
 
+    global current_locale
+
     # this dialog has no title and placed at the top left corner.
     dialog1 = "vnd.sun.star.extension://com.addon.autotextaddon/dialogs_autotext/Dialog1.xdl"
     window = None
     if True:
+        ctx = uno.getComponentContext()
+        smgr = ctx.ServiceManager
+        
+        try:
+            ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.autotextaddon")+'python/locales', languages=[getLanguage()])
+        except Exception as e:
+            ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.autotextaddon")+'python/locales', languages=["en"])
+        
+        ui_locale.install()
+        _ = ui_locale.gettext
         toolkit = create("com.sun.star.awt.Toolkit")
         parent = frame.getContainerWindow()
 
@@ -192,6 +247,12 @@ def create_window(ctx, args):
         Autotext_Label = child.getControl("LabelListbox")
         Autotext_Label.Text = _("Auto Texts")
 
+        GroupLabel = child.getControl("GroupLabel")
+        GroupLabel.Text = _("Group")        
+
+        Preview_Label = child.getControl("LabelPreview")
+        Preview_Label.Text = _("Preview")
+
         Autotext_ListBox = child.getControl("SavedAutotext") 
 
         # there should be sorted entries by title and not name!
@@ -218,9 +279,17 @@ def create_window(ctx, args):
         TeamList = child.getControl("GroupListBox")
         TeamList.addActionListener(ListBoxActionListener(ctx,child))
 
-        groups_to_insert = dps.getElementNames() 
+        global groups_to_insert
+        global group_ids 
+        group_ids = dps.getElementNames()
+
+        groups_to_insert = []
+        
+        for x in group_ids:
+            groups_to_insert[len(groups_to_insert):] = [dps.getByName(x).Title]
+        
         TeamList.addItems(groups_to_insert,0)
-        TeamList.getModel().SelectedItems = [groups_to_insert.index(current_group)]
+        TeamList.getModel().SelectedItems = [group_ids.index(current_group)]
         
         child.setVisible(True)
 
@@ -304,7 +373,7 @@ class ActionListener(unohelper.Base, XActionListener):
 
             if selected_pos == -1:
                 parentwin = get_parent_document().getCurrentController().Frame.ContainerWindow
-                MessageBox(parentwin, _("No autotext is selected. Please select auotext and then press Insert"), _('Error'),ERRORBOX)
+                MessageBox(parentwin, _("No autotext is selected. Please select autotext and then press Insert"), _('Error'),ERRORBOX)
                 return
 
             psm = uno.getComponentContext().ServiceManager
@@ -317,6 +386,13 @@ class ActionListener(unohelper.Base, XActionListener):
             selected_autotext.applyTo(ViewCursor)
 
         if action_command == "AddSelectedAutoText":
+            try:
+                ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.autotextaddon")+'python/locales', languages=[getLanguage()])
+            except Exception as e:
+                ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.autotextaddon")+'python/locales', languages=["en"])
+        
+            ui_locale.install()
+            _ = ui_locale.gettext
             oCurs = get_parent_document().getCurrentSelection()
             psm = uno.getComponentContext().ServiceManager
             dps = psm.createInstance("com.sun.star.text.AutoTextContainer")
@@ -330,13 +406,30 @@ class ActionListener(unohelper.Base, XActionListener):
             dp = psm.createInstance("com.sun.star.awt.DialogProvider")
             dlg = dp.createDialog("vnd.sun.star.extension://com.addon.autotextaddon/dialogs_autotext/Dialog2.xdl")
 
+            global groups_to_insert
+            global group_ids
+            dlg.Title = _("Add to category") +" "+ groups_to_insert[group_ids.index(current_group)]
+
+            NameLabel = dlg.getControl("NameLabel")
+            ShortcutLabel = dlg.getControl("ShortcutLabel")
+            AddButton = dlg.getControl("AddButton")
+
+            NameLabel.Text = _("Name")
+            ShortcutLabel.Text = _("Shortcut")
+            AddButton.Label = _("Add")
+
             if dlg.execute() == 0:
                 return
             
             new_autotext_name = dlg.getControl("NameField").Text
             new_autotext_shortcut = dlg.getControl("ShortcutField").Text
 
-            oRange.insertNewByName(new_autotext_shortcut,new_autotext_name,oCurs.getByIndex(0))
+            try:
+                oRange.insertNewByName(new_autotext_shortcut,new_autotext_name,oCurs.getByIndex(0))
+            except Exception as e:
+                parentwin = get_parent_document().getCurrentController().Frame.ContainerWindow
+                MessageBox(parentwin, _("Cannot add selection to category") +" "+ current_group, _('Error'),ERRORBOX)
+            
 
             #refresh entries of main listbox
             oRange = dps.getByName(current_group)
@@ -373,7 +466,9 @@ class ListBoxActionListener(unohelper.Base, XActionListener):
 
         global sorted_by_title 
         global current_group
-        current_group = action_command
+        global groups_to_insert
+        global group_ids
+        current_group = group_ids[groups_to_insert.index(action_command)]
 
         autotext_listbox = dialog.getControl("SavedAutotext")
 
