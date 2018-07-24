@@ -28,6 +28,7 @@ case "$1" in
             eval sudo -u $USER_NAME $UNOPKG_PATH remove org.openoffice.legacy.LibreCustLib.oxt || true
             eval sudo -u $USER_NAME $UNOPKG_PATH remove org.libreoffice.settings_loader || true
             eval sudo -u $USER_NAME $UNOPKG_PATH remove org.kasenides.el-GR-en-US-dictionary || true
+            eval sudo -u $USER_NAME $UNOPKG_PATH remove com.addon.lawaddon || true
             LAST_MENUBAR="$(ls -1 | sort -r 2>&1 | head -n 1)"
             cp "$MENUBAR_DIR/$LAST_MENUBAR" "$MENUBAR_DIR/menubar.xml" || true
 
@@ -44,6 +45,7 @@ case "$1" in
     remove)
         rm -rf /var/cache/librecust
             eval sudo -u $USER_NAME $UNOPKG_PATH remove com.addon.pagenumbering || true
+            eval sudo -u $USER_NAME $UNOPKG_PATH remove com.addon.lawaddon || true
             eval sudo -u $USER_NAME $UNOPKG_PATH remove com.addon.autotextaddon || true
             eval sudo -u $USER_NAME $UNOPKG_PATH remove org.openoffice.legacy.LibreCustLib.oxt || true
             eval sudo -u $USER_NAME $UNOPKG_PATH remove org.libreoffice.settings_loader || true
