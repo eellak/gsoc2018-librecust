@@ -8,6 +8,7 @@ MENUBAR_PATH="/tmp/librecust/menubar.xml"
 TOOLBAR_SINGLE_PATH="/tmp/librecust/singlemode.xml"
 TOOLBAR_TEXTOBJ_PATH="/tmp/librecust/textobjectbar.xml"
 PAGE_NUMBERING_PATH="/tmp/librecust/PageNumbering*"
+SPELL_CHECK_PATH="/tmp/librecust/orthos*"
 USER_HOME_PATH="$(eval echo "~$different_user")"
 
 
@@ -26,6 +27,8 @@ case "$1" in
             eval sudo -u $USER_NAME $UNOPKG_PATH remove com.addon.autotextaddon || true
             eval sudo -u $USER_NAME $UNOPKG_PATH remove org.openoffice.legacy.LibreCustLib.oxt || true
             eval sudo -u $USER_NAME $UNOPKG_PATH remove org.libreoffice.settings_loader || true
+            eval sudo -u $USER_NAME $UNOPKG_PATH remove org.kasenides.el-GR-en-US-dictionary || true
+            eval sudo -u $USER_NAME $UNOPKG_PATH remove com.addon.lawaddon || true
             LAST_MENUBAR="$(ls -1 | sort -r 2>&1 | head -n 1)"
             cp "$MENUBAR_DIR/$LAST_MENUBAR" "$MENUBAR_DIR/menubar.xml" || true
 
@@ -39,7 +42,21 @@ case "$1" in
                 db_purge
         fi
         ;;
+    remove)
+        rm -rf /var/cache/librecust
+            eval sudo -u $USER_NAME $UNOPKG_PATH remove com.addon.pagenumbering || true
+            eval sudo -u $USER_NAME $UNOPKG_PATH remove com.addon.lawaddon || true
+            eval sudo -u $USER_NAME $UNOPKG_PATH remove com.addon.autotextaddon || true
+            eval sudo -u $USER_NAME $UNOPKG_PATH remove org.openoffice.legacy.LibreCustLib.oxt || true
+            eval sudo -u $USER_NAME $UNOPKG_PATH remove org.libreoffice.settings_loader || true
+            eval sudo -u $USER_NAME $UNOPKG_PATH remove org.kasenides.el-GR-en-US-dictionary || true
+            LAST_MENUBAR="$(ls -1 | sort -r 2>&1 | head -n 1)"
+            cp "$MENUBAR_DIR/$LAST_MENUBAR" "$MENUBAR_DIR/menubar.xml" || true
 
+            LAST_TOOLBAR_DIR="$(ls -1 | sort -r 2>&1 | head -n 1)"
+            cp "$TOOLBAR_DIR/$LAST_TOOLBAR_DIR/* $TOOLBAR_DIR/" || true
+
+        ;;
     remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
         ;;
 

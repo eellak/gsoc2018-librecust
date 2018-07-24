@@ -6,6 +6,6 @@ Description: Terminate LibreOffice instances to continue installation?:
 
 Template: librecust/question2
 Type: multiselect
-Choices: Page Numbering, Settings loader, AutoText Wizard, LibreCust lib, Law toolbar, UI customizations
-Default: Page Numbering, Settings loader, AutoText Wizard, LibreCust lib, UI customizations
+Choices: Page Numbering, Settings loader, AutoText Wizard, LibreCust lib, Law toolbar, UI customizations, Orthos Greek spell-check
+Default: Page Numbering, Settings loader, AutoText Wizard, LibreCust lib, Law toolbar, UI customizations, Orthos Greek spell-check
 Description: Please select librecust packages to install:

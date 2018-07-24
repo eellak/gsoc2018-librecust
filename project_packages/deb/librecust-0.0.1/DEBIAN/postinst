@@ -16,6 +16,7 @@ MENUBAR_PATH="/tmp/librecust/menubar.xml"
 TOOLBAR_SINGLE_PATH="/tmp/librecust/singlemode.xml"
 TOOLBAR_TEXTOBJ_PATH="/tmp/librecust/textobjectbar.xml"
 PAGE_NUMBERING_PATH="/tmp/librecust/PageNumbering*"
+SPELL_CHECK_PATH="/tmp/librecust/orthos*"
 USER_HOME_PATH="$(eval echo "~$different_user")"
 
 
@@ -26,7 +27,7 @@ TOOLBAR_DIR="$USER_PROFILE_PATH/soffice.cfg/modules/swriter/toolbar"
 INSTALLATION_TIMESTAMP="$(timestamp)"
 
 declare -A SELECT_DICT
-SELECT_DICT=( ['Page Numbering']=1 ['Settings loader']=2 ['AutoText Wizard']=3 ['LibreCust lib']=4 ['Law toolbar']=5 ['UI customizations']=6)
+SELECT_DICT=( ['Page Numbering']=1 ['Settings loader']=2 ['AutoText Wizard']=3 ['LibreCust lib']=4 ['Law toolbar']=5 ['UI customizations']=6 ['Orthos Greek spell-check']=7)
 IFS=","
 
 # Source debconf library.
@@ -41,7 +42,7 @@ if [[ $KILL_SOFFICE = "No" ]]; then
 	exit 0
 fi
 
-killall soffice.bin #kill those LO instances
+killall soffice.bin || true #kill those LO instances 
 
 prompt_result=${RET//", "/,}
 prompt_result=($prompt_result);
@@ -76,6 +77,8 @@ for i in "${!prompt_result[@]}"; do
 			cp "$TOOLBAR_TEXTOBJ_PATH" "$TOOLBAR_DIR/" || true
 			echo "[DONE]"
 			;;
+		7) echo "Installing Orthos Greek spell-check"
+			eval sudo -u $USER_NAME $UNOPKG_PATH add -f $SPELL_CHECK_PATH
 	esac
 done
 
