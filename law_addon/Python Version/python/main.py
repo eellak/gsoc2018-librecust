@@ -69,6 +69,19 @@ def insert_law(*args):
     if dlg.execute() == 0:
         return
 
+    # Get dialog Model
+    oDialog1Model = dlg.Model
+
+    # Get user input
+
+    LawIDField = oDialog1Model.getByName("LawIDField")
+    LawIDString = LawIDField.Text
+    
+
+    # Get data drom 3gm server
+    response = requests.get("https://jsonplaceholder.typicode.com/todos")
+    todos = json.loads(response.text)
+
     ViewCursor.setString("HALLO")    
 
 def insert_contents(*args):
