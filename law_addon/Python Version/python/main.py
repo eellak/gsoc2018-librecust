@@ -9,6 +9,9 @@ from com.sun.star.beans.PropertyAttribute import REMOVEABLE
 from com.sun.star.beans.PropertyAttribute import MAYBEDEFAULT
 from com.sun.star.beans import PropertyValue
 
+import json
+import requests
+
 def main(*args):
     ctx = uno.getComponentContext()
     smgr = ctx.ServiceManager
@@ -74,15 +77,22 @@ def insert_law(*args):
 
     # Get user input
 
-    LawIDField = oDialog1Model.getByName("LawIDField")
+    LawIDField = oDialog1Model.getByName("TextField1")
     LawIDString = LawIDField.Text
     
+    LawIDString = LawIDString.replace(" ", "/")
+
+    ViewCursor.setString(LawIDString)
+
 
     # Get data drom 3gm server
-    response = requests.get("https://jsonplaceholder.typicode.com/todos")
-    todos = json.loads(response.text)
-
-    ViewCursor.setString("HALLO")    
+    response = requests.get("http://snf-829516.vm.okeanos.grnet.gr/"+LawIDString)
+    
+    if response.status_code == 404 :
+        ViewCursor.setString("404 server not accessible")
+        return
+    Versions = json.loads(response.text)
+    #ViewCursor.setString(Versions[0].text)    
 
 def insert_contents(*args):
     ctx = uno.getComponentContext()
