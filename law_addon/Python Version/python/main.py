@@ -112,7 +112,7 @@ def insert_contents(*args):
     doc = XSCRIPTCONTEXT.getDocument().getCurrentController()
     dispatcher.executeDispatch(doc,  ".uno:InsertMultiIndex", "", 0, tuple())
 
-def insert_external_document():
+def insert_external_document(*args):
     doc = XSCRIPTCONTEXT.getDocument()
 
     #Create view cursor to take current cursor position
@@ -131,9 +131,30 @@ def insert_external_document():
     #For now
     string = 'EXTERNAL DOCUMENT'
     
+    #After all insert the link in current cursor position
     cursor.setString(string)
     cursor.HyperLinkURL = url
-    #xray(smgr,ctx,doc)
+
+    Bookmark = doc.createInstance("com.sun.star.text.Bookmark")
+    
+    #For now
+    Bookmark.setName(url)
+    doc_text.insertTextContent(cursor,Bookmark,False)
+    
+    '''
+    Info about getting page number of certain bookmark
+    Useful for document merging later on
+
+    LibreOffice Basic macro from developers guide
+    oVC.gotoRange(oBookmark.getAnchor(), False)
+
+    REM Grab page number and then return view cursor to previous location
+    pg = oVC.getPage()
+    oVC.gotoRange(oTextCursor, False)
+
+    '''
+
+    #xray(smgr,ctx,doc.Bookmarks.getByIndex(0))
     
 
 
