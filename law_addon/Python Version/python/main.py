@@ -83,26 +83,41 @@ def insert_law(*args):
     if dlg.execute() == 0:
         return
 
+    doc_text = Doc.getCurrentController().getModel().getText()
+
+    cursor = doc_text.createTextCursorByRange(ViewCursor)
     # Get dialog Model
     oDialog1Model = dlg.Model
 
-    # Get user input
+    # Get user inputViewCursor.setString("Άρθρο "+ article_num + "\n")
 
     LawIDField = oDialog1Model.getByName("TextField1")
     LawIDString = LawIDField.Text
     
     LawIDString = LawIDString.replace(" ", "/")
 
+    ViewCursor.gotoEnd(False)
     ViewCursor.setString(LawIDString)
-
+    
 
     # Get data drom 3gm server
-    response = requests.get("http://snf-829516.vm.okeanos.grnet.gr/"+LawIDString)
+    response = requests.get("http://snf-829516.vm.okeanos.grnet.gr/get_law/"+LawIDString)
     
     if response.status_code == 404 :
+        ViewCursor.gotoEnd(False)
         ViewCursor.setString("404 server not accessible")
         return
-    Versions = json.loads(response.text)
+    Versions = json.loads(response.text)['versions']
+    Articles = Versions[0]['articles']
+    for article_num,article_body in sorted(Articles.items(), key=lambda x: int(x[0])):
+        ViewCursor.gotoEnd(False)
+        ViewCursor.setString("Άρθρο "+ article_num + "\n") 
+        for paragraph_num,paragraph_body in sorted(article_body.items(),key=lambda x: int(x[0])):
+            ViewCursor.gotoEnd(False)
+            ViewCursor.setString("* Παράγραφος "+ paragraph_num + "\n")       
+        
+
+
     #ViewCursor.setString(Versions[0].text)    
 
 def insert_contents(*args):
@@ -140,7 +155,7 @@ def insert_external_document(*args):
     #For now
     Bookmark.setName(url)
     doc_text.insertTextContent(cursor,Bookmark,False)
-    
+        
     '''
     Info about getting page number of certain bookmark
     Useful for document merging later on
