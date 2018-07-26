@@ -123,10 +123,19 @@ def insert_external_document():
 
     ctx = uno.getComponentContext()
     smgr = ctx.ServiceManager
-    xray(smgr,ctx,url)
+    
 
+    doc_text = doc.getCurrentController().getModel().getText()
+
+    cursor = doc_text.createTextCursorByRange(ViewCursor)
+    #For now
     string = 'EXTERNAL DOCUMENT'
     
+    cursor.setString(string)
+    cursor.HyperLinkURL = url
+    #xray(smgr,ctx,doc)
+    
+
 
 def xray(smgr, ctx, target):
     mspf = smgr.createInstanceWithContext(
