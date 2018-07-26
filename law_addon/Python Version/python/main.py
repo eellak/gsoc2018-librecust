@@ -9,8 +9,19 @@ from com.sun.star.beans.PropertyAttribute import REMOVEABLE
 from com.sun.star.beans.PropertyAttribute import MAYBEDEFAULT
 from com.sun.star.beans import PropertyValue
 
+#file picker constants
+from com.sun.star.ui.dialogs.TemplateDescription import FILEOPEN_PREVIEW
+
 import json
 import requests
+
+# Shortcut for creating service in API
+createUnoService = (
+        XSCRIPTCONTEXT
+        .getComponentContext()
+        .getServiceManager()
+        .createInstance 
+                    )
 
 def main(*args):
     ctx = uno.getComponentContext()
@@ -101,6 +112,22 @@ def insert_contents(*args):
     doc = XSCRIPTCONTEXT.getDocument().getCurrentController()
     dispatcher.executeDispatch(doc,  ".uno:InsertMultiIndex", "", 0, tuple())
 
+def insert_external_document():
+    doc = XSCRIPTCONTEXT.getDocument()
+
+    #Create view cursor to take current cursor position
+    ViewCursor = doc.getCurrentController().getViewCursor()
+
+    # Pending to open on pwd of document firing the execution
+    url = FilePicker(None,FILEOPEN_PREVIEW)
+
+    ctx = uno.getComponentContext()
+    smgr = ctx.ServiceManager
+    xray(smgr,ctx,url)
+
+    string = 'EXTERNAL DOCUMENT'
+    
+
 def xray(smgr, ctx, target):
     mspf = smgr.createInstanceWithContext(
         "com.sun.star.script.provider.MasterScriptProviderFactory", ctx)
@@ -109,6 +136,17 @@ def xray(smgr, ctx, target):
         "vnd.sun.star.script:XrayTool._Main.Xray?language=Basic&location=application")
     script.invoke((target,), (), ())
 
+'''
+Fire file picker http://api.libreoffice.org/docs/idl/ref/namespacecom_1_1sun_1_1star_1_1ui_1_1dialogs_1_1TemplateDescription.html
+Constants are included from the previous link
+'''
+def FilePicker(path=None, mode=1):
+    filepicker = createUnoService( "com.sun.star.ui.dialogs.OfficeFilePicker" )
+    if path:
+        filepicker.setDisplayDirectory(path )
+    filepicker.initialize( ( mode,) )
+    if filepicker.execute():
+        return filepicker.getFiles()[0]  
 
 def copyUsingPropertySetInfo(srcObj, dstObj):
     ctx = uno.getComponentContext()
@@ -194,4 +232,4 @@ def get_instance(service_name):
 
 g_ImplementationHelper = unohelper.ImplementationHelper()
 
-g_exportedScripts = main,insert_hd1,insert_law,insert_contents,
+g_exportedScripts = main,insert_hd1,insert_law,insert_contents,insert_external_document,
