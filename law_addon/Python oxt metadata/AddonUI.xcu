@@ -36,6 +36,59 @@
                   <value>_self</value>
                </prop>
             </node>
+            <node oor:name="N003" oor:op="replace">
+               <prop oor:name="Context" oor:type="xs:string">
+                  <value>com.sun.star.text.TextDocument</value>
+               </prop>
+               <prop oor:name="Title" oor:type="xs:string">
+                  <value xml:lang="en">Insert Contents</value>
+                  <value xml:lang="el">Εισαγωγή πίνακα περιεχομένων</value>
+               </prop>
+               <prop oor:name="URL" oor:type="xs:string">
+                  <value>vnd.sun.star.script:LawAddon-0.0.1.oxt|python|main.py$insert_contents?language=Python&amp;location=user:uno_packages</value>
+               </prop>
+               <prop oor:name="Target" oor:type="xs:string">
+                  <value>_self</value>
+               </prop>
+            </node>
+            <node oor:name="N004" oor:op="replace">
+               <prop oor:name="Context" oor:type="xs:string">
+                  <value>com.sun.star.text.TextDocument</value>
+               </prop>
+               <prop oor:name="Title" oor:type="xs:string">
+                  <value xml:lang="en">Insert external document</value>
+                  <value xml:lang="el">Εισαγωγή εξωτερικού αρχείου</value>
+               </prop>
+               <prop oor:name="URL" oor:type="xs:string">
+                  <value>vnd.sun.star.script:LawAddon-0.0.1.oxt|python|main.py$insert_external_document?language=Python&amp;location=user:uno_packages</value>
+               </prop>
+               <prop oor:name="Target" oor:type="xs:string">
+                  <value>_self</value>
+               </prop>
+            </node>
+         </node>
+      </node>
+
+      <node oor:name="Images">
+         <node oor:name="com.addon.lawaddon.N001" oor:op="replace">
+            <prop oor:name="URL" oor:type="xs:string">
+               <value>vnd.sun.star.script:LawAddon-0.0.1.oxt|python|main.py$insert_law?language=Python&amp;location=user:uno_packages</value>
+            </prop>
+            <node oor:name="UserDefinedImages">
+               <prop oor:name="ImageSmallURL" oor:type="xs:string">
+                  <value>%origin%/images/scale_16.png</value>
+               </prop>
+            </node>
+         </node>
+         <node oor:name="com.addon.lawaddon.N002" oor:op="replace">
+            <prop oor:name="URL" oor:type="xs:string">
+               <value>vnd.sun.star.script:LawAddon-0.0.1.oxt|python|main.py$insert_contents?language=Python&amp;location=user:uno_packages</value>
+            </prop>
+            <node oor:name="UserDefinedImages">
+               <prop oor:name="ImageSmallURL" oor:type="xs:string">
+                  <value>%origin%/images/contents_16.png</value>
+               </prop>
+            </node>
          </node>
       </node>
 
