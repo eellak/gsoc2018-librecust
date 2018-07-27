@@ -3,6 +3,7 @@ import unohelper
 import itertools
 import operator
 import sys
+import re
 from com.sun.star.beans.PropertyAttribute import READONLY
 from com.sun.star.beans.PropertyAttribute import MAYBEVOID
 from com.sun.star.beans.PropertyAttribute import REMOVEABLE
@@ -91,7 +92,7 @@ def insert_law(*args):
 
     # Get user inputViewCursor.setString("Άρθρο "+ article_num + "\n")
 
-    LawIDField = oDialog1Model.getByName("TextField1")
+    LawIDField = oDialog1Model.getByName("InsertLawField")
     LawIDString = LawIDField.Text
     
     LawIDString = LawIDString.replace(" ", "/")
@@ -108,17 +109,43 @@ def insert_law(*args):
         ViewCursor.setString("404 server not accessible")
         return
     Versions = json.loads(response.text)['versions']
-    Articles = Versions[0]['articles']
-    for article_num,article_body in sorted(Articles.items(), key=lambda x: int(x[0])):
-        ViewCursor.gotoEnd(False)
-        ViewCursor.setString("Άρθρο "+ article_num + "\n") 
-        for paragraph_num,paragraph_body in sorted(article_body.items(),key=lambda x: int(x[0])):
+    Articles = Versions[-1]['articles'] # Pythonic get the last inserted element in list
+
+    ArticleField = oDialog1Model.getByName("ArticleField")
+
+    if re.search('\d+\s?\-\s?\d+',ArticleField.Text):
+        article_re = re.match('(\d+)\s?\-\s?(\d+)',ArticleField.Text)
+        article_left = int(article_re.groups()[0])
+        article_right = int(article_re.groups()[1])
+
+        for art_i in range(article_left,article_right+1):
             ViewCursor.gotoEnd(False)
-            ViewCursor.setString("      * Παράγραφος "+ paragraph_num + "\n")       
+            ViewCursor.setString("Άρθρο "+ str(art_i) + "\n")
+            article_body = Articles[str(art_i)]
+            
+            for paragraph_num,paragraph_body in sorted(article_body.items(),key=lambda x: int(x[0])):
+                ViewCursor.gotoEnd(False)
+                ViewCursor.setString("      * Παράγραφος "+ paragraph_num + "\n")
+                for sentence in paragraph_body:
+                    ViewCursor.gotoEnd(False)
+                    ViewCursor.setString(sentence + ".")
+                ViewCursor.gotoEnd(False)
+                ViewCursor.setString("\n")
+
+
+
         
 
 
     #ViewCursor.setString(Versions[0].text)    
+
+'''
+    for article_num,article_body in sorted(Articles.items(), key=lambda x: int(x[0])):
+        
+        for paragraph_num,paragraph_body in sorted(article_body.items(),key=lambda x: int(x[0])):
+            ViewCursor.gotoEnd(False)
+            ViewCursor.setString("      * Παράγραφος "+ paragraph_num + "\n")       
+'''
 
 def insert_contents(*args):
     ctx = uno.getComponentContext()
