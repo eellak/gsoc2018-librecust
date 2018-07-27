@@ -97,7 +97,7 @@ def insert_law(*args):
     LawIDString = LawIDString.replace(" ", "/")
 
     ViewCursor.gotoEnd(False)
-    ViewCursor.setString(LawIDString)
+    ViewCursor.setString(LawIDString+"\n")
     
 
     # Get data drom 3gm server
@@ -114,7 +114,7 @@ def insert_law(*args):
         ViewCursor.setString("Άρθρο "+ article_num + "\n") 
         for paragraph_num,paragraph_body in sorted(article_body.items(),key=lambda x: int(x[0])):
             ViewCursor.gotoEnd(False)
-            ViewCursor.setString("* Παράγραφος "+ paragraph_num + "\n")       
+            ViewCursor.setString("      * Παράγραφος "+ paragraph_num + "\n")       
         
 
 
