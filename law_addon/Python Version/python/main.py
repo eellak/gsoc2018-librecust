@@ -16,6 +16,19 @@ from com.sun.star.ui.dialogs.TemplateDescription import FILEOPEN_PREVIEW
 import json
 import requests
 
+import gettext
+_ = gettext.gettext 
+
+from com.sun.star.awt.MessageBoxType import MESSAGEBOX, INFOBOX, WARNINGBOX, ERRORBOX, QUERYBOX
+from com.sun.star.awt.MessageBoxButtons import BUTTONS_OK, BUTTONS_OK_CANCEL, BUTTONS_ABORT_IGNORE_RETRY, BUTTONS_YES_NO_CANCEL, BUTTONS_YES_NO, BUTTONS_RETRY_CANCEL, DEFAULT_BUTTON_OK, DEFAULT_BUTTON_CANCEL, DEFAULT_BUTTON_RETRY, DEFAULT_BUTTON_YES, DEFAULT_BUTTON_NO, DEFAULT_BUTTON_IGNORE
+
+def MessageBox(ParentWin, MsgText, MsgTitle, MsgType=MESSAGEBOX, MsgButtons=BUTTONS_OK):
+  ctx = uno.getComponentContext()
+  sm = ctx.ServiceManager
+  sv = sm.createInstanceWithContext("com.sun.star.awt.Toolkit", ctx) 
+  myBox = sv.createMessageBox(ParentWin, MsgType, MsgButtons, MsgTitle, MsgText)
+  return myBox.execute()
+
 # Shortcut for creating service in API
 createUnoService = (
         XSCRIPTCONTEXT
@@ -81,35 +94,53 @@ def insert_law(*args):
     dp = psm.createInstance("com.sun.star.awt.DialogProvider")
     dlg = dp.createDialog("vnd.sun.star.extension://com.addon.lawaddon/dialogs/InsertLaw.xdl")
 
+    # Get dialog Model
+    oDialog1Model = dlg.Model
+
+    TypeField = oDialog1Model.getByName("TypeListBox")
+
+    TypeField.StringItemList = ["ν.","π.δ."]
+
     if dlg.execute() == 0:
         return
 
     doc_text = Doc.getCurrentController().getModel().getText()
 
     cursor = doc_text.createTextCursorByRange(ViewCursor)
-    # Get dialog Model
-    oDialog1Model = dlg.Model
 
     # Get user inputViewCursor.setString("Άρθρο "+ article_num + "\n")
 
     LawIDField = oDialog1Model.getByName("InsertLawField")
     LawIDString = LawIDField.Text
     
-    LawIDString = LawIDString.replace(" ", "/")
+    #LawIDString = LawIDString.replace(" ", "/")
 
-    ViewCursor.gotoEnd(False)
-    ViewCursor.setString(LawIDString+"\n")
+    UndoManager = Doc.getUndoManager()
     
+    
+    LawTypeIndex = TypeField.SelectedItems[0]
+    LawType = TypeField.getItemText(LawTypeIndex)
 
+    # Start API communications, developers should apply different API here
     # Get data drom 3gm server
-    response = requests.get("http://snf-829516.vm.okeanos.grnet.gr/get_law/"+LawIDString)
+    response = requests.get("http://snf-829516.vm.okeanos.grnet.gr/get_law/"+ LawType +"/" +LawIDString)
     
     if response.status_code == 404 :
-        ViewCursor.gotoEnd(False)
-        ViewCursor.setString("404 server not accessible")
+        parentwin = Doc.getCurrentController().Frame.ContainerWindow
+        MessageBox(parentwin, _("Failure while communicating with server, please try later"), _('Error'),ERRORBOX)
         return
-    Versions = json.loads(response.text)['versions']
-    Articles = Versions[-1]['articles'] # Pythonic get the last inserted element in list
+    
+    try:
+        Versions = json.loads(response.text)['versions']
+        Articles = Versions[-1]['articles'] # Pythonic get the last inserted element in list
+    except Exception as e:
+        parentwin = Doc.getCurrentController().Frame.ContainerWindow
+        MessageBox(parentwin, _("Failure while communicating with server, please try later"), _('Error'),ERRORBOX)
+        return
+    
+    UndoManager.enterUndoContext(_("Insert Law"))   #There should be included all those changing operations that should be put in undo stack
+    ViewCursor.gotoEnd(False)
+    ViewCursor.setString(LawIDString+"\n")
 
     ArticleField = oDialog1Model.getByName("ArticleField")
 
@@ -120,32 +151,18 @@ def insert_law(*args):
 
         for art_i in range(article_left,article_right+1):
             ViewCursor.gotoEnd(False)
-            ViewCursor.setString("Άρθρο "+ str(art_i) + "\n")
+            ViewCursor.setString(_("Article")+" "+ str(art_i) + "\n")
             article_body = Articles[str(art_i)]
             
             for paragraph_num,paragraph_body in sorted(article_body.items(),key=lambda x: int(x[0])):
                 ViewCursor.gotoEnd(False)
-                ViewCursor.setString("      * Παράγραφος "+ paragraph_num + "\n")
+                ViewCursor.setString(_("Paragraph")+ " " + paragraph_num + "\n")
                 for sentence in paragraph_body:
                     ViewCursor.gotoEnd(False)
                     ViewCursor.setString(sentence + ".")
                 ViewCursor.gotoEnd(False)
                 ViewCursor.setString("\n")
-
-
-
-        
-
-
-    #ViewCursor.setString(Versions[0].text)    
-
-'''
-    for article_num,article_body in sorted(Articles.items(), key=lambda x: int(x[0])):
-        
-        for paragraph_num,paragraph_body in sorted(article_body.items(),key=lambda x: int(x[0])):
-            ViewCursor.gotoEnd(False)
-            ViewCursor.setString("      * Παράγραφος "+ paragraph_num + "\n")       
-'''
+    UndoManager.leaveUndoContext()
 
 def insert_contents(*args):
     ctx = uno.getComponentContext()
