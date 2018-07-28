@@ -213,7 +213,6 @@ def insert_law(*args):
         MessageBox(parentwin, _("Failure while communicating with server, please try later"), _('Error'),ERRORBOX)
         return
     
-    UndoManager.enterUndoContext(_("Insert Law"))   #There should be included all those changing operations that should be put in undo stack
     ViewCursor.gotoEnd(False)
     ViewCursor.setString(LawIDString+"\n")
     UndoManager.leaveUndoContext()
