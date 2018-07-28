@@ -47,10 +47,23 @@ defaults:
     seo:
       type: "WebPage"
 
+- scope:
+    path: _guides
+    type: guides
+  values:
+    layout: guides
+    sectionid: guides
+    seo:
+      type: "WebPage"
+
+
 collections:
   docs:
     permalink: /:collection/:path/
     output: true
   posts:
     permalink: /blog/:year/:month/:day/:title/
+    output: true
+  guides:
+    permalink: /:collection/:path/
     output: true

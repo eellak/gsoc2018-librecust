@@ -1,0 +1,10 @@
+- title: Examples
+  docs:
+  - bootstrap
+  - cheatsheet
+
+- title: AutoText
+  docs:
+  - autotext_intro
+  - autotext_descr
+  - autotext_usage
