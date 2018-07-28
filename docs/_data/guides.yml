@@ -8,3 +8,7 @@
   - autotext_intro
   - autotext_descr
   - autotext_usage
+
+- title: Page Numbering
+  docs:
+  - pagenum_usage  
