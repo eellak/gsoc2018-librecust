@@ -216,6 +216,7 @@ def insert_law(*args):
     UndoManager.enterUndoContext(_("Insert Law"))   #There should be included all those changing operations that should be put in undo stack
     ViewCursor.gotoEnd(False)
     ViewCursor.setString(LawIDString+"\n")
+    UndoManager.leaveUndoContext()
 
     ArticleField = oDialog1Model.getByName("ArticleField")
 
@@ -224,17 +225,22 @@ def insert_law(*args):
         article_left = int(article_re.groups()[0])
         article_right = int(article_re.groups()[1])
 
+        UndoManager.enterUndoContext(_("Insert Law"))
+
         for art_i in range(article_left,article_right+1):
             ViewCursor.gotoEnd(False)
             ViewCursor.setString(_("Article")+" "+ str(art_i) + "\n")
             article_body = Articles[str(art_i)]
             
             print_paragraphs(article_body,ViewCursor)
-            
+
+        UndoManager.leaveUndoContext()
     elif re.search('\s?\d+\s?',ArticleField.Text):
             article_re = re.match('\s?(\d+)\s?',ArticleField.Text)
             article_num = int(article_re.groups()[0])
 
+            UndoManager.enterUndoContext(_("Insert Law"))
+        
             # Insert article
             ViewCursor.gotoEnd(False)
             ViewCursor.setString(_("Article")+" "+ str(article_num) + "\n")
@@ -242,8 +248,13 @@ def insert_law(*args):
             article_body = Articles[str(article_num)]
             print_paragraphs(article_body,ViewCursor)
 
+            UndoManager.leaveUndoContext()
+
     elif re.search('\d+\s?,?\s?',ArticleField.Text):
         article_re = re.match('\d+\s?,?\s?',ArticleField.Text)
+        
+        UndoManager.enterUndoContext(_("Insert Law"))
+        
         for art_i in article_re.groups():
             art_index = int(art_i)
 
@@ -252,13 +263,13 @@ def insert_law(*args):
             article_body = Articles[str(art_i)]
             
             print_paragraphs(article_body,ViewCursor)
+
+        UndoManager.leaveUndoContext()
     else:
         parentwin = Doc.getCurrentController().Frame.ContainerWindow
         MessageBox(parentwin, _("Empty or wrong Articles input, please try again"), _('Law ID Error'),ERRORBOX)
         insert_law()
         return
-        
-    UndoManager.leaveUndoContext()
 
 def print_paragraphs(article_body , ViewCursor):
     for paragraph_num,paragraph_body in sorted(article_body.items(),key=lambda x: int(x[0])):
