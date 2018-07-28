@@ -229,14 +229,8 @@ def insert_law(*args):
             ViewCursor.setString(_("Article")+" "+ str(art_i) + "\n")
             article_body = Articles[str(art_i)]
             
-            for paragraph_num,paragraph_body in sorted(article_body.items(),key=lambda x: int(x[0])):
-                ViewCursor.gotoEnd(False)
-                ViewCursor.setString(_("Paragraph")+ " " + paragraph_num + "\n")
-                for sentence in paragraph_body:
-                    ViewCursor.gotoEnd(False)
-                    ViewCursor.setString(sentence + ".")
-                ViewCursor.gotoEnd(False)
-                ViewCursor.setString("\n")
+            print_paragraphs(article_body,ViewCursor)
+            
     elif re.search('\s?\d+\s?',ArticleField.Text):
             article_re = re.match('\s?(\d+)\s?',ArticleField.Text)
             article_num = int(article_re.groups()[0])
@@ -246,15 +240,8 @@ def insert_law(*args):
             ViewCursor.setString(_("Article")+" "+ str(article_num) + "\n")
 
             article_body = Articles[str(article_num)]
+            print_paragraphs(article_body,ViewCursor)
 
-            for paragraph_num,paragraph_body in sorted(article_body.items(),key=lambda x: int(x[0])):
-                ViewCursor.gotoEnd(False)
-                ViewCursor.setString(_("Paragraph")+ " " + paragraph_num + "\n")
-                for sentence in paragraph_body:
-                    ViewCursor.gotoEnd(False)
-                    ViewCursor.setString(sentence + ".")
-                ViewCursor.gotoEnd(False)
-                ViewCursor.setString("\n")
     elif re.search('\d+\s?,?\s?',ArticleField.Text):
         article_re = re.match('\d+\s?,?\s?',ArticleField.Text)
         for art_i in article_re.groups():
@@ -264,15 +251,7 @@ def insert_law(*args):
             ViewCursor.setString(_("Article")+" "+ str(art_i) + "\n")
             article_body = Articles[str(art_i)]
             
-            for paragraph_num,paragraph_body in sorted(article_body.items(),key=lambda x: int(x[0])):
-                ViewCursor.gotoEnd(False)
-                ViewCursor.setString(_("Paragraph")+ " " + paragraph_num + "\n")
-                for sentence in paragraph_body:
-                    ViewCursor.gotoEnd(False)
-                    ViewCursor.setString(sentence + ".")
-                ViewCursor.gotoEnd(False)
-                ViewCursor.setString("\n")
-    
+            print_paragraphs(article_body,ViewCursor)
     else:
         parentwin = Doc.getCurrentController().Frame.ContainerWindow
         MessageBox(parentwin, _("Empty or wrong Articles input, please try again"), _('Law ID Error'),ERRORBOX)
@@ -280,6 +259,16 @@ def insert_law(*args):
         return
         
     UndoManager.leaveUndoContext()
+
+def print_paragraphs(article_body , ViewCursor):
+    for paragraph_num,paragraph_body in sorted(article_body.items(),key=lambda x: int(x[0])):
+        ViewCursor.gotoEnd(False)
+        ViewCursor.setString(_("Paragraph")+ " " + paragraph_num + "\n")
+        for sentence in paragraph_body:
+            ViewCursor.gotoEnd(False)
+            ViewCursor.setString(sentence + ".")
+        ViewCursor.gotoEnd(False)
+        ViewCursor.setString("\n")
 
 def insert_contents(*args):
     ctx = uno.getComponentContext()
