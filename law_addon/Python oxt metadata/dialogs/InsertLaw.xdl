@@ -13,6 +13,6 @@
   <dlg:menulist dlg:id="TypeListBox" dlg:tab-index="5" dlg:left="7" dlg:top="21" dlg:width="108" dlg:height="19" dlg:spin="true"/>
   <dlg:text dlg:id="ArticleLabel" dlg:tab-index="6" dlg:left="9" dlg:top="114" dlg:width="31" dlg:height="11" dlg:value="Article/s"/>
   <dlg:textfield dlg:id="ArticleField" dlg:tab-index="7" dlg:left="43" dlg:top="110" dlg:width="57" dlg:height="19"/>
-  <dlg:button dlg:style-id="0" dlg:id="CommandButton1" dlg:tab-index="8" dlg:left="86" dlg:top="134" dlg:width="17" dlg:height="19" dlg:value="?" dlg:button-type="help"/>
+  <dlg:button dlg:style-id="0" dlg:id="CommandButton1" dlg:tab-index="8" dlg:left="86" dlg:top="134" dlg:width="17" dlg:height="19" dlg:value="?" dlg:button-type="help" dlg:help-url="com.addon.lawaddon/Page02.xhp" />
  </dlg:bulletinboard>
 </dlg:window>

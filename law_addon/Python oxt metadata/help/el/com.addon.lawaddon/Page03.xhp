@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+   <meta>
+      <topic id="com.addon.lawaddon.Page03">
+         <title id="tit" xml-lang="el">LawAddon-0.0.1.oxt : Εισαγωγή εξωτερικού αρχείου</title>
+         <filename>/com.addon.lawaddon/Page03.xhp</filename>
+      </topic>
+   </meta>
+   <body>
+      <paragraph role="heading" level="1" xml-lang="el" id="N0021">
+         Εισαγωγή εξωτερικού αρχείου
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0022">
+         Κατά τη συγκεκριμένη λειτουργία, και με την βοήθεια διαλόγου, προσφέρεται η δυνατότητα εισαγωγής οποιουδήποτε εξωτερικού αρχείου με τη μορφή υπερ-συνδέσμου. Χρησιμοποιώντας αυτό το εργαλείο, ο χρήστης μπορεί να παρεμβάλλει εξωτερικά αρχεία στο επεξεργάσιμο έγγραφό του, χωρίς αυτά να γεμίζουν το κείμενο και να υποχρεώνουν τον χρήστη να τα προσπερνά ώστε να επεξεργαστεί το έγγραφο. Τα έγγραφα αυτά προστίθενται με χρήση του σχετικού ως προς το ανοικτό έγγραφο μονοπάτι. Συνεπώς, προκειμένου να μεταφερθεί ορθά το έγγραφο θα πρέπει να μεταφερθεί μαζί με τον φάκελο των εξωτερικών αντικειμένων, χωρίς να αλλάξει το μονοπάτι προς αυτά.
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0023">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0024">
+         Προκειμένου να εισαχθεί το εξωτερικό αρχείο, ο χρήστης οφείλει να ακολουθήσει τα εξής βήματα:
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0025">
+         
+      </paragraph>
+      <list type="ordered">
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0026">
+               Επιλογή εργαλείου &quot;Εισαγωγή εξωτερικού αρχείου&quot; <image src="com.addon.lawaddon/../../../images/help_icon_scale.png" id="N0027"></image> από τη γραμμή εργαλείων &quot;Νομικά έγγραφα&quot; 
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0028">
+               Επιλογή του αρχείου από τον διάλογο επιλογής που εμφανίζεται.
+            </paragraph>
+         </listitem>
+      </list>
+      <paragraph role="tip" xml-lang="el" id="N0029">
+         Το πρόσθετο αυτό χρησιμοποιεί σχετικά μονοπάτια για την αντιστοίχηση των συνδέσμων με τα εξωτερικά αρχεία. Για αυτό χρειάζεται να είναι ενεργοποιημένη η επιλογή Εργαλεία-&gt;Επιλογές-&gt;Αποθήκευση URLs σχετικών με το σύστημα αρχείων
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0030">
+         
+      </paragraph>
+   </body>
+</helpdocument>

@@ -37,11 +37,16 @@
                <link href="com.addon.lawaddon/Page02.xhp" name ="Page02">Αυτόματη εισαγωγή κειμένου νόμου</link>
             </paragraph>
          </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0008">
+               <link href="com.addon.lawaddon/Page03.xhp" name ="Page03">Εισαγωγή εξωτερικού αρχείου</link>
+            </paragraph>
+         </listitem>
       </list>
-      <paragraph role="paragraph" xml-lang="el" id="N0008">
+      <paragraph role="paragraph" xml-lang="el" id="N0009">
          
       </paragraph>
-      <paragraph role="paragraph" xml-lang="el" id="N0009">
+      <paragraph role="paragraph" xml-lang="el" id="N0010">
          
       </paragraph>
    </body>

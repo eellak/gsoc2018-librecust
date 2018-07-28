@@ -3,5 +3,6 @@
    <help_section application="comaddonlawaddon" id="01" title="Πρόσθετο νομικών εγγράφων">
       <topic id="comaddonlawaddon/com.addon.lawaddon/Page01.xhp">Εισαγωγή</topic>
       <topic id="comaddonlawaddon/com.addon.lawaddon/Page02.xhp">Αυτόματη εισαγωγή κειμένου νόμου</topic>
+      <topic id="comaddonlawaddon/com.addon.lawaddon/Page03.xhp">Εισαγωγή εξωτερικού αρχείου</topic>
    </help_section>
 </tree_view>

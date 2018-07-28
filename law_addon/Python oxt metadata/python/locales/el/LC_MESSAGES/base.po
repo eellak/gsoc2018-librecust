@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Librecust\n"
 "POT-Creation-Date: 2018-07-28 17:54+0300\n"
-"PO-Revision-Date: 2018-07-28 17:57+0300\n"
+"PO-Revision-Date: 2018-07-28 19:28+0300\n"
 "Last-Translator: \n"
 "Language-Team: Arvanitis Christos <arvchristos@gmail.com>\n"
 "Language: el\n"
@@ -27,7 +27,7 @@ msgstr "Κωδικός"
 
 #: python/main.py:163
 msgid "Use format [number]/[year] for searching in law database"
-msgstr "Εισαγωγή στη μορφή [αριθμός]/[χρονολογία] (π.χ. 4009-2011)"
+msgstr "Εισαγωγή στη μορφή [αριθμός]/[χρονολογία] (π.χ. 4009/2011)"
 
 #: python/main.py:166
 msgid "Article/s"
@@ -42,10 +42,8 @@ msgid "Law ID field not properly filled, please try again"
 msgstr "Το πεδίο κωδικός δεν συμπληρώθηκε σωστά, προσπαθήστε ξανά."
 
 #: python/main.py:187 python/main.py:276
-#, fuzzy
-#| msgid "Law ID"
 msgid "Law ID Error"
-msgstr "Κωδικός"
+msgstr "Σφάλμα: Κωδικός"
 
 #: python/main.py:203 python/main.py:211
 msgid "Error"

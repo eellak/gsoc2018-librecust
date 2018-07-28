@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Extension files were created by Extension Compiler - version 2.1.2 -->
+<!-- Extension update file was created by Extension Compiler - version 2.1.2 -->
 <description xmlns="http://openoffice.org/extensions/description/2006"
  xmlns:dep="http://openoffice.org/extensions/description/2006"
  xmlns:xlink="http://www.w3.org/1999/xlink" >
    <identifier value="com.addon.lawaddon" />
    <version value="0.0.1" />
-   <extension-description>
-      <src xlink:href="Descriptions/descr-el.txt" lang="el"/>
-   </extension-description>
-   <update-information>
-      <src xlink:href="https://github.com/eellak/gsoc2018-librecust/raw/master/law_addon/Python%20Version/LawAddon.update.xml" />
-   </update-information>
    <dependencies>
       <OpenOffice.org-minimal-version value="2.4" dep:name="OpenOffice.org 2.4 minimum, or more recent" />
    </dependencies>
-   <display-name>
-      <name lang="en">Law document toolbar</name>
-      <name lang="el">Law document toolbar</name>
-   </display-name>
+   <update-download>
+      <src xlink:href="https://github.com/eellak/gsoc2018-librecust/raw/master/law_addon/Python%20Version/LawAddon-0.0.1.oxt" />
+   </update-download>
    <publisher>
       <name lang="en" xlink:href="https://eellak.github.io/gsoc2018-librecust/">Arvanitis Christos</name>
       <name lang="el" xlink:href="https://eellak.github.io/gsoc2018-librecust/">Αρβανίτης Χρήστος</name>
