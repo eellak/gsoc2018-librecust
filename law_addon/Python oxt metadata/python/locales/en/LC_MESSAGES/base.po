@@ -1,0 +1,68 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Librecust\n"
+"POT-Creation-Date: 2018-07-28 17:54+0300\n"
+"PO-Revision-Date: 2018-07-28 17:55+0300\n"
+"Last-Translator: \n"
+"Language-Team: Arvanitis Christos <arvchristos@gmail.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 2.0.9\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: python/main.py:146 python/main.py:214
+msgid "Insert Law"
+msgstr "Insert Law"
+
+#: python/main.py:152
+msgid "Type"
+msgstr "Type"
+
+#: python/main.py:160
+msgid "Law ID"
+msgstr "Law ID"
+
+#: python/main.py:163
+msgid "Use format [number]/[year] for searching in law database"
+msgstr "Use format [number]/[year] for searching in law database"
+
+#: python/main.py:166
+msgid "Article/s"
+msgstr "Article/s"
+
+#: python/main.py:169
+msgid "Insert"
+msgstr "Insert"
+
+#: python/main.py:187
+msgid "Law ID field not properly filled, please try again"
+msgstr "Law ID field not properly filled, please try again"
+
+#: python/main.py:187 python/main.py:276
+#, fuzzy
+#| msgid "Law ID"
+msgid "Law ID Error"
+msgstr "Law ID"
+
+#: python/main.py:203 python/main.py:211
+msgid "Error"
+msgstr "Error"
+
+#: python/main.py:203 python/main.py:211
+msgid "Failure while communicating with server, please try later"
+msgstr "Failure while communicating with server, please try later"
+
+#: python/main.py:227 python/main.py:244 python/main.py:262
+msgid "Article"
+msgstr "Article"
+
+#: python/main.py:232 python/main.py:250 python/main.py:267
+msgid "Paragraph"
+msgstr "Paragraph"
+
+#: python/main.py:276
+msgid "Empty or wrong Articles input, please try again"
+msgstr "Empty or wrong Articles input, please try again"

@@ -1,0 +1,68 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Librecust\n"
+"POT-Creation-Date: 2018-07-28 17:54+0300\n"
+"PO-Revision-Date: 2018-07-28 17:57+0300\n"
+"Last-Translator: \n"
+"Language-Team: Arvanitis Christos <arvchristos@gmail.com>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 2.0.9\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: python/main.py:146 python/main.py:214
+msgid "Insert Law"
+msgstr "Εισαγωγή Νόμου"
+
+#: python/main.py:152
+msgid "Type"
+msgstr "Είδος"
+
+#: python/main.py:160
+msgid "Law ID"
+msgstr "Κωδικός"
+
+#: python/main.py:163
+msgid "Use format [number]/[year] for searching in law database"
+msgstr "Εισαγωγή στη μορφή [αριθμός]/[χρονολογία] (π.χ. 4009-2011)"
+
+#: python/main.py:166
+msgid "Article/s"
+msgstr "Άρθρο/α"
+
+#: python/main.py:169
+msgid "Insert"
+msgstr "Εισαγωγή"
+
+#: python/main.py:187
+msgid "Law ID field not properly filled, please try again"
+msgstr "Το πεδίο κωδικός δεν συμπληρώθηκε σωστά, προσπαθήστε ξανά."
+
+#: python/main.py:187 python/main.py:276
+#, fuzzy
+#| msgid "Law ID"
+msgid "Law ID Error"
+msgstr "Κωδικός"
+
+#: python/main.py:203 python/main.py:211
+msgid "Error"
+msgstr "Σφάλμα"
+
+#: python/main.py:203 python/main.py:211
+msgid "Failure while communicating with server, please try later"
+msgstr "Αποτυχία επικοινωνίας με τον διακομιστή, προσπαθήστε αργότερα"
+
+#: python/main.py:227 python/main.py:244 python/main.py:262
+msgid "Article"
+msgstr "Άρθρο"
+
+#: python/main.py:232 python/main.py:250 python/main.py:267
+msgid "Paragraph"
+msgstr "Παράγραφος"
+
+#: python/main.py:276
+msgid "Empty or wrong Articles input, please try again"
+msgstr "Κενό ή λάθος συμπληρωμένο πεδίο Άρθρο/α, προσπαθήστε ξανά."

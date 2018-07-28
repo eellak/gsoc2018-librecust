@@ -3,17 +3,71 @@ import unohelper
 import itertools
 import operator
 import sys
+import re
 from com.sun.star.beans.PropertyAttribute import READONLY
 from com.sun.star.beans.PropertyAttribute import MAYBEVOID
 from com.sun.star.beans.PropertyAttribute import REMOVEABLE
 from com.sun.star.beans.PropertyAttribute import MAYBEDEFAULT
 from com.sun.star.beans import PropertyValue
+from urllib.parse import urlparse
 
 #file picker constants
 from com.sun.star.ui.dialogs.TemplateDescription import FILEOPEN_PREVIEW
 
 import json
 import requests
+
+import gettext
+_ = gettext.gettext 
+
+from com.sun.star.awt.MessageBoxType import MESSAGEBOX, INFOBOX, WARNINGBOX, ERRORBOX, QUERYBOX
+from com.sun.star.awt.MessageBoxButtons import BUTTONS_OK, BUTTONS_OK_CANCEL, BUTTONS_ABORT_IGNORE_RETRY, BUTTONS_YES_NO_CANCEL, BUTTONS_YES_NO, BUTTONS_RETRY_CANCEL, DEFAULT_BUTTON_OK, DEFAULT_BUTTON_CANCEL, DEFAULT_BUTTON_RETRY, DEFAULT_BUTTON_YES, DEFAULT_BUTTON_NO, DEFAULT_BUTTON_IGNORE
+
+def MessageBox(ParentWin, MsgText, MsgTitle, MsgType=MESSAGEBOX, MsgButtons=BUTTONS_OK):
+  ctx = uno.getComponentContext()
+  sm = ctx.ServiceManager
+  sv = sm.createInstanceWithContext("com.sun.star.awt.Toolkit", ctx) 
+  myBox = sv.createMessageBox(ParentWin, MsgType, MsgButtons, MsgTitle, MsgText)
+  return myBox.execute()
+
+def get_main_directory(module_name): #com.addon.lawaddon
+    ctx = uno.getComponentContext()
+    srv = ctx.getByName("/singletons/com.sun.star.deployment.PackageInformationProvider")
+    return urlparse(srv.getPackageLocation(module_name)).path + "/"
+
+# Inspired by @sng at https://forum.openoffice.org/en/forum/viewtopic.php?f=45&t=81457
+# and Andrew Pitonyak pdf "Useful Useful Macro Information For OpenOffice.org"
+def getLanguage():
+    oProvider = "com.sun.star.configuration.ConfigurationProvider"
+    oAccess   = "com.sun.star.configuration.ConfigurationAccess"
+    oConfigProvider = get_instance(oProvider)
+    oProp = PropertyValue()
+    oProp.Name = "nodepath"
+    oProp.Value = "org.openoffice.Office.Linguistic/General"
+    properties = (oProp,)
+    key = "UILocale"
+    oSet = oConfigProvider.createInstanceWithArguments(oAccess, properties)
+    if oSet and (oSet.hasByName(key)):
+        ooLang = oSet.getPropertyValue(key)
+
+    if not (ooLang and not ooLang.isspace()):
+        oProp.Value = "/org.openoffice.Setup/L10N"
+        properties = (oProp,)
+        key = "ooLocale"
+        oSet = oConfigProvider.createInstanceWithArguments(oAccess, properties)
+        if oSet and (oSet.hasByName(key)):
+            ooLang = oSet.getPropertyValue(key)
+    return ooLang
+
+def get_instance(service_name):
+        """ gets a service from Uno """
+        sm = uno.getComponentContext()
+        ctx = sm.getServiceManager()
+        try:
+            service = ctx.createInstance(service_name)
+        except:
+            service = NONE
+        return service
 
 # Shortcut for creating service in API
 createUnoService = (
@@ -66,6 +120,15 @@ def insert_law(*args):
     ctx = uno.getComponentContext()
     smgr = ctx.ServiceManager
 
+        #Get locale string and accordingly the ccorrespondign .mo file for l10n
+    try:
+        ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.lawaddon")+'python/locales', languages=[getLanguage()])
+    except Exception as e:
+        ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.lawaddon")+'python/locales', languages=["en"])
+
+    ui_locale.install()
+    _ = ui_locale.gettext
+
     Doc = XSCRIPTCONTEXT.getDocument()
     UndoManager = Doc.getUndoManager()
 
@@ -80,30 +143,143 @@ def insert_law(*args):
     dp = psm.createInstance("com.sun.star.awt.DialogProvider")
     dlg = dp.createDialog("vnd.sun.star.extension://com.addon.lawaddon/dialogs/InsertLaw.xdl")
 
-    if dlg.execute() == 0:
-        return
+    dlg.Title = _("Insert Law")
 
     # Get dialog Model
     oDialog1Model = dlg.Model
 
-    # Get user input
+    TypeLabel = oDialog1Model.getByName("TypeLabel")
+    TypeLabel.Label = _("Type")
 
-    LawIDField = oDialog1Model.getByName("TextField1")
+    TypeField = oDialog1Model.getByName("TypeListBox")
+
+    TypeField.StringItemList = ["ν.","π.δ."]
+    TypeField.SelectedItems = [0]
+
+    InsertFieldLabel = oDialog1Model.getByName("InsertFieldLabel")
+    InsertFieldLabel.Label = _("Law ID")
+
+    HelpLabel = oDialog1Model.getByName("HelpLabel")
+    HelpLabel.Label = _("Use format [number]/[year] for searching in law database")
+
+    ArticleLabel = oDialog1Model.getByName("ArticleLabel")
+    ArticleLabel.Label = _("Article/s")
+
+    InsertButton = oDialog1Model.getByName("InsertButton")
+    InsertButton.Label = _("Insert")
+
+    if dlg.execute() == 0:
+        return
+
+
+
+    doc_text = Doc.getCurrentController().getModel().getText()
+
+    cursor = doc_text.createTextCursorByRange(ViewCursor)
+
+    # Get user inputViewCursor.setString("Άρθρο "+ article_num + "\n")
+
+    LawIDField = oDialog1Model.getByName("InsertLawField")
     LawIDString = LawIDField.Text
     
-    LawIDString = LawIDString.replace(" ", "/")
+    if not re.search('\d+\s?\/\s?\d+',LawIDString):
+        parentwin = Doc.getCurrentController().Frame.ContainerWindow
+        MessageBox(parentwin, _("Law ID field not properly filled, please try again"), _('Law ID Error'),ERRORBOX)
+        insert_law()
+        return
 
-    ViewCursor.setString(LawIDString)
+    #LawIDString = LawIDString.replace(" ", "/")
 
+    UndoManager = Doc.getUndoManager()
+    
+    
+    LawTypeIndex = TypeField.SelectedItems[0]
+    LawType = TypeField.getItemText(LawTypeIndex)
 
+    # Start API communications, developers should apply different API here
     # Get data drom 3gm server
-    response = requests.get("http://snf-829516.vm.okeanos.grnet.gr/"+LawIDString)
+    response = requests.get("http://snf-829516.vm.okeanos.grnet.gr/get_law/"+ LawType +"/" +LawIDString)
     
     if response.status_code == 404 :
-        ViewCursor.setString("404 server not accessible")
+        parentwin = Doc.getCurrentController().Frame.ContainerWindow
+        MessageBox(parentwin, _("Failure while communicating with server, please try later"), _('Error'),ERRORBOX)
         return
-    Versions = json.loads(response.text)
-    #ViewCursor.setString(Versions[0].text)    
+    
+    try:
+        Versions = json.loads(response.text)['versions']
+        Articles = Versions[-1]['articles'] # Pythonic get the last inserted element in list
+    except Exception as e:
+        parentwin = Doc.getCurrentController().Frame.ContainerWindow
+        MessageBox(parentwin, _("Failure while communicating with server, please try later"), _('Error'),ERRORBOX)
+        return
+    
+    UndoManager.enterUndoContext(_("Insert Law"))   #There should be included all those changing operations that should be put in undo stack
+    ViewCursor.gotoEnd(False)
+    ViewCursor.setString(LawIDString+"\n")
+
+    ArticleField = oDialog1Model.getByName("ArticleField")
+
+    if re.search('\d+\s?\-\s?\d+',ArticleField.Text):
+        article_re = re.match('(\d+)\s?\-\s?(\d+)',ArticleField.Text)
+        article_left = int(article_re.groups()[0])
+        article_right = int(article_re.groups()[1])
+
+        for art_i in range(article_left,article_right+1):
+            ViewCursor.gotoEnd(False)
+            ViewCursor.setString(_("Article")+" "+ str(art_i) + "\n")
+            article_body = Articles[str(art_i)]
+            
+            for paragraph_num,paragraph_body in sorted(article_body.items(),key=lambda x: int(x[0])):
+                ViewCursor.gotoEnd(False)
+                ViewCursor.setString(_("Paragraph")+ " " + paragraph_num + "\n")
+                for sentence in paragraph_body:
+                    ViewCursor.gotoEnd(False)
+                    ViewCursor.setString(sentence + ".")
+                ViewCursor.gotoEnd(False)
+                ViewCursor.setString("\n")
+    elif re.search('\s?\d+\s?',ArticleField.Text):
+            article_re = re.match('\s?(\d+)\s?',ArticleField.Text)
+            article_num = int(article_re.groups()[0])
+
+            # Insert article
+            ViewCursor.gotoEnd(False)
+            ViewCursor.setString(_("Article")+" "+ str(article_num) + "\n")
+
+            article_body = Articles[str(article_num)]
+
+            for paragraph_num,paragraph_body in sorted(article_body.items(),key=lambda x: int(x[0])):
+                ViewCursor.gotoEnd(False)
+                ViewCursor.setString(_("Paragraph")+ " " + paragraph_num + "\n")
+                for sentence in paragraph_body:
+                    ViewCursor.gotoEnd(False)
+                    ViewCursor.setString(sentence + ".")
+                ViewCursor.gotoEnd(False)
+                ViewCursor.setString("\n")
+    elif re.search('\d+\s?,?\s?',ArticleField.Text):
+        article_re = re.match('\d+\s?,?\s?',ArticleField.Text)
+        for art_i in article_re.groups():
+            art_index = int(art_i)
+
+            ViewCursor.gotoEnd(False)
+            ViewCursor.setString(_("Article")+" "+ str(art_i) + "\n")
+            article_body = Articles[str(art_i)]
+            
+            for paragraph_num,paragraph_body in sorted(article_body.items(),key=lambda x: int(x[0])):
+                ViewCursor.gotoEnd(False)
+                ViewCursor.setString(_("Paragraph")+ " " + paragraph_num + "\n")
+                for sentence in paragraph_body:
+                    ViewCursor.gotoEnd(False)
+                    ViewCursor.setString(sentence + ".")
+                ViewCursor.gotoEnd(False)
+                ViewCursor.setString("\n")
+    
+    else:
+        parentwin = Doc.getCurrentController().Frame.ContainerWindow
+        MessageBox(parentwin, _("Empty or wrong Articles input, please try again"), _('Law ID Error'),ERRORBOX)
+        insert_law()
+        return
+        
+    UndoManager.leaveUndoContext()
 
 def insert_contents(*args):
     ctx = uno.getComponentContext()
@@ -112,7 +288,7 @@ def insert_contents(*args):
     doc = XSCRIPTCONTEXT.getDocument().getCurrentController()
     dispatcher.executeDispatch(doc,  ".uno:InsertMultiIndex", "", 0, tuple())
 
-def insert_external_document():
+def insert_external_document(*args):
     doc = XSCRIPTCONTEXT.getDocument()
 
     #Create view cursor to take current cursor position
@@ -131,9 +307,30 @@ def insert_external_document():
     #For now
     string = 'EXTERNAL DOCUMENT'
     
+    #After all insert the link in current cursor position
     cursor.setString(string)
     cursor.HyperLinkURL = url
-    #xray(smgr,ctx,doc)
+
+    Bookmark = doc.createInstance("com.sun.star.text.Bookmark")
+    
+    #For now
+    Bookmark.setName(url)
+    doc_text.insertTextContent(cursor,Bookmark,False)
+        
+    '''
+    Info about getting page number of certain bookmark
+    Useful for document merging later on
+
+    LibreOffice Basic macro from developers guide
+    oVC.gotoRange(oBookmark.getAnchor(), False)
+
+    REM Grab page number and then return view cursor to previous location
+    pg = oVC.getPage()
+    oVC.gotoRange(oTextCursor, False)
+
+    '''
+
+    #xray(smgr,ctx,doc.Bookmarks.getByIndex(0))
     
 
 
