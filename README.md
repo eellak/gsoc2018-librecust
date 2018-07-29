@@ -2,6 +2,8 @@
 
 Adding open source software in employee's workflow.
 
+# Brief description
+
 ## Project outline
 This GSOC project, **Librecust**, includes the following substeps:
 - Development of specific menu, UI customizations and extensions(add-ons) to achieve MS Office familiar interface without undermining LO functionality.
@@ -10,17 +12,13 @@ This GSOC project, **Librecust**, includes the following substeps:
 
 This project was suggested by [GFOSS - Open Technologies Alliance](https://gfoss.eu/home-posts/) in the context of [Google Summer of Code 2018](https://www.google.com).
 
-## Installation
-The installation process is described in the corresponding [wiki page]()
-
-
 ## UI customization
 - ### Menubar
 Users have developed MS Office related muscle memory while using this struct. LO includes a superset of MS Office functionality so we reorder all menubar options while including each additional in another submenu. [Done]
 - ### Toolbar
 Small icon size is defined as default (MS Office 2003) with similar icons while leaving space for additional buttons relative to the extension development [Done]
 
-Simple basic macros to inspect and access certain submenus (eg Page Setup Dialog) that are not accessible through [Dispatch Commands](https://wiki.documentfoundation.org/Development/DispatchCommands) (.uno:*) [Code](https://github.com/eellak/gsoc2018-librecust/tree/master/menu_customization/macros/LibreCustLib) [Done]
+Simple basic macros to inspect and access certain submenus (eg Page Setup Dialog) that are not accessible through [Dispatch Commands](https://wiki.documentfoundation.org/Development/DispatchCommands) (.uno:*) [Code](https://github.com/eellak/gsoc2018-librecust/tree/master/menu_customization/macros/LibreCustLib) [Done].
 
 ## Extension development
 Extension elements are prototyped in LO Basic for API abstraction, then ported and finalized to Python to access a more active and populated developer community.
@@ -64,6 +62,13 @@ However, it is not mandatory to install the extensions or he whole project to re
 ### Challenges
 While LO Basic is the most documented language, mainly because of its abstraction, developers keen on using modern languages (eg Python, Java). LibreOffice Python UNO bridge is poorly documented with helping topics spread across multiple forum posts, so our documentation will be of much help for new developers.
 
+# Installing and building librecust
+## Installation
+The installation process is described in the corresponding [wiki page]()
+
+## Building librecust
+Building and packaging instructions for developers are provided in the corresponding [wiki page](Build/project/link).
+
 
 ## Implementation
 Menu customizations are implemented by editing user configuration `.xml` files and adding UI functionality through predefined [dispatch commands](https://wiki.documentfoundation.org/Development/DispatchCommands) and macro scripts.
@@ -73,50 +78,23 @@ Modules and partially mockups will be implemented in `.ui` format mainly using [
 
 Then, we need to harvest Greek legal documents for template creation. Some relevant sources are websites of associations such as [EANDA](http://www.eanda.gr/) and [DSA](http://www.dsa.gr/). Those sources provide templates that do not have any specific format. Most of them are created by employees or lawyers thus their undefined structure.
 
-Through this project, we will also create a "proof of concept" archive of templates using data and documents from several Greek court divisions as well as document the creation procedure of those templates and developed addons.
+Templates include "User defined fields" for static information (e.g. date and members of court) and "Bookmarks" for case specific info (e.g. description of law case) as well as properties for classification. Those can be tracked and used through the Java or Basic API as shown in LibreOffice [examples](https://api.libreoffice.org/examples/DevelopersGuide/Text/).
 
-Templates will include "User defined fields" for static information (e.g. date and members of court) and "Bookmarks" for case specific info (e.g. description of law case) as well as properties for classification. Those can be tracked and used through the Java or Basic API as shown in LibreOffice [examples](https://api.libreoffice.org/examples/DevelopersGuide/Text/).
+Finally, after observing template detaills, we engineered addons that automate their creation taking into account their non-standard nature across different services. 
 
-Finally, when the required "proof of concept" document archive is built, we will create templates for each one of them.
+We started with the intention to build a LibreOffice extension providing an interface for template selection and filling. However, most public services already used such an interface, so we decided to build a different approach of document filling automation through AutoTexts.
 
-The document directory will be available for use through a LibreOffice extension. This extension will be an add-on (in the context of having a GUI built with LibreOffice Basic dialog editor).
-
-The extension code acts as the backend part of our extension implementing functions that ease the access to LibreOffice Java API.
-
-A large number of those functions are implemented (or inspired) by the following sources:
+A large part of the project and its composing functions is implemented (or inspired) by the following sources:
 - Andrew Davison work on documenting Java Libreoffice Programming Concepts on [Java LibreOffice Programming](http://fivedots.coe.psu.ac.th/~ad/jlop/#contents)
 - Samuel Mehrbrodt's repository for a basic Eclipse LibreOffice extension project [libreoffice-starter-extension](https://github.com/smehrbrodt/libreoffice-starter-extension)
--  Andrew D. Pitonyak's OpenOffice.org Macros Explained - [OOME Third Edition](http://www.pitonyak.org/OOME_3_0.pdf)
+- Andrew D. Pitonyak's OpenOffice.org Macros Explained - [OOME Third Edition](http://www.pitonyak.org/OOME_3_0.pdf)
 
-## Installing
-During the development period of the project the installation procedure will be rather long. When sub-goals are implemented all steps will be included in an .oxt installation.
 
-Installation requires running the installation bash script located at install_script/installer.sh
-
-```bash
-cd install_script
-bash installer.sh
-```
-An interactive script asks the user for installation of required sub-modules of the project. Superuser permissions are required in some steps.
+# The team
+## Student 
+- Arvanitis Christos (@arvchristos) [link to github page].
 
 ## Mentors
 Mentors overseeing the development process:
 - Kostas Papadimas
 - Theodoros Karounos
-
-## Timeline
-- [x] April 23 – May 14
-* Building development environment while updating README and documentation for installation and packaging details.
-* Harvesting of Greek legal documents and design of automation tools for template creation.
-- [x] May 14 – May 20
-* Creation of mockups and prototypes for specific MS Office details that are going to be implemented while getting feedback from users.
-- [x] May 20 – June 15
-* Implementation and testing of UI customizations.
-* Development of Page Numbering extension in the context of easing UI workflow.
-* Development of deb package for debian deployment.
-- [x] June 15 – July 20
-* Automation of legal document development and development of additional extensions.
-* AutoText and LibreLaw extension development.
-* Localization of all extensions in Greek for easing usage from employees.
-- [ ] July 20 – August 8
-* Testing, adjustments and further documentation.

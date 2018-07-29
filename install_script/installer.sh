@@ -112,3 +112,4 @@ cp "$ICON_THEME_PATH"/*.zip $LIBRE_LIB_CONFIG_PATH
 #Then we have to create desired file structure and copy templates
 
 #Finaly we have to install the main Librelaw oxt extension
+

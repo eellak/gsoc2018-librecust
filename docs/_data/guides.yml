@@ -11,4 +11,10 @@
 
 - title: Page Numbering
   docs:
-  - pagenum_usage  
+  - pagenum_usage
+
+- title: LawAddon
+  docs:
+  - lawaddon_intro
+  - lawaddon_insertlaw
+  - lawaddon_insert_external

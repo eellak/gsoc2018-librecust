@@ -1,7 +1,7 @@
 - title: Getting started
   docs:
   - Installation
-
+  - Build_Project
 - title: UI customization
   docs:
   - Configuration-extension
