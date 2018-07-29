@@ -7,7 +7,7 @@ Adding open source software in employee's workflow.
 ## Project outline
 This GSOC project, **Librecust**, includes the following substeps:
 - Development of specific menu, UI customizations and extensions(add-ons) to achieve MS Office familiar interface without undermining LO functionality.
-- Creation of Greek legal system templates to introduce LO mechanisms as a tool for Greek Public Services
+- Creation of extensions to automate editing and creation of Greek legal documents as an alternative to template usage in services that do not follow a standardized document format, in order to introduce LO mechanisms as a tool for Greek Public Services.
 - Documentation of LO customization and extension development as well as deployment approaches for real case scenarios (testing on Specific Court Department with multiple workstations)
 
 This project was suggested by [GFOSS - Open Technologies Alliance](https://gfoss.eu/home-posts/) in the context of [Google Summer of Code 2018](https://www.google.com).
