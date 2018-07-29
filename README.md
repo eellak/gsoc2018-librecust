@@ -26,7 +26,7 @@ Extension elements are prototyped in LO Basic for API abstraction, then ported a
 Page numbering Addon, providing interface for page offsets, starting pages, and different numbering types in the same documents, avoiding manual insertion of Page Styles and Breaks.[Code](https://github.com/eellak/gsoc2018-librecust/tree/master/page_numbering_addon)
 
 #### Notes
-Page style nesting is not developed so a new approach of style inheritance through cloning style property set ([XPropertySet](https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1beans_1_1PropertySet.html) service).
+Page style nesting is not developed so a new approach of style inheritance through cloning style property set is implemented ([XPropertySet](https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1beans_1_1PropertySet.html) service).
 
 [Our approach](https://github.com/eellak/gsoc2018-librecust/blob/master/page_numbering_addon/Python%20version/python/main.py#L299)
 
@@ -89,6 +89,8 @@ A large part of the project and its composing functions is implemented (or inspi
 - Samuel Mehrbrodt's repository for a basic Eclipse LibreOffice extension project [libreoffice-starter-extension](https://github.com/smehrbrodt/libreoffice-starter-extension)
 - Andrew D. Pitonyak's OpenOffice.org Macros Explained - [OOME Third Edition](http://www.pitonyak.org/OOME_3_0.pdf)
 
+# Timeline
+The timeline followed throughout librecust development is included in the corresponding [timeline gist](link/to/timeline/gist) 
 
 # The team
 ## Student 
