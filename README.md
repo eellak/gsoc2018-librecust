@@ -67,8 +67,7 @@ While LO Basic is the most documented language, mainly because of its abstractio
 The installation process is described in the corresponding [wiki page]()
 
 ## Building librecust
-Building and packaging instructions for developers are provided in the corresponding [wiki page](Build/project/link).
-
+Building and packaging instructions for developers are provided in the corresponding [wiki page](https://github.com/eellak/gsoc2018-librecust/wiki/Build-Project).
 
 ## Implementation
 Menu customizations are implemented by editing user configuration `.xml` files and adding UI functionality through predefined [dispatch commands](https://wiki.documentfoundation.org/Development/DispatchCommands) and macro scripts.
