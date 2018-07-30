@@ -80,7 +80,7 @@ Then, we need to harvest Greek legal documents for template creation. Some relev
 
 Templates include "User defined fields" for static information (e.g. date and members of court) and "Bookmarks" for case specific info (e.g. description of law case) as well as properties for classification. Those can be tracked and used through the Java or Basic API as shown in LibreOffice [examples](https://api.libreoffice.org/examples/DevelopersGuide/Text/).
 
-Finally, after observing template detaills, we engineered addons that automate their creation taking into account their non-standard nature across different services. 
+Finally, after observing template details, we engineered addons that automate their creation taking into account their non-standard nature across different services. 
 
 We started with the intention to build a LibreOffice extension providing an interface for template selection and filling. However, most public services already used such an interface, so we decided to build a different approach of document filling automation through AutoTexts.
 
@@ -92,6 +92,9 @@ A large part of the project and its composing functions is implemented (or inspi
 # Timeline
 The timeline followed throughout librecust development is included in the corresponding [timeline gist](https://gist.github.com/arvchristos/a579323d320b288dbbc50ad547e859ec) 
 
+# Final Report
+The final report for GSOC 2018, as written by Arvanitis Christos, and in the form of a gist file can be found [here](https://gist.github.com/arvchristos/64a4c37bc9060e27ad82fb6258ad9dbf). 
+
 # Future Work
 The following future work can be done to improve the state of Librecust project:
 
@@ -102,7 +105,6 @@ The following future work can be done to improve the state of Librecust project:
 5. Solution for distribution of AutoTexts among workstations of same departments.
 6. Automatic extraction of AutoText elements from a huge number of documents for each public service.
 7. Packaging for multiple other distributions   
-
 
 # The team
 ## Student 
