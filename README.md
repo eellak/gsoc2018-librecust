@@ -90,7 +90,19 @@ A large part of the project and its composing functions is implemented (or inspi
 - Andrew D. Pitonyak's OpenOffice.org Macros Explained - [OOME Third Edition](http://www.pitonyak.org/OOME_3_0.pdf)
 
 # Timeline
-The timeline followed throughout librecust development is included in the corresponding [timeline gist](link/to/timeline/gist) 
+The timeline followed throughout librecust development is included in the corresponding [timeline gist](https://gist.github.com/arvchristos/a579323d320b288dbbc50ad547e859ec) 
+
+# Future Work
+The following future work can be done to improve the state of Librecust project:
+
+1. Add more sources to `Insert Law` functionality for uneventful access to the vast majority of law documents (Only access to [gsoc2018-3gm](https://github.com/eellak/gsoc2018-3gm) database)
+2. Merge current document with external elements: By the end of the project, for every external document a bookmark is provided to give access to external element positions to future developers that attempt to implement this functionality. Complete merging requires canvas writing to external document elements (e.g. png, pdf...) in order for page numbering to be included. The exported document can be a pdf including all documents referenced in the main editing one.
+3. Page Numbering addon: Add further functionality to page numbering addon (even/odd pages numbered). The LIbreOffice API already includes functions that lead to such additions.
+4. Completely open source template management software.
+5. Solution for distribution of AutoTexts among workstations of same departments.
+6. Automatic extraction of AutoText elements from a huge number of documents for each public service.
+7. Packaging for multiple other distributions   
+
 
 # The team
 ## Student 
