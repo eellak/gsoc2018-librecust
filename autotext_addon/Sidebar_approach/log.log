@@ -1,0 +1,48 @@
+unodit - unodit - INFO - 
+Version:  unodit 0.7.0      Created:  Mon Jul 30 19:50:54 2018
+
+unodit directory = /home/arvchristos/Documents/GSOC/unodit-master
+---------------------------------------------------------------------
+mode      = sidebar_oxt
+pydir     = /usr/lib/libreoffice/share/Scripts/python/test_sidebar
+xdlfile   = None
+app name  = AutoText
+panel     = 1
+indent    = 4
+---------------------------------------------------------------------
+
+unodit - mode_sidebar_oxt - INFO - 
+MODE: ---------- sidebar_oxt -------------------------------------
+oxt_creator - __init__ - INFO - NEW LOGGER: unodit.oxt_creator.CreateSidebarExtension
+oxt_creator - create - INFO - oxt: AutoText_Devel.oxt
+unodit - unodit - INFO - 
+CONNTENT:/usr/lib/libreoffice/share/Scripts/python/test_sidebar directory:
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/AutoText_Devel.oxt,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/Factory.xcu,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/config.ini,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/AutotextAddon-0.0.1.oxt,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/ProtocolHandler.xcu,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/log.log,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/AutotextAddon.odt,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/Sidebar.xcu,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/description.xml,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/empty_dialog.xdl,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/images/icon_16.png,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/images/help/icon_inline.png,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/images/help/en/floating_wizard.png,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/images/help/en/docked_wizard.png,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/images/help/en/add_wizard.png,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/images/help/el/floating_wizard.png,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/images/help/el/docked_wizard.png,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/images/help/el/add_wizard.png,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/src/AutoText.py,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/src/pythonpath/ui/Panel1_UI.py,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/src/pythonpath/ui_logic/Panel1.py,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/registration/license.txt,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/dialogs_autotext/Dialog1.xdl,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/dialogs_autotext/Dialog2.xdl,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/image/icon.png,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/description/title.txt,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/description/description.txt,
+/usr/lib/libreoffice/share/Scripts/python/test_sidebar/META-INF/manifest.xml,
+
