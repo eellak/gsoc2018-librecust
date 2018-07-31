@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tree_view version="24-Aug-2004">
+   <help_section application="comaddonautotextaddon" id="01" title="Πρόσθετο αυτόματων κειμένων">
+      <topic id="comaddonautotextaddon/com.addon.autotextaddon/Page01.xhp">Εισαγωγή</topic>
+      <topic id="comaddonautotextaddon/com.addon.autotextaddon/Page02.xhp">Σύντομη περιγραφή αυτόματων κειμένων</topic>
+      <topic id="comaddonautotextaddon/com.addon.autotextaddon/Page03.xhp">Χρήση επέκτασης Autotext</topic>
+   </help_section>
+</tree_view>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+   <meta>
+      <topic id="com.addon.autotextaddon.Page01">
+         <title id="tit" xml-lang="en">Autotext Addon : Introduction</title>
+         <filename>/com.addon.autotextaddon/Page01.xhp</filename>
+      </topic>
+   </meta>
+   <body>
+      <bookmark branch="index" xml-lang="en" id="N0001">
+         <bookmark_value>autotext;starter</bookmark_value>
+      </bookmark>
+      <paragraph role="paragraph" xml-lang="en" id="N0002">
+         
+      </paragraph>
+      <paragraph role="heading" level="1" xml-lang="en" id="N0003">
+         Introduction
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0004">
+         AutoText Addon is an extension that simplifies autotext usage for beginers in LibreOffice. Autotexts are, by default, available through the following menu:<br/><br/>Tools -&gt; AutoText... (F3)
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0005">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0006">
+         The dialog that opens using this menu includes each and every functionality relevant to autotexts. However, this dialog cannot be used along editing a document. Users are required to use this dialog, interrupting the writing process. In addition to this, in order to add new autotexts, one has to select the required content and afterwards open the dialog.
+      </paragraph>
+      <paragraph role="heading" level="2" xml-lang="en" id="N0007">
+         Goal
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0008">
+         This extension overcomes the aforementioned problems offering the ability to interact with autotexts without leaving the editing window. More complex functionality is still provided through the default autotext dialog.
+      </paragraph>
+   </body>
+</helpdocument>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+   <meta>
+      <topic id="com.addon.autotextaddon.Page03">
+         <title id="tit" xml-lang="en">Autotext Addon : Extension_usage</title>
+         <filename>/com.addon.autotextaddon/Page03.xhp</filename>
+      </topic>
+   </meta>
+   <body>
+      <paragraph role="heading" level="1" xml-lang="en" id="N0021">
+         AutoText Addon usage
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0022">
+         The extension uses the following dialog to ease autotext usage in LibreOffice:
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0023">
+         <image src="com.addon.autotextaddon/../../../images/help/en/floating_wizard.png" id="N0024"><alt xml-lang="en" id="N0025">Main dialog</alt></image>
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0026">
+         
+      </paragraph>
+      <paragraph role="heading" level="2" xml-lang="en" id="N0027">
+         Extension description
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0028">
+         The previous dialog supports usage in two modes, docked as a sidebar or floating window.
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0029">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0030">
+         In order to transit from one state/mode to other double clicking while holding the Ctrl key in any point of the dialog except of the main controls (Buttons, List boxes...) is required.
+      </paragraph>
+      <paragraph role="tip" xml-lang="en" id="N0031">
+         Ctrl + double click to toogle between docked sidebar and floating window mode.
+      </paragraph>
+      <paragraph role="heading" level="4" xml-lang="en" id="N0032">
+         Sidebar (docked)
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0033">
+         <image src="com.addon.autotextaddon/../../../images/help/en/docked_wizard.png" id="N0034"></image>
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0035">
+         
+      </paragraph>
+      <paragraph role="heading" level="4" xml-lang="en" id="N0036">
+         Floating Window
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0037">
+         <image src="com.addon.autotextaddon/../../../images/help/en/floating_wizard.png" id="N0038"></image>
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0039">
+         
+      </paragraph>
+      <paragraph role="heading" level="3" xml-lang="en" id="N0040">
+         Toogling autotext extension dialog
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0041">
+         Using the sidebar button <image src="com.addon.autotextaddon/../../../images/help/icon_inline.png" id="N0042"></image> the autotext addon wizard is opened/closed.
+      </paragraph>
+      <paragraph role="heading" level="3" xml-lang="en" id="N0043">
+         Interface elements
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0044">
+         The controls that are included in the interface are described:
+      </paragraph>
+      <list type="unordered">
+         <listitem>
+            <paragraph role="listitem" xml-lang="en" id="N0045">
+               <emph>Category</emph>: The category that the autotexts shown are included.
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="en" id="N0046">
+               <emph>Auto Texts</emph>: The autotexts of the previous category are shown in this list box. Texts are sorted by name and the ability to search through them is provided by typing while focused in the list.
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="en" id="N0047">
+               <emph>Preview</emph>: Preview of the selected element in Auto Texts list box.
+            </paragraph>
+         </listitem>
+      </list>
+      <paragraph role="warning" xml-lang="en" id="N0048">
+         Only static and unformatted text is shown in the Preview field.
+      </paragraph>
+      <list type="unordered">
+         <listitem>
+            <paragraph role="listitem" xml-lang="en" id="N0049">
+               <emph>More...</emph>: Access to the default LibreOffice AutoText dialog for more complex operations.
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="en" id="N0050">
+               <emph>Add Selection</emph>: Add the selected document content to a new AutoText.
+            </paragraph>
+         </listitem>
+      </list>
+      <paragraph role="warning" xml-lang="en" id="N0051">
+         Add Selection creates a new entry in the category shown at this time by <emph>Category </emph>field. 
+      </paragraph>
+      <list type="unordered">
+         <listitem>
+            <paragraph role="listitem" xml-lang="en" id="N0052">
+               <emph>Insert</emph>: Insert selected autotext to current cursor position.
+            </paragraph>
+         </listitem>
+      </list>
+      <paragraph role="paragraph" xml-lang="en" id="N0053">
+         
+      </paragraph>
+   </body>
+</helpdocument>

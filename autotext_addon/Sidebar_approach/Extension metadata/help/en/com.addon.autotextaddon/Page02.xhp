@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+   <meta>
+      <topic id="com.addon.autotextaddon.Page02">
+         <title id="tit" xml-lang="en">Autotext Addon : Describe_usage</title>
+         <filename>/com.addon.autotextaddon/Page02.xhp</filename>
+      </topic>
+   </meta>
+   <body>
+      <paragraph role="heading" level="1" xml-lang="en" id="N0009">
+         Brief autotext description
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0010">
+         Autotexts in LibreOffice are an essential functionality for typing speedup and optimization of document processing. They are not limited to static text content. 
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0011">
+         As it is easily observed by the default autotexts included with every installation of LibreOffice, they support every possible content such as user fields, formatted text and tables, even images.
+      </paragraph>
+      <paragraph role="tip" xml-lang="en" id="N0012">
+         This feature, supporting every possible metadata content makes Autotexts an essential tool in the template creation toolset.
+      </paragraph>
+      <paragraph role="heading" level="2" xml-lang="en" id="N0013">
+         Organizing autotexts
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0014">
+         Autotexts are organized in Categories. Libreoffice provides a number of predefined categories with the most important being My AutoTexts (mytexts). In addition to this, for English relevant locales, some more categories specific to templates or other fields are provided.
+      </paragraph>
+      <paragraph role="tip" xml-lang="en" id="N0015">
+         Categories lead to better classification of autotexts. Example usage is the classification of autotexts according their subject (e.g. Work, Correspondence...)
+      </paragraph>
+      <paragraph role="heading" level="2" xml-lang="en" id="N0016">
+         Autotext properties
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="en" id="N0017">
+         Autotexts are consisted of two properties:
+      </paragraph>
+      <list type="unordered">
+         <listitem>
+            <paragraph role="listitem" xml-lang="en" id="N0018">
+               <emph>Name</emph>: The main identifier of an autotext. If the autotext autocomplete function is enabled, while typing suggestions about autotext names are provided.
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="en" id="N0019">
+               <emph>Shortcut</emph>: This field can be used for even faster insertion of autotexts. While editing a document, instead of typing the whole name, one can type the shortcut and then the (F3) key to insert the corresponding autotext.
+            </paragraph>
+         </listitem>
+      </list>
+      <paragraph role="tip" xml-lang="en" id="N0020">
+         Enabling autotext completion suggestions:<br/>Tools -&gt; AutoText... (F3) -&gt; Display remainder of name as suggestion while typing
+      </paragraph>
+   </body>
+</helpdocument>
