@@ -138,15 +138,12 @@ class Panel1_UI(unohelper.Base, XActionListener, XJobExecutor):
         self.HelpButton.Width = 17
         self.HelpButton.Height = 15
         self.HelpButton.HelpText = "Page03"
+        self.HelpButton.HelpURL = "com.addon.autotextaddon/Page03.xhp"
         self.HelpButton.Label = "?"
         self.HelpButton.PushButtonType = 3
 
         # inserts the control model into the dialog model
         self.DialogModel.insertByName("HelpButton", self.HelpButton)
-
-        # add the action listener
-        self.DialogContainer.getControl('HelpButton').addActionListener(self)
-        self.DialogContainer.getControl('HelpButton').setActionCommand('HelpButton_OnClick')
 
         # --------- create an instance of FixedText control, set properties ---
         self.PreviewLabel = self.DialogModel.createInstance("com.sun.star.awt.UnoControlFixedTextModel")
@@ -157,6 +154,8 @@ class Panel1_UI(unohelper.Base, XActionListener, XJobExecutor):
         self.PreviewLabel.PositionY = "190"
         self.PreviewLabel.Width = 138
         self.PreviewLabel.Height = 93
+        self.PreviewLabel.MultiLine = True
+        self.PreviewLabel.Border = 1
 
         # inserts the control model into the dialog model
         self.DialogModel.insertByName("PreviewLabel", self.PreviewLabel)
@@ -230,9 +229,6 @@ class Panel1_UI(unohelper.Base, XActionListener, XJobExecutor):
 
         if oActionEvent.ActionCommand == 'MoreButton_OnClick':
             self.MoreButton_OnClick()
-
-        if oActionEvent.ActionCommand == 'HelpButton_OnClick':
-            self.HelpButton_OnClick()
 
 
 # ----------------- END GENERATED CODE ----------------------------------------

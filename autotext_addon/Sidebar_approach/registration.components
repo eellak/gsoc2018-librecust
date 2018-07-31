@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<components xmlns="http://openoffice.org/2010/uno-components">
- <component loader="com.sun.star.loader.Python"
-  uri="python/main.py">
-  <implementation name="com.addon.autotextaddon">
-   <service name="com.addon.autotextaddon"/>
-  </implementation>
- </component>
-</components>
