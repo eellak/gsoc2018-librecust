@@ -1,0 +1,14 @@
+Package: librecust
+Version: 0.0.1
+Architecture: all
+Depends:  libreoffice (>= 5.0.0.0), debconf (>= 0.2.26), libreoffice-script-provider-python, libreoffice-l10n-el
+Maintainer: Arvanitis Christos <arvchristos@gmail.com>
+Priority: optional
+Section: base
+Filename: pool/main/libr/librecust/librecust_0.0.1_all.deb
+Size: 13698796
+SHA256: 4a3c9d82c17891c42277c85e8c942f7c681601b7eefa516854782de350c17ea4
+SHA1: b637f5dc91d9e4f474d47941a39c9a3a5612be3a
+MD5sum: bc73db57bc297322a617b0f63ece43a4
+Description: GSOC 2018 LibreOffice customization and creation of legal templates
+

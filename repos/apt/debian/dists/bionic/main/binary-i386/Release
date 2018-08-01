@@ -1,0 +1,5 @@
+Component: main
+Origin: Librecust
+Label: Librecust
+Architecture: i386
+Description: Librecust GSOC project debian package

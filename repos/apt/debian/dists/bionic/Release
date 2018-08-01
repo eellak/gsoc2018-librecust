@@ -1,0 +1,28 @@
+Origin: Librecust
+Label: Librecust
+Codename: bionic
+Date: Wed, 01 Aug 2018 19:16:56 UTC
+Architectures: amd64 i386
+Components: main
+Description: Librecust GSOC project debian package
+MD5Sum:
+ 32648982b85db15ecdea9761d58ac718 570 main/binary-amd64/Packages
+ 84ce1c788c4bdcf6f1a86c8ce75c6d53 412 main/binary-amd64/Packages.gz
+ 8a83d5602de43bf550b7ce8f26f2a299 122 main/binary-amd64/Release
+ 32648982b85db15ecdea9761d58ac718 570 main/binary-i386/Packages
+ 84ce1c788c4bdcf6f1a86c8ce75c6d53 412 main/binary-i386/Packages.gz
+ b00855199b3e3b8f95d6c916a396f6dc 121 main/binary-i386/Release
+SHA1:
+ 95e4d26cb09f745384a6de46bc762b738e9d1abf 570 main/binary-amd64/Packages
+ 2a4eb4c6a646d53932bc3dbaf44f5480dae18a3d 412 main/binary-amd64/Packages.gz
+ 9bcc9e6f0c7af512b97ce81cfcdc85a2dc5fd193 122 main/binary-amd64/Release
+ 95e4d26cb09f745384a6de46bc762b738e9d1abf 570 main/binary-i386/Packages
+ 2a4eb4c6a646d53932bc3dbaf44f5480dae18a3d 412 main/binary-i386/Packages.gz
+ 7e0e3a457a9bb1fed987cd22f7db62d21b274ab3 121 main/binary-i386/Release
+SHA256:
+ 6cf377f857cb53b49f638b7cf8d4a6a946604e0b43e70cdcc9f627e2c39267a8 570 main/binary-amd64/Packages
+ bbfc50399ea7430ba76537e621e9ee640c7779a5874cb589ca4684ffb08ef31b 412 main/binary-amd64/Packages.gz
+ ee4472f643af3a458c27e8d87a94d1e13dad495df0e2a3822d8d941f7dc55bb2 122 main/binary-amd64/Release
+ 6cf377f857cb53b49f638b7cf8d4a6a946604e0b43e70cdcc9f627e2c39267a8 570 main/binary-i386/Packages
+ bbfc50399ea7430ba76537e621e9ee640c7779a5874cb589ca4684ffb08ef31b 412 main/binary-i386/Packages.gz
+ 6d5a8a0d58851b4cf4ec0b9035382c17358291774df3b31c469898a1d570715d 121 main/binary-i386/Release
