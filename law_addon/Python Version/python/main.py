@@ -198,7 +198,7 @@ def insert_law(*args):
 
     # Start API communications, developers should apply different API here
     # Get data drom 3gm server
-    response = requests.get("http://snf-829516.vm.okeanos.grnet.gr/get_law/"+ LawType +"/" +LawIDString)
+    response = requests.get("https://3gm.ellak.gr/get_law/"+ LawType +"/" +LawIDString)
     
     if response.status_code == 404 :
         parentwin = Doc.getCurrentController().Frame.ContainerWindow
@@ -215,7 +215,6 @@ def insert_law(*args):
     
     ViewCursor.gotoEnd(False)
     ViewCursor.setString(LawIDString+"\n")
-    UndoManager.leaveUndoContext()
 
     ArticleField = oDialog1Model.getByName("ArticleField")
 
