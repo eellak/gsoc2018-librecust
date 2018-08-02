@@ -10,6 +10,6 @@ Components: main
  
 Description: Librecust GSOC project debian package
  
-SignWith: librecust.key
+SignWith: 21DCBA878FEAEB66
  
 DebOverride: override.dbr
