@@ -1,5 +1,5 @@
 Component: main
 Origin: Librecust
-Label: Librecust
+Label: LIbrecust
 Architecture: i386
-Description: Librecust GSOC project debian package
+Description: Librecust apt repository deb package

@@ -1,15 +1,7 @@
-Origin: Librecust
- 
-Label: Librecust
- 
+Origin: Librecust 
+Label: LIbrecust
 Codename: bionic
- 
 Architectures: amd64 i386
- 
 Components: main
- 
-Description: Librecust GSOC project debian package
- 
-SignWith: 21DCBA878FEAEB66
- 
-DebOverride: override.dbr
+Description: Librecust apt repository deb package
+SignWith: 91F20E4FA8DF792393EFC416F8E328F21CFF4BF6

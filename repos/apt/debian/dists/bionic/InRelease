@@ -2,44 +2,44 @@
 Hash: SHA256
 
 Origin: Librecust
-Label: Librecust
+Label: LIbrecust
 Codename: bionic
-Date: Wed, 01 Aug 2018 19:16:56 UTC
+Date: Thu, 02 Aug 2018 09:34:27 UTC
 Architectures: amd64 i386
 Components: main
-Description: Librecust GSOC project debian package
+Description: Librecust apt repository deb package
 MD5Sum:
  32648982b85db15ecdea9761d58ac718 570 main/binary-amd64/Packages
  84ce1c788c4bdcf6f1a86c8ce75c6d53 412 main/binary-amd64/Packages.gz
- 8a83d5602de43bf550b7ce8f26f2a299 122 main/binary-amd64/Release
+ 1ffc268daa58ada396f466165d3998cf 121 main/binary-amd64/Release
  32648982b85db15ecdea9761d58ac718 570 main/binary-i386/Packages
  84ce1c788c4bdcf6f1a86c8ce75c6d53 412 main/binary-i386/Packages.gz
- b00855199b3e3b8f95d6c916a396f6dc 121 main/binary-i386/Release
+ b808700f19929ec598abdc1f030d2b2e 120 main/binary-i386/Release
 SHA1:
  95e4d26cb09f745384a6de46bc762b738e9d1abf 570 main/binary-amd64/Packages
  2a4eb4c6a646d53932bc3dbaf44f5480dae18a3d 412 main/binary-amd64/Packages.gz
- 9bcc9e6f0c7af512b97ce81cfcdc85a2dc5fd193 122 main/binary-amd64/Release
+ 5edea0f81a19e70d3d8a7571e8259e6e2a23b589 121 main/binary-amd64/Release
  95e4d26cb09f745384a6de46bc762b738e9d1abf 570 main/binary-i386/Packages
  2a4eb4c6a646d53932bc3dbaf44f5480dae18a3d 412 main/binary-i386/Packages.gz
- 7e0e3a457a9bb1fed987cd22f7db62d21b274ab3 121 main/binary-i386/Release
+ 488faf61c99bef5a97b659f7c0bc8c26c60a951c 120 main/binary-i386/Release
 SHA256:
  6cf377f857cb53b49f638b7cf8d4a6a946604e0b43e70cdcc9f627e2c39267a8 570 main/binary-amd64/Packages
  bbfc50399ea7430ba76537e621e9ee640c7779a5874cb589ca4684ffb08ef31b 412 main/binary-amd64/Packages.gz
- ee4472f643af3a458c27e8d87a94d1e13dad495df0e2a3822d8d941f7dc55bb2 122 main/binary-amd64/Release
+ 188b4c9906bdf1eb7544a9ae7ec1bfab555ded3c91839269c0e205f3b609c035 121 main/binary-amd64/Release
  6cf377f857cb53b49f638b7cf8d4a6a946604e0b43e70cdcc9f627e2c39267a8 570 main/binary-i386/Packages
  bbfc50399ea7430ba76537e621e9ee640c7779a5874cb589ca4684ffb08ef31b 412 main/binary-i386/Packages.gz
- 6d5a8a0d58851b4cf4ec0b9035382c17358291774df3b31c469898a1d570715d 121 main/binary-i386/Release
+ 41f4a9ca293201c7c96c337bcb1f3cebc781c6c8a01f3badb530f5fed6538496 120 main/binary-i386/Release
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAEBCAAdFiEERVOm+QQXX6S/bFSHuw711ZBL6NsFAltiBygACgkQuw711ZBL
-6Ns7ZAv9HYMsc2UEd2LW2tJ8hAikO3IEgPDQKY+Br7/08H9saSjqCMQz/FYS5p8S
-xdS1LAGWR87+0XNq1hb63QdFLwP10yyxKxAdi0pZhAqNW/OOnpv+4QN3/jmu6cbA
-00NDB1GImdeLOwRnsmME8x8SSrPzWIMU9F7ixYmC2wGvuQ28LBTNNqcXv7qUTpg1
-OPD0QQXlk3wjk3EciE04YlJ6vVfIcsODtjqmed+TviigoEc80D4OC9qDPUS1XwUd
-Jk1IfOXU4JJfiVrSec+2FkUxQlidMcRgRllSOj0/eeehOxTfiMF0vwvlFH1MhyXH
-Ubg1Kq4iPDI4vv8fzLVbgJWh4M1uhd0G0FjeVKOq0mtO3gvY3/teSY6VVp7+sseR
-awx/xdQ7LR+uYC9Fwouan1tgOXpgvmf0djzOs2n8RqI+Bfgs2Cz64Ld2ADJTKtsP
-8qLVcVJ6c09plSb4E/84a+n7CwC9477Y8xcaCUvZXUgGj7Lkz7/1PNDuf27fmWrg
-zeDSOSl1
-=YHAA
+iQGzBAEBCAAdFiEEkfIOT6jfeSOT78QW+OMo8hz/S/YFAlti0CkACgkQ+OMo8hz/
+S/YzIAv/ZtStYlNJSpVYou0cZigKJ8aow2vfbaUs1p08T4jQXF3Ntnt04VYJaD1p
+yJntYy1RsmS1WMsp3Y2sEFQDmJJd7nLxsesjeOPYSzVEX9AXeNb8vNCwokYrKVeB
+mlDR8gGiILonaJHUdhvC43cMCyMDVpH/EwKhNFALrlDpbj9QHNrkAfpuYTLFTPaX
+cAMvWxYnCf91jbVi6mh5bv118qKblCuSf5rfab6grQpQkEbCMf1zGXiAR1Nc2hPO
+HFemUGxjs/6y+W82wGslnNJb6u8LiyOxjI5CBdVpilFry/ZUKMB59rWguDd7stH2
+rnSjR0lKJXoq8v9yt2UvIVk+ZVvjk28fVH4MBUD5yry1Zd7MloC7+R8w725FS6Xi
+3m6HPKKh7PrWy2XgelushsBu4G/tJGRtqET89yYWxkF4wF1QkeNnRSBQaylSCdtD
+mM2maxion89RRdM/Ve6NC6rvkWMxVGfFiTfajKhnH39YYFi+AgCahC/xfbnbhXLr
+WwYx8cul
+=VvrH
 -----END PGP SIGNATURE-----
