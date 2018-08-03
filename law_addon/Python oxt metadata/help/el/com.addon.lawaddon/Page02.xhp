@@ -7,41 +7,41 @@
       </topic>
    </meta>
    <body>
-      <paragraph role="heading" level="1" xml-lang="el" id="N0011">
+      <paragraph role="heading" level="1" xml-lang="el" id="N0013">
          Αυτόματη εισαγωγή κειμένου νόμου
       </paragraph>
-      <paragraph role="paragraph" xml-lang="el" id="N0012">
+      <paragraph role="paragraph" xml-lang="el" id="N0014">
          Κατά τη συγκεκριμένη λειτουργία, και με την βοήθεια διαλόγου, προσφέρεται η δυνατότητα αυτόματης εισαγωγής του ενημερωμένου κειμένου το οποίο αντιστοιχεί στον νόμο που εισάγει ο χρήστης.
       </paragraph>
-      <paragraph role="paragraph" xml-lang="el" id="N0013">
+      <paragraph role="paragraph" xml-lang="el" id="N0015">
          Προκειμένου να εισαχθεί το ενημερωμένο κείμενο ο χρήστης οφείλει να ακολουθήσει τα εξής βήματα:
       </paragraph>
-      <paragraph role="paragraph" xml-lang="el" id="N0014">
+      <paragraph role="paragraph" xml-lang="el" id="N0016">
          
       </paragraph>
       <list type="ordered">
          <listitem>
-            <paragraph role="listitem" xml-lang="el" id="N0015">
-               Επιλογή εργαλείου &quot;Εισαγωγή νόμου&quot; <image src="com.addon.lawaddon/../../../images/help_icon_scale.png" id="N0016"></image> από τη γραμμή εργαλείων &quot;Νομικά έγγραφα&quot; 
-            </paragraph>
-         </listitem>
-         <listitem>
             <paragraph role="listitem" xml-lang="el" id="N0017">
-               Συμπλήρωση πεδίου κειμένου με τον κατάλληλο αριθμό νόμου (μορφή εισόδου: αριθμός_νόμου/χρονολογία)
-            </paragraph>
-         </listitem>
-         <listitem>
-            <paragraph role="listitem" xml-lang="el" id="N0018">
-               Επιλογή άρθρου-άρθρων απο λίστα
+               Επιλογή εργαλείου &quot;Εισαγωγή νόμου&quot; <image src="com.addon.lawaddon/../../../images/help_icon_scale.png" id="N0018"></image> από τη γραμμή εργαλείων &quot;Νομικά έγγραφα&quot; 
             </paragraph>
          </listitem>
          <listitem>
             <paragraph role="listitem" xml-lang="el" id="N0019">
+               Συμπλήρωση πεδίου κειμένου με τον κατάλληλο αριθμό νόμου (μορφή εισόδου: αριθμός_νόμου/χρονολογία)
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0020">
+               Επιλογή άρθρου-άρθρων απο λίστα
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0021">
                Εισαγωγή με χρήση του πλήκτρου &quot;Εισαγωγή&quot;
             </paragraph>
          </listitem>
       </list>
-      <paragraph role="paragraph" xml-lang="el" id="N0020">
+      <paragraph role="paragraph" xml-lang="el" id="N0022">
          
       </paragraph>
    </body>

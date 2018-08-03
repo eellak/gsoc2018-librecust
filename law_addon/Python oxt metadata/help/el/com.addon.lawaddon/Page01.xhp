@@ -42,11 +42,21 @@
                <link href="com.addon.lawaddon/Page03.xhp" name ="Page03">Εισαγωγή εξωτερικού αρχείου</link>
             </paragraph>
          </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0009">
+               <link href="com.addon.lawaddon/Page04.xhp" name ="Page04">Εισαγωγή πίνακα περιεχομένων</link>
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0010">
+               <link href="com.addon.lawaddon/Page05.xhp" name ="Page05">Ενημέρωση πινάκων περιεχομένων</link>
+            </paragraph>
+         </listitem>
       </list>
-      <paragraph role="paragraph" xml-lang="el" id="N0009">
+      <paragraph role="paragraph" xml-lang="el" id="N0011">
          
       </paragraph>
-      <paragraph role="paragraph" xml-lang="el" id="N0010">
+      <paragraph role="paragraph" xml-lang="el" id="N0012">
          
       </paragraph>
    </body>

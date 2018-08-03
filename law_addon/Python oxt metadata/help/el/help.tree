@@ -4,5 +4,7 @@
       <topic id="comaddonlawaddon/com.addon.lawaddon/Page01.xhp">Εισαγωγή</topic>
       <topic id="comaddonlawaddon/com.addon.lawaddon/Page02.xhp">Αυτόματη εισαγωγή κειμένου νόμου</topic>
       <topic id="comaddonlawaddon/com.addon.lawaddon/Page03.xhp">Εισαγωγή εξωτερικού αρχείου</topic>
+      <topic id="comaddonlawaddon/com.addon.lawaddon/Page04.xhp">Εισαγωγή πίνακα περιεχομένων</topic>
+      <topic id="comaddonlawaddon/com.addon.lawaddon/Page05.xhp">Ενημέρωση πινάκων περιεχομένων</topic>
    </help_section>
 </tree_view>

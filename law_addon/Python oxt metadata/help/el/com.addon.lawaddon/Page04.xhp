@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+   <meta>
+      <topic id="com.addon.lawaddon.Page04">
+         <title id="tit" xml-lang="el">LawAddon-0.0.1.oxt : Εισαγωγή πίνακα περιεχομένων</title>
+         <filename>/com.addon.lawaddon/Page04.xhp</filename>
+      </topic>
+   </meta>
+   <body>
+      <paragraph role="heading" level="1" xml-lang="el" id="N0032">
+         Εισαγωγή πίνακα περιεχομένων
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0033">
+         Αυτό το πλήκτρο παρέχει μία συντόμευση προς τη λειτουργία εισαγωγής πίνακα περιεχομένων, χωρίς να προσθέτει κάποια επιπλέον λειτουργικότητα. Για περισσότερες πληροφορίες ο αναγνώστης παραπέμπεται στον ακόλουθο σύνδεσμο.
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0034">
+         <br/><link href="https://help.libreoffice.org/Writer/Creating_a_Table_of_Contents/el" name ="external">Βοήθεια LibreOffice</link>
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0035">
+         
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0036">
+         Σε αυτή τη λειτουργία αντιστοιχεί το πλήκτρο <image src="com.addon.lawaddon/../../../images/help_icon_contents.png" id="N0037"></image>.
+      </paragraph>
+   </body>
+</helpdocument>

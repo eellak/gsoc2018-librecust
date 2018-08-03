@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+   <meta>
+      <topic id="com.addon.lawaddon.Page05">
+         <title id="tit" xml-lang="el">LawAddon-0.0.1.oxt : Ενημέρωση πινάκων περιεχομένων</title>
+         <filename>/com.addon.lawaddon/Page05.xhp</filename>
+      </topic>
+   </meta>
+   <body>
+      <paragraph role="heading" level="1" xml-lang="el" id="N0038">
+         Ενημέρωση πινάκων περιεχομένων
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0039">
+         Αυτό το πλήκτρο παρέχει τη δυνατότητα ενημέρωσης του συνόλου των πινάκων περιεχομένων στο ανοικτό έγγραφο. Αυτή η λειτουργία δεν απαιτεί την αλλαγή της θέσης του κέρσορα ώστε να χρησιμοποιηθεί η προεπιλεγμένη λειτουργία:
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0040">
+         <br/>Δεξί κλίκ στον πίνακα -&gt; Ενημέρωση ευρετηρίου ή πίνακα περιεχομένων.<br/><br/>Για την ενημέρωση των πλήκτρων, ο χρήστης χρησιμοποιεί το πλήκτρο <image src="com.addon.lawaddon/../../../images/help_icon_update.png" id="N0041"></image>
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0042">
+         
+      </paragraph>
+   </body>
+</helpdocument>

@@ -115,6 +115,14 @@ def insert_hd1(*args):
     ViewCursor.ParaStyleName = "Heading 1"
     UndoManager.leaveUndoContext()
 
+def update_indices(*args):
+    Doc = XSCRIPTCONTEXT.getDocument()
+    Indexes = Doc.getDocumentIndexes()
+
+    for x in Indexes:
+        x.update()
+    
+
 def insert_law(*args):
     #Inspect services for debugging purposes
     ctx = uno.getComponentContext()
@@ -436,4 +444,4 @@ def get_instance(service_name):
 
 g_ImplementationHelper = unohelper.ImplementationHelper()
 
-g_exportedScripts = main,insert_hd1,insert_law,insert_contents,insert_external_document,
+g_exportedScripts = main,insert_hd1,insert_law,insert_contents,insert_external_document,update_indices,
