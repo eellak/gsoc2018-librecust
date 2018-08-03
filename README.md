@@ -8,7 +8,7 @@ Welcome to Google Summer of Code 2018 project *LibreOffice customization and cre
 
 
 ## Project outline
-This GSOC project, **Librecust**, includes the following substeps:
+This GSOC project, **librecust**, includes the following substeps:
 - Development of specific menu, UI customizations and extensions(add-ons) to achieve MS Office familiar interface without undermining LO functionality.
 - Creation of extensions to automate editing and creation of Greek legal documents as an alternative to template usage in services that do not follow a standardized document format, in order to introduce LO mechanisms as a tool for Greek Public Services.
 - Documentation of LO customization and extension development as well as development of deployment approaches for real case scenarios (testing on Specific Court Department (*The Council of State*) with multiple active workstations)
@@ -21,7 +21,7 @@ Users have developed MS Office related muscle memory while using this tool. LO i
 - ### Toolbar
 The corresponding, in terms of MS Office functionality, toolbar items are included with similar appearance (small icon size is defined as default (MS Office 2003) with similar icons) while leaving space for additional buttons relative to the extension development. The icon set included in the set of modifications is created by [@charliecnr](https://www.deviantart.com/charliecnr). 
 
-Simple basic macros to inspect and access certain sub-menus (e.g. Page Setup Dialog) that are not accessible through default [dispatch Commands](https://wiki.documentfoundation.org/Development/DispatchCommands) (.uno:*) [Code](https://github.com/eellak/gsoc2018-librecust/tree/master/menu_customization/macros/LibreCustLib).
+Simple basic macros to inspect and access certain sub-menus (e.g. Page Setup Dialog) that are not accessible through default [dispatch Commands](https://wiki.documentfoundation.org/Development/DispatchCommands) (.uno:*) [Code](https://github.com/eellak/gsoc2018-librecust/tree/master/menu_customization/macros/librecustLib).
 
 
 ## Extension development
@@ -51,7 +51,7 @@ Utilizing feedback from employees, we developed an AutoText addon that allows si
 Additionally, AutoTexts provide the ability to distribute certain text segments across a local network, so an AutoText database can be created for each department.   
 
 ## Deployment
-In every possible service the deployment part is a crucial process. Some of our customizations are distributed through extensions while others (menu customizations) require editing user directory configuration files (.xml). Achieving a unified installation interface includes the development of an interactive bash script giving options for partial or complete installation of Librecust. Regarding certain settings application (e.g. default toolbar size) we took advantage of the LO SAX XML parsing and just add certain xml elements to the file head, letting LO to reconstruct the XML on application startup.
+In every possible service the deployment part is a crucial process. Some of our customizations are distributed through extensions while others (menu customizations) require editing user directory configuration files (.xml). Achieving a unified installation interface includes the development of an interactive bash script giving options for partial or complete installation of librecust. Regarding certain settings application (e.g. default toolbar size) we took advantage of the LO SAX XML parsing and just add certain xml elements to the file head, letting LO to reconstruct the XML on application startup.
 The whole project requires continuous testing and feedback so deployment was our first concern and the installation approach is already implemented. See [installation script](https://github.com/eellak/gsoc2018-librecust/tree/master/install_script)
 
 The previous approach can be used in almost any Linux distribution. However, in order to massively install our customizations in public service workstations (that use Debian based distributions), we packaged the whole librecust process in a `deb` package. The package elements are included in the corresponding [directory](https://github.com/eellak/gsoc2018-librecust/tree/master/project_packages/deb).
@@ -101,7 +101,7 @@ The timeline followed throughout librecust development is included in the corres
 The final report for GSOC 2018, as written by Arvanitis Christos, and in the form of a gist file, can be found [here](https://gist.github.com/arvchristos/64a4c37bc9060e27ad82fb6258ad9dbf). 
 
 # Future Work
-The following future work can be done to improve the state of Librecust project:
+The following future work can be done to improve the state of librecust project:
 
 1. Add more sources to `Insert Law` functionality for uneventful access to the vast majority of law documents (Only access to [gsoc2018-3gm](https://github.com/eellak/gsoc2018-3gm) database)
 2. Merge current document with external elements: By the end of the project, for every external document a bookmark is provided to give access to external element positions to future developers that attempt to implement this functionality. Complete merging requires canvas writing to external document elements (e.g. `png`, `pdf`...) in order for page numbering to be included. The exported document can be a pdf including all documents referenced in the main editing one.
@@ -113,7 +113,7 @@ The following future work can be done to improve the state of Librecust project:
 
 # The team
 ## Student 
-- Arvanitis Christos (@arvchristos)[https://github.com/arvchristos].
+- Arvanitis Christos [@arvchristos](https://github.com/arvchristos).
 
 ## Mentors
 Mentors overseeing the development process:

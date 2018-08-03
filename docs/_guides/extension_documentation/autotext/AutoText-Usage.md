@@ -36,7 +36,7 @@ In order to transit from one state/mode to other double clicking while holding t
 ![Dialog](../../img/help/autotext/help/en/floating_wizard.png)
  
 ### Toogling autotext extension dialog 
-Using the toolbar button ![Dialog](../../img/help/autotext/help/icon_inline.png) the autotext addon wizard is opened/closed. 
+Using the sidebar button ![Dialog](../../img/help/autotext/help/icon_inline.png) the autotext addon wizard is opened/closed. 
 
 ### Interface elements 
 The controls that are included in the interface are described: 
