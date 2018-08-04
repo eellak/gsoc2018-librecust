@@ -8,6 +8,9 @@ Info about the repo for each distribution will go here
 ## Debian 
 Add the package repository to apt:
 
+```bash
+echo "deb https://eellak.github.io/gsoc2018-librecust/repos/apt/debian/ precise main" | sudo tee -a /etc/apt/sources.list
+```
 Update
 ```bash
 sudo apt update
