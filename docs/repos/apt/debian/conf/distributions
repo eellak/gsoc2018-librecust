@@ -4,4 +4,4 @@ Codename: precise
 Suite: stable
 Architectures: i386 amd64 source
 Components: main
-SignWith:librecust
+SignWith: librecust
