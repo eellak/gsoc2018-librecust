@@ -1,7 +1,7 @@
-Origin: Librecust 
-Label: LIbrecust
-Codename: bionic
-Architectures: amd64 i386
+Origin: Librecust
+Label: librecust
+Codename: precise
+Suite: stable
+Architectures: i386 amd64 source
 Components: main
-Description: Librecust apt repository deb package
-SignWith: 91F20E4FA8DF792393EFC416F8E328F21CFF4BF6
+SignWith:librecust
