@@ -1,0 +1,7 @@
+Origin: Librecust
+Label: librecust
+Codename: precise
+Suite: stable
+Architectures: i386 amd64 source
+Components: main
+SignWith:librecust
