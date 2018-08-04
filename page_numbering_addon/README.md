@@ -14,6 +14,9 @@ This plugin, or by LO/OO terminology add-on(an extension that includes any kind 
 * Numbering type selection such as Roman, Arabic or Greek
 * Multiple Page numbering setups per document
 
+## Download
+Page Numbering Addon can be found either in this repository or at the [LibreOffice Official Extensions](https://extensions.libreoffice.org/extensions/page-numbering-addon).
+
 ## Implementation
 In order to get familiar with LO API we first implemented a version of the plugin in LO Basic language. Although this is the most documented among LO/OO compatible languages, it follows an archaic programming principle with little to none moder features. That is the reason that led us to port the official version in Python, using [UNO:API](https://api.libreoffice.org/) as the connection with LibreOffice.
 
