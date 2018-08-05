@@ -10,39 +10,40 @@
 import uno
 import unohelper
 
-from com.sun.star.awt.MessageBoxButtons import BUTTONS_OK, BUTTONS_OK_CANCEL, BUTTONS_YES_NO, BUTTONS_YES_NO_CANCEL, BUTTONS_RETRY_CANCEL, BUTTONS_ABORT_IGNORE_RETRY
-from com.sun.star.awt.MessageBoxButtons import DEFAULT_BUTTON_OK, DEFAULT_BUTTON_CANCEL, DEFAULT_BUTTON_RETRY, DEFAULT_BUTTON_YES, DEFAULT_BUTTON_NO, DEFAULT_BUTTON_IGNORE
-from com.sun.star.awt.MessageBoxType import MESSAGEBOX, INFOBOX, WARNINGBOX, ERRORBOX, QUERYBOX
+from com.sun.star.awt.MessageBoxButtons import (BUTTONS_OK,
+                                                BUTTONS_OK_CANCEL,
+                                                BUTTONS_YES_NO,
+                                                BUTTONS_YES_NO_CANCEL,
+                                                BUTTONS_RETRY_CANCEL,
+
+                                                BUTTONS_ABORT_IGNORE_RETRY)
+from com.sun.star.awt.MessageBoxButtons import (DEFAULT_BUTTON_OK,
+                                                DEFAULT_BUTTON_CANCEL,
+                                                DEFAULT_BUTTON_RETRY,
+                                                DEFAULT_BUTTON_YES,
+                                                DEFAULT_BUTTON_NO,
+                                                DEFAULT_BUTTON_IGNORE)
+
+from com.sun.star.awt.MessageBoxType import (MESSAGEBOX,
+                                             INFOBOX,
+                                             WARNINGBOX,
+                                             ERRORBOX,
+                                             QUERYBOX)
 
 from com.sun.star.ui import XUIElementFactory
 from com.sun.star.lang import XComponent
-from com.sun.star.ui import XUIElement, XToolPanel,XSidebarPanel, LayoutSize
-from com.sun.star.frame import XDispatch,XDispatchProvider
+from com.sun.star.ui import (XUIElement,
+                             XToolPanel,
+                             XSidebarPanel,
+                             LayoutSize)
+
+from com.sun.star.frame import (XDispatch,
+                                XDispatchProvider)
+
 from com.sun.star.ui.UIElementType import TOOLPANEL as UET_TOOLPANEL
 
 from ui_logic.Panel1 import Panel1
 
-
-
-# ----------------- helpers for API_inspector tools -----------------
-
-# uncomment for MRI
-#def mri(ctx, target):
-#    mri = ctx.ServiceManager.createInstanceWithContext("mytools.Mri", ctx)
-#    mri.inspect(target)
-
-# uncomment for Xray
-#from com.sun.star.uno import RuntimeException as _rtex
-#def xray(myObject):
-#    try:
-#        sm = uno.getComponentContext().ServiceManager
-#        mspf = sm.createInstanceWithContext("com.sun.star.script.provider.MasterScriptProviderFactory", uno.getComponentContext())
-#        scriptPro = mspf.createScriptProvider("")
-#        xScript = scriptPro.getScript("vnd.sun.star.script:XrayTool._Main.Xray?language=Basic&location=application")
-#        xScript.invoke((myObject,), (), ())
-#        return
-#    except:
-#        raise _rtex("\nBasic library Xray is not installed", uno.getComponentContext())
 
 def messageBox(MsgText, MsgTitle, MsgType=MESSAGEBOX, MsgButtons=BUTTONS_OK):
     ctx = uno.getComponentContext()
@@ -53,7 +54,7 @@ def messageBox(MsgText, MsgTitle, MsgType=MESSAGEBOX, MsgButtons=BUTTONS_OK):
     mBox.execute()
 
 
-class ElementFactory( unohelper.Base, XUIElementFactory):
+class ElementFactory(unohelper.Base, XUIElementFactory):
     """
     UNO service that implements the com/sun/star/ui/XUIElementFactory interface.
     If you write a new factory then add it to Factories.xcu
@@ -96,14 +97,19 @@ class ElementFactory( unohelper.Base, XUIElementFactory):
             print(e)
             tb()
 
+
 g_ImplementationHelper = unohelper.ImplementationHelper()
 g_ImplementationHelper.addImplementation(
-        ElementFactory,
-        "com.addon.autotextaddon",
-        ("com.sun.star.task.Job",),)
+    ElementFactory,
+    "com.addon.autotextaddon",
+    ("com.sun.star.task.Job",),)
 
 
-class XUIPanel( unohelper.Base,  XSidebarPanel, XUIElement, XToolPanel, XComponent):
+class XUIPanel(unohelper.Base,
+               XSidebarPanel,
+               XUIElement,
+               XToolPanel,
+               XComponent):
 
     def __init__(self, ctx, frame, xParentWindow, url):
 
@@ -119,8 +125,10 @@ class XUIPanel( unohelper.Base,  XSidebarPanel, XUIElement, XToolPanel, XCompone
             dialogUrl = "vnd.sun.star.extension://com.addon.autotextaddon/empty_dialog.xdl"
             smgr = self.ctx.ServiceManager
 
-            provider = smgr.createInstanceWithContext("com.sun.star.awt.ContainerWindowProvider", self.ctx)
-            self.window = provider.createContainerWindow(dialogUrl, "", self.xParentWindow, None)
+            provider = smgr.createInstanceWithContext(
+                "com.sun.star.awt.ContainerWindowProvider", self.ctx)
+            self.window = provider.createContainerWindow(
+                dialogUrl, "", self.xParentWindow, None)
 
         return self
 
@@ -162,6 +170,7 @@ class XUIPanel( unohelper.Base,  XSidebarPanel, XUIElement, XToolPanel, XCompone
     def getMinimalWidth(self):
         return 50
 
+
 class test(unohelper.Base, XDispatch, XDispatchProvider):
 
     IMPLE_NAME = "com.addon.ProtocolHandler"
@@ -169,7 +178,7 @@ class test(unohelper.Base, XDispatch, XDispatchProvider):
 
     @classmethod
     def get_imple(klass):
-        #pydevBrk()
+        # pydevBrk()
         return klass, klass.IMPLE_NAME, klass.SERVICE_NAMES
 
     def __init__(self, *args):
@@ -199,8 +208,8 @@ class test(unohelper.Base, XDispatch, XDispatchProvider):
         """
 
         if featureURL.Path == 'Panel1':
-            messageBox(featureURL.Path, 'DefaultMenuCommand', MsgType=MESSAGEBOX, MsgButtons=BUTTONS_OK)
-
+            messageBox(featureURL.Path, 'DefaultMenuCommand',
+                       MsgType=MESSAGEBOX, MsgButtons=BUTTONS_OK)
 
 
 g_ImplementationHelper.addImplementation(*test.get_imple())
@@ -223,4 +232,3 @@ def showPanels(panelWin, url):
         panel_height = app.getHeight()
 
         return panel_height + pos_y
-

@@ -16,61 +16,39 @@ from urllib.parse import urlparse
 _ = gettext.gettext
 
 # Dictionary for possible numbering type options
-NumTypeCollection = {"i,ii,iii,...": 3, "I,II,III,...": 2, "1,2,3,...": 4, "Α,Β,Γ,...": 52,
-                     "α,β,γ,...": 53, "a...aa...aaa": 10, "A...AA...AAA": 9, "a,b,c,...": 1, "A,B,C,...": 0}
-
-class oListenerTop_Class(XTopWindowListener, unohelper.Base):
-    def __init__(self,):
-        self.doc = None
-
-    def setDocument(self, doc):
-        self.doc = doc
-
-# XModifyListener
-    def windowOpened(self, oEvent):
-        pass
-
-    def windowClosed(self, oEvent):
-        pass
-
-    def windowClosing(self, oEvent):
-        pass
-
-    def windowMinimized(self, oEvent):
-        pass
-
-    def windowNormalized(self, oEvent):
-        pass
-
-    def windowActivated(self, oEvent):
-        pass
-
-    def windowDeactivated(self, oEvent):
-        pass
-
-# parent-interface XEventListener
-    def disposing(self, oEvent):
-        pass  # normally not needed, but should be callable anyway
-
-def get_main_directory(module_name): #com.addon.pagenumbering
-    ctx = uno.getComponentContext()
-    srv = ctx.getByName("/singletons/com.sun.star.deployment.PackageInformationProvider")
-    return urlparse(srv.getPackageLocation(module_name)).path + "/"
-
+NumTypeCollection = {
+    "i,ii,iii,...": 3,
+    "I,II,III,...": 2,
+    "1,2,3,...": 4,
+    "Α,Β,Γ,...": 52,
+    "α,β,γ,...": 53,
+    "a...aa...aaa": 10,
+    "A...AA...AAA": 9,
+    "a,b,c,...": 1,
+    "A,B,C,...": 0
+}
 
 def main(*args):
     ctx = uno.getComponentContext()
     smgr = ctx.ServiceManager
     try:
-        ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.pagenumbering")+'python/locales', languages=[getLanguage()])
+        ui_locale = gettext.translation('base',
+                                        localedir=get_main_directory("com.addon.pagenumbering") +
+                                        'python/locales',
+                                        languages=[getLanguage()]
+                                        )
     except Exception as e:
-        ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.pagenumbering")+'python/locales', languages=["en"])
+        ui_locale = gettext.translation('base',
+                                        localedir=get_main_directory("com.addon.pagenumbering") +
+                                        'python/locales',
+                                        languages=["en"]
+                                        )
 
     ui_locale.install()
     _ = ui_locale.gettext
 
-    # get the doc from the scripting context which is made available to all scripts
-
+    ''' get the doc from the scripting context which is made available to all scripts
+    '''
     Doc = XSCRIPTCONTEXT.getDocument()
     UndoManager = Doc.getUndoManager()
     psm = uno.getComponentContext().ServiceManager
@@ -83,7 +61,7 @@ def main(*args):
 
     oDialog1Model.Title = _("Page Numbering Title")
 
-    #Cancel and OK button Labels
+    # Cancel and OK button Labels
     CancelButton = oDialog1Model.getByName("CancelButton")
     CancelButton.Label = _("Cancel")
 
@@ -118,15 +96,26 @@ def main(*args):
     TypeLabel = oDialog1Model.getByName("TypeLabel")
     TypeLabel.Label = _("Numbering Type")
     NumberingTypeSelectListBox = oDialog1Model.getByName("NumberingTypeSelect")
-    NumberingTypeSelectListBox.StringItemList = ["i,ii,iii,...", "I,II,III,...", "1,2,3,...", "Α,Β,Γ,...","α,β,γ,...", "a...aa...aaa", "A...AA...AAA", "a,b,c,...", "A,B,C,..."]
+
+    NumberingTypeSelectListBox.StringItemList = [
+        "i,ii,iii,...",
+        "I,II,III,...",
+        "1,2,3,...",
+        "Α,Β,Γ,...",
+        "α,β,γ,...",
+        "a...aa...aaa",
+        "A...AA...AAA",
+        "a,b,c,...",
+        "A,B,C,..."
+    ]
+
     NumberingTypeSelectListBox.Text = "1,2,3,..."
 
     DecorLabel = oDialog1Model.getByName("DecorLabel")
     DecorLabel.Label = _("Decor")
     NumberingDecorationListBox = oDialog1Model.getByName("NumberingDecoration")
-    NumberingDecorationListBox.StringItemList = ["#","-#-","[#]","(#)"]
+    NumberingDecorationListBox.StringItemList = ["#", "-#-", "[#]", "(#)"]
     NumberingDecorationListBox.Text = "#"
-
 
     # FontUsed = oDialog1Model.getByName("FontSelect")
 
@@ -170,10 +159,11 @@ def main(*args):
         AlignmentEnum = AlignmentEnum + 1
 
     PageNumber = Doc.createInstance("com.sun.star.text.textfield.PageNumber")
-    # xray(smgr,ctx,PageNumber)
 
-    PageNumber.NumberingType = NumTypeCollection[oDialog1Model.getByName(
-        "NumberingTypeSelect").Text]  # Just ARABIC numbering for now till implementation
+    PageNumber.NumberingType = NumTypeCollection[
+        oDialog1Model.getByName(
+            "NumberingTypeSelect").Text
+    ]  # Just ARABIC numbering for now till implementation
     PageNumber.SubType = 1  # Which page does the textfield refer to
 
     PageStyles = Doc.StyleFamilies.getByName("PageStyles")
@@ -228,15 +218,19 @@ def main(*args):
     # For text insertion a Text cursor is needed
     NumCursor = Num_Position.Text.createTextCursor()
 
-    UndoManager.enterUndoContext(_("Page Numbering"))   #There should be included all those changing operations that should be put in undo stack
+    '''There should be included all those changing operations that should be put in undo stack
+    '''
+    UndoManager.enterUndoContext(_("Page Numbering"))
 
     ViewCursor.jumpToPage(FirstNumberedPage.Value)
 
-# Set index of first numbered page
-# We cannot use PageNumber.Offset property because we may need bigger than total page number indexing
+    '''Set index of first numbered page
+    We cannot use PageNumber.Offset property because we may need bigger than total page number indexing
+    '''
     ViewCursor.PageNumberOffset = FirstNumberedIndex.Value
 
-# Every numbered page will be of Standard Page style for now
+    ''' Every numbered page will be of Standard Page style for now
+    '''
     ViewCursor.PageDescName = NewStyle.FollowStyle
 
     NumCursor.ParaAdjust = AlignmentEnum
@@ -244,6 +238,7 @@ def main(*args):
     NumCursor.CharHeight = FontSize.Value
 
     AlignmentListBox = oDialog1Model.getByName("Alignment")
+
     NumberingDecorationComboBoxText = oDialog1Model.getByName(
         "NumberingDecoration").Text
     if NumberingDecorationComboBoxText == "#":
@@ -265,16 +260,59 @@ def main(*args):
     UndoManager.leaveUndoContext()
     dlg.removeTopWindowListener(oListenerTop)
 
-def xray(smgr, ctx, target):
-    mspf = smgr.createInstanceWithContext(
-        "com.sun.star.script.provider.MasterScriptProviderFactory", ctx)
-    script_provider = mspf.createScriptProvider("")
-    script = script_provider.getScript(
-        "vnd.sun.star.script:XrayTool._Main.Xray?language=Basic&location=application")
-    script.invoke((target,), (), ())
 
+class oListenerTop_Class(XTopWindowListener, unohelper.Base):
+    """
+    Top window listener implementation (XTopWindowListener) 
+    """
+    def __init__(self,):
+        self.doc = None
+
+    def setDocument(self, doc):
+        self.doc = doc
+
+# XModifyListener
+    def windowOpened(self, oEvent):
+        pass
+
+    def windowClosed(self, oEvent):
+        pass
+
+    def windowClosing(self, oEvent):
+        pass
+
+    def windowMinimized(self, oEvent):
+        pass
+
+    def windowNormalized(self, oEvent):
+        pass
+
+    def windowActivated(self, oEvent):
+        pass
+
+    def windowDeactivated(self, oEvent):
+        pass
+
+# parent-interface XEventListener
+    def disposing(self, oEvent):
+        pass  # normally not needed, but should be callable anyway
+
+
+def get_main_directory(module_name):
+    """
+    Return a string that corresponds to the installation directory of 
+    the module_name string (e.g. com.addon.pagenumbering )
+    """
+    ctx = uno.getComponentContext()
+    srv = ctx.getByName(
+        "/singletons/com.sun.star.deployment.PackageInformationProvider")
+    
+    return urlparse(srv.getPackageLocation(module_name)).path + "/"
 
 def ListFonts(oDoc, SearchString):
+    """
+    Returns a tuple (Font_list string[] , index of SearchString font (int) ). 
+    """
     SearchIndex = -1
     uniqueFontNames = []
     oWindow = oDoc.getCurrentController().getFrame().getContainerWindow()
@@ -297,6 +335,9 @@ def ListFonts(oDoc, SearchString):
 
 
 def copyUsingPropertySetInfo(srcObj, dstObj):
+    """
+    Cope the whole PropertySet of an UNO object to an other instance.
+    """
     ctx = uno.getComponentContext()
     smgr = ctx.ServiceManager
     sPInfo = srcObj.getPropertySetInfo()
@@ -344,11 +385,17 @@ def canCopyTypeWithAssignment(oObj):
         else:
             return False
 
-# Inspired by @sng at https://forum.openoffice.org/en/forum/viewtopic.php?f=45&t=81457
-# and Andrew Pitonyak pdf "Useful Useful Macro Information For OpenOffice.org"
+'''Inspired by @sng at https://forum.openoffice.org/en/forum/viewtopic.php?f=45&t=81457
+and Andrew Pitonyak pdf "Useful Useful Macro Information For OpenOffice.org"
+'''
+
 def getLanguage():
+    """
+    Get current user interface language in string format. Useful for
+    UI locale checkong on l10n operations (e.g. gettext...) 
+    """
     oProvider = "com.sun.star.configuration.ConfigurationProvider"
-    oAccess   = "com.sun.star.configuration.ConfigurationAccess"
+    oAccess = "com.sun.star.configuration.ConfigurationAccess"
     oConfigProvider = get_instance(oProvider)
     oProp = PropertyValue()
     oProp.Name = "nodepath"
@@ -368,15 +415,19 @@ def getLanguage():
             ooLang = oSet.getPropertyValue(key)
     return ooLang
 
+
 def get_instance(service_name):
-        """ gets a service from Uno """
-        sm = uno.getComponentContext()
-        ctx = sm.getServiceManager()
-        try:
-            service = ctx.createInstance(service_name)
-        except:
-            service = NONE
-        return service
+    """
+    Get a service shortcut. 
+    """
+    sm = uno.getComponentContext()
+    ctx = sm.getServiceManager()
+    try:
+        service = ctx.createInstance(service_name)
+    except:
+        service = NONE
+    return service
+
 
 g_ImplementationHelper = unohelper.ImplementationHelper()
 g_ImplementationHelper.addImplementation(

@@ -15,6 +15,12 @@
    <update-information>
       <src xlink:href="https://github.com/eellak/gsoc2018-librecust/raw/master/page_numbering_addon/Python%20version/PageNumberingAddonPython.update.xml" />
    </update-information>
+   <registration>
+      <simple-license accept-by="admin" suppress-on-update="true" >
+         <license-text xlink:href="Legal/license-en.txt" lang="en" />
+         <license-text xlink:href="Legal/license-el.txt" lang="el" />
+      </simple-license>
+   </registration>
    <dependencies>
       <OpenOffice.org-minimal-version value="3.1" dep:name="OpenOffice.org 2.4 mnameinimum, or more recent" />
    </dependencies>
