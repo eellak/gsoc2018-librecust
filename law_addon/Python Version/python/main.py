@@ -10,6 +10,8 @@ from com.sun.star.beans.PropertyAttribute import REMOVEABLE
 from com.sun.star.beans.PropertyAttribute import MAYBEDEFAULT
 from com.sun.star.beans import PropertyValue
 from urllib.parse import urlparse
+import urllib
+from urllib import request
 
 #file picker constants
 from com.sun.star.ui.dialogs.TemplateDescription import FILEOPEN_PREVIEW
@@ -22,6 +24,8 @@ _ = gettext.gettext
 
 from com.sun.star.awt.MessageBoxType import MESSAGEBOX, INFOBOX, WARNINGBOX, ERRORBOX, QUERYBOX
 from com.sun.star.awt.MessageBoxButtons import BUTTONS_OK, BUTTONS_OK_CANCEL, BUTTONS_ABORT_IGNORE_RETRY, BUTTONS_YES_NO_CANCEL, BUTTONS_YES_NO, BUTTONS_RETRY_CANCEL, DEFAULT_BUTTON_OK, DEFAULT_BUTTON_CANCEL, DEFAULT_BUTTON_RETRY, DEFAULT_BUTTON_YES, DEFAULT_BUTTON_NO, DEFAULT_BUTTON_IGNORE
+
+ui_locale = None
 
 def MessageBox(ParentWin, MsgText, MsgTitle, MsgType=MESSAGEBOX, MsgButtons=BUTTONS_OK):
   ctx = uno.getComponentContext()
@@ -127,12 +131,12 @@ def insert_law(*args):
     #Inspect services for debugging purposes
     ctx = uno.getComponentContext()
     smgr = ctx.ServiceManager
-
+    global ui_locale
         #Get locale string and accordingly the ccorrespondign .mo file for l10n
     try:
-        ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.lawaddon")+'python/locales', languages=[getLanguage()])
+        ui_locale = gettext.translation('base', localedir=urllib.request.url2pathname(get_main_directory("com.addon.lawaddon")+'python/locales'), languages=[getLanguage()])
     except Exception as e:
-        ui_locale = gettext.translation('base', localedir=get_main_directory("com.addon.lawaddon")+'python/locales', languages=["en"])
+        ui_locale = gettext.translation('base', localedir=urllib.request.url2pathname(get_main_directory("com.addon.lawaddon")+'python/locales'), languages=["en"])
 
     ui_locale.install()
     _ = ui_locale.gettext
@@ -278,6 +282,8 @@ def insert_law(*args):
         return
 
 def print_paragraphs(article_body , ViewCursor):
+    global ui_locale
+    _ = ui_locale.gettext
     for paragraph_num,paragraph_body in sorted(article_body.items(),key=lambda x: int(x[0])):
         ViewCursor.gotoEnd(False)
         ViewCursor.setString(_("Paragraph")+ " " + paragraph_num + "\n")
