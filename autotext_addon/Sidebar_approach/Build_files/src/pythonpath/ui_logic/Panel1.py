@@ -97,6 +97,11 @@ def get_instance(service_name):
         service = NONE
     return service
 
+def xray(smgr, ctx, target):
+    mspf = smgr.createInstanceWithContext("com.sun.star.script.provider.MasterScriptProviderFactory", ctx)
+    script_provider = mspf.createScriptProvider("")
+    script = script_provider.getScript("vnd.sun.star.script:XrayTool._Main.Xray?language=Basic&location=application")
+    script.invoke((target,), (), ())
 
 from com.sun.star.uno import RuntimeException as _rtex
 
@@ -126,15 +131,13 @@ class Panel1(Panel1_UI):
         # Get current UI language
         try:
             ui_locale = gettext.translation('base',
-                                            localedir=urllib.request.url2pathname(
-                                                get_main_directory("com.addon.autotextaddon") +
-                                            'locales'),
+                                            localedir=get_main_directory("com.addon.autotextaddon") +
+                                            'locales',
                                             languages=[getLanguage()])
         except Exception as e:
             ui_locale = gettext.translation('base',
-                                            localedir=urllib.request.url2pathname(
-                                                get_main_directory("com.addon.autotextaddon") +
-                                            'locales'),
+                                            localedir=get_main_directory("com.addon.autotextaddon") +
+                                            'locales',
                                             languages=["en"])
 
         ui_locale.install()
@@ -218,6 +221,7 @@ class Panel1(Panel1_UI):
         global sorted_by_title
         global current_group
         global ui_locale
+        self.document = self.desktop.getCurrentComponent()
         auto_list = self.child.getControl("SavedAutotext")
         selected_pos = auto_list.getSelectedItemPos()
 
@@ -235,7 +239,9 @@ class Panel1(Panel1_UI):
         oRange = dps.getByName(current_group)
 
         selected_autotext = oRange.getByIndex(sorted_by_title[selected_pos][1])
+        
         ViewCursor = self.document.getCurrentController().getViewCursor()
+        
         selected_autotext.applyTo(ViewCursor)
 
     def AddSelectionButton_OnClick(self):
@@ -248,7 +254,7 @@ class Panel1(Panel1_UI):
         global sorted_by_title
         global current_group
         global ui_locale
-
+        self.document = self.desktop.getCurrentComponent()
         _ = ui_locale.gettext
 
         oCurs = self.document.getCurrentSelection()
@@ -302,6 +308,7 @@ class Panel1(Panel1_UI):
         """
         Access to the default AutoText window
         """
+        self.document = self.desktop.getCurrentComponent()
         ctx = uno.getComponentContext()
         smgr = ctx.ServiceManager
         dispatcher = smgr.createInstanceWithContext(
