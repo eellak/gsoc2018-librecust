@@ -52,7 +52,8 @@ for i in "${!prompt_result[@]}"; do
 	#echo ${SELECT_DICT["${prompt_result[$i]}"]}
 	case ${SELECT_DICT["${prompt_result[$i]}"]} in
 		1) echo "Installing Page Numbering addon"
-			eval sudo -u $USER_NAME $UNOPKG_PATH add -f $PAGE_NUMBERING_PATH
+			# Hacky way because no stdin while on postinst thus no licensed extensions can be installed in postinst. See according issue
+			eval sudo -u $USER_NAME $UNOPKG_PATH gui -f $PAGE_NUMBERING_PATH
 			;;
 		2) echo "Installing Settings loader"
 			eval sudo -u $USER_NAME $UNOPKG_PATH add -f $SETTINGS_LOADER_PATH

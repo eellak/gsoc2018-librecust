@@ -42,7 +42,7 @@ case "$1" in
                 db_purge
         fi
         ;;
-    remove)
+    remove|upgrade)
         rm -rf /var/cache/librecust
             eval sudo -u $USER_NAME $UNOPKG_PATH remove com.addon.pagenumbering || true
             eval sudo -u $USER_NAME $UNOPKG_PATH remove com.addon.lawaddon || true
@@ -57,7 +57,7 @@ case "$1" in
             cp "$TOOLBAR_DIR/$LAST_TOOLBAR_DIR/* $TOOLBAR_DIR/" || true
 
         ;;
-    remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+    failed-upgrade|abort-install|abort-upgrade|disappear)
         ;;
 
     *)
