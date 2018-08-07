@@ -126,13 +126,15 @@ class Panel1(Panel1_UI):
         # Get current UI language
         try:
             ui_locale = gettext.translation('base',
-                                            localedir=get_main_directory("com.addon.autotextaddon") +
-                                            'locales',
+                                            localedir=urllib.request.url2pathname(
+                                                get_main_directory("com.addon.autotextaddon") +
+                                            'locales'),
                                             languages=[getLanguage()])
         except Exception as e:
             ui_locale = gettext.translation('base',
-                                            localedir=get_main_directory("com.addon.autotextaddon") +
-                                            'locales',
+                                            localedir=urllib.request.url2pathname(
+                                                get_main_directory("com.addon.autotextaddon") +
+                                            'locales'),
                                             languages=["en"])
 
         ui_locale.install()

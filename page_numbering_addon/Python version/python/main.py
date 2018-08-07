@@ -13,6 +13,8 @@ from com.sun.star.beans import PropertyValue
 import gettext
 import os
 from urllib.parse import urlparse
+import urllib
+from urllib import request
 _ = gettext.gettext
 
 # Dictionary for possible numbering type options
@@ -28,19 +30,22 @@ NumTypeCollection = {
     "A,B,C,...": 0
 }
 
+
 def main(*args):
     ctx = uno.getComponentContext()
     smgr = ctx.ServiceManager
     try:
         ui_locale = gettext.translation('base',
-                                        localedir=get_main_directory("com.addon.pagenumbering") +
-                                        'python/locales',
+                                        localedir=urllib.request.url2pathname(
+                                            get_main_directory("com.addon.pagenumbering") +
+                                            'python/locales'),
                                         languages=[getLanguage()]
                                         )
     except Exception as e:
         ui_locale = gettext.translation('base',
-                                        localedir=get_main_directory("com.addon.pagenumbering") +
-                                        'python/locales',
+                                        localedir=urllib.request.url2pathname(
+                                            get_main_directory("com.addon.pagenumbering") +
+                                            'python/locales'),
                                         languages=["en"]
                                         )
 
@@ -265,6 +270,7 @@ class oListenerTop_Class(XTopWindowListener, unohelper.Base):
     """
     Top window listener implementation (XTopWindowListener) 
     """
+
     def __init__(self,):
         self.doc = None
 
@@ -306,8 +312,9 @@ def get_main_directory(module_name):
     ctx = uno.getComponentContext()
     srv = ctx.getByName(
         "/singletons/com.sun.star.deployment.PackageInformationProvider")
-    
+
     return urlparse(srv.getPackageLocation(module_name)).path + "/"
+
 
 def ListFonts(oDoc, SearchString):
     """
@@ -385,9 +392,11 @@ def canCopyTypeWithAssignment(oObj):
         else:
             return False
 
+
 '''Inspired by @sng at https://forum.openoffice.org/en/forum/viewtopic.php?f=45&t=81457
 and Andrew Pitonyak pdf "Useful Useful Macro Information For OpenOffice.org"
 '''
+
 
 def getLanguage():
     """
