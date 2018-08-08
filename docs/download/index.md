@@ -100,4 +100,57 @@ Download latest release from Github repository.
     </div>
     </div>
 
+    <h3 class="header-light regular-pad">UI customizations</h3>
+        <div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Menu Bar</div>
+            <div class="panel-body">                
+<div markdown="1">
+Download latest xml from Github repository:
+* [menubar.xml](https://github.com/eellak/gsoc2018-librecust/raw/master/menu_customization/menubar/menubar.xml)
+
+Then copy to User directory:
+
+```bash
+cp ./menubar.xml "$USER_PROFILE_PATH/soffice.cfg/modules/swriter/menubar/"
+```
+
+<span class="label label-warning">Warning</span> Currently, only EL locale modifications available.
+</div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-info">
+            <div class="panel-heading">Tool Bar</div>
+            <div class="panel-body">
+<div markdown="1">
+Download latest release from Github repository.
+* [singlemode.xml](https://github.com/eellak/gsoc2018-librecust/raw/master/menu_customization/toolbar/singlemode.xml)
+* [textobjectbar.xml](https://github.com/eellak/gsoc2018-librecust/raw/master/menu_customization/toolbar/textobjectbar.xml)
+
+Then copy to User directory:
+
+```bash
+cp ./*.xml "$USER_PROFILE_PATH/soffice.cfg/modules/swriter/toolbar/"
+```
+
+</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-success">
+            <div class="panel-heading">Icon set</div>
+            <div class="panel-body">
+<div markdown="1">
+Download latest release from [@charliecnr](https://www.deviantart.com/charliecnr) deviantart [page](https://www.deviantart.com/charliecnr/art/Office-2013-theme-for-LibreOffice-512127527).
+</div>
+            </div>
+        </div>
+    </div>
+    </div>
+
 </div>
