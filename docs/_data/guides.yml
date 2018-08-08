@@ -13,3 +13,5 @@
   - lawaddon_intro
   - lawaddon_insertlaw
   - lawaddon_insert_external
+  - lawaddon_insert_contents
+  - lawaddon_update_indices

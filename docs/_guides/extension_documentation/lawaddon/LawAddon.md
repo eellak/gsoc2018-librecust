@@ -24,3 +24,5 @@ layout: guide
 Μέσω της επέκτασης, παρέχονται οι εξής λειτουργικότητες: 
 * [Αυτόματη εισαγωγή κειμένου νόμου](/gsoc2018-librecust/guides/lawaddon_insertlaw) 
 * [Εισαγωγή εξωτερικού αρχείου](/gsoc2018-librecust/guides/lawaddon_insert_external) 
+* [Εισαγωγή πίνακα περιεχομένων](/gsoc2018-librecust/guides/lawaddon_insert_contents) 
+* [Ενημέρωση πινάκων περιεχομένων](/gsoc2018-librecust/guides/lawaddon_update_indices) 
