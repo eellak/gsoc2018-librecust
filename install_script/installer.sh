@@ -12,6 +12,9 @@ WORKING_DIR="$(pwd)"
 UNOPKG_PATH="$(which unopkg)"
 LIBRECUST_MACRO_PATH="$(realpath ../)/menu_customization/macros/LibreCustLib.oxt"
 SETTINGS_LOADER_PATH="$(realpath ../)/settings_loader/settings_loader.oxt"
+PAGE_NUMBERING_PATH="$(realpath ../)/page_numbering_addon/Python\ version/PageNumberingAddonPython-0.0.1.oxt"
+AUTOTEXT_PATH="$(realpath ../)/autotext_addon/Sidebar_approach/Build_files/AutotextAddon-0.0.1.oxt"
+LAWADDON_PATH="$(realpath ../)/law_addon/Python\ Version/LawAddon-0.0.1.oxt"
 MENUBAR_PATH="$(realpath ../)/menu_customization/menubar/menubar.xml"
 TOOLBAR_PATH="$(realpath ../)/menu_customization/toolbar"
 USER_HOME_PATH="$(eval echo "~$different_user")"
@@ -47,7 +50,7 @@ then
     exit 1
 fi
 
-eval $UNOPKG_PATH add $LIBRECUST_MACRO_PATH  #unopkg add extension
+eval $UNOPKG_PATH gui $LIBRECUST_MACRO_PATH 
 
 read -p "Install Settings Loader (settings_loader.oxt)? [y/n] " -n 1 -r
 echo    # (optional) move to a new line
@@ -57,7 +60,37 @@ then
     exit 1
 fi
 
-eval $UNOPKG_PATH add $SETTINGS_LOADER_PATH #unopkg add extension
+eval $UNOPKG_PATH gui $SETTINGS_LOADER_PATH 
+
+read -p "Install Page Numbering Addon (PageNumberingAddon.oxt)? [y/n] " -n 1 -r
+echo    # (optional) move to a new line
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    echo "Installation Failed: exiting"
+    exit 1
+fi
+
+eval $UNOPKG_PATH gui $AUTOTEXT_PATH 
+read -p "Install AutoText Addon (AutoTextAddon.oxt)? [y/n] " -n 1 -r
+echo    # (optional) move to a new line
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    echo "Installation Failed: exiting"
+    exit 1
+fi
+
+eval $UNOPKG_PATH gui $AUTOTEXT_PATH #unopkg gui because it is licensed and unopkg crashes when used with such extensions
+
+read -p "Install Law Toolbar (LawAddon.oxt)? [y/n] " -n 1 -r
+echo    # (optional) move to a new line
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    echo "Installation Failed: exiting"
+    exit 1
+fi
+
+eval $UNOPKG_PATH gui $LAWADDON_PATH #unopkg gui because it is licensed and unopkg crashes when used with such extensions
+
 
 #Then we have to copy menubar after we backup previous menubar configuration with timestamp
 
@@ -106,7 +139,7 @@ then
 fi
 
 # Copy icon theme
-cp "$ICON_THEME_PATH"/*.zip $LIBRE_LIB_CONFIG_PATH
+sudo cp "$ICON_THEME_PATH"/*.zip $LIBRE_LIB_CONFIG_PATH
 
 
 #Then we have to create desired file structure and copy templates
