@@ -6,9 +6,9 @@ Maintainer: Arvanitis Christos <arvchristos@gmail.com>
 Priority: optional
 Section: base
 Filename: pool/main/libr/librecust/librecust_0.0.1_all.deb
-Size: 13777368
-SHA256: 7381654b3d29a932abaef7e44181e29546590ccfb622c55f1fa210362545129c
-SHA1: c6a58c7a85a2567d340d286805cd64c32037ae4d
-MD5sum: 0e631597f1c0432749b684b9e9c83a41
+Size: 13777572
+SHA256: cf5d243d5799e6b1ff136a72e211a2eb7674ac238328163417a36e940e06f5cd
+SHA1: 56e929d6c8dbca4e33ea974911b672fdb8a755b2
+MD5sum: dcdf8e7f29a011fd14b009367ca9c5a8
 Description: GSOC 2018 LibreOffice customization and creation of legal templates
 

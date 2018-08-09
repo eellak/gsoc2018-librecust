@@ -53,7 +53,7 @@ General info about debian repositories [here](https://wiki.debian.org/DebianRepo
 ## How to delete a deb from repo
 
 ```bash
-reprepro delete [codename] [deb_name]
+reprepro remove [codename] [deb_name]
 ```
 
 ## How to add a deb to repo
