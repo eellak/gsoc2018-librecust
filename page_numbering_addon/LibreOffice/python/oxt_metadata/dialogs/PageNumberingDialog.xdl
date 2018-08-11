@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="PageNumberingDialog" dlg:left="148" dlg:top="91" dlg:width="272" dlg:height="119" dlg:closeable="true" dlg:moveable="true" dlg:title="Insert Page Numbering">
+ <dlg:bulletinboard>
+  <dlg:menulist dlg:id="Alignment" dlg:tab-index="5" dlg:left="126" dlg:top="19" dlg:width="63" dlg:height="13" dlg:spin="true"/>
+  <dlg:menulist dlg:id="Position" dlg:tab-index="6" dlg:left="201" dlg:top="19" dlg:width="63" dlg:height="13" dlg:spin="true"/>
+  <dlg:numericfield dlg:id="First_Numbered_Page" dlg:tab-index="7" dlg:left="8" dlg:top="81" dlg:width="63" dlg:height="11" dlg:decimal-accuracy="0" dlg:value="1" dlg:spin="true"/>
+  <dlg:numericfield dlg:id="First_Numbered_Index" dlg:tab-index="9" dlg:left="103" dlg:top="81" dlg:width="63" dlg:height="11" dlg:decimal-accuracy="0" dlg:value="1" dlg:spin="true"/>
+  <dlg:numericfield dlg:id="FontSize" dlg:tab-index="13" dlg:left="173" dlg:top="51" dlg:width="63" dlg:height="11" dlg:decimal-accuracy="0" dlg:value="1" dlg:spin="true"/>
+  <dlg:menulist dlg:id="FontSelect" dlg:tab-index="15" dlg:left="6" dlg:top="49" dlg:width="104" dlg:height="13" dlg:spin="true"/>
+  <dlg:combobox dlg:id="NumberingDecoration" dlg:tab-index="0" dlg:left="5" dlg:top="19" dlg:width="41" dlg:height="12" dlg:tabstop="false" dlg:align="center" dlg:spin="true"/>
+  <dlg:combobox dlg:id="NumberingTypeSelect" dlg:tab-index="17" dlg:left="59" dlg:top="19" dlg:width="55" dlg:height="12" dlg:tabstop="false" dlg:align="center" dlg:spin="true"/>
+  <dlg:text dlg:id="DecorLabel" dlg:tab-index="2" dlg:left="5" dlg:top="3" dlg:width="39" dlg:height="11" dlg:value="Decor"/>
+  <dlg:text dlg:id="AlignmentLabel" dlg:tab-index="3" dlg:left="126" dlg:top="3" dlg:width="48" dlg:height="11" dlg:value="Alignment"/>
+  <dlg:text dlg:id="PositionLabel" dlg:tab-index="4" dlg:left="201" dlg:top="3" dlg:width="28" dlg:height="11" dlg:value="Position"/>
+  <dlg:text dlg:id="FontLabel" dlg:tab-index="11" dlg:left="6" dlg:top="38" dlg:width="51" dlg:height="11" dlg:value="Font"/>
+  <dlg:text dlg:id="SizeLabel" dlg:tab-index="14" dlg:left="173" dlg:top="38" dlg:width="51" dlg:height="11" dlg:value="Size"/>
+  <dlg:text dlg:id="FirstPageLabel" dlg:tab-index="8" dlg:left="8" dlg:top="69" dlg:width="51" dlg:height="9" dlg:value="First Page"/>
+  <dlg:text dlg:id="PageOffsetLabel" dlg:tab-index="10" dlg:left="103" dlg:top="69" dlg:width="51" dlg:height="9" dlg:value="Page Offset"/>
+  <dlg:text dlg:id="TypeLabel" dlg:tab-index="16" dlg:left="59" dlg:top="3" dlg:width="51" dlg:height="11" dlg:value="Type"/>
+  <dlg:button dlg:id="CancelButton" dlg:tab-index="12" dlg:left="163" dlg:top="101" dlg:width="50" dlg:height="12" dlg:value="Cancel" dlg:button-type="cancel"/>
+  <dlg:button dlg:id="OKButton" dlg:tab-index="1" dlg:left="218" dlg:top="101" dlg:width="50" dlg:height="12" dlg:default="true" dlg:value="OK" dlg:button-type="ok"/>
+  <dlg:button dlg:id="HelpButton" dlg:tab-index="18" dlg:left="106" dlg:top="101" dlg:width="50" dlg:height="12" dlg:help-text="Page01" dlg:help-url="com.addon.pagenumbering/Page01.xhp" dlg:value="Help" dlg:button-type="help"/>
+ </dlg:bulletinboard>
+</dlg:window>

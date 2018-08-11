@@ -1,1 +1,1 @@
-Greek Description
+Επέκταση αυτοματοποιημένης εφαρμογής ρυθμίσεων/επιλογών στο LibreOffice ως μέρος του Librecust.

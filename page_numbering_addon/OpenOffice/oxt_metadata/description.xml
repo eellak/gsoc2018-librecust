@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Extension files were created by Extension Compiler - version 2.1.2 -->
+<description xmlns="http://openoffice.org/extensions/description/2006"
+ xmlns:dep="http://openoffice.org/extensions/description/2006"
+ xmlns:xlink="http://www.w3.org/1999/xlink" >
+   <identifier value="com.addon.pagenumbering" />
+   <version value="0.0.1" />
+   <icon>
+      <default xlink:href="images/icon.png" />
+   </icon>
+   <extension-description>
+      <src xlink:href="Descriptions/descr-en.txt" lang="en"/>
+      <src xlink:href="Descriptions/descr-el.txt" lang="el"/>
+   </extension-description>
+   <update-information>
+      <src xlink:href="https://github.com/eellak/gsoc2018-librecust/raw/master/page_numbering_addon/Python%20version/PageNumberingAddonPython-A.update.xml" />
+   </update-information>
+   <registration>
+      <simple-license accept-by="admin" suppress-on-update="true" >
+         <license-text xlink:href="Legal/license-en.txt" lang="en" />
+         <license-text xlink:href="Legal/license-el.txt" lang="el" />
+      </simple-license>
+   </registration>
+   <dependencies>
+      <OpenOffice.org-minimal-version value="4.0" dep:name="Apache OpenOffice 4.0 minimum, or more recent" />
+   </dependencies>
+   <display-name>
+      <name lang="en">Page Numbering Add-on</name>
+      <name lang="el">Page Numbering Addon</name>
+   </display-name>
+   <publisher>
+      <name lang="en" xlink:href="https://eellak.github.io/gsoc2018-librecust/">Arvanitis Christos</name>
+      <name lang="el" xlink:href="https://eellak.github.io/gsoc2018-librecust/">Αρβανίτης Χρήστος</name>
+   </publisher>
+</description>

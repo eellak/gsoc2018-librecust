@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+   <meta>
+      <topic id="com.addon.pagenumbering.Page01">
+         <title id="tit" xml-lang="el">Page Numbering Addon : Εισαγωγή</title>
+         <filename>/com.addon.pagenumbering/Page01.xhp</filename>
+      </topic>
+   </meta>
+   <body>
+      <paragraph role="heading" level="1" xml-lang="el" id="N0001">
+         Πρόσθετο αρίθμησης σελίδας
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0002">
+         Η προσθήκη αρίθμησης σελίδων στις σουίτες LibreOffice/OpenOffice απαιτεί μια παράλογα σύνθετη μεθοδολογία, ειδικά για τον νέο χρήστη. Με την υπάρχουσα διαδικασία, προκειμένου να εισαχθεί αρίθμηση σελίδων, ο χρήστης οφείλει να έχει κατανοήσει πλήρως έννοιες όπως οι τεχνοτροπίες σελίδων και το εύρος που εκτείνονται, πως λειτουργούν οι χειροκίνητες αλλαγές σελίδων καθώς και το που βρίσκεται η πληροφορία για τον τρέχοντα αριθμό σελίδας κάθε παραγράφου. Λαμβάνοντας υπόψιν το γεγονός πως άλλες σουίτες γραφείου ακολουθούν μια αρκετά απλούστερη προσέγγιση, αναπτύχθηκε το συγκεκριμένο πρόσθετο. Σε αυτή την ενότητα αναλύεται η προσέγγιση που προσθέτει ένα αφαιρετικό επίπεδο στην υπάρχουσα διαδικασία προσθήκης αρίθμησης σελίδων. 
+      </paragraph>
+      <paragraph role="heading" level="2" xml-lang="el" id="N0003">
+         Εισαγωγή
+      </paragraph>
+      <section id="Στοιχείο μενού" >
+         <paragraph role="paragraph" xml-lang="el" id="N0004">
+            Το πρόσθετο είναι προσβάσιμο μέσω του μενού <emph>Εισαγωγή-&gt;Αρίθμηση Σελίδας</emph>
+         </paragraph>
+      </section>
+      <paragraph role="paragraph" xml-lang="el" id="N0005">
+         Κατά τη πρόσβαση στο στοιχείο του μενού εμφανίζεται ο ακόλουθος διάλογος:<br/><image src="com.addon.pagenumbering/../../../images/help/el/main_page_numbering.png" id="N0006"><alt xml-lang="el" id="N0007">Κύριος Διάλογος</alt></image>
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0008">
+         
+      </paragraph>
+      <list type="unordered">
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0009">
+               <emph>Διακόσμηση</emph>: Επιλογή για απλή αρίθμηση ή για διακόσμηση (π.χ. -1-, [1]).
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0010">
+               <emph>Τύπος</emph>: Επιλογή τύπου αρίθμησης από ένα σύνολο διαθέσιμων στοιχείων τα οποία υποστηρίζονται από το LibreOffice/OpenOffice, όπως Ρωμαϊκά (i,ii... , I,II...), Αραβικά (1,2...) ή Ελληνικά (α,β... , Α,Β...).
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0011">
+               <emph>Στοίχιση</emph>: Ορισμός της στοίχισης κειμένου της αρίθμησης.
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0012">
+               <emph>Θέση</emph>: Επιλογή της θέσης αρίθμησης (διαθέσιμες επιλογές η Κεφαλίδα και το Υποσέλιδο)
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0013">
+               <emph>Γραμματοσειρά</emph>: Επιλογή από την λίστα εγκατεστημένων γραμματοσειρών του συστήματος.
+            </paragraph>
+         </listitem>
+      </list>
+      <paragraph role="warning" xml-lang="el" id="N0014">
+         Μερικές γραμματοσειρές δεν υποστηρίζουν συγκεκριμένα είδη αρίθμησης, οπότε και ο χρήστης ενδέχεται να αντιμετωπίσει προβλήματα συμβατότητας και κενά πεδία αρίθμησης (π.χ. μια γραμματοσειρά δεν υποστηρίζει ελληνικούς χαρακτήρες).
+      </paragraph>
+      <list type="unordered">
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0015">
+               <emph>Μέγεθος</emph>: Ορισμός μεγέθους γραμματοσειράς.
+            </paragraph>
+         </listitem>
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0016">
+               <emph>Πρώτη σελίδα</emph>: Η σελίδα από την οποία ξεκινά η αρίθμηση.
+            </paragraph>
+         </listitem>
+      </list>
+      <paragraph role="tip" xml-lang="el" id="N0017">
+         Παράδειγμα χρήσης πρώτης σελίδας διαφορετικής του (1) αποτελεί η ύπαρξη περιεχομένων και εξωφύλλου στις προηγούμενες της πρώτης αριθμημένης σελίδας.
+      </paragraph>
+      <paragraph role="tip" xml-lang="el" id="N0018">
+         Επιλέγοντας σελίδα διαφορετική από τη πρώτη (1) δημιουργεί δύο περιοχές σελίδων, τη πρώτη η οποία δεν έχει αρίθμηση και τη δεύτερη που έχει. Η συμπεριφορά αυτή είναι αποτέλεσμα της δημιουργίας αντιγράφων τεχνοτροπιών σελίδας προκειμένου να διατηρηθεί η πρότερη της αρίθμησης παραμετροποίηση του στυλ των σελίδων.
+      </paragraph>
+      <list type="unordered">
+         <listitem>
+            <paragraph role="listitem" xml-lang="el" id="N0019">
+               <emph>Αρίθμηση από...</emph>: Ορισμός του αριθμού της πρώτης αριθμημένης σελίδας.
+            </paragraph>
+         </listitem>
+      </list>
+      <paragraph role="tip" xml-lang="el" id="N0020">
+         Ορίζοντας την επιλογή “Αρίθμηση από...” αλλάζει αυτόματα και η κατάλληλη ιδιότητα της πρώτης παραγράφου, επιτρέποντας στον χρήστη να ορίσει διαφορετικά είδη αρίθμησης κατά μήκος του κειμένου (π.χ. Για τις πρώτες ν σελίδες Ρωμαϊκή αρίθμηση ενώ για τις υπόλοιπες απλή Αραβική αρίθμηση).
+      </paragraph>
+      <paragraph role="paragraph" xml-lang="el" id="N0021">
+         
+      </paragraph>
+   </body>
+</helpdocument>

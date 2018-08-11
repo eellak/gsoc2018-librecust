@@ -1,1 +1,1 @@
-English description
+Librecust deployment extension for Libreoffice 
