@@ -36,7 +36,7 @@ Page numbering Addon, providing interface for page offsets, starting pages, and 
 - #### Notes
 Page style nesting is not developed so an approach of style inheritance through cloning style property set is implemented ([XPropertySet](https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1beans_1_1PropertySet.html) service).
 
-[Approach followed in librecust](https://github.com/eellak/gsoc2018-librecust/blob/master/page_numbering_addon/Python%20version/python/main.py)
+[Approach followed in librecust](https://github.com/eellak/gsoc2018-librecust/blob/7abb56c11406746ab8d9bb694df3a68062a15ee8/page_numbering_addon/LibreOffice/python/build_files/python/main.py#L344)
 
 - ### Legal paper assisting toolbar (LawAddon)
 All template related extension modules are compatible with existing management software used in certain departments. While more info is included in the corresponding [readme](https://github.com/eellak/gsoc2018-librecust/tree/master/law_addon), the elements compiling LawAddon are the following:
@@ -45,7 +45,7 @@ All template related extension modules are compatible with existing management s
 * Insert contents table: Insert contents table simulating the corresponding tool from menubar.
 * Update contents table: Update all content tables without leaving current cursor position, speeding up the default process for long documents.
 
-All the aforementioned utilities are implemented in the [LawAddon python script](https://github.com/eellak/gsoc2018-librecust/blob/master/law_addon/Python%20Version/python/main.py).
+All the aforementioned utilities are implemented in the [LawAddon python script](https://github.com/eellak/gsoc2018-librecust/blob/master/law_addon/LibreOffice/build_files/python/main.py).
 
 ## Template creation
 While there are few public departments that use standardized law documents (and have already implemented them), most services and court departments produce and use non-standardized documents. This is the reason why we decided to engineer a different approach for automation of document creation. The base of this approach is the AutoText functionality that is implemented in LibreOffice/OpenOffice.
@@ -67,7 +67,7 @@ Throughout this GSOC project, documentation for each part will be compiled. We f
 The [wiki](https://github.com/eellak/gsoc2018-librecust/wiki) includes documentation pages for developers.
 
 ### End User documentation
-End user man pages are included as meta-data in LibreOffice Help at install. An [example](https://github.com/eellak/gsoc2018-librecust/tree/master/page_numbering_addon/Addon%20metadata) of this inclusion for reference can be observed at each extension's meta-data.
+End user man pages are included as meta-data in LibreOffice Help at install. An [example](https://github.com/eellak/gsoc2018-librecust/tree/master/autotext_addon/LibreOffice/sidebar_version/oxt_metadata) of this inclusion for reference can be observed at each extension's meta-data.
 
 However, it is not mandatory to install extensions or the whole project to access those man-pages. They are also part of the project's [Github page](https://eellak.github.io/gsoc2018-librecust/).
 
