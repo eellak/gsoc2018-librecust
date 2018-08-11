@@ -80,8 +80,8 @@ Download latest release from Github repository.
             <div class="panel-body">
 <div markdown="1">
 Download latest release from Github repository.
-* [0.0.1](https://github.com/eellak/gsoc2018-librecust/raw/master/autotext_addon/LibreOffice/sidebar_version/build_files/AutotextAddon-0.0.1.oxt) (LibreOffice | Sidebar version)
-* [0.0.1](https://github.com/eellak/gsoc2018-librecust/raw/master/autotext_addon/LibreOffice/toolbar_version/build_files/AutotextAddon-0.0.1.oxt) (LibreOffice | Toolbar version)
+* [0.0.1](https://github.com/eellak/gsoc2018-librecust/raw/master/autotext_addon/LibreOffice/sidebar_version/build_files/AutotextAddon-0.0.1.oxt) (LibreOffice, Sidebar version)
+* [0.0.1](https://github.com/eellak/gsoc2018-librecust/raw/master/autotext_addon/LibreOffice/toolbar_version/build_files/AutotextAddon-0.0.1.oxt) (LibreOffice, Toolbar version)
 </div>
             </div>
         </div>
