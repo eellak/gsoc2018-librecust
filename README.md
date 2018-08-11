@@ -39,7 +39,7 @@ Page style nesting is not developed so an approach of style inheritance through 
 [Approach followed in librecust](https://github.com/eellak/gsoc2018-librecust/blob/7abb56c11406746ab8d9bb694df3a68062a15ee8/page_numbering_addon/LibreOffice/python/build_files/python/main.py#L344)
 
 - ### Legal paper assisting toolbar (LawAddon)
-All template related extension modules are compatible with existing management software used in certain departments. While more info is included in the corresponding [readme](https://github.com/eellak/gsoc2018-librecust/tree/master/law_addon), the elements compiling LawAddon are the following:
+All template related extension modules are compatible with existing management software used in certain departments. While more info is included in the corresponding [page](https://eellak.github.io/gsoc2018-librecust/guides/lawaddon_intro/), the elements compiling LawAddon are the following:
 * Insert Law: Extension that fetches Greek law text body to current cursor position. The API used for law fetching is provided by another GSOC project from GFOSS. [gsoc2018-3gm](https://github.com/eellak/gsoc2018-3gm).
 * Insert external document: Extension that inserts an external document as reference link to current cursor position using relative parts for document portability.
 * Insert contents table: Insert contents table simulating the corresponding tool from menubar.
