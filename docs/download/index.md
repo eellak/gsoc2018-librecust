@@ -67,8 +67,8 @@ Before downloading any of the extensions, please consider the [requirements]({{ 
             <div class="panel-body">                
 <div markdown="1">
 Download latest release from Github repository.
-* [0.0.1](https://github.com/eellak/gsoc2018-librecust/raw/master/page_numbering_addon/Python%20version/PageNumberingAddonPython-0.0.1.oxt) (LibreOffice)
-* [0.0.1](https://github.com/eellak/gsoc2018-librecust/raw/master/page_numbering_addon/Python%20version/PageNumberingAddonPython-A-0.0.1.oxt) (Apache OpenOffice)
+* [0.0.1](https://github.com/eellak/gsoc2018-librecust/raw/master/page_numbering_addon/LibreOffice/python/build_files/PageNumberingAddonPython-0.0.1.oxt) (LibreOffice)
+* [0.0.1](https://github.com/eellak/gsoc2018-librecust/raw/master/page_numbering_addon/OpenOffice/python/build_files/PageNumberingAddonPython-A-0.0.1.oxt) (Apache OpenOffice)
 </div>
 
             </div>
@@ -80,8 +80,8 @@ Download latest release from Github repository.
             <div class="panel-body">
 <div markdown="1">
 Download latest release from Github repository.
-* [0.0.1](https://github.com/eellak/gsoc2018-librecust/raw/master/autotext_addon/Sidebar_approach/Build_files/AutotextAddon-0.0.1.oxt) (LibreOffice)
-* [0.0.1](https://github.com/eellak/gsoc2018-librecust/raw/master/autotext_addon/Sidebar_approach/Build_files/AutotextAddon-A-0.0.1.oxt) (Apache OpenOffice)
+* [0.0.1](https://github.com/eellak/gsoc2018-librecust/raw/master/autotext_addon/LibreOffice/sidebar_version/build_files/AutotextAddon-0.0.1.oxt) (LibreOffice | Sidebar version)
+* [0.0.1](https://github.com/eellak/gsoc2018-librecust/raw/master/autotext_addon/LibreOffice/toolbar_version/build_files/AutotextAddon-0.0.1.oxt) (LibreOffice | Toolbar version)
 </div>
             </div>
         </div>
@@ -92,8 +92,8 @@ Download latest release from Github repository.
             <div class="panel-body">
 <div markdown="1">
 Download latest release from Github repository.
-* [0.0.1](https://github.com/eellak/gsoc2018-librecust/raw/master/law_addon/Python%20Version/LawAddon-0.0.1.oxt) (LibreOffice)
-* [0.0.1](https://github.com/eellak/gsoc2018-librecust/raw/master/law_addon/Python%20Version/LawAddon-A-0.0.1.oxt) (Apache OpenOffice)
+* [0.0.1](https://github.com/eellak/gsoc2018-librecust/raw/master/law_addon/LibreOffice/build_files/LawAddon-0.0.1.oxt) (LibreOffice)
+* [0.0.1](https://github.com/eellak/gsoc2018-librecust/raw/master/law_addon/LibreOffice/build_files/LawAddon-A-0.0.1.oxt) (Apache OpenOffice)
 </div>
             </div>
         </div>
