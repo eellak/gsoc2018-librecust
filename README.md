@@ -69,7 +69,7 @@ The [wiki](https://github.com/eellak/gsoc2018-librecust/wiki) includes documenta
 ### End User documentation
 End user man pages are included as meta-data in LibreOffice Help at install. An [example](https://github.com/eellak/gsoc2018-librecust/tree/master/autotext_addon/LibreOffice/sidebar_version/oxt_metadata) of this inclusion for reference can be observed at each extension's meta-data.
 
-However, it is not mandatory to install extensions or the whole project to access those man-pages. They are also part of the project's [Github page](https://eellak.github.io/gsoc2018-librecust/).
+However, it is not mandatory to install extensions or the whole project to access those man-pages. They are also part of the project's [Github page](https://eellak.github.io/gsoc2018-librecust/guides/home/).
 
 ### Challenges
 While LO Basic is the most documented language, mainly because of its abstraction, developers keen on using modern languages (e.g. Python, Java). LibreOffice Python UNO bridge is poorly documented with helping topics spread across multiple forum posts, so our documentation will be of much help for new developers.
@@ -91,7 +91,7 @@ Templates include "User defined fields" for static information (e.g. date and me
 
 Finally, after observing template details, we engineered addons that automate their creation taking into account their non-standard nature across different services. 
 
-We started with the intention to build a LibreOffice extension providing an interface for template selection and filling. However, most public services already used such an interface, so we decided to build a different approach of document filling automation through AutoTexts.
+We started with the intention to build a LibreOffice extension providing an interface for template selection and filling. However, most public services already used such an interface, so we decided to implement a different approach of document filling automation through AutoTexts.
 
 A large part of the project and its composing functions is implemented (or inspired) by the following sources:
 - Andrew Davison work on documenting Java Libreoffice Programming Concepts on [Java LibreOffice Programming](http://fivedots.coe.psu.ac.th/~ad/jlop/#contents)
