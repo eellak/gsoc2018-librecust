@@ -3,8 +3,6 @@ title: Installation
 permalink: /docs/Installation/
 ---
 
-Info about the repo for each distribution will go here
-
 ## Requirements
 
 ### Debian

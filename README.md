@@ -1,11 +1,16 @@
 # LibreOffice customization and creation of legal Templates - librecust
 
-Welcome to Google Summer of Code 2018 project *LibreOffice customization and creation of legal Templates* (or librecust). The project is adding open source software in employee's workflow, applying mainly on Greek legal services (mainly on *The Council of State* and extending to other services such "Administrative Court of Appeal" departments).
+Welcome to Google Summer of Code 2018 project *LibreOffice customization and creation of legal Templates* (or librecust). The project is adding open source software in employee's workflow, applying currently on Greek legal services (mainly on *The Council of State* and extending to other services such "Administrative Court of Appeal" departments).
+
+# Overview
+* [Description](#brief-description)
+* [Installation](#installing-and-building-librecust)
+* [Timeline](#timeline)
+* [Final report](#final-report)
+* [Future work](#future-work)
+* [The team](#the-team)
 
 # Brief description
-
-## Project statement
-
 
 ## Project outline
 This GSOC project, **librecust**, includes the following substeps:
@@ -21,8 +26,7 @@ Users have developed MS Office related muscle memory while using this tool. LO i
 - ### Toolbar
 The corresponding, in terms of MS Office functionality, toolbar items are included with similar appearance (small icon size is defined as default (MS Office 2003) with similar icons) while leaving space for additional buttons relative to the extension development. The icon set included in the set of modifications is created by [@charliecnr](https://www.deviantart.com/charliecnr). 
 
-Simple basic macros to inspect and access certain sub-menus (e.g. Page Setup Dialog) that are not accessible through default [dispatch Commands](https://wiki.documentfoundation.org/Development/DispatchCommands) (.uno:*) [Code](https://github.com/eellak/gsoc2018-librecust/tree/master/menu_customization/macros/librecustLib).
-
+Simple basic macros to inspect and access certain sub-menus (e.g. Page Setup Dialog) that are not accessible through default [dispatch Commands](https://wiki.documentfoundation.org/Development/DispatchCommands) (`.uno:*`) [Code](https://github.com/eellak/gsoc2018-librecust/tree/master/menu_customization/macros/librecustLib).
 
 ## Extension development
 Extension elements are prototyped in LO Basic for API abstraction, then ported and finalized to Python to access a more active and populated developer community.
@@ -32,7 +36,7 @@ Page numbering Addon, providing interface for page offsets, starting pages, and 
 - #### Notes
 Page style nesting is not developed so an approach of style inheritance through cloning style property set is implemented ([XPropertySet](https://api.libreoffice.org/docs/idl/ref/servicecom_1_1sun_1_1star_1_1beans_1_1PropertySet.html) service).
 
-[Our approach](https://github.com/eellak/gsoc2018-librecust/blob/master/page_numbering_addon/Python%20version/python/main.py#L299)
+[Approach followed in librecust](https://github.com/eellak/gsoc2018-librecust/blob/master/page_numbering_addon/Python%20version/python/main.py)
 
 - ### Legal paper assisting toolbar (LawAddon)
 All template related extension modules are compatible with existing management software used in certain departments. While more info is included in the corresponding [readme](https://github.com/eellak/gsoc2018-librecust/tree/master/law_addon), the elements compiling LawAddon are the following:
@@ -77,7 +81,7 @@ The installation process is described in the corresponding [wiki page](https://g
 ## Building librecust
 Building and packaging instructions for developers are provided in the corresponding [wiki page](https://github.com/eellak/gsoc2018-librecust/wiki/Build-Project).
 
-## Implementation
+# Implementation
 Menu customizations are implemented by editing user configuration `.xml` files and adding UI functionality through predefined [dispatch commands](https://wiki.documentfoundation.org/Development/DispatchCommands) and macro scripts. Any unimplemented feature is developed using macro scripts and inspecting tools for access to different menu items (e.g. tabs, radio buttons...) simulating the corresponding menu items of MS Office.
 The must-see reference for LibreOffice Macro development that is of great use throughout this project is Andrew Pitonyak's [OpenOffice Macro Information](http://www.pitonyak.org/AndrewMacro.odt).
 
@@ -93,6 +97,7 @@ A large part of the project and its composing functions is implemented (or inspi
 - Andrew Davison work on documenting Java Libreoffice Programming Concepts on [Java LibreOffice Programming](http://fivedots.coe.psu.ac.th/~ad/jlop/#contents)
 - Samuel Mehrbrodt's repository for a basic Eclipse LibreOffice extension project [libreoffice-starter-extension](https://github.com/smehrbrodt/libreoffice-starter-extension)
 - Andrew D. Pitonyak's OpenOffice.org Macros Explained - [OOME Third Edition](http://www.pitonyak.org/OOME_3_0.pdf)
+- [@kelsa-pi](https://github.com/kelsa-pi) UNO Dialog Tools [unodit](https://github.com/kelsa-pi/unodit) project.
 
 # Timeline
 The timeline followed throughout librecust development is included in the corresponding [timeline gist](https://gist.github.com/arvchristos/a579323d320b288dbbc50ad547e859ec) 
@@ -107,7 +112,7 @@ The following future work can be done to improve the state of librecust project:
 2. Merge current document with external elements: By the end of the project, for every external document a bookmark is provided to give access to external element positions to future developers that attempt to implement this functionality. Complete merging requires canvas writing to external document elements (e.g. `png`, `pdf`...) in order for page numbering to be included. The exported document can be a pdf including all documents referenced in the main editing one.
 3. Page Numbering add-on: Add further functionality to page numbering add on (even/odd pages numbered). The LIbreOffice API already includes functions that lead to such additions.
 4. Completely open source template management software.
-5. Solution for distribution of AutoTexts among workstations of same departments.
+5. Solution for distribution of AutoTexts among workstations of same departments (replacing proprietary/outdated management software in such services).
 6. Automatic extraction of AutoText elements from a huge number of documents for each public service.
 7. Packaging for multiple other distributions   
 
