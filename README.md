@@ -26,7 +26,7 @@ Users have developed MS Office related muscle memory while using this tool. LO i
 - ### Toolbar
 The corresponding, in terms of MS Office functionality, toolbar items are included with similar appearance (small icon size is defined as default (MS Office 2003) with similar icons) while leaving space for additional buttons relative to the extension development. The icon set included in the set of modifications is created by [@charliecnr](https://www.deviantart.com/charliecnr). 
 
-Simple basic macros to inspect and access certain sub-menus (e.g. Page Setup Dialog) that are not accessible through default [dispatch Commands](https://wiki.documentfoundation.org/Development/DispatchCommands) (`.uno:*`) [Code](https://github.com/eellak/gsoc2018-librecust/tree/master/menu_customization/macros/librecustLib).
+Simple basic macros to inspect and access certain sub-menus (e.g. Page Setup Dialog) that are not accessible through default [dispatch Commands](https://wiki.documentfoundation.org/Development/DispatchCommands) (`.uno:*`) [Code](https://github.com/eellak/gsoc2018-librecust/tree/master/menu_customization/macros/).
 
 ## Extension development
 Extension elements are prototyped in LO Basic for API abstraction, then ported and finalized to Python to access a more active and populated developer community.
