@@ -7,6 +7,8 @@
       manifest:full-path="python/" />
    <manifest:file-entry manifest:media-type="application/vnd.sun.star.dialog-library" 
       manifest:full-path="dialogs/" />
+   <manifest:file-entry manifest:media-type="application/vnd.sun.star.basic-library" 
+      manifest:full-path="basic/PageStyleClone/" />
    <manifest:file-entry manifest:media-type="application/vnd.sun.star.configuration-data" 
       manifest:full-path="AddonUI.xcu" />
 </manifest:manifest>

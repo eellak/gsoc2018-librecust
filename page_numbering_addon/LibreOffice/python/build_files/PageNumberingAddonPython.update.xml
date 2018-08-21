@@ -9,7 +9,7 @@
       <OpenOffice.org-minimal-version value="3.1" dep:name="OpenOffice.org 2.4 mnameinimum, or more recent" />
    </dependencies>
    <update-download>
-      <src xlink:href="https://github.com/eellak/gsoc2018-librecust/raw/master/page_numbering_addon/Python%20version/PageNumberingAddonPython-0.0.1.oxt" />
+      <src xlink:href="https://github.com/eellak/gsoc2018-librecust/raw/master/page_numbering_addon/LibreOffice/python/build_files/PageNumberingAddonPython-0.0.1.oxt" />
    </update-download>
    <publisher>
       <name lang="en" xlink:href="https://eellak.github.io/gsoc2018-librecust/">Arvanitis Christos</name>

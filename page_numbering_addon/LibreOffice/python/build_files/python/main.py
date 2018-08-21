@@ -30,6 +30,12 @@ NumTypeCollection = {
     "A,B,C,...": 0
 }
 
+def copyPropertySet(smgr,ctx,srcObj,dstObj):
+    mspf = smgr.createInstanceWithContext("com.sun.star.script.provider.MasterScriptProviderFactory", ctx)
+    script_provider = mspf.createScriptProvider("")
+    script = script_provider.getScript("vnd.sun.star.script:PageStyleClone.PageStyle.copyPropertySet?language=Basic&location=application")
+    script.invoke((srcObj,dstObj), (), ())
+    return dstObj
 
 def main(*args):
     ctx = uno.getComponentContext()
@@ -180,8 +186,7 @@ def main(*args):
     CurrentStyleName = ViewCursor.PageStyleName
     OldStyle = PageStyles.getByName(CurrentStyleName)
 
-    copyUsingPropertySetInfo(OldStyle, NewStyle)
-
+    copyPropertySet(smgr,ctx,OldStyle,NewStyle)
     DefNumberingStyleNum = 200
 
     oUDP = Doc.getDocumentProperties().UserDefinedProperties
@@ -216,9 +221,13 @@ def main(*args):
     if PositionListBox.SelectedItems[0] == 0:
         NumberedPage.HeaderIsOn = True
         Num_Position = NumberedPage.HeaderText
+        NumberedPage.HeaderBodyDistance = 499
+        NumberedPage.HeaderHeight = 0
     else:
         NumberedPage.FooterIsOn = True
         Num_Position = NumberedPage.FooterText
+        NumberedPage.FooterBodyDistance = 499
+        NumberedPage.FooterHeight = 0
 
     # For text insertion a Text cursor is needed
     NumCursor = Num_Position.Text.createTextCursor()

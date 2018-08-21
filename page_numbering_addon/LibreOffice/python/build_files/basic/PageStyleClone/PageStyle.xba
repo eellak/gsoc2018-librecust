@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="PageStyle" script:language="StarBasic">REM  *****  BASIC  *****
+
+
+Function copyPropertySet(srcObj, dstObj)
+copyUsingPropertySetInfo(srcObj, dstObj)
+copyPropertySet = dstObj
+end function
+
+
+&apos; Forum post of @pitonyak from https://forum.openoffice.org/en/forum/viewtopic.php?f=20&amp;t=55879
+Sub copyUsingPropertySetInfo(srcObj, dstObj)
+  Dim sPInfo, dPInfo  &apos; Property Set Information Objects
+  Dim sNames          &apos; Source names
+  Dim oProps
+  Dim oProp
+  Dim i As Integer
+  Dim oSValue
+  Dim oDValue
+ 
+  If NOT HasUnoInterfaces(srcObj, &quot;com.sun.star.beans.XPropertySet&quot;) Then
+    &apos; No idea how to  assign contained values.
+    Print &quot;Object does not support the XPropertySet interface.&quot;
+    Exit Sub
+  End If
+ 
+  sPInfo = srcObj.getPropertySetInfo()
+  dPInfo = dstObj.getPropertySetInfo()
+  oProps = sPInfo.getProperties()
+  For i = LBound(oProps) To UBound(oProps)
+    oProp = oProps(i)
+    If dPInfo.hasPropertyByName(oProp.Name) Then
+      &apos; I want short circuit boolean logic
+      If oProp.Type.getName() = dPInfo.getPropertyByName(oProp.Name).Type.getName() Then
+        &apos; The types match...
+        oSValue = srcObj.getPropertyValue(oProp.Name)
+        If canCopyTypeWithAssignment(oSValue) Then
+          If (oProp.Attributes AND com.sun.star.beans.PropertyAttribute.READONLY) = 0 Then
+            If oProp.Name = &quot;GridLines&quot; Then
+              &apos;Print &quot;Ready for GridLines&quot;
+              &apos; Unclear why GridLines failes....
+            Else
+              dstObj.setPropertyValue(oProp.Name, oSValue)
+            End If
+          End If
+        ElseIf IsArray(oSValue) Then
+         &apos; Ignore for now.
+         Print &quot;Ignoring array property &quot; &amp; oProp.Name
+        Else
+          oDValue = dstObj.getPropertyValue(oProp.Name)
+          If IsNull(oDValue) OR IsEmpty(oDValue) Then
+         
+            If (oProp.Attributes AND com.sun.star.beans.PropertyAttribute.READONLY) = 0 Then
+              &apos; TODO: Is this safe?
+              dstObj.setPropertyValue(oProp.Name, oSValue)
+            End If
+             
+          ElseIf HasUnoInterfaces(oSValue, &quot;com.sun.star.beans.XPropertySet&quot;) Then
+           
+            &apos; Not an array and not a struct,
+            &apos; So modifying oDValue should set the internals to the same value.
+            If oSValue.SupportsService(&quot;com.sun.star.text.Text&quot;) Then
+              &apos; TODO: Note that this does NOT properly copy a text object with it&apos;s content.
+              &apos; If the text object supported transferable content, then this would be easy.
+              &apos; It does not, so you must iterate over the content and then handle the items of interest.
+            Else
+              copyUsingPropertySetInfo(oSValue, oDValue)
+            End If
+               
+          Else
+             
+            &apos; Print &quot;ignoring read-only property: &quot; &amp; oProp.Name
+             
+          End If
+        End If
+      End If
+    End If
+  Next
+End Sub
+
+Function canCopyTypeWithAssignment(oObj) As Boolean
+  Select Case VarType(oObj)
+    Case 0 To 8
+      canCopyTypeWithAssignment = True
+    Case 11, 35, 36, 37
+      canCopyTypeWithAssignment = True
+    Case 16 To 23
+      canCopyTypeWithAssignment = True
+    Case Else
+     If IsUnoStruct(oObj) Then
+       canCopyTypeWithAssignment = True
+     Else
+       canCopyTypeWithAssignment = False
+    End If
+  End Select
+End Function
+
+</script:module>

@@ -13,6 +13,8 @@ from com.sun.star.beans import PropertyValue
 import gettext
 import os
 from urllib.parse import urlparse
+import urllib
+from urllib import request
 _ = gettext.gettext
 
 # Dictionary for possible numbering type options
@@ -28,19 +30,28 @@ NumTypeCollection = {
     "A,B,C,...": 0
 }
 
+def copyPropertySet(smgr,ctx,srcObj,dstObj):
+    mspf = smgr.createInstanceWithContext("com.sun.star.script.provider.MasterScriptProviderFactory", ctx)
+    script_provider = mspf.createScriptProvider("")
+    script = script_provider.getScript("vnd.sun.star.script:PageStyleClone.PageStyle.copyPropertySet?language=Basic&location=application")
+    script.invoke((srcObj,dstObj), (), ())
+    return dstObj
+
 def main(*args):
     ctx = uno.getComponentContext()
     smgr = ctx.ServiceManager
     try:
         ui_locale = gettext.translation('base',
-                                        localedir=get_main_directory("com.addon.pagenumbering") +
-                                        'python/locales',
+                                        localedir=urllib.request.url2pathname(
+                                            get_main_directory("com.addon.pagenumbering") +
+                                            'python/locales'),
                                         languages=[getLanguage()]
                                         )
     except Exception as e:
         ui_locale = gettext.translation('base',
-                                        localedir=get_main_directory("com.addon.pagenumbering") +
-                                        'python/locales',
+                                        localedir=urllib.request.url2pathname(
+                                            get_main_directory("com.addon.pagenumbering") +
+                                            'python/locales'),
                                         languages=["en"]
                                         )
 
@@ -175,8 +186,7 @@ def main(*args):
     CurrentStyleName = ViewCursor.PageStyleName
     OldStyle = PageStyles.getByName(CurrentStyleName)
 
-    copyUsingPropertySetInfo(OldStyle, NewStyle)
-
+    copyPropertySet(smgr,ctx,OldStyle,NewStyle)
     DefNumberingStyleNum = 200
 
     oUDP = Doc.getDocumentProperties().UserDefinedProperties
@@ -211,9 +221,13 @@ def main(*args):
     if PositionListBox.SelectedItems[0] == 0:
         NumberedPage.HeaderIsOn = True
         Num_Position = NumberedPage.HeaderText
+        NumberedPage.HeaderBodyDistance = 499
+        NumberedPage.HeaderHeight = 0
     else:
         NumberedPage.FooterIsOn = True
         Num_Position = NumberedPage.FooterText
+        NumberedPage.FooterBodyDistance = 499
+        NumberedPage.FooterHeight = 0
 
     # For text insertion a Text cursor is needed
     NumCursor = Num_Position.Text.createTextCursor()
@@ -265,6 +279,7 @@ class oListenerTop_Class(XTopWindowListener, unohelper.Base):
     """
     Top window listener implementation (XTopWindowListener) 
     """
+
     def __init__(self,):
         self.doc = None
 
@@ -306,8 +321,9 @@ def get_main_directory(module_name):
     ctx = uno.getComponentContext()
     srv = ctx.getByName(
         "/singletons/com.sun.star.deployment.PackageInformationProvider")
-    
+
     return urlparse(srv.getPackageLocation(module_name)).path + "/"
+
 
 def ListFonts(oDoc, SearchString):
     """
@@ -385,9 +401,11 @@ def canCopyTypeWithAssignment(oObj):
         else:
             return False
 
+
 '''Inspired by @sng at https://forum.openoffice.org/en/forum/viewtopic.php?f=45&t=81457
 and Andrew Pitonyak pdf "Useful Useful Macro Information For OpenOffice.org"
 '''
+
 
 def getLanguage():
     """

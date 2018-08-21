@@ -13,7 +13,7 @@
       <src xlink:href="Descriptions/descr-el.txt" lang="el"/>
    </extension-description>
    <update-information>
-      <src xlink:href="https://github.com/eellak/gsoc2018-librecust/raw/master/page_numbering_addon/Python%20version/PageNumberingAddonPython-A.update.xml" />
+      <src xlink:href="https://github.com/eellak/gsoc2018-librecust/raw/master/page_numbering_addon/OpenOffice/python/build_files/PageNumberingAddonPython-A.update.xml" />
    </update-information>
    <registration>
       <simple-license accept-by="admin" suppress-on-update="true" >
