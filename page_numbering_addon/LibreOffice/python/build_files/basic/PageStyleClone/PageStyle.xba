@@ -11,6 +11,7 @@ end function
 
 &apos; Forum post of @pitonyak from https://forum.openoffice.org/en/forum/viewtopic.php?f=20&amp;t=55879
 Sub copyUsingPropertySetInfo(srcObj, dstObj)
+  On Error Goto ErrorHandler
   Dim sPInfo, dPInfo  &apos; Property Set Information Objects
   Dim sNames          &apos; Source names
   Dim oProps
@@ -76,7 +77,11 @@ Sub copyUsingPropertySetInfo(srcObj, dstObj)
         End If
       End If
     End If
+Proceed:
   Next
+Exit Sub
+ErrorHandler:
+  Resume Proceed
 End Sub
 
 Function canCopyTypeWithAssignment(oObj) As Boolean
